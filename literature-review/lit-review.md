@@ -2,18 +2,95 @@
 
 * * *
 
-- **Author:**
-- **Year:**
-- **Title:**
+- **Author:** M.A. Crerar
+- **Year:** 1985
+- **Title:** Elements of a Statistical Approach to the Question of Authorship of Music
+- **Summary:** This paper uses methods previous paper (Paisely 1964) that has some issues to examine the work of three italian composers, two foreign composers, and one non-contemporary to see differnces. They use the first 20 notes for each sample. They use four methods, first examining frequency of note value, second examining frequency of opening interval, next the opening interval keeping in mind the first note, and fourth looking at 2x2 note transitions. 
+
+- **Notes:** 
+*pg 1 
+  *Follows from a paper regarding Valentini, a student of Corelli. Notes how much musicological investigation uses a combined technical details and characterization of style. 
+
+*pg2 
+  *Computational musicology helps give evidence for previous claims. Use markers whose usage remains invariant under changes of topic. Refering to literature: Analysis devoid of both syntatic and semantic considerations - subconscious stylistic traits - wouldnt be copied by an adept imitator, also ignoring musical syntax which woudl be shared by contemporaries. Operate at micro level of intervallic movement, convention-bound but offers space for individuality. 
+
+  *Things to avoid - focus on characteristics which are conscious products of musical convention and considering too many parameters simultaneously
+
+  *Intersting note about influence - Valentini was a student of Corelli 
+
+*pg3
+  *used method from Paisley 1964
+  *Method - random sample of 105 incipits coded for corelli, coded random samples of Handel and JS Bach to see if they are closer in style to each other than to a foreign contemporary, random sample from the instrumental works of Beethoven - different period
+
+  *Samples were approx 20 pitches in length
+  *Transposed into C, assigned a numerical value to each note in the chromatic progression C-B
+  *Paisely did two test, first looked at two samles of 800 two note transitions for each composer
+
+*pg 4
+  *Can also do frequency of note in each piece - all composers basically the same for this
+  *Claim that the three composers of interest are indistinguishable by simple statistical methods- cant do easy word count like in literature
+
+  *second test - examine opening interval in each incipit - uniformity in composers
+
+  *Apparently some funky stuff happening with Paisleys chi squre tests
+
+  *Comparing h and b, the expected frequencies are found by calculating the arithmetic mean for each set of two observations and then using all the actual values as obbservations
+$$x^2 = \sum{frac{(b_i-e_i)^2}{e_i}} + \sum{\frac{(h_i - e_i)^2}{e_i}}$$
+
+*pg 5 Paisly ignored interval direction, two notes can be separated by at most six semitones and then classfied 7 (0   to 6) - chi-square values in table 4 
+
+  *Each composer rejects the others work - I think this means they are distiguishable by this
+
+  *Paisley second analysis looked at two transitions of the type tonic to tonic, third to fifth, other diatonic to tonic, chromatic to fifth etc. 
+
+  *They represented minor incipits in the relative major, so used different groups - a little confusing
+
+  *The italian composers reject each others work
+
+*Pg 6)
+  *Third test, examined 1800 two note transitions recorded info on what note the leap was made from
+  *All six composers are thus shown to reject each other's work. 
+
+  *Final test - 1600 sets of consecutive 2X2 note transitions - 7X7 matrix occurences of all permutations of intervals [0-16]x[o-16]
+ 
+ 
+*7) Consistency for one composer
+
+  *issues - use start, which is perhaps not as unique 
+
+  *future directions - which a work was started by one composer and finished by anoterh 
+  *early work of a composer looks like the later work of the composer, or if is more similar to a different composer ie beethoven , mozart
+
+Questions: What is an incipit? Is this a music or math word? 
+
+
+- **How does this relate?** Has some good ideas for simple tests I could run. Also warnigns on thigns to avoid. 
+
+* * *
+
+- **Author:** Andrew Brinkman*1 Daniel Shanahan, *2 Craig Sapp#3
+- **Year:** 2-16
+- **Title:** Musical Stylometry, Machine Learning, and Attribution Studies: A Semi-Supervised Approach to the Works of Josquin
 - **Summary:**
+- **Notes:**
+
+
+
+
 - **How does this relate?**
 
 * * *
 
-- **Author:**
-- **Year:**
-- **Title:**
-- **Summary:**
-- **How does this relate?**
 
-* * *
+
+
+
+
+
+
+
+
+
+
+
+
