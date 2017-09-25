@@ -1,4 +1,124 @@
+---
+title: "Literature Review"
+output: github_document
+---
+
+
 # Literature Review
+
+
+* * *
+
+- **Author:** Eric Backer, Peter van Kranenburg
+- **Year:** 2-16
+- **Title:** On musical stylometry -- a patern recognition approach
+- **Summary:**
+- **Notes:**
+
+- pg 1
+- Uses 20 features - style markers to describ different sonorities in compositions
+- 200 different compositions of Bach, Handel, Telemann, Mozer and Haydn. 
+-Eve with a few features, the styles of the various composers could be seperated with leave one out error rates varying from 4 to 9 percent. 
+- A second experiment included 30 fugues from JS Bach, WF BAch and JL KRebs of differnet style and character. Then the f minor fugue for organ which Bach's authorship is disputed was analyze. There was experimental evidence that JL Krebs wrote it 
+
+-pg2
+- Problem with stylometry is the lack of an underlying theory. Until the study is done, it is not known which of the style markers will be the discriminator. 
+- Have to generate a large number of potentially interesting features wich it is hoped will be suitable for stylometric studies. 
+
+
+-pg 3
+- Sometimes they have to transpose the parts - I wonder why? 
+- Uses overlapping windowing over entire composition - I like that they use the whole piece
+- Tradeoff between the number of fragments (as high as possible) and the variance of the feature values (as small as possible) 
+
+- pg 4
+- Cool graph plotting variance as a function of the number of bars in a window - I wonder if this changes with time signature? 
+- Chose 30 bars per fragment
+- Decompositng a composition (windowing) results in a number of related data points, enabling representation of a composition as a cloud of data points on the basis of which global densities can be estimated
+- Data points are ordered in time
+- Note how many bars offset
+- 20 veatures are computed, most are low level properties of counter point
+- expected to be consistent from different genres and dates 
+- high level features, key, modulations, development of theme expected to reflect characteristics of individual compositions. 
+
+
+- pg 5
+- List of the features used: 
+- Stability - normalizes to compare different time signatures 
+- Fraction of the score that consists of dissonatnt sonorities
+- Fraction of bars that begin with a dissonant sonority
+- Sonority Entropy - Manson(1985) sonority is a type of chord with a number reprosenting each sonority - total duration of all occurrences for each sonority computed, then probabilities of the occurance are estimated by weighted frequencies
+- Harmony Entropy similar to sonority entropy but considers pitch of chord
+- pitch entropy - list of occurrences of all the pitches made
+- voice density - only takes into account bars that are strictly polyphonic
+- part seconds to part octave - measures amount of a number of intervals between the different voice pairs
+- parallel thirs fourths sixths 
+- step suspension
+
+- pg 6 Analysis
+- Uses Matlab toolbox PRTools
+- feature selection uses Floating Forward Slection 
+
+- pg 7 
+- for two class and five class problems uses k nearest neighbor classifier
+- what is a leave one out error 
+- Find that Bach's style can be isolated from the style of the other composers
+
+
+
+- likely that JL Krebs is the composer
+
+
+
+
+
+
+
+- **How does this relate?**
+
+* * *
+
+
+* * *
+
+- **Author:** Dannenberg, Thom, Watson
+- **Year:** 1997
+- **Title:** A Machine Learning Approach to Musical Style Recognition
+- **Summary:** They use naieve basiean classifiers, linear classifiers and neural networks to see if a MIDI recording of an improvized piece of four and eight options. 
+- **Notes:**
+
+-pg 1
+
+
+- Uses machine learning to build effective style classifiers for interactive performance systems instead of focusing on low-level perceptual features such as pitch and tempo. 
+- Relatively simple stylistic features such as playing energetically, playing lyrically, or playing with syncopation are difficult to detect reliably. 
+- Issues of contrast - energetic pieces contain silence
+-higher level musical intent appears chaotic and unstructured when presented in low - level terms such as MIDI performance data
+-This paper is studying hte feasibility of applying machine learning techniques to build musical style classifiers
+- initial problem to classify an improvisation as one of four styles, lyrical, frantic, syncopated or pointillistic
+- classifier operates within five seconds - important to recognize in real time
+
+
+- pg2
+- Uses MIDI files from a performer, does new styles every fifteen seconds
+- 1200 five second training examples
+- Used naive Bayesian, linear, and neural network approaces 
+- naive Bayesian classifier assumes that features are uncorrelated and normally distributed. Given a vector of features F, want to know which classification C is most likely. The most likely class is the one whose mean feature vector has the least normalized distance to f. 
+$$ \delta c = \sqrt{\sum_{i = 1}^n \big( \frac{F_i - \mu_{C,i}}{\sigma_{C,i}}\big)^2}$$
+- 3.2 Linear classifier - computed a weighted sum of features where a differnt set of weights is used for each class. Assumes features are normally distributed but not uncorrelated. It tries to sepaerate memebers of the class from non-members by cutting the feature vector space with a hyperplane. 
+- 3.3 Neural Networks. The most powerful because they incorporate non linear terms and do not make strong assumptions about the feature probability distributions. Used a Cascade-Correlation architecture wich consists initially of only input and output units 
+- Had high percentage of correct classifications 
+- They wonder why these systems worked well when hand-coded approaches have failed. 
+
+
+
+
+
+- **How does this relate?**
+I dont think it relates exactly, as I dont want to deal with sound, but sheet music. I wonder if I could use some of the stylistic ideas on sheet music? It seems to somewhat dismiss the lower level stuff i maybe wanted to do. 
+
+* * *
+
 
 * * *
 
@@ -68,9 +188,9 @@ Questions: What is an incipit? Is this a music or math word?
 
 * * *
 
-- **Author:** Andrew Brinkman*1 Daniel Shanahan, *2 Craig Sapp#3
-- **Year:** 2-16
-- **Title:** Musical Stylometry, Machine Learning, and Attribution Studies: A Semi-Supervised Approach to the Works of Josquin
+- **Author:** 
+- **Year:** 
+- **Title:** 
 - **Summary:**
 - **Notes:**
 
@@ -80,12 +200,6 @@ Questions: What is an incipit? Is this a music or math word?
 - **How does this relate?**
 
 * * *
-
-
-
-
-
-
 
 
 
