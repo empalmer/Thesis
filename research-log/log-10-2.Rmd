@@ -1,0 +1,26 @@
+---
+title: "Log-10-2"
+output: github_document
+---
+
+### Research Log
+
+Thesis mtg: 
+
+* Working on coding muse data in R - is there a better way to do this? 
+* Much of the muse data seems like it will be unnesecary for analysis. I think I only need the first four collumns
+
+
+This week I:
+
+* Read about Muse Data
+* Installed and read about Humdrum
+* Started figuring out how to use Humdrum
+* Decided its better to make my own R script
+* Worked on getting my script running - in progress 
+
+
+
+
+To do for next week!: 
+* 
