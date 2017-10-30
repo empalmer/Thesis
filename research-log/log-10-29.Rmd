@@ -1,0 +1,28 @@
+---
+title: "Log-10-29"
+output: github_document
+---
+
+To do this week: 
+
+Add to lit review and push
+Find data: 6 disputed leider, 15 Fanny , 30 Felix
+Import data to R
+Get humdrum/xml2hum running. 
+
+
+Comments: 
+
+xml2hum seems to be working now! 
+
+I have not been able to find that much sheet music by Fanny that would be able to be converted into music XML. I'm thinking I might have to enter it myself into musescore. Honestly it shouldn't be that hard if I use the PAB keyboards. (Hopefully). I am meeting with the music librarian on ___ and hopefully they will be able to find more scores!
+
+I have found sheet music (in pdf form) that should work for my data set. 
+
+
+
+
+
+
+
+

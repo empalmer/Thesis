@@ -23,4 +23,42 @@ This week I:
 
 
 To do for next week!: 
-* 
+* Figure out how muse data is made
+* ask about finale 
+* object oreinted prog R 
+* google if anyone has done musical analysis R packages
+* figure out humdrum 
+* Email john - figure out musical question - which corpus 
+* Code up some objects and think about formats
+* Email Anderw brinkman - it looks like you did analysis in R, coudl you share code? 
+
+
+Objects : Muse - list       corpus- list    dataframe --- data frame
+
+
+
+mehtods - functions to use on obmects 
+        - feature_extraction()
+        - create_df()
+
+
+create_df(corpus,reponse = "", features = c(function names))
+
+ask at thesis mtg: 
+- How do you create a package within a project? 
+
+
+
+carver choir book -  
+eaton "" 
+
+
+diamm 
+
+
+
+
+
+
+
+

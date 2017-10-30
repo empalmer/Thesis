@@ -6,11 +6,70 @@ output: github_document
 
 # Literature Review
 
+* * *
+
+- **Author:** Andrew Brinkman, Daniel Shanahan, Craig Sapp
+- **Year:** 2016
+- **Title:** Musical Stylometry, Machine Learning, and Attribution Studies: A Semi-Supervised Approach to the Works of Josquin. 
+- **Summary:**
+- **Notes:**
+
+- hard for humans to preform unbiased analysis of authorial attribution
+- uses "high-level features" along with low-level features. high level for example 9-8 suspensions, lowlevel note to note transition probabilities. 
+- looking at features that are easier to quantify - not always what music historians look at. 
+- Compares Josquin to other composers in a range of styles (identify features that represent differences between styles, are common to a particular style, or are unique to a particular composer)
+- 
+- Initial test- compare to JS Bach four part chorales
+- Next compares to Ockeghem and Du Fay
+- Finally compares de Orto and La Rue
+
+- use PCA to reduce 53 input features
+- Chose first 5 components to account for 85% of the variance
+- Can see clear seperation between Bach and Josquin with only two PCs
+- (Does not talk about what the model actually is... )
+- repetition of the fifth is often a distinguishing feature
+- using the first two pCs there is very little seperation, same for La Rue
+- 
+
+- uses results of the principal component analysis as a way of training a multi-composer classifier. 
+- train three classifiers
+- 1) K nearest neighbor classifier. Uses 27 pcs 
+- 2) Support Vector Machine 
+- 3) Decision tree
+
+* * * 
+
+- **Author** Jacqueline Speiser, Vishesh Gupta
+- **Year**
+- **Title** Composer Style Attributino
+- **Notes** 
+
+- goal to analyze music of Josquin and Ockeghem and la Rue to find a model that can classify unknown works as Josquin or not
+- four categories: frequencies of individual notes, frequencies of pairwise interval combinations between each voice, markov transition matrices for rhythms of pieces, and markov transition matrices of pitches in each piece
+- used mutual information to score 3000 features
+- used top 50 features
+- PCA and selected top 50 features
+- use Naive Bayes for initial learning algorithm, had 30-40 percent training error- music not independent
+- used 10-fold cv on support vector machine and gaussian discriminant analysis. 
+- chose svm with a gaussian kernel
+- 
+
+
+* * *
+
+- **Author** Francoise Tillard
+- **Year**
+- **Title** Fanny Mendelssohn
+- **Notes**
+
+pg Op8 and Op9 has two lieder by Fanny, no2, no3, no12, no9,10,12
+Mentions that Felix admitted that fanny wrote op8 no3 but doesn't mention how the rest are thought to be atrributed to her. 
+(Includes list of publications by Fanny)
 
 * * *
 
 - **Author:** Eric Backer, Peter van Kranenburg
-- **Year:** 2-16
+- **Year:** 2016
 - **Title:** On musical stylometry -- a patern recognition approach
 - **Summary:**
 - **Notes:**
@@ -30,6 +89,7 @@ output: github_document
 - Sometimes they have to transpose the parts - I wonder why? 
 - Uses overlapping windowing over entire composition - I like that they use the whole piece
 - Tradeoff between the number of fragments (as high as possible) and the variance of the feature values (as small as possible) 
+
 
 - pg 4
 - Cool graph plotting variance as a function of the number of bars in a window - I wonder if this changes with time signature? 
@@ -55,9 +115,11 @@ output: github_document
 - parallel thirs fourths sixths 
 - step suspension
 
+
 - pg 6 Analysis
 - Uses Matlab toolbox PRTools
 - feature selection uses Floating Forward Slection 
+
 
 - pg 7 
 - for two class and five class problems uses k nearest neighbor classifier
@@ -67,14 +129,6 @@ output: github_document
 
 
 - likely that JL Krebs is the composer
-
-
-
-
-
-
-
-- **How does this relate?**
 
 * * *
 
@@ -109,9 +163,6 @@ $$ \delta c = \sqrt{\sum_{i = 1}^n \big( \frac{F_i - \mu_{C,i}}{\sigma_{C,i}}\bi
 - 3.3 Neural Networks. The most powerful because they incorporate non linear terms and do not make strong assumptions about the feature probability distributions. Used a Cascade-Correlation architecture wich consists initially of only input and output units 
 - Had high percentage of correct classifications 
 - They wonder why these systems worked well when hand-coded approaches have failed. 
-
-
-
 
 
 - **How does this relate?**
@@ -184,22 +235,11 @@ $$x^2 = \sum{frac{(b_i-e_i)^2}{e_i}} + \sum{\frac{(h_i - e_i)^2}{e_i}}$$
 Questions: What is an incipit? Is this a music or math word? 
 
 
-- **How does this relate?** Has some good ideas for simple tests I could run. Also warnigns on thigns to avoid. 
+- **How does this relate?** Has some good ideas for simple tests I could run. Also warnigns on things to avoid. 
 
 * * *
 
-- **Author:** 
-- **Year:** 
-- **Title:** 
-- **Summary:**
-- **Notes:**
 
-
-
-
-- **How does this relate?**
-
-* * *
 
 
 
