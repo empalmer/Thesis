@@ -1,0 +1,78 @@
+---
+title: "krn2r"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Import **kern file
+
+```{r}
+a <- read.delim('./Data/Mendelssohn/Fanny/h1nohead', header = F)
+```
+
+
+## Function
+
+```{r}
+
+krn2r <- function(kern){
+  l <- list()
+  for(c in 1:ncol(kern)){
+    l[[c]] <- kern[,c]
+  }
+  return(l)
+}
+
+l[[1]] <- a[,1]
+l[[2]] <- a[,2]
+krn2r(a)
+
+
+l[[1]] <- "Lockung"
+l[[2]] <- "Fanny Hensel"
+l[[3]] <- list(Part1 = a[,1], Part2 = a[,2], Part3 = a[,3], Part4 = a[,4])
+
+l[[3]][1] <- for(i in 1:nrow(a)){
+  measure_count <- 0
+  measure <- list(measure_number = measure_count, )
+   j <- 1
+   while(a[i,1] != paste("=", measure_count +1, sep = "")){
+     measure[j] <- a[i+j,1]
+     j <- j + 1
+   }
+   measure_count <- measure_count + 1
+}
+  
+
+
+s1 <- as.vector(a[,1])
+note_duration <- 
+note_value <- 
+
+```
+
+
+Description of output: 
+
+[[1]] Title
+[[2]] Composer
+[[3]] Piece - as list
+      [[1]] Part 1 (ie instrument voice etc)
+            [[1]] gen info
+                  key, meter, clef, minrhy?
+            [[2]] spline 1
+                  [[1]] m1
+                  [[2]] m2, 
+                  .
+                  .
+                  .
+            [[3]] spline 2
+            .
+            .
+            .
+      [[2]] Part 2
+

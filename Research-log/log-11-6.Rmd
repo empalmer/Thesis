@@ -1,0 +1,87 @@
+---
+title: "Log-10-29"
+output: github_document
+---
+
+### Thesis mtg: 
+
+
+
+### Data process. 
+Download Musescore file
+Open it in musescore and export to xml
+Try xml2hum directly. Usually doesnt work. 
+Extract each line individually using the command 
+xml2hum -s1 file.xml > staff1.krn
+xml2hum -s2 file.xml > staff2.krn
+
+Check each has right number of notes rcheck staff1.krn | grep = | tail -5 (first had to install rcheck by going into folder and doing make rcheck)
+
+Check all have same base rythm (also make minrhy)
+minrhy staff1.krn staff2.krn
+
+Change if nesecary and compile
+timebase -t 48 staff1.krn > x1.krn
+    timebase -t 48 staff2.krn > x2.krn
+    assemble x2.krn x1.krn | rid -d > score.krn
+
+I'm thinking of getting rid of text in the file. It seems unesecary. Also get rid of other score compiling data. 
+extract -i '**text' s1.krn > ts1.krn
+
+
+### Storing **kern in R
+
+[[1]] Title
+[[2]] Composer
+[[3]] Piece - as list
+      [[1]] Part 1 (ie instrument voice etc)
+            [[1]] gen info
+                  key, meter, clef, minrhy?
+            [[2]] spline 1
+                  [[1]] m1
+                  [[2]] m2, 
+                  .
+                  .
+                  .
+            [[3]] spline 2
+            .
+            .
+            .
+      [[2]] Part 2
+
+
+### Comments
+It takes awhile to get the scores in the nice format. The process is not automated. Advice? 
+The title and other info does not get translated as easily. 
+
+
+It sounds like the PARC has the ability to convert scores into musicXML! Joe has given my contact to the person in the parc that knows how to do that. 
+
+Working on getting pieces I have (list of pieces) into R. Even though I have the xml2hum program working, it seems it only works for one line at a time, and then I have to add them together and make sure it worked. 
+
+Another piece for comparison? 
+https://today.duke.edu/2012/09/eastersonata
+
+
+
+
+### To do next week:
+
+Data:
+A ton of data cleaning
+Get ahold of instructional technologist at PARC and convert all scores to XML
+Clean this data and import into R
+Figure out bash scripts or make files for data extraction. 
+
+Writing:
+Start writing about existing lit and the Mendelssohns
+Question: How in depth should I go about the process? For example, should I say, convert data from XML to R. Or should I go through each step and issues doing so? 
+
+Analysis: 
+Figure out what features I want to extract
+Code in R those features
+OR see if humdrum can do it nicer
+
+
+
+
