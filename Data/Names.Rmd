@@ -1,0 +1,65 @@
+---
+title: "Names"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Names: 
+
+Fanny Hensel: 
+
+h1 wo kommst du her
+h2 das stille fleh'n
+h3 heut' in dieser nacht
+h4 die furchtsame trane 
+h5 lied des schafers
+h6 ohne sie
+h7 mein herz das ist begraben
+h8 fruhlingsserinnerung
+h9 eilig zieh'n in weiter ferne
+h10 ihr tone schwingt euch
+
+
+h11 Ave Maria
+h12 lebewohl
+h13 die nonne
+h14 die schwalbe
+h15 wanderlied
+h16 fruhlingsnahe
+h17 heimweh
+h18 zwischen gaeta und capua
+h19 die aolsharfe auf dem schlosse zu baden
+h20 was will die einsame trane
+h21 am leuchtenden sommermorgen
+h22 
+
+
+
+
+
+
+Felix
+
+m1 minnelied irn mai
+m2 das heimweh
+m3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

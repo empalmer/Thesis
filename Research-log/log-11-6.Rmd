@@ -6,7 +6,6 @@ output: github_document
 ### Thesis mtg: 
 
 
-
 ### Data process. 
 Download Musescore file
 Open it in musescore and export to xml
@@ -81,6 +80,74 @@ Analysis:
 Figure out what features I want to extract
 Code in R those features
 OR see if humdrum can do it nicer
+
+ 
+
+
+
+Extra stuffs 
+
+Mscience - private equity research
+
+
+Nov 21th talk on Monday
+All talks on 12
+8 peple per lunch
+Meet in math lounge at 11:45 ish 
+
+
+Pin
+381995
+
+
+
+Key area, 
+- look up key area 
+- look at last two bars - how cadence are arrived at. - cadence type 
+- use of seventh chords
+- augmented sixth chords - how used, frequency etc. 
+- freqency of accidental 
+- chromaticism - two consectutive half steps - group by how many 
+- uses of editorial things - 
+- dynamics, tempo 
+- contrapuntal mistakes, parallel fifths, parallel octaves, voice leading, 
+- use of triplets
+- articulation markings, stacatto - proportion  - total number usage of 
+- grace notes
+- pedel markings
+- fermatas
+- frequency of rythmic values (in certain time signature)
+- leaps - stepwise vs leaps - of individual 
+- whether melody has chord tone - leaps into dissonance 
+- frequency if voice is doubled in piano
+- number of bars where piano plays and no voice, other way too
+- trills, ornaments
+- tempo and time changes in a song
+- every time sevent scale degree occurs where does it go, one or somewhere else
+- fourth same, 3 or 5
+- minor - 6 to 5, and 
+- In minor, 7th natural vs raised also 6th, raised or lowered? 
+- Tritone vertically, properly resolved - contrary motino, out
+- 7th chords , proper resolution of seventh chords
+- augmented 6th chords, germain, french, - resolution
+- frequency of chords
+- placement of rest, in each beat
+- serialization - ? cant repeat untill all used
+- textrue - how many notes at one time? 
+- range of singer - 
+
+
+
+- 
+
+
+
+
+
+
+
+
+
 
 
 

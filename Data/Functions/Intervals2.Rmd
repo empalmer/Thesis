@@ -1,0 +1,17 @@
+---
+title: "Intervals"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+is_dim_sec <- function(n1,nn2){
+  
+  
+  
+}
+```

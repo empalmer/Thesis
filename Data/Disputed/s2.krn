@@ -1,0 +1,390 @@
+**kern
+*staff2
+*I"Piano
+=1-
+*clefG2
+*k[b-e-a-]
+*M6/8
+8r
+8B-/ 8e-/ 8g/
+8B-/ 8e-/ 8g/
+8r
+8B-/ 8e-/ 8g/
+8B-/ 8e-/ 8g/
+=2
+8r
+8B-/ 8d/ 8a-/
+8B-/ 8d/ 8a-/
+8r
+8B-/ 8d/ 8a-/
+8B-/ 8d/ 8a-/
+=3
+8r
+8B-/ 8e-/ 8g/
+8B-/ 8e-/ 8g/
+8r
+8G/ 8c/ 8e-/
+8G/ 8c/ 8e-/
+=4
+!!linebreak:original
+8r
+8F/ 8B-/ 8d/
+8F/ 8B-/ 8d/
+8r
+8F/ 8An/ 8e-/
+8F/ 8A/ 8e-/
+=5
+*clefF4
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+=6
+!!pagebreak:original
+8r
+8F\ 8An\ 8e-\
+8F\ 8A\ 8e-\
+8r
+8F\ 8A\ 8e-\
+8F\ 8A\ 8e-\
+=7
+8r
+8F\ 8B-\
+8F\ 8B-\
+8r
+8D\ 8A-\ 8B-\
+8D\ 8A-\ 8B-\
+=8
+8r
+8E-\ 8G\ 8c\
+8E-\ 8G\ 8c\
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+=9
+!!linebreak:original
+*clefG2
+8r
+8G/ 8B-/ 8e-/
+8G/ 8B-/ 8e-/
+8r
+8G/ 8c/ 8en/
+8G/ 8c/ 8e/
+=10
+!!pagebreak:original
+8r
+8A-/ 8c/ 8f/
+8A-/ 8c/ 8f/
+8r
+8B-/ 8e-/ 8g/
+8B-/ 8e-/ 8g/
+=11
+8r
+8c/ 8e-/ 8a-/
+8c/ 8e-/ 8a-/
+8r
+8c/ 8e-/ 8an/
+8c/ 8e-/ 8a/
+=12
+8r
+8B-/ 8e-/ 8g/ 8b-/
+8B-/ 8e-/ 8g/
+8r
+8B-/ 8d/ 8a-/
+8B-/ 8d/ 8a-/
+=13
+8r
+8B-/L 8e-/ 8g/
+8B-/J 8e-/ 8g/
+*^
+8r	(4ee-/
+8e-/L 8g/	.
+8e-/J 8g/	8dd/)
+*v	*v
+=14
+!!linebreak:original
+*^
+8r	(4cc/
+8d/L 8f/	.
+8d/J 8f/	8b-/)
+8r	(4an/
+8c/L 8e-/	.
+8d/J 8f/	8a-/)
+=15	=15
+8r	4.g/
+8B-/L 8e-/	.
+8B-/J 8e-/	.
+*v	*v
+8r
+*^
+8B-/L 8e-/ 8g/	4r
+8B-/J 8e-/ 8g/	.
+*v	*v
+=16
+8r
+8B-/ 8d/ 8a-/
+8B-/ 8d/ 8a-/
+8r
+8B-/ 8d/ 8a-/
+8B-/ 8d/ 8a-/
+=17
+8r
+8B-/ 8e-/ 8g/
+8B-/ 8e-/ 8g/
+8r
+8G/ 8c/ 8e-/
+8G/ 8c/ 8e-/
+=18
+!!pagebreak:original
+*clefF4
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+8r
+8F\ 8An\ 8e-\
+8F\ 8A\ 8e-\
+=19
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+=20
+8r
+8F\ 8An\ 8e-\
+8F\ 8A\ 8e-\
+8r
+8F\ 8A\ 8e-\
+8F\ 8A\ 8e-\
+=21
+!!linebreak:original
+8r
+8F\ 8B-\
+8F\ 8B-\
+8r
+8D\ 8A-\ 8Bn\
+8D\ 8A-\ 8B\
+=22
+!!pagebreak:original
+8r
+8E-\ 8G\ 8c\
+8E-\ 8G\ 8c\
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+=23
+*clefG2
+8r
+8G/ 8B-/ 8e-/
+8G/ 8B-/ 8e-/
+8r
+8G/ 8c/ 8en/
+8G/ 8c/ 8e/
+=24
+8r
+8A-/ 8c/ 8f/
+8A-/ 8c/ 8f/
+8r
+8B-/ 8e-/ 8g/
+8B-/ 8e-/ 8g/
+=25
+!!linebreak:original
+8r
+8A-/ 8e-/ 8a-/
+8A-/ 8e-/ 8a-/
+8r
+8c/ 8e-/ 8an/
+8c/ 8e-/ 8a/
+=26
+!!pagebreak:original
+8r
+8B-/ 8e-/ 8g/ 8b-/
+8B-/ 8e-/ 8g/
+8r
+8A-/ 8B-/ 8d/ 8f/
+8A-/ 8B-/ 8d/ 8f/
+=27
+8r
+8G/L 8B-/ 8e-/
+8G/J 8B-/ 8e-/
+*^
+8r	(4ee-/
+8e-/L 8g/	.
+8e-/J 8g/	8dd/
+=28	=28
+8r	4cc/
+8d/L 8f/	.
+8d/J 8f/	8b-/
+8r	4an/
+8c/L 8e-/	.
+8d/J 8f/	8a-/
+=29	=29
+8r	4.g/)
+8B-/L 8e-/	.
+8B-/J 8e-/	.
+*v	*v
+8r
+8B-/L 8e-/ 8g/
+8B-/J 8e-/ 8g/
+=30
+!!linebreak:original
+8r
+8c/ 8e-/ 8g-/
+8c/ 8e-/ 8f/
+8r
+8Bn/ 8d/ 8f/
+8B-/ 8d/ 8f/
+=31
+8r
+8B-/ 8e-/
+8B-/ 8e-/
+*clefF4
+8r
+8E-\ 8B-\ 8e-\
+8E-\ 8B-\ 8e-\
+=32
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+8r
+8F\ 8An\ 8e-\
+8F\ 8A\ 8e-\
+=33
+!!pagebreak:original
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+8r
+8F\ 8B-\ 8d\
+8F\ 8B-\ 8d\
+=34
+!!linebreak:original
+8r
+8F\ 8An\ 8e-\
+8F\ 8A\ 8e-\
+8r
+8F\ 8A\ 8e-\
+8F\ 8A\ 8e-\
+=35
+8r
+8F\ 8A-\ 8Bn\
+8F\ 8A-\ 8B\
+8r
+8G\ 8c\
+8G\ 8c\
+=36
+*clefG2
+8r
+8A-/ 8Bn/ 8d/
+8A-/ 8B/ 8d/
+8r
+8B-/ 8e-/
+8B-/ 8e-/
+=37
+!!pagebreak:original
+8r
+8B-/ 8d-/ 8en/
+8B-/ 8d-/ 8e/
+8r
+8c/ 8f/
+8c/ 8f/
+=38
+!!linebreak:original
+8r
+8d-/ 8en/ 8g-/
+8d-/ 8e/ 8g-/
+8r
+8e-/ 8a-/
+8e-/ 8a-/
+=39
+8r
+8c/ 8e-/ 8an/
+8c/ 8e-/ 8a/
+8r
+8c/ 8e-/ 8a/
+8c/ 8e-/ 8a/
+=40
+8r
+8c/ 8e-/ 8an/
+8c/ 8e-/ 8a/
+8r
+8c/ 8e-/ 8a/
+8c/ 8e-/ 8a/
+=41
+!!pagebreak:original
+8r
+8B-/ 8d/ 8a-/
+8B-/ 8d/ 8a-/
+8r
+8B-/ 8d/ 8a-/
+8B-/ 8d/ 8a-/
+=42
+!!linebreak:original
+8r
+8B-/ 8e-/ 8g-/
+8B-/ 8e-/ 8g-/
+8r
+8G-/ 8c/ 8e-/
+8G-/ 8c/ 8e-/
+=43
+8r
+8F/ 8B-/ 8d/
+8F/ 8B-/ 8d/
+8r
+8E-/ 8B-/ 8e-/
+8E-/ 8B-/ 8e-/
+=44
+8r
+8G/ 8B-/ 8en/
+8G/ 8B-/ 8e/
+8r
+8F/ 8c/ 8f/
+8F/ 8c/ 8f/
+=45
+!!pagebreak:original
+8r
+8G-/ 8c/ 8e-/
+8G-/ 8c/ 8e-/
+8r
+8Gn/ 8d-/ 8en/
+8G/ 8d-/ 8e/
+=46
+!!linebreak:original
+8r
+8A-/ 8c/ 8e-/
+8A-/ 8c/ 8e-/
+8r
+8An/ 8c/ 8e-/ 8f/
+8A/ 8c/ 8e-/ 8f/
+=47
+8r
+8G/ 8B-/ 8e-/ 8g/
+8G/ 8B-/ 8e-/ 8g/
+8r
+8A-/ 8B-/ 8d/
+8A-/ 8B-/ 8d/
+=48
+8r
+8G/L 8B-/ 8e-/
+8G/J 8B-/ 8e-/
+*^
+8r	(4cc/
+8d/L 8f/	.
+8d/J 8f/	8b-/
+=49	=49
+8r	4an/
+8c/L 8e-/	.
+8d/J 8f/	8a-/
+8r	4g/
+8B-/L 8e-/	.
+8A-/J 8d/	8f/
+*v	*v
+=50
+!!pagebreak:original
+4.G/) 4.B-/ 4.e-/
+4.r;
+==
+*-

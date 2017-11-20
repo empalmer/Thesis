@@ -1,0 +1,8 @@
+Error on line: 96: problem with rhythm in **kern spine 1
+Line min duration is measured to be: -3/2
+Durations on this line: 
+	1	1
+Running total of durations from previous rhythm: 
+	5/2	0
+Line of data that failed:
+4dd#/	4f#\	.

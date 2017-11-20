@@ -1,0 +1,38 @@
+---
+title: "Log-11-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Did this week
+- Set up a meeting with Joe
+
+
+### Naming ettiquite for pieces: 
+Pieces will be titled in the data file, so names will be as follows
+Disputed: dnumber
+Felix: mnumber
+Fanny: hnumber
+
+## In progress
+- Start writing omg
+- Meet with Joe 
+- Get all data into R
+- Write a function(s) that can read the outputted data. 
+
+To do(from thesis mtg)
+1) Meet w/ John to discuss useful features - Yep!
+2) Write functions to calculate features - not yet
+3) Learn regex - sort of
+4) Look into Make - shell script - Doing shell!
+
+## To do next week
+- More writing! Ahh
+- Data analysis
+
+
+
+
