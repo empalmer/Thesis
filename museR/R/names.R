@@ -1,16 +1,11 @@
----
-title: "Notes"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(stringr)
-```
-
-## R Markdown
-
-```{r}
+#' Takes a spline and converts creates data frame with numeric note value (NNV) and descriptive notevalue (DNV) 
+#' 
+#' @param spline .krn file 
+#' @return dataframe of stuff
+#' 
+#' @examples 
+#' 
+#'
 
 
 note_value <- data.frame(colnames(c("base","third","fifth","val_base","val_third","val_fifth")))
@@ -29,11 +24,11 @@ notes_to_val <- function(note){
     v <- NA
     val <- NA
   } else if(str_detect(note, "[Aa]-")){
-     v <- "A flat"
-     val <- 1
+    v <- "A flat"
+    val <- 1
   } else if(str_detect(note, "[Aa]$")){
-     v <- "A"
-     val <- 2
+    v <- "A"
+    val <- 2
   } else if (str_detect(note, "[Aa]#")){
     v <- "A sharp"
     val <- 3
@@ -101,9 +96,3 @@ notes_to_val <- function(note){
   r <- c(v,val)
   return(r)
 }
-
-
-
-
-
-```

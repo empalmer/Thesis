@@ -1,12 +1,26 @@
 ## My Thesis Repo
 
-The structure of this repository should serve as a starting point in organizing all of the work related to your thesis.
+* Data (not visable) contains Fanny and Felix Mendelssohn files in .xml and .krn format
+* Literature-review contains writing for the first chapters of the thesis
+* museR is my R package for analysis
+* Research - log 
+* Thesis_template is Reed's blank template for R markdown
+
+## About museR:
+
+A package for all analysis. Currently only supports pieces with piano and voice. 
+
+### Naming conventions: 
+
+* NNV : numeric note value (0-12) eg A flat = 0
+* DNV : descriptive note value A-flat to G sharp
+
 
 #### Abstract
+ A thesis on musical stylometry focusing on Felix and Fanny Mendelssohn
 
 
-
-#### Timeline
+## Timeline
 ### Weeks before winter break
 
 11/6 All data in R
@@ -30,4 +44,18 @@ March 9th (Before Spring Break) or likely more realistically April 1st first dra
 April 15h (A week before its due) final draft of full document done
 
 #### Outline
+
+* Chapter 1
+  + Existing literature
+  + About Fanny and Felix
+  
+  
+* Chapter 2
+  + About data, converstion
+  + About functions
+
+
+
+
+
 

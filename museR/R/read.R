@@ -3,7 +3,7 @@
 #' @param spline .krn file 
 #' @return dataframe of stuff
 
-kern2data <- function(spline){ # takes a spline(".krn") as input
+kern2df <- function(spline){ # takes a spline(".krn") as input
   data <- readLines(spline)
   data <- data[-grep("!!linebreak", data)] #removes all linebreak text
   staff <- grep("staff[0-9]", data, value = T) # which staff are we talking about?

@@ -1,3 +1,4 @@
+
 ---
 title: "Names"
 output: html_document
@@ -8,9 +9,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-Names: 
+#vNames: 
 
-Fanny Hensel: 
+## Fanny Hensel: 
 
 h1 wo kommst du her
 h2 das stille fleh'n
@@ -42,24 +43,8 @@ h22
 
 
 
-Felix
+## Felix
 
 m1 minnelied irn mai
 m2 das heimweh
 m3
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
