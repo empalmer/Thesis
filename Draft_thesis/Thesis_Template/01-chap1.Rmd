@@ -1,42 +1,40 @@
-<!--
-This is for including Chapter 1.  Notice that it's also good practice to name your chunk.  This will help you debug potential issues as you knit.  The chunk above is called intro and the one below is called chapter1.  Feel free to change the name of the Rmd file as you wish, but don't forget to change it here from chap1.Rmd.
--->
+# Chapter 1
 
-<!--
-The {#rmd-basics} text after the chapter declaration will allow us to link throughout the document back to the beginning of Chapter 1.  These labels will automatically be generated (if not specified) by changing the spaces to hyphens and capital letters to lowercase.  Look for the reference to this label at the beginning of Chapter 2.
--->
+## Introduction
 
-# Introduction
+Music often has subjective summary "statistics" throughout music literature and everyday conversation. For example we talk about Beethoven's Symphony 9 (think ode to joy) as "majestic, powerful fateful, expertly written, etc", music critics go more in depth to say.... , and those with a musical background might go into more description into the actual music compared to the emotional affect. 
 
-Music often has subjective summary "statistics" throughout music literature and everyday conversation. For example we talk about Beethovens Symphony 9 (think ode to joy) as "magestic, powerful fateful, expertly writtin, etc", music critics go more in depth to say.... , and those with a musical background might go into more description into the actual music compared to the emotional affect. 
+What if one wanted to compare Beethoven to say, Bach? One might say that Beethoven was a classical composer, whereas Bach was a baroque composer. What exactly to those classifiers mean? Sure, it is very well documented the years each composer was active in, and that there were large changes in the popular aspects of classical music. Even the untrained ear can distinguish differences between Bach and Beethoven. What exactly is the difference that one can hear? Does Bach follow counterpoint rules more exactly? What ways can we empirically differentiate those two composers? How about Mozart and Saliery, contemporaries? While those familiar with classical music can spot the differences between the two composers, it is more difficult for the untrained ear or eye to spot the differences. 
 
-What if one wanted to compare Beethoven to say, Bach? One might say that Beethoven was a classical composer, whereas Bach was a baroque composer. What exactly to those classifiers mean? Sure, it is very well documented the years each composer was active in, and that there were large changes in the popular aspects of classical music. Even the untrained ear can distinguish differences between Bach and Beethoven. What exactly is the difference that one can hear? Does Bach follow counterpoint rules more exactly? What ways can we empirically differentiate those two composers? How about Mozart and Saliery? While those familiar with classical music can spot the differences between the two composers, it is more difficult for the untrained ear or eye to spot the differences. 
+What if we had a piece and didn't know who wrote it? 
 
-What if we had a piece and didnt know who wrote it? 
-
-# Literature Review
+## Literature Review
 
 ### Federalist Papers
 
-. and . had a similar question, but regarding writing authorship. The famous Federalist Papers were often written by a pen name ... Historians have often examined the papers using styles of previously known writings of ... Using the frequency of the words and and the, . and . trained the writings on a set of pices of each. These uncounsious indicators were able to differentiate between the two writters, and when a model was trained, the model was able to classify the anonymous papers as ... 
+Mosteller and Wallace had a similar question, but regarding writing authorship [@mosteller1964inference]. The famous Federalist Papers were written under the pen name 'Publius'. There are several disputed papers attributed to James Madison or Alexander Hamilton.  Historians have often examined the papers using styles of previously known writings of Madison and Hamilton. () Using the frequency of words such as and 'by', 'from', and 'upon' Mosteller and Wallace trained the writings on a set of pieces of each. These unconscious indicators were able to differentiate between the two writers, and when a model was trained (using .... ), the model was able to identify the author of the disputed paper.
 
 ### Music
 
-Analyzing music, almost any piece by any composer, has already been throughouly examined my music historians. (Paragraph about things that music historians talk about when analyzing music.)
+Analyzing music, almost any piece by any composer, has already been thoroughly examined my music historians. (Paragraph about things that music historians talk about when analyzing music. find sources for this. )
 
 
 
-The human eye, no matter how well trained in music, has an extremetly hard time identifying small features throughout a piece. Say one composer was very fond of middle C, and consitently used it slightly more than other composers. Unless the use of C was extreme, breaking rules of counterpoint, a human might not be able to catch this characteristic. Writing has certain rules of grammar, that one would expect all published writers to mostly follow. Writers would likely never have the word and written twice in a row. Similarly, classical music has rules and conventions. Counterpoint (described in Chapter 2), melody, and characteristics of the instrument composed for etc constrict a composer. 
+The human eye, no matter how well trained in music, has an extremely hard time noticing small features throughout a piece. Even if one has a feature in mind, would you want to count the number of times an author used the word 'as' in a 500 page book? Would one trust that count to be accurate? Say one composer was very fond of middle C, and consistently used it slightly more than other composers. Unless the use of C was extreme, likely breaking rules of counterpoint and making odd melodic choices, a human might not be able to catch this characteristic. Writing has certain rules of grammar, that one would expect all published writers to mostly follow. Writers would likely never have the word 'as' written twice in a row. Similarly, classical music has rules and conventions. Counterpoint (described in Chapter 2?), melody, and characteristics of the instrument composed for constrict a composer. 
 
-How can one find similar unconcious feature comparable to and/the usage for a composer?  Some () have analyzed these features in auditory format (Midi)... In this paper we look at music in sheet music form. We then come to an interesting problem. Writing such as in the federalist papers is one word then the next, read left to right line by line, one word at a time. However music 
+How can one find similar unconscious features comparable to word frequency for a composer?  Some  have analyzed these features in audio format (MIDI) to distinguish certain genres of music. [@de2003feature] They used self-organizing neural maps to classify music as either jazz or classical. In this paper we look at music in sheet music form. Sheet music is how composers write the music, and sheet music contains all the the information displayed clearly that a recording might not be obvious.
+
+We then come to an interesting problem regarding extracting information from sheet music. Writing such as in the federalist papers is one word then the next, read left to right line by line, one word at a time. However music is read in a variety of ways. It can be read left to right note by note, but it can also be read vertically as the harmony, or the notes played together. Also in a piece with several instruments, the above happens at the same time for each instrument. There are also aspects that take place over large sections, such as phrasing, or cadencial patterns. There are rules of counterpoint that are followed throughout the entire piece. How then do we detect what features are those of rules and practices of classical music, and where the creativeness and individuality of a composer happens? 
+
+Most of the musical stylometry papers have focused on composers in the rennesanse, baroque and classical period. The Mendelssohns were composing in the Romantic period. This choice might be because composwers in earlier eras had less "expressive" allowances for thier composing, thus making features easier. Who knows. 
 
 
 
-# Fanny and Felix Mendelssohn
+## Fanny and Felix Mendelssohn
 
 
 
-# Stats stuff
+## Stats stuff - what to include here?
 
 
 

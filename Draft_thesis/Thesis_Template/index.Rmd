@@ -1,5 +1,5 @@
 ---
-author: 'Your R. Name'
+author: 'Emily Palmer'
 date: 'May 2018'
 institution: 'Reed College'
 division: 'Mathematics and Natural Sciences'
