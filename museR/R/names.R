@@ -1,23 +1,11 @@
-#' Takes a spline and converts creates data frame with numeric note value (NNV) and descriptive notevalue (DNV) 
-#' 
-#' @param spline .krn file 
-#' @return dataframe of stuff
+#' Identifies the note and note value of a .krn note
+#'  
+#' @param note .krn file 
+#' @return NNV and DNV
 #' 
 #' @examples 
 #' 
 #'
-
-
-note_value <- data.frame(colnames(c("base","third","fifth","val_base","val_third","val_fifth")))
-for(i in 1:nrow(piece)){
-  note_value[i,1] <- notes_to_val(piece[i,3])[1] 
-  note_value[i,2] <- notes_to_val(piece[i,5])[1]
-  note_value[i,3] <- notes_to_val(piece[i,7])[1]
-  note_value[i,4] <- notes_to_val(piece[i,3])[2] 
-  note_value[i,5] <- notes_to_val(piece[i,5])[2]
-  note_value[i,6] <- notes_to_val(piece[i,7])[2]
-}
-
 
 notes_to_val <- function(note){
   if (is.na(note)){
@@ -96,3 +84,26 @@ notes_to_val <- function(note){
   r <- c(v,val)
   return(r)
 }
+
+
+#' Adds columns with more easily analyzable note names
+#'  
+#' @param piece .krn file 
+#' @return data frame with orriginal piece and NNV and DNV
+#' 
+#' @examples 
+#' 
+#'
+
+
+note_value <- function(piece){
+  df <- data.frame(colnames(c("base","third","fifth","val_base","val_third","val_fifth")))
+  for(i in 1:nrow(piece)){
+    df[i,1] <- notes_to_val(piece[i,3])[1] 
+    df[i,2] <- notes_to_val(piece[i,5])[1]
+    df[i,3] <- notes_to_val(piece[i,7])[1]
+    df[i,4] <- notes_to_val(piece[i,3])[2] 
+    df[i,5] <- notes_to_val(piece[i,5])[2]
+    df[i,6] <- notes_to_val(piece[i,7])[2]
+  }
+  

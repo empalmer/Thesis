@@ -1,4 +1,8 @@
-#' Takes a .krn file and converts into a readable format
+
+
+### kern2df ####
+
+#' Takes a .krn spline and converts into data frame
 #' 
 #' @param spline .krn file 
 #' @return dataframe of stuff
@@ -13,9 +17,9 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   measure_numbers <- 1:length(measures) # how many measures there are
   
   
-  list_notes <- grep("^[0-9]|\\[", data)
+  list_notes <- grep("^[0-9]|\\[|\\.", data) # makes a list of notes and . 's 
   
-  val_list_notes <- grep("^[0-9]|\\[", data, value = T)
+  val_list_notes <- grep("^[0-9]|\\[|\\.", data, value = T)
   
   measure_column <- vector() # make a vector of which row each is in. 
   for( i in 2:length(measures)){
@@ -37,17 +41,17 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
     }
   }
   
-  piece <- data.frame(measure =measure_column, n1 = n[,1], n2 = n[,2], n3=n[,3])
+  piece <- data.frame(measure = measure_column, n1 = n[,1], n2 = n[,2], n3 = n[,3])
   piece <- as.data.frame(lapply(piece, function(y) gsub("L|J", "", y)))
   piece <- as.data.frame(lapply(piece, function(y) gsub("\\[|\\]", "", y)))
   
-  r1 <- vector()
+  r1 <- vector()          # totally forgot what this is... 
   for(i in 1:nrow(piece)){
-    r1[i]<- regmatches(piece[i,2], regexpr("[0-9]{1,2}",piece[i,2]))
+    r1[i]<- regmatches(piece[i,2], regexpr("[0-9]{1,2}|\\.",piece[i,2]))
   }
-  on1 <- vector()
+  on1 <- vector()       # this too
   for(i in 1:nrow(piece)){
-    on1[i] <- regmatches(piece[i,2], regexpr("[A-z]{1,2}.*",piece[i,2]))
+    on1[i] <- regmatches(piece[i,2], regexpr("[A-z]{1,2}.*|\\.",piece[i,2]))
   }
   r2 <- vector()
   for(i in 1:nrow(piece)){
@@ -57,7 +61,7 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
       r2[i] <- NA
     }
     else{
-      r2[i]<- regmatches(piece[i,3], regexpr("[0-9]{1,2}",piece[i,3]))
+      r2[i]<- regmatches(piece[i,3], regexpr("[0-9]{1,2}|\\.",piece[i,3]))
     }
   }
   on2 <- vector()
@@ -68,7 +72,7 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
       on2[i] <- NA
     }
     else{
-      on2[i]<- regmatches(piece[i,3], regexpr("[A-z]{1,2}.*",piece[i,3]))
+      on2[i]<- regmatches(piece[i,3], regexpr("[A-z]{1,2}.*|\\.",piece[i,3]))
     }
   }
   r3 <- vector()
@@ -95,11 +99,54 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   }
   
   piece <- data.frame(measure = measure_column, 
-                      nv1 = r1, 
-                      n1 = on1, 
-                      nv2 = r2, 
-                      n2 = on2, 
-                      nv3 = r3,
-                      n3 = on3)
+                      rhythm_val_base = r1, 
+                      note_val_base = on1, 
+                      rhy_val_third = r2, 
+                      note_val_third = on2, 
+                      rhy_val_fifth = r3,
+                      note_val_fifth = on3)
   piece
 }
+
+
+#######  piece_df #############
+
+
+
+#' Takes several splines in .krn that are part of a piece and calls kern2df to create one df for entire piece
+#' 
+#' @param a first spline .krn file 
+#' @param b second spline .krn file
+#' @param c third spline .krn file
+#' @return dataframe for entire piece - combined splines
+
+piece_df <- function(a,b,c){
+  df_a <- kern2df(a)
+  df_b <- kern2df(b)
+  df_c <- kern2df(c)
+  len <- nrow(df_a)
+  len_b <- nrow(df_b)
+  len_c <- nrow(df_c)
+#  if(len != len_b & len != len_c){ # make sure everything matches up
+ 
+  spline_number <- c(rep(1,len),rep(2,len),rep(3,len)) #indicates which spline everything belongs to
+  
+  piece <- rbind(df_a,df_b,df_c)
+  
+  piece <- cbind(spline_number, piece)
+  piece
+
+}  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
