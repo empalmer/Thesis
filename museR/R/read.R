@@ -6,6 +6,8 @@
 #' 
 #' @param spline .krn file 
 #' @return dataframe of stuff
+#' 
+#' 
 
 kern2df <- function(spline){ # takes a spline(".krn") as input
   data <- readLines(spline)
@@ -29,83 +31,42 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   }
   
   
-  notes_list <- list()
-  for(i in 1:length(list_notes)){
-    notes_list[[i]] <- unlist(strsplit(val_list_notes[i],"/") )
-  }
+  sep_chord <- list() #creates a list that seperates 4E 8n into two 
+  
+    for(i in 1:length(list_notes)){ # if not, seperate the notes
+      sep_chord[[i]] <- unlist(strsplit(val_list_notes[i],"\\/|\\\\"))
+    }
+  
   
   n <- data.frame()
   for( j in 1:3){
     for( i in 1:length(list_notes)){
-      n[i,j]<-notes_list[[i]][j]
+      n[i,j]<-sep_chord[[i]][j]
     }
   }
   
   piece <- data.frame(measure = measure_column, n1 = n[,1], n2 = n[,2], n3 = n[,3])
   piece <- as.data.frame(lapply(piece, function(y) gsub("L|J", "", y)))
-  piece <- as.data.frame(lapply(piece, function(y) gsub("\\[|\\]", "", y)))
+  piece <- as.data.frame(lapply(piece, function(y) gsub("\\[|\\]|\\\\|\\/", "", y)))
   
-  r1 <- vector()          # totally forgot what this is... 
-  for(i in 1:nrow(piece)){
-    r1[i]<- regmatches(piece[i,2], regexpr("[0-9]{1,2}|\\.",piece[i,2]))
-  }
-  on1 <- vector()       # this too
-  for(i in 1:nrow(piece)){
-    on1[i] <- regmatches(piece[i,2], regexpr("[A-z]{1,2}.*|\\.",piece[i,2]))
-  }
-  r2 <- vector()
-  for(i in 1:nrow(piece)){
-    if(is.na(piece[i,3])){
-      r2[i] <- NA}
-    else if( piece[i,3]==""){
-      r2[i] <- NA
-    }
-    else{
-      r2[i]<- regmatches(piece[i,3], regexpr("[0-9]{1,2}|\\.",piece[i,3]))
-    }
-  }
-  on2 <- vector()
-  for(i in 1:nrow(piece)){
-    if(is.na(piece[i,3])){
-      on2[i] <- NA}
-    else if( piece[i,3]==""){
-      on2[i] <- NA
-    }
-    else{
-      on2[i]<- regmatches(piece[i,3], regexpr("[A-z]{1,2}.*|\\.",piece[i,3]))
-    }
-  }
-  r3 <- vector()
-  for(i in 1:nrow(piece)){
-    if(is.na(piece[i,4])){
-      r3[i] <- NA}
-    else if( piece[i,4]==""){
-      r3[i] <- NA
-    }
-    else{
-      r3[i]<- regmatches(piece[i,4], regexpr("[0-9]{1,2}",piece[i,4]))
-    }
-  }
-  on3 <- vector()
-  for(i in 1:nrow(piece)){
-    if(is.na(piece[i,4])){
-      on3[i] <- NA}
-    else if( piece[i,4]==""){
-      on3[i] <- NA
-    }
-    else{
-      on3[i]<- regmatches(piece[i,4], regexpr("[A-z]{1,2}.*",piece[i,4]))
-    }
-  }
+  r1 <- str_extract(piece[,2],"[0-9]{1,2}(\\.*)")
+  note_base <- str_extract(piece[,2],"[A-z]{1,2}.*")
   
-  piece <- data.frame(measure = measure_column, 
+  r2 <- str_extract(piece[,3],"[0-9]{1,2}(\\.*)")
+  note_third <- str_extract(piece[,3],"[A-z]{1,2}.*")
+  
+  r3 <- str_extract(piece[,4],"[0-9]{1,2}(\\.*)")
+  note_fifth <- str_extract(piece[,4],"[A-z]{1,2}.*")
+
+  
+  spline_df <- data.frame(measure = measure_column, 
                       rhythm_val_base = r1, 
-                      note_val_base = on1, 
+                      note_val_base = note_base, 
                       rhy_val_third = r2, 
-                      note_val_third = on2, 
+                      note_val_third = note_third, 
                       rhy_val_fifth = r3,
-                      note_val_fifth = on3)
-  piece
+                      note_val_fifth = note_fifth)
+  spline_df
 }
 
 
