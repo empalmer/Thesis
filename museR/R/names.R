@@ -99,11 +99,18 @@ notes_to_val <- function(note){
 note_value <- function(piece){
   df <- data.frame(colnames(c("base","third","fifth","val_base","val_third","val_fifth")))
   for(i in 1:nrow(piece)){
-    df[i,1] <- notes_to_val(piece[i,3])[1] 
-    df[i,2] <- notes_to_val(piece[i,5])[1]
-    df[i,3] <- notes_to_val(piece[i,7])[1]
-    df[i,4] <- notes_to_val(piece[i,3])[2] 
-    df[i,5] <- notes_to_val(piece[i,5])[2]
-    df[i,6] <- notes_to_val(piece[i,7])[2]
+    df[i,1] <- notes_to_val(piece[i,4])[1] 
+    df[i,2] <- notes_to_val(piece[i,6])[1]
+    df[i,3] <- notes_to_val(piece[i,8])[1]
+    df[i,4] <- notes_to_val(piece[i,4])[2] 
+    df[i,5] <- notes_to_val(piece[i,6])[2]
+    df[i,6] <- notes_to_val(piece[i,8])[2]
   }
+  cbind(piece,df)
+}  
+
+  
+  
+  
+  
   

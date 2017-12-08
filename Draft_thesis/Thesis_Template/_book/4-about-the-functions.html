@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="conclusion.html">
-<link rel="next" href="B-the-second-appendix-for-fun.html">
+<link rel="prev" href="3-about-the-data-and-conversion-process.html">
+<link rel="next" href="5-methods.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -105,17 +105,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2" data-path="1-chapter-1.html"><a href="1-chapter-1.html#literature-review"><i class="fa fa-check"></i><b>1.2</b> Literature Review</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="1-chapter-1.html"><a href="1-chapter-1.html#federalist-papers"><i class="fa fa-check"></i><b>1.2.1</b> Federalist Papers</a></li>
 <li class="chapter" data-level="1.2.2" data-path="1-chapter-1.html"><a href="1-chapter-1.html#music"><i class="fa fa-check"></i><b>1.2.2</b> Music</a></li>
-<li class="chapter" data-level="1.2.3" data-path="1-chapter-1.html"><a href="1-chapter-1.html#previous-choices-of-features"><i class="fa fa-check"></i><b>1.2.3</b> Previous choices of features</a></li>
-<li class="chapter" data-level="1.2.4" data-path="1-chapter-1.html"><a href="1-chapter-1.html#methods-for-analysis"><i class="fa fa-check"></i><b>1.2.4</b> Methods for analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="1-chapter-1.html"><a href="1-chapter-1.html#fanny-and-felix-mendelssohn"><i class="fa fa-check"></i><b>1.3</b> Fanny and Felix Mendelssohn</a></li>
+<li class="chapter" data-level="1.4" data-path="1-chapter-1.html"><a href="1-chapter-1.html#stats-stuff---what-to-include-here"><i class="fa fa-check"></i><b>1.4</b> Stats stuff - what to include here?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="2-section.html"><a href="2-section.html"><i class="fa fa-check"></i><b>2</b> </a><ul>
-<li class="chapter" data-level="2.1" data-path="2-section.html"><a href="2-section.html#about-the-data-and-conversion-process"><i class="fa fa-check"></i><b>2.1</b> About the data and conversion process</a></li>
-<li class="chapter" data-level="2.2" data-path="2-section.html"><a href="2-section.html#about-the-functions"><i class="fa fa-check"></i><b>2.2</b> About the functions</a></li>
-<li class="chapter" data-level="2.3" data-path="2-section.html"><a href="2-section.html#methods"><i class="fa fa-check"></i><b>2.3</b> Methods</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="3-eda.html"><a href="3-eda.html"><i class="fa fa-check"></i><b>3</b> EDA</a></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Chapter 2</a></li>
+<li class="chapter" data-level="3" data-path="3-about-the-data-and-conversion-process.html"><a href="3-about-the-data-and-conversion-process.html"><i class="fa fa-check"></i><b>3</b> About the data and conversion process</a></li>
+<li class="chapter" data-level="4" data-path="4-about-the-functions.html"><a href="4-about-the-functions.html"><i class="fa fa-check"></i><b>4</b> About the functions</a></li>
+<li class="chapter" data-level="5" data-path="5-methods.html"><a href="5-methods.html"><i class="fa fa-check"></i><b>5</b> Methods</a></li>
 <li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="A-the-first-appendix.html"><a href="A-the-first-appendix.html"><i class="fa fa-check"></i><b>A</b> The First Appendix</a></li>
@@ -140,27 +137,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-first-appendix" class="section level1">
-<h1><span class="header-section-number">A</span> The First Appendix</h1>
-<p>This first appendix includes all of the R chunks of code that were hidden throughout the document (using the <code>include = FALSE</code> chunk tag) to help with readibility and/or setup.</p>
-<p><strong>In the main Rmd file</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This chunk ensures that the thesisdown package is</span>
-<span class="co"># installed and loaded. This thesisdown package includes</span>
-<span class="co"># the template files for the thesis.</span>
-<span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(devtools))
-  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://cran.rstudio.com&quot;</span>)
-<span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(thesisdown))
-  devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ismayc/thesisdown&quot;</span>)
-<span class="kw">library</span>(thesisdown)</code></pre></div>
-<p><strong>In Chapter <a href="#ref-labels"><strong>??</strong></a>:</strong></p>
+<div id="about-the-functions" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> About the functions</h1>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="conclusion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="B-the-second-appendix-for-fun.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="3-about-the-data-and-conversion-process.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

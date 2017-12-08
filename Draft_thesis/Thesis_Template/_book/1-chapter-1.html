@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="conclusion.html">
-<link rel="next" href="B-the-second-appendix-for-fun.html">
+
+<link rel="next" href="2-section.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -140,27 +140,53 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-first-appendix" class="section level1">
-<h1><span class="header-section-number">A</span> The First Appendix</h1>
-<p>This first appendix includes all of the R chunks of code that were hidden throughout the document (using the <code>include = FALSE</code> chunk tag) to help with readibility and/or setup.</p>
-<p><strong>In the main Rmd file</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This chunk ensures that the thesisdown package is</span>
-<span class="co"># installed and loaded. This thesisdown package includes</span>
-<span class="co"># the template files for the thesis.</span>
-<span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(devtools))
-  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://cran.rstudio.com&quot;</span>)
-<span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(thesisdown))
-  devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ismayc/thesisdown&quot;</span>)
-<span class="kw">library</span>(thesisdown)</code></pre></div>
-<p><strong>In Chapter <a href="#ref-labels"><strong>??</strong></a>:</strong></p>
+<div id="header">
+<h1 class="title">Thesis</h1>
+<h4 class="author"><em>Emily Palmer</em></h4>
+<h4 class="date"><em>May 2018</em></h4>
+</div>
+<div id="chapter-1" class="section level1">
+<h1><span class="header-section-number">1</span> Chapter 1</h1>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">1.1</span> Introduction</h2>
+<p>Music often has subjective summary “statistics” throughout music literature and everyday conversation. For example we talk about Beethoven’s Symphony 9 (think ode to joy) as “majestic, powerful fateful, expertly written, etc”, music critics go more in depth to say…. , and those with a musical background might go into more description into the actual music compared to the emotional affect.</p>
+<p>What if one wanted to compare Beethoven to say, Bach? One might say that Beethoven was a classical composer, whereas Bach was a baroque composer. What exactly to those classifiers mean? Sure, it is very well documented the years each composer was active in, and that there were large changes in the popular aspects of classical music. Even the untrained ear can distinguish differences between Bach and Beethoven. What exactly is the difference that one can hear? Does Bach follow counterpoint rules more exactly? What ways can we empirically differentiate those two composers? How about Mozart and Saliery, contemporaries? While those familiar with classical music can spot the differences between the two composers, it is more difficult for the untrained ear or eye to spot the differences.</p>
+<p>What if we had a piece and didn’t know who wrote it?</p>
+</div>
+<div id="literature-review" class="section level2">
+<h2><span class="header-section-number">1.2</span> Literature Review</h2>
+<div id="federalist-papers" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Federalist Papers</h3>
+<p>Mosteller and Wallace had a similar question, but regarding writing authorship <span class="citation">(Mosteller &amp; Wallace, 1964)</span>. The famous Federalist Papers were written under the pen name ‘Publius’. There are several disputed papers attributed to James Madison or Alexander Hamilton. Historians have often examined the papers using styles of previously known writings of Madison and Hamilton. () Using the frequency of words such as and ‘by’, ‘from’, and ‘upon’ Mosteller and Wallace trained the writings on a set of pieces of each. These unconscious indicators were able to differentiate between the two writers, and when a model was trained (using …. ), the model was able to identify the author of the disputed paper.</p>
+</div>
+<div id="music" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Music</h3>
+<p>Analyzing music, almost any piece by any composer, has already been thoroughly examined my music historians. (Paragraph about things that music historians talk about when analyzing music. find sources for this. )</p>
+<p>The human eye, no matter how well trained in music, has an extremely hard time noticing small features throughout a piece. Even if one has a feature in mind, would one want to count the number of times an author used the word ‘as’ in a 500 page book? Would one trust that count to be accurate? Say one composer was very fond of middle C, and consistently used it slightly more than other composers. Unless the use of C was extreme, likely breaking rules of counterpoint and making odd melodic choices, a human might not be able to catch this characteristic. Writing has certain rules of grammar, that one would expect all published writers to mostly follow. Writers would likely never have the word ‘as’ written twice in a row. Similarly, classical music has rules and conventions. Counterpoint (described in Chapter 2), melody, and characteristics of the instrument composed for constrict a composer.</p>
+<p>How can one find similar unconscious features comparable to word frequency for a composer? Some have analyzed these features in audio format (MIDI) to distinguish certain genres of music. <span class="citation">(De León &amp; Inesta, 2003)</span> They used self-organizing neural maps to classify music as either jazz or classical. In this paper we look at music in sheet music form. Sheet music is how composers write the music, and sheet music contains all the the information displayed clearly that a recording might not be obvious.</p>
+<p>We then come to an interesting problem regarding extracting information from sheet music. Writing such as in the federalist papers is one word then the next, read left to right line by line, one word at a time. However music is read in a variety of ways. It can be read left to right note by note, but it can also be read vertically as the harmony, or the notes played together. Also in a piece with several instruments, the above happens at the same time for each instrument. There are also aspects that take place over large sections, such as phrasing, or cadencial patterns. There are rules of counterpoint that are followed throughout the entire piece. How then do we detect what features are those of rules and practices of classical music, and where the creativeness and individuality of a composer happens?</p>
+<p>Most of the musical stylometry papers have focused on composers in the rennesanse, baroque and classical period. The Mendelssohns were composing in the Romantic period. This choice might be because composers in earlier eras had less “expressive” allowances for their composing, thus making features easier.</p>
+</div>
+<div id="previous-choices-of-features" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Previous choices of features</h3>
+</div>
+<div id="methods-for-analysis" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> Methods for analysis</h3>
+<p>Most of the previous research has needed to do some kind of feature selection. The whole reason use machine learning is because us humans cannot detect which features are important and distinguishing.</p>
+</div>
+</div>
+<div id="fanny-and-felix-mendelssohn" class="section level2">
+<h2><span class="header-section-number">1.3</span> Fanny and Felix Mendelssohn</h2>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="conclusion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="B-the-second-appendix-for-fun.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+<a href="2-section.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

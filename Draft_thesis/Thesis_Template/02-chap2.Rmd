@@ -1,19 +1,11 @@
-# Chapter 2
+# 
 
-<!-- Required to number equations in HTML files -->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-
-
-# About the data and conversion process
+## About the data and conversion process
 
 
 
-# About the functions
+## About the functions
 
 
 
-# Methods
+## Methods
