@@ -187,9 +187,6 @@ Second paragraph of abstract starts here.
 \mainmatter % here the regular arabic numbering starts
 \pagestyle{fancyplain} % turns page numbering back on
 
-\chapter{thesisdown::thesis\_gitbook:
-default}\label{thesisdownthesis_gitbook-default}
-
 \chapter{Chapter 1}\label{chapter-1}
 
 \section{Introduction}\label{introduction}
@@ -300,7 +297,24 @@ entire composition to produce more data, and aviod issues of
 dimensionality (?). They chose a window of 30 bars to create a high
 enough number of frangments per piece and a low enough variance of the
 feature values between fragments. They chose to extract 20 features.
-They extracted information
+They extracted information regarding the ``stability'' computed by
+dividing the standard deviation of the lengths of the fragment by the
+mean length of the fragments. It is normalized in this way to be
+comparable over differeing time signatures. They also found the fraction
+of the score that consisted of dissonate sonorities, as well as the
+fraction of bars that begin with a dissonant sonority. Next they
+computed the entropy of the probability of occurance of ways of thinking
+about chords; chords are the same no matter what scale degree they are
+on, and distinguising chords differently. Next the entropy was
+calculated given the probabilty of each pitch in the score. Entropy was
+calculated by \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where \(p_i\) is the
+probabity of occurance, and \(N\) is the total number. Next they the
+average number of active voices at one time. This represents the voice
+density of the piece. Then for every interval, the duration of that
+interval was divided by the total duration of all intervals. Next the
+total duration of parallel thirds, fourths, and sixths divided by the
+total duration of all intervals was measured. Finally a measure of
+suspensions was found.
 
 A number of previous papers have focused oh Josquin des Prez. This is
 likely due to the fact that there is a large training and testing data
@@ -334,13 +348,73 @@ process}\label{about-the-data-and-conversion-process}
 
 \chapter{EDA}\label{eda}
 
+\chapter{}\label{section-1}
+
+\section{Feature Selection}\label{feature-selection}
+
+\chapter{}\label{section-2}
+
+\section{Model selection}\label{model-selection}
+
+\chapter{}\label{section-3}
+
+\section{Model Fit}\label{model-fit}
+
+\chapter{}\label{section-4}
+
+\section{Discussion}\label{discussion}
+
 \chapter*{Conclusion}\label{conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
 
+If we don't want Conclusion to have a chapter number next to it, we can
+add the \texttt{\{-\}} attribute.
+
+\textbf{More info}
+
+And here's some other random info: the first paragraph after a chapter
+title or section head \emph{shouldn't be} indented, because indents are
+to tell the reader that you're starting a new paragraph. Since that's
+obvious after a chapter or section title, proper typesetting doesn't add
+an indent there.
+
+\appendix
+
 \chapter{The First Appendix}\label{the-first-appendix}
+
+This first appendix includes all of the R chunks of code that were
+hidden throughout the document (using the \texttt{include\ =\ FALSE}
+chunk tag) to help with readibility and/or setup.
+
+\textbf{In the main Rmd file}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# This chunk ensures that the thesisdown package is}
+\CommentTok{# installed and loaded. This thesisdown package includes}
+\CommentTok{# the template files for the thesis.}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(devtools))}
+  \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(thesisdown))}
+\NormalTok{  devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"ismayc/thesisdown"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(thesisdown)}
+\end{Highlighting}
+\end{Shaded}
+\textbf{In Chapter \ref{ref-labels}:}
+
+\chapter{The Second Appendix, for
+Fun}\label{the-second-appendix-for-fun}
+
+\backmatter
 
 \chapter*{References}\label{references}
 \addcontentsline{toc}{chapter}{References}
+
+\markboth{References}{References}
+
+\noindent
+
+\setlength{\parindent}{-0.20in} \setlength{\leftskip}{0.20in}
+\setlength{\parskip}{8pt}
 
 \hypertarget{refs}{}
 \hypertarget{ref-backer2005}{}
