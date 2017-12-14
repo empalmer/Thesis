@@ -187,16 +187,17 @@ Second paragraph of abstract starts here.
 \mainmatter % here the regular arabic numbering starts
 \pagestyle{fancyplain} % turns page numbering back on
 
-\chapter{Chapter 1}\label{chapter-1}
+\chapter{}\label{section}
 
 \section{Introduction}\label{introduction}
 
 Music often has subjective summary ``statistics'' throughout music
 literature and everyday conversation. For example we talk about
 Beethoven's Symphony 9 (think ode to joy) as ``majestic, powerful,
-fateful, expertly written, etc'', music critics go more in depth to
-say\ldots{}. , and those with a musical background might go into more
-description into the actual music compared to the emotional affect.
+fateful, expertly written, etc'', music critics go more in depth to talk
+about the performance and reception, and those with a musical background
+might go into more description into the actual music compared to the
+emotional affect.
 
 What if one wanted to compare Beethoven to Bach? One might say that
 Beethoven was a classical composer, whereas Bach was a baroque composer.
@@ -211,30 +212,31 @@ familiar with classical music can spot the differences between the two
 composers, it is more difficult for the untrained ear or eye to spot the
 differences.
 
-What if we had a piece and didn't know who wrote it?
+What if we had a piece and didn't know who wrote it? What features are
+inherent in a composers style that woudl allow us to identify the true
+composer?
 
 \section{Literature Review}\label{literature-review}
 
 \subsection{Federalist Papers}\label{federalist-papers}
 
-Mosteller and Wallace had a similar question, but regarding writing
-authorship (Mosteller \& Wallace, 1964). The famous Federalist Papers
-were written under the pen name `Publius'. There are several disputed
-papers attributed to James Madison or Alexander Hamilton. Historians
-have often examined the papers using styles of previously known writings
-of Madison and Hamilton. () Using the frequency of words such as and
-`by', `from', and `upon' Mosteller and Wallace trained the writings on a
-set of pieces of each. These unconscious indicators were able to
-differentiate between the two writers, and when a model was trained
-(using \ldots{}. ), the model was able to identify the author of the
-disputed paper.
+Text classification has recently become a large field. One of the
+earliest instances of text classification was on the Federalist
+papers.(Mosteller \& Wallace, 1964). The famous Federalist Papers were
+written under the pen name `Publius'. There are several disputed papers
+attributed to James Madison or Alexander Hamilton. Historians have often
+examined the papers using styles of previously known writings of Madison
+and Hamilton. () Using the frequency of words such as and `by', `from',
+and `upon' Mosteller and Wallace trained the writings on a set of pieces
+of each. These unconscious indicators were able to differentiate between
+the two writers, and when a model was trained (using \ldots{}. ), the
+model was able to identify the author of the disputed paper.
 
 \subsection{Music}\label{music}
 
-Analyzing music, almost any piece by any composer, has already been
-thoroughly examined by music historians. (Paragraph about things that
-music historians talk about when analyzing music. find sources for this.
-)
+Almost any piece by any composer has already been thoroughly examined by
+music historians. (Paragraph about things that music historians talk
+about when analyzing music. find sources for this. )
 
 The human eye, no matter how well trained in music, has an extremely
 hard time noticing small features throughout a piece. Even if one has a
@@ -274,7 +276,7 @@ those of rules and practices of classical music, and where the
 creativeness and individuality of a composer happens?
 
 Most of the musical stylometry papers have focused on composers in the
-Rennesaince, baroque and classical period. The Mendelssohns were
+Renaissance, baroque and classical period. The Mendelssohns were
 composing in the Romantic period. This choice might be because composers
 in earlier eras had less ``expressive'' allowances for their composing,
 thus making features easier.
@@ -288,36 +290,31 @@ period, different features would be useful. Often, features are
 extracted en masse and then work is done later to determine which
 features are important or useful in identifying style.
 
-There are two general groups of features. The first is low level, things
-such as note frequency, rhythm frequency etc. The second is high level,
-such as \ldots{}
-
-Work by Backer and Kranenburg (Backer \& Kranenburg, 2005) (Should I
-talk about the data they used too?) analyzed the music of Bach, Handel,
-Telemann, Mozart and Haydn. Additionally they compared J.S. Bach, W.F.
-Bach and J.L Krebs in an attempt to classify BWV 534. They use
-overlapping windowing over each entire composition to produce more data,
-and avoid issues of dimensionality (?). They chose a window of 30 bars
-to create a high enough number of fragments per piece and a low enough
-variance of the feature values between fragments. They chose to extract
-20 features. They extracted information regarding the ``stability''
-computed by dividing the standard deviation of the lengths of the
-fragment by the mean length of the fragments. It is normalized in this
-way to be comparable over differing time signatures. They also found the
-fraction of the score that consisted of dissonant sororities, as well as
-the fraction of bars that begin with a dissonant sonority. Next they
-computed the entropy of the probability of occurrence of ways of
-thinking about chords; chords are the same no matter what scale degree
-they are on, and distinguishing chords differently. Next the entropy was
-calculated given the probability of each pitch in the score. Entropy was
-calculated by \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where \(p_i\) is the
-probability of occurrence, and \(N\) is the total number. Next they the
-average number of active voices at one time. This represents the voice
-density of the piece. Then for every interval, the duration of that
-interval was divided by the total duration of all intervals. Next the
-total duration of parallel thirds, fourths, and sixths divided by the
-total duration of all intervals was measured. Finally a measure of
-suspensions was found.
+Work by Backer and Kranenburg (Backer \& Kranenburg, 2005) analyzed the
+music of Bach, Handel, Telemann, Mozart and Haydn. Additionally they
+compared J.S. Bach, W.F. Bach and J.L Krebs in an attempt to classify
+BWV 534. They use overlapping windowing over each entire composition to
+produce more data, and avoid issues of dimensionality (?). They chose a
+window of 30 bars to create a high enough number of fragments per piece
+and a low enough variance of the feature values between fragments. They
+chose to extract 20 features. They extracted information regarding the
+``stability'' computed by dividing the standard deviation of the lengths
+of the fragment by the mean length of the fragments. It is normalized in
+this way to be comparable over differing time signatures. They also
+found the fraction of the score that consisted of dissonant sororities,
+as well as the fraction of bars that begin with a dissonant sonority.
+Next they computed the entropy of the probability of occurrence of ways
+of thinking about chords; chords are the same no matter what scale
+degree they are on, and distinguishing chords differently. Next the
+entropy was calculated given the probability of each pitch in the score.
+Entropy was calculated by \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where
+\(p_i\) is the probability of occurrence, and \(N\) is the total number.
+Next they the average number of active voices at one time. This
+represents the voice density of the piece. Then for every interval, the
+duration of that interval was divided by the total duration of all
+intervals. Next the total duration of parallel thirds, fourths, and
+sixths divided by the total duration of all intervals was measured.
+Finally a measure of suspensions was found.
 
 A number of previous papers have focused on Josquin des Prez. This is
 likely due to the fact that there is a large training and testing data
@@ -340,26 +337,47 @@ voices, Markov transition matrices for the rhythms of the pieces, and
 Markov transition matrices of the pitches in each piece. In total, this
 lead to a total of 3000 features. (Help why?)
 
+\subsection{Background on Variable and Feature
+Selection}\label{background-on-variable-and-feature-selection}
+
+Especially in research regarding gene expression and text
+categorization, data sets have enormous numbers of variables. Here
+variable are raw inputs, and features are variables constructed for
+input variables (Guyon \& Elisseeff, 2003). There are several variable
+selection algorithms that select variables.
+
+Several variable selection algorithms include variable ranking. Variable
+ranking uses a score function to assign a score to each input variables.
+It is a filter method. It is a computationally efficient method. It is
+robust against over fitting as it introduces bias, but may have less
+variance. It is tempting to only include variables that have a high
+score. However, this possibly leads to redundancy. In addition,
+variables that are not important by themselves can have a significant
+performance improvement when considered with other variables.
+
+Will include more after I read more\ldots{}
+
 \subsection{Methods for analysis}\label{methods-for-analysis}
 
 Most of the previous research has needed to do some kind of feature
 selection. The whole reason use machine learning is because us humans
 cannot detect which features are important and distinguishing.
 
-Backer and Krannenburg (Backer \& Kranenburg, 2005) used the Floating
-Forward Selection algorithm to extract important features. They compared
-each composer in their study (Bach, Handel, Telemann, Mozart and Haydn)
-via creating comparisons of all possible class arrangements, ie
-(Bach)(Handel), (Bach)(Handel,Teleman), etc. They extracted features for
-each class arrangement that distinguished the groups the best. For Bach
-and not Bach, they created a decision boundary for the features Diss
-Part, Par thirds, and stab time slice. For Bach and others and each
-individually, they classified via a k-nearest neighbor classifier. They
-use decision trees to interpret the features used in decision making of
-the different class arrangements. To determine authorship of BWV 535,
-they train a quadratic Bayesian classifier to distinguish J.S. Bach,
-W.F. Bach and J.L Krebs. They again compare every possible class
-arrangement as potential composers.
+In a study to identify distinguishing style between Bach, Handel,
+Telemann, Mozart, and Haydn, and then subsequently classify the
+authorship of BWV 535, the Floating Forward Selection algorithm was used
+to extract important features. (Backer \& Kranenburg, 2005) Each
+composer in the study was compared via creating comparisons of all
+possible class arrangements, ie (Bach)(Handel), (Bach)(Handel,Teleman),
+etc. They extracted features for each class arrangement that
+distinguished the groups the best. For Bach and not Bach, they created a
+decision boundary for the features Diss Part, Par thirds, and stab time
+slice. For Bach and others and each individually, they classified via a
+k-nearest neighbor classifier. They use decision trees to interpret the
+features used in decision making of the different class arrangements. To
+determine authorship of BWV 535, they train a quadratic Bayesian
+classifier to distinguish J.S. Bach, W.F. Bach and J.L Krebs. They again
+compare every possible class arrangement as potential composers.
 
 Brinkman et al. (Brinkman et al., n.d.) used PCa to reduce the
 dimensions of the features. Although only two PC's accounted for most of
@@ -380,13 +398,65 @@ mutual information of each features. They then chose the top 50 features
 and ran GDA. They then ran PCA to attempt to remove some of the
 dependencies associated with musical features. They first fit a Naive
 Bayes for classification, but it had a large training error as the
-indepencence assumption does not work well with musical data. Next they
-used support vector machines with a gaussian kernel and GCA learning
+independence assumption does not work well with musical data. Next they
+used support vector machines with a Gaussian kernel and GCA learning
 algorithms.
 
 \section{Fanny and Felix Mendelssohn}\label{fanny-and-felix-mendelssohn}
 
-\chapter{}\label{section}
+Most musical stylometry analysis focuses on music of the Renaissance and
+Baroque period, as there are more questions of authorship in that
+period. As the Romantic period is much more modern in comparison, there
+are many more surviving records of original manuscripts that include the
+composer.
+
+Felix Mendelssohn, often considered a prodegy akin to Mozart, was a
+prolific composer. (Continue\ldots{} )
+
+His lesser known sister Fanny Hensel was also a composer of incredible
+skill. The two were very close, for many years training and studying
+together. In thier early education living in Berlin, Felix and Fanny
+recieved the same musical education, first piano lessons by Madam Bigot,
+a famous pianist estemed by Haydn and Beethoven. Beginning in 1818, Carl
+Friedrich Zelter, a somewhat removed student of Bach and the most
+influential Berlin musician of the time, began to teach them both
+composition. In addition to music, the children were tutured by some of
+the finest scholard in Berlin in subjects such as languages, history,
+and drawing. Goethe himself claimed that Fanny was ``as gifted as
+Felix''. (Tillard, 1996)
+
+As Fanny grew up, her father started implying that she should focus her
+energy on the domestic sphere of her life. While the fact that she never
+became a world famous composer and performer is often attributed to the
+gender politics of her time, it is also likely due to her high class.
+(Reich, 1991) Especially considering the Anti-semetic feelings of the
+time, and since the family had recently converted from Judiasm to
+Christianity, the family did not want any other unusual characteristic
+such as a professional female composer to set them further appart from
+``polite'' society.
+
+Thourought their lives, Felix and Fanny maintained contact through
+letters untill Fanny's death in 1847 and Felix's death shorthly
+thereafter. These letters contain many instances of Felix asking for
+advice on his compositions (include quote)
+
+Unlike Felix who conducted and performed piano and organ in some of
+Berlin's most estemed concert halls, most of Fanny's performances were
+private, only performed in small circles of her friends and family at
+intimate parties. Similarly, although she was quite a prolific composer,
+under reccomendatino of her father Abraham Mendelsson, and to a lesser
+extent Felix, Fanny did not publish her work until later in her life. In
+\ldots{} after her fathers death and though her brothers dissaproval,
+she published \ldots{} Many of Fanny's unpublished notebooks are in
+private collections and are innaccessible
+
+However, it is widly speculated (known?) that some of Fanny's work was
+published under her brother's name, Especially three pieces each in his
+Op 8 and 9 lieder. Famously, when Felix met the Queen of England, she
+sang Felix's Lied ``Italien'', and Felix had to admit that in fact, it
+was his siter that had written it.
+
+\chapter{}\label{section-1}
 
 \section{About the data and conversion
 process}\label{about-the-data-and-conversion-process}
@@ -397,19 +467,19 @@ process}\label{about-the-data-and-conversion-process}
 
 \chapter{EDA}\label{eda}
 
-\chapter{}\label{section-1}
+\chapter{}\label{section-2}
 
 \section{Feature Selection}\label{feature-selection}
 
-\chapter{}\label{section-2}
+\chapter{}\label{section-3}
 
 \section{Model selection}\label{model-selection}
 
-\chapter{}\label{section-3}
+\chapter{}\label{section-4}
 
 \section{Model Fit}\label{model-fit}
 
-\chapter{}\label{section-4}
+\chapter{}\label{section-5}
 
 \section{Discussion}\label{discussion}
 
@@ -480,13 +550,25 @@ the works of josquin.
 De León, P. J. P., \& Inesta, J. M. (2003). Feature-driven recognition
 of music styles, 773--781.
 
+\hypertarget{ref-guyon2003}{}
+Guyon, I., \& Elisseeff, A. (2003). An introduction to variable and
+feature selection. \emph{Journal of Machine Learning Research},
+\emph{3}(Mar), 1157--1182.
+
 \hypertarget{ref-mosteller1964inference}{}
 Mosteller, F., \& Wallace, D. (1964). \emph{Inference and disputed
 authorship: The federalist}. Addison-Wesley.
 
+\hypertarget{ref-reich1991}{}
+Reich, N. B. (1991). The power of class: Fanny hensel. \emph{Mendelssohn
+and His World}, 86--99.
+
 \hypertarget{ref-CompStyleAttri}{}
 Speiser, J., \& Gupta, V. (n.d.). Composer style attribution.
 \emph{Project Report for CS}, \emph{229}.
+
+\hypertarget{ref-tillard1996}{}
+Tillard, F. (1996). \emph{Fanny mendelssohn}. Hal Leonard Corporation.
 
 
 % Index?
