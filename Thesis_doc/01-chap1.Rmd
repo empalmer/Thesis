@@ -39,9 +39,9 @@ Work by Speiser and Gupta [@CompStyleAttri] analyzed Josquin and his contemporar
 
 ### Background on Variable and Feature Selection
 
-Especially in research regarding gene expression and text categorization, data sets have enormous numbers of variables. Here variable are raw inputs, and features are variables constructed for input variables [@guyon2003]. There are several variable selection algorithms that select variables. 
+Especially in research regarding gene expression and text categorization, data sets have enormous numbers of variables. Here variable are raw inputs, and features are variables constructed for input variables [@guyon2003]. There are several variable selection algorithms that select the "important" variables. 
 
-Several variable selection algorithms include variable ranking. Variable ranking uses a score function to assign a score to each input variables. It is a filter method. It is a computationally efficient method. It is robust against over fitting as it introduces bias, but may have less variance. It is tempting to only include variables that have a high score. However, this possibly leads to redundancy. In addition, variables that are not important by themselves can have a significant performance improvement when considered with other variables. 
+Several variable selection algorithms include variable ranking. Variable ranking uses a score function to assign a score to each input variable. It is a computationally efficient method and is robust against over fitting as it introduces bias, but may have less variance. It is tempting to only include variables that have a high score. However, this possibly leads to redundancy. In addition, variables that are not important by themselves can have a significant performance improvement when considered with other variables. 
 
 Will include more after I read more...
 
