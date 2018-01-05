@@ -136,7 +136,6 @@ Second paragraph of abstract starts here.
 }
 
 	\usepackage{tikz}
-	\usepackage{}
 % End of CII addition
 %%
 %% End Preamble
@@ -193,13 +192,13 @@ Second paragraph of abstract starts here.
 
 \section{Introduction}\label{introduction}
 
-Music often has subjective summary ``statistics'' throughout music
-literature and everyday conversation. For example we talk about
-Beethoven's Symphony 9 (think ode to joy) as ``majestic, powerful,
-fateful, expertly written, etc'', music critics go more in depth to talk
-about the performance and reception, and those with a musical background
-might go into more description into the actual music compared to the
-emotional affect.
+In everyday conversation and music liturature, music is often often
+described using subjective summary ``statistics''. For example we talk
+about Beethoven's Symphony 9 (think ode to joy) as `majestic',
+`powerful', `expertly written', `etc', music critics go more in depth to
+talk about the performance and reception, and those with a musical
+background might go into more description into the actual music,
+couterpoint, melodic arc, etc., compared to the emotional affect.
 
 What if one wanted to compare Beethoven to Bach? One might say that
 Beethoven was a classical composer, whereas Bach was a baroque composer.
@@ -209,8 +208,8 @@ in the popular aspects of classical music. Even the untrained ear can
 distinguish differences between Bach and Beethoven. What exactly is the
 difference that one can hear? Does Bach follow counterpoint rules more
 exactly? What ways can we empirically differentiate those two composers?
-How about Mozart and Saliery who were contemporaries? While those
-familiar with classical music can spot the differences between the two
+How about contemporary composers such as Mozart and Saliery? While those
+familiar with classical music can spot the differences between these two
 composers, it is more difficult for the untrained ear or eye to spot the
 differences.
 
@@ -256,32 +255,38 @@ melody, and characteristics of the instrument composed for constrict a
 composer.
 
 How can one find similar unconscious features comparable to word
-frequency for a composer? Some have analyzed these features in audio
-format (MIDI) to distinguish certain genres of music. (De León \&
-Inesta, 2003) They used self-organizing neural maps to classify music as
-either jazz or classical. In this paper we look at music in sheet music
-form. Sheet music is how composers write the music, and sheet music
-contains all the the information displayed clearly that a recording
-might not be obvious.
+frequency for a composer? There are two main ways to look at features in
+a piece of music. The first option is using a recording of the piece.
+This way has been used succesfully using a perfomrance in MIDI format to
+distinguish certain genres of music. (De León \& Inesta, 2003) They used
+self-organizing neural maps to classify music as either jazz or
+classical.
 
-We then come to an interesting problem regarding extracting information
-from sheet music. Writing such as in the federalist papers is one word
-then the next, read left to right line by line, one word at a time.
-However music is read in a variety of ways. It can be read left to right
-note by note, but it can also be read vertically as the harmony, or the
-notes played together. Also in a piece with several instruments, the
-above happens at the same time for each instrument. There are also
-aspects that take place over large sections, such as phrasing, or
-cadencial patterns. There are rules of counterpoint that are followed
-throughout the entire piece. How then do we detect what features are
-those of rules and practices of classical music, and where the
-creativeness and individuality of a composer happens?
+The second is using the sheet music of the piece. Performances of the
+same piece vary extremely, and there is information at a higher
+resonlution with easier access (intervals, etc.) in sheet music. Thus,
+in this paper sheet music will be used for analysis.
+
+Text analysis, such as in the federalist papers, is read one word after
+another. Information in piece of music, however, is read in a variety of
+ways. It can be read left to right note by note, but it can also be read
+vertically as the harmony, or the notes played together. Also in a piece
+with several instruments, the above happens at the same time for each
+instrument. There are also aspects that take place over large sections,
+such as phrasing, or cadencial patterns. There are rules of counterpoint
+that are followed throughout the entire piece. Thus we need to find
+`features' or `variables' (see below) that can be measured for each
+piece, or perhaps each measure or instrument, that can describe a
+certain piece of music. Then we must decide which features are those of
+rules and practices of classical music, and where the creativeness and
+individuality of a composer happens?
 
 Most of the musical stylometry papers have focused on composers in the
-Renaissance, baroque and classical period. The Mendelssohns were
+Renaissance, Baroque, and Classical eras. The Mendelssohns were
 composing in the Romantic period. This choice might be because composers
 in earlier eras had less ``expressive'' allowances for their composing,
-thus making features easier.
+thus making features easier, although this is just speculation. There
+are also more pieces with doubtful authorship in those eras.
 
 \subsection{Classification}\label{classification}
 
@@ -289,65 +294,9 @@ Assigning likely composers to a piece of music is a classification
 problem. Classic approaches to this problem are as follows
 
 In our case, for each song, we will have vector \(X\) which will be a
-vector of all the \(p\) features we are measuring. These will be the
-predictors. For each song, we will also have, or be trying to predict
-\(Y\), or the identity of the composer.
-
-\subsection{Previous choices of
-features}\label{previous-choices-of-features}
-
-Deciding on and extracting features of music is the first step to
-analysis. Depending on the characteristics of the composer and time
-period, different features would be useful. Often, features are
-extracted en masse and then work is done later to determine which
-features are important or useful in identifying style.
-
-Work by Backer and Kranenburg (Backer \& Kranenburg, 2005) analyzed the
-music of Bach, Handel, Telemann, Mozart and Haydn. Additionally they
-compared J.S. Bach, W.F. Bach and J.L Krebs in an attempt to classify
-BWV 534. They use overlapping windowing over each entire composition to
-produce more data, and avoid issues of dimensionality (?). They chose a
-window of 30 bars to create a high enough number of fragments per piece
-and a low enough variance of the feature values between fragments. They
-chose to extract 20 features. They extracted information regarding the
-``stability'' computed by dividing the standard deviation of the lengths
-of the fragment by the mean length of the fragments. It is normalized in
-this way to be comparable over differing time signatures. They also
-found the fraction of the score that consisted of dissonant sororities,
-as well as the fraction of bars that begin with a dissonant sonority.
-Next they computed the entropy of the probability of occurrence of ways
-of thinking about chords; chords are the same no matter what scale
-degree they are on, and distinguishing chords differently. Next the
-entropy was calculated given the probability of each pitch in the score.
-Entropy was calculated by \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where
-\(p_i\) is the probability of occurrence, and \(N\) is the total number.
-Next they the average number of active voices at one time. This
-represents the voice density of the piece. Then for every interval, the
-duration of that interval was divided by the total duration of all
-intervals. Next the total duration of parallel thirds, fourths, and
-sixths divided by the total duration of all intervals was measured.
-Finally a measure of suspensions was found.
-
-A number of previous papers have focused on Josquin des Prez. This is
-likely due to the fact that there is a large training and testing data
-set available in easily analyzable format provided by the Josquin
-Research Project (citation). In addition there are a number of pieces of
-disputed authorship that have been attributed to him. Work by Brinkman
-et al. (Brinkman, Shanahan, \& Sapp, n.d.) use machine learning
-approaches to evaluate attribution of compositions by des Prez. They
-used both high level and low level features. The high level features
-were 9-8 suspensions, oblique motion, contrary motion, similar motion
-and parallel motion. The low level features were average melodic
-entropy, normalized pairwise variability index (?), and note-to-note
-transition probabilities.
-
-Work by Speiser and Gupta (Speiser \& Gupta, n.d.) analyzed Josquin and
-his contemporaries to attempt to classify unknown works. They extracted
-four categories of features, frequencies of individual notes,
-frequencies of pairwise interval combinations between each of the
-voices, Markov transition matrices for the rhythms of the pieces, and
-Markov transition matrices of the pitches in each piece. In total, this
-lead to a total of 3000 features. (Help why?)
+vector of all the \(p\) variables and features we are measuring. These
+will be the predictors. For each song we will also have, or be trying to
+predict \(y\), or the identity of the composer.
 
 \subsection{Background on Variable and Feature
 Selection}\label{background-on-variable-and-feature-selection}
@@ -444,10 +393,66 @@ K-means
 
 PCA
 
+\subsection{Previous choices of
+features}\label{previous-choices-of-features}
+
+Deciding on and extracting features of music is the first step to
+analysis. Depending on the characteristics of the composer and time
+period, different features would be useful. Often, features are
+extracted en masse and then work is done later to determine which
+features are important or useful in identifying style.
+
+Work by Backer and Kranenburg (Backer \& Kranenburg, 2005) analyzed the
+music of Bach, Handel, Telemann, Mozart and Haydn. Additionally they
+compared J.S. Bach, W.F. Bach and J.L Krebs in an attempt to classify
+BWV 534. They use overlapping windowing over each entire composition to
+produce more data, and avoid issues of dimensionality (?). They chose a
+window of 30 bars to create a high enough number of fragments per piece
+and a low enough variance of the feature values between fragments. They
+chose to extract 20 features. They extracted information regarding the
+``stability'' computed by dividing the standard deviation of the lengths
+of the fragment by the mean length of the fragments. It is normalized in
+this way to be comparable over differing time signatures. They also
+found the fraction of the score that consisted of dissonant sororities,
+as well as the fraction of bars that begin with a dissonant sonority.
+Next they computed the entropy of the probability of occurrence of ways
+of thinking about chords; chords are the same no matter what scale
+degree they are on, and distinguishing chords differently. Next the
+entropy was calculated given the probability of each pitch in the score.
+Entropy was calculated by \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where
+\(p_i\) is the probability of occurrence, and \(N\) is the total number.
+Next they the average number of active voices at one time. This
+represents the voice density of the piece. Then for every interval, the
+duration of that interval was divided by the total duration of all
+intervals. Next the total duration of parallel thirds, fourths, and
+sixths divided by the total duration of all intervals was measured.
+Finally a measure of suspensions was found.
+
+A number of previous papers have focused on Josquin des Prez. This is
+likely due to the fact that there is a large training and testing data
+set available in easily analyzable format provided by the Josquin
+Research Project (citation). In addition there are a number of pieces of
+disputed authorship that have been attributed to him. Work by Brinkman
+et al. (Brinkman, Shanahan, \& Sapp, n.d.) use machine learning
+approaches to evaluate attribution of compositions by des Prez. They
+used both high level and low level features. The high level features
+were 9-8 suspensions, oblique motion, contrary motion, similar motion
+and parallel motion. The low level features were average melodic
+entropy, normalized pairwise variability index (?), and note-to-note
+transition probabilities.
+
+Work by Speiser and Gupta (Speiser \& Gupta, n.d.) analyzed Josquin and
+his contemporaries to attempt to classify unknown works. They extracted
+four categories of features, frequencies of individual notes,
+frequencies of pairwise interval combinations between each of the
+voices, Markov transition matrices for the rhythms of the pieces, and
+Markov transition matrices of the pitches in each piece. In total, this
+lead to a total of 3000 features. (Help why?)
+
 \subsection{Previous applications}\label{previous-applications}
 
 Most of the previous research has needed to do some kind of feature
-selection. The whole reason use machine learning is because us humans
+selection. The whole reason we use machine learning is because us humans
 cannot detect which features are important and distinguishing.
 
 A modification of a forward selection (Floating Forward Selection(cite))
