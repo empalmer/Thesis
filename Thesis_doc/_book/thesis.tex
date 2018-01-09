@@ -291,7 +291,8 @@ are also more pieces with doubtful authorship in those eras.
 \subsection{Classification}\label{classification}
 
 Assigning likely composers to a piece of music is a classification
-problem. Classic approaches to this problem are as follows
+problem. Classic approaches to this problem are described in the next
+section.
 
 In our case, for each song, we will have vector \(X\) which will be a
 vector of all the \(p\) variables and features we are measuring. These
@@ -301,26 +302,23 @@ predict \(y\), or the identity of the composer.
 \subsection{Background on Variable and Feature
 Selection}\label{background-on-variable-and-feature-selection}
 
-Still working on this section. I've outlined the stuff i likely will
-include
-
 Especially in research regarding gene expression and text
-categorization, data sets have enormous numbers of variables. Here
-variable are raw inputs, and features are variables constructed for
-input variables (Guyon \& Elisseeff, 2003). There are several variable
-selection algorithms that select the ``important'' variables.
-
-In our case, the variables is the entire song in the \ldots{} format.
-Features, such as pitch frequency are things that are formed from the
-variables. The dimension\ldots{}
+categorization, data sets have enormous numbers of variables. We use
+``feature'' and ``variable'' interchangably, with the exception when
+features are created from variables, and the distinction will be made in
+that case. (Guyon \& Elisseeff, 2003). There are several variable
+selection algorithms that select the ``important'' variables. If we
+included every variable that we extract from the piece, our model would
+very likely be overfit.
 
 The start of feature selection is domain knowledge. Thank to John Cox in
-the music department for suggesting a list of valuable features.
+the music department for suggesting a list of valuable features. These
+will be described in Chapter 2.
 
 Several variable selection algorithms include variable ranking. Variable
-ranking uses a score function to assign a score to each input variable.
-It is a computationally efficient method and is robust against over
-fitting as it introduces bias, but may have less variance. It is
+ranking uses a score function to assign a score to each possible
+variable. It is a computationally efficient method and is robust against
+overfitting as it introduces bias but may result in less variance. It is
 tempting to only include variables that have a high score. However, this
 possibly leads to redundancy. In addition, variables that are not
 important by themselves can have a significant performance improvement
@@ -328,7 +326,7 @@ when considered with other variables. Popular variable ranking methods
 for classification are single variable classfiers and information
 theoretic ranking criteria.
 
-Single variable classifiers ranks the variable according to thier
+Single variable classifiers rank the variable according to thier
 individual predictive power. The predictive power can be measured in
 terms or error rate, or using the false positive or false negative rate
 (fpr, fnr). This classifier cannot distinguish variables that perfectly
@@ -345,22 +343,20 @@ the \(i^th\) predictor and \(y\) the response, and \(p(x_i,y)\) is the
 joint density. \(I(i)\) is a measure of dependency between the density
 of variable \(x_i\) and the density of the response \(y\) (reword)
 
-Moving on from knowing the ranking of a variable, we move on to the
-problem of selecting which variables will be useful for our model. This
-is known as variable subset selection. The three most common types of
-variable subset selection are wrappers, filters, and embedded methods.
-Wrappers use a ``black box'' machine to score subsets of variables
-according to their predictive power. Filters select subsets of variables
-as a pre-processing step, independently of the chosen preditor, Embedded
-methods perform variable selection in the process of training and are
-usually specific to given learning machinese. Here learning machinens
-are the \ldots{}
+After knowing the ranking of a variable we then select which variables
+will be useful for our model. This is known as variable subset
+selection. The three most common types of variable subset selection are
+wrappers, filters, and embedded methods. Filters do not involve any
+machine learning to create the criterian for varable subset selection.
+Wrappers on the other hand use the ``performance of a learning machine
+trained using a given feature subset.'' Embedded methods perform
+variable selection in the process of training and are usually specific
+to given learning machines
 
 All possible subsets of variables is \(2^p-1\), which for large \(p\) is
-often computationally impossible. Or at least extreely dificlut.
-Strategies like best-first, branch and bound, simulated anealing, and
-genetic algorithms can help with the computational difficulties.
-(reword)
+often computationally impossible. Strategies like best-first, branch and
+bound, simulated anealing, and genetic algorithms can help with the
+computational difficulties.
 
 Wrappers are often thought of as brute force methods. This can be good,
 as it can reduce overfitting. Two types include forward selection and
@@ -393,6 +389,8 @@ K-means
 
 PCA
 
+Floating Forward Selection
+
 \subsection{Previous choices of
 features}\label{previous-choices-of-features}
 
@@ -402,38 +400,46 @@ period, different features would be useful. Often, features are
 extracted en masse and then work is done later to determine which
 features are important or useful in identifying style.
 
-Work by Backer and Kranenburg (Backer \& Kranenburg, 2005) analyzed the
-music of Bach, Handel, Telemann, Mozart and Haydn. Additionally they
-compared J.S. Bach, W.F. Bach and J.L Krebs in an attempt to classify
-BWV 534. They use overlapping windowing over each entire composition to
-produce more data, and avoid issues of dimensionality (?). They chose a
-window of 30 bars to create a high enough number of fragments per piece
-and a low enough variance of the feature values between fragments. They
-chose to extract 20 features. They extracted information regarding the
-``stability'' computed by dividing the standard deviation of the lengths
-of the fragment by the mean length of the fragments. It is normalized in
-this way to be comparable over differing time signatures. They also
-found the fraction of the score that consisted of dissonant sororities,
-as well as the fraction of bars that begin with a dissonant sonority.
-Next they computed the entropy of the probability of occurrence of ways
-of thinking about chords; chords are the same no matter what scale
-degree they are on, and distinguishing chords differently. Next the
-entropy was calculated given the probability of each pitch in the score.
-Entropy was calculated by \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where
-\(p_i\) is the probability of occurrence, and \(N\) is the total number.
-Next they the average number of active voices at one time. This
-represents the voice density of the piece. Then for every interval, the
-duration of that interval was divided by the total duration of all
-intervals. Next the total duration of parallel thirds, fourths, and
-sixths divided by the total duration of all intervals was measured.
-Finally a measure of suspensions was found.
+In addition to what kinds of features, in music there is also the
+question of the scale at where those features take place. They can be
+features for a given instruemnt, the entire piece, or each measure. Also
+windowing techniques can be used where a ``window'' is created over a
+given number of bars or notes, and moves thorugh the whole piece. For
+each window, a feature is recorded. These can be overlapping windows by
+creating an ``ofset'' of a number of beats or notes. This produces more
+data, as instead of one feature for each piece, there is a feature for
+each window, and there an be tens of windows in each piece.
 
-A number of previous papers have focused on Josquin des Prez. This is
-likely due to the fact that there is a large training and testing data
-set available in easily analyzable format provided by the Josquin
-Research Project (citation). In addition there are a number of pieces of
-disputed authorship that have been attributed to him. Work by Brinkman
-et al. (Brinkman, Shanahan, \& Sapp, n.d.) use machine learning
+Common types of features used before in music analysis are: Frequencies
+or fractions of notes, chords, etc are a common low-level feature. These
+include the fraction of the score that consisted of dissonant
+sororities, as well as the fraction of bars that begin with a dissonant
+sonority
+
+Features measuring ``stability'' are also popular. Stability is computed
+by dividing the standard deviation of the lengths of the fragment by the
+mean length of the fragments. It is normalized in this way to be
+comparable over differing time signatures. (Backer \& Kranenburg, 2005)
+
+Markov transition matrices for the rhythms of the pieces, and Markov
+transition matrices of the pitches in each piece
+
+The above teqniques were used to analyze the music of Bach, Handel,
+Telemann, Mozart and Haydn and compare J.S. Bach, W.F. Bach and J.L
+Krebs in an attempt to classify BWV 534.(Backer \& Kranenburg, 2005)
+They use overlapping windowing over each entire composition to produce
+more data, and avoid issues of dimensionality. They chose a window of 30
+bars to create a high enough number of fragments per piece and a low
+enough variance of the feature values between fragments. They chose to
+extract 20 features including features of freactions and measuring
+stability, and entropy.
+
+Aditionally, a number of previous papers have focused on Josquin des
+Prez. This is likely due to the fact that there is a large training and
+testing data set available in easily analyzable format provided by the
+Josquin Research Project (citation). In addition there are a number of
+pieces of disputed authorship that have been attributed to him. Work by
+Brinkman et al. (Brinkman, Shanahan, \& Sapp, n.d.) use machine learning
 approaches to evaluate attribution of compositions by des Prez. They
 used both high level and low level features. The high level features
 were 9-8 suspensions, oblique motion, contrary motion, similar motion
@@ -447,13 +453,13 @@ four categories of features, frequencies of individual notes,
 frequencies of pairwise interval combinations between each of the
 voices, Markov transition matrices for the rhythms of the pieces, and
 Markov transition matrices of the pitches in each piece. In total, this
-lead to a total of 3000 features. (Help why?)
+lead to a total of 3000 features.
 
 \subsection{Previous applications}\label{previous-applications}
 
 Most of the previous research has needed to do some kind of feature
-selection. The whole reason we use machine learning is because us humans
-cannot detect which features are important and distinguishing.
+selection. A lot of features are extracted as a priori we don't know
+which features are distinguishing.
 
 A modification of a forward selection (Floating Forward Selection(cite))
 was used to extract features in order to identify distinguishing style
@@ -472,19 +478,20 @@ Bayesian classifier to distinguish J.S. Bach, W.F. Bach and J.L Krebs.
 They again compare every possible class arrangement as potential
 composers.
 
-Brinkman et al. (Brinkman et al., n.d.) used PCa to reduce the
-dimensions of the features. Although only two PC's accounted for most of
-the variance, they decided to use 5 PC's to account for 85\% of the
-variance. They then do binary comparisons of Josquin and other
-composers. This resulted in a relatively clear separation between Bach
-and Josquin. For Josquin and his contemporaries, the PC's do not do as
-well a job of separation. Using results of the principal component
-analysis run on all the composers, they train a classifier on all the
-composers. First they use a k-nearest neighbor classifier. They use 27
-PCs to again account for 85\% of the variance. Next they trained a
-support vector machine classifier with a radial kernel. Finally they
-used a decision tree to determine which features were important in
-discerning the composers.
+PCA was used to analyze the music of Bach, Handel, Telemann, Mozart and
+Haydn and compare J.S. Bach, W.F. Bach and J.L Krebs in an attempt to
+classify BWV 534.(Backer \& Kranenburg, 2005) Although only two PC's
+accounted for most of the variance, 5 PCs were used to account for more
+variance. Binary comparisions were used to compare composers. This
+resulted in a relatively clear separation between Bach and Josquin. For
+Josquin and his contemporaries, the PC's do not do as well a job of
+separation. The results of the principal component analysis run on all
+the composers, were used to train a classifier on all the composers.
+First a k-nearest neighbor classifier was used. To accound for most of
+the variance, 27 PCs were used. Next they trained a support vector
+machine classifier with a radial kernel. Finally they used a decision
+tree to determine which features were important in discerning the
+composers.
 
 Speiser and Gupta (Speiser \& Gupta, n.d.) scored each feature by the
 mutual information of each features. They then chose the top 50 features
@@ -599,6 +606,19 @@ process}\label{about-the-data-and-conversion-process}
 \chapter{}\label{section-2}
 
 \section{Feature Selection}\label{feature-selection}
+
+Next they computed the entropy of the probability of occurrence of ways
+of thinking about chords; chords are the same no matter what scale
+degree they are on, and distinguishing chords differently. Next the
+entropy was calculated given the probability of each pitch in the score.
+Entropy was calculated by \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where
+\(p_i\) is the probability of occurrence, and \(N\) is the total
+number.Next they the average number of active voices at one time. This
+represents the voice density of the piece. Then for every interval, the
+duration of that interval was divided by the total duration of all
+intervals. Next the total duration of parallel thirds, fourths, and
+sixths divided by the total duration of all intervals was measured.
+Finally a measure of suspensions was found. (Backer)
 
 \chapter{}\label{section-3}
 

@@ -1,6 +1,6 @@
 ## My Thesis Repo
 
-I'm going to continue working on this on the 2nd when I get back from break. I'm going to continue revising my first chapter, especially adding more stats stuff. I didn't have much time before I left for break since our meeting on Thursday. A lot of the articles I was trying to access needed permissions, and I'm not on campus to be able to access them. Currently I've been trying to get words down, and I know there is a lot that sounds weird. If a sentence doesnt make sense at all, I probably know, and will change it later. I've currently been reading a lot on feature selection. I will add to those sections over break. 
+I'm still working on editing my first chapter. The first time I write sentences down they sound really weird and silly so I'm going through several drafting phases. I'm trying to change the perspective from author to concept. I think I'm going to put a lot of the description about what previous research did for features in the section where I talk about my features. I'm also still working on adding to the Background and Variable Selection section.  
 
 Over break, I will work on: 
 
