@@ -1,15 +1,7 @@
 ## My Thesis Repo
 
-I'm still working on editing my first chapter. The first time I write sentences down they sound really weird and silly so I'm going through several drafting phases. I'm trying to change the perspective from author to concept. I think I'm going to put a lot of the description about what previous research did for features in the section where I talk about my features. I'm also still working on adding to the Background and Variable Selection section.  
 
-Over break, I will work on: 
-
-- Scanning all music and converting into data frames. Double checking for errors in scanned and converted forms.
-- Coding of all features!
-- Revising first chapter
-- Start writing second chapter
-
-
+## Includes:
 
 * Data (not visable) contains Fanny and Felix Mendelssohn files in .xml and .krn format
 * Literature-review contains writing for the first chapters of the thesis
@@ -20,12 +12,18 @@ Over break, I will work on:
 * Thesis_template is Reed's blank template for R markdown
 
 ## Timeline
+wk 1 - 
+wk 2 - 
+wk 3
+wk 4
+wk 5
+... 
 
 ### Big Deadlines
 
 April 1st: First draft of full document done
 
-April 15h: (A week before its due) final draft of full document done
+April 15th: (A week before its due) final draft of full document done
 
 
 ## About museR:
