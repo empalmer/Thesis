@@ -13,11 +13,8 @@
 
 ## Timeline
 
-wk 2 - 
-wk 3
-wk 4
-wk 5
-... 
+Feb 23rd - Finish rough draft 
+Feb 16th (Friday at 4..) + all data scanned and edited
 
 ### Big Deadlines
 
