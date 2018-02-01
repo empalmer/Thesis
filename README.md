@@ -12,7 +12,7 @@
 * Thesis_template is Reed's blank template for R markdown
 
 ## Timeline
-wk 1 - 
+
 wk 2 - 
 wk 3
 wk 4
@@ -39,7 +39,6 @@ A package for all analysis. Currently only supports pieces with piano and voice.
 
 #### Abstract
  A thesis on musical stylometry focusing on Felix and Fanny Mendelssohn
-
 
 
 #### Outline
