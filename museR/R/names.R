@@ -1,13 +1,13 @@
+
+
+#### n.v_n.n #### 
 #' Identifies the note and note value of a .krn note
 #'  
 #' @param note .krn file 
 #' @return NNV and DNV
 #' 
-#' @examples 
-#' 
-#'
 
-notes_to_val <- function(note){
+n.v_n.n <- function(note){
   if (is.na(note)){
     v <- NA
     val <- NA
@@ -85,31 +85,62 @@ notes_to_val <- function(note){
   return(r)
 }
 
-
+#### note_value #### 
 #' Adds columns with more easily analyzable note names
 #'  
-#' @param piece .krn file 
+#' @param spline .krn file 
 #' @return data frame with orriginal piece and NNV and DNV
 #' 
-#' @examples 
-#' 
-#'
 
-
-note_value <- function(piece){
-  df <- data.frame(colnames(c("base","third","fifth","val_base","val_third","val_fifth")))
-  for(i in 1:nrow(piece)){
-    df[i,1] <- notes_to_val(piece[i,4])[1] 
-    df[i,2] <- notes_to_val(piece[i,6])[1]
-    df[i,3] <- notes_to_val(piece[i,8])[1]
-    df[i,4] <- notes_to_val(piece[i,4])[2] 
-    df[i,5] <- notes_to_val(piece[i,6])[2]
-    df[i,6] <- notes_to_val(piece[i,8])[2]
+# should be run on indifidual instruments... 
+add_n.v_n.n <- function(spline){
+  df <- data.frame(colnames(c("n.n_1","n.n_2","n.n_3","n.v_1","n.v_2","n.v_3")))
+  for(i in 1:nrow(spline)){
+    df[i,1] <- n.v_n.n(spline[i,3])[1] 
+    df[i,2] <- n.v_n.n(spline[i,5])[1]
+    df[i,3] <- n.v_n.n(spline[i,7])[1]
+    df[i,4] <- n.v_n.n(spline[i,3])[2] 
+    df[i,5] <- n.v_n.n(spline[i,5])[2]
+    df[i,6] <- n.v_n.n(spline[i,7])[2]
   }
-  cbind(piece,df)
+  df
 }  
 
-  
+
+
+#' Gives the name of a given rhythm value
+#'
+#' @param note
+#' @return rhythm name
+#'
+#'
+r.n <- function(note){
+  if(is.na(note)){
+    n <- NA
+  }else if(note == 4){
+    n <- "Quarter note" 
+  }else{
+    n <- "Tbd"
+  }
+  return(n)
+}
+
+#' Takes result of kern_2_df and changes
+#' rhythms to name values (ie changes 4 to quarter note)
+#'
+#' @param piece_data_frame
+#' @return columns with rhythm names
+#'
+#'
+add_r.n <- function(spline){
+  df <- data.frame(colnames(c("r1","r2","r3")))
+  for(i in 1:nrow(spline)){
+    df[i,1] <- r.n(spline[i,2])
+    df[i,2] <- r.n(spline[i,4])
+    df[i,3] <- r.n(spline[i,6])
+  }
+  df
+}
   
   
   

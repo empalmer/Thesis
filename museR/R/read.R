@@ -1,7 +1,7 @@
-
 library(stringr)
-### kern2df ####
+source("~/Desktop/Thesis/museR/R/names.R")
 
+###############################################################
 #' Takes a .krn spline and converts into data frame
 #'
 #' @param spline .krn file
@@ -56,8 +56,7 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   spline_df
 }
 
-
-#######  piece_df #############
+###############################################################
 #' Takes several splines in .krn that are part of a piece 
 #' and calls kern2df to create one df for entire piece
 #'
@@ -67,53 +66,50 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
 #' @return dataframe for entire piece - combined splines
 
 piece_df <- function(a,b,c){
-# if want splines listed vertically
-#  len <- nrow(df_a)
-#  len_b <- nrow(df_b)
-#  len_c <- nrow(df_c)
-#  spline_number <- c(rep(1,len),rep(2,len),rep(3,len)) 
-#indicates which spline everything belongs to
-#  piece <- rbind(df_a,df_b,df_c)
-#  piece <- cbind(spline_number, piece)
-#  piece
   A <- kern2df(a)
   B <- kern2df(b)
   C <- kern2df(c)
-  
   measure_col <- A[,1]
+  A.n <- add_n.v_n.n(A) # add note names and int values
+  B.n <- add_n.v_n.n(B)
+  C.n <- add_n.v_n.n(C)
+  A.r <- add_r.n(A) # Add rhythm names
+  B.r <- add_r.n(B)
+  C.r <- add_r.n(C)
   A <- A[,-1] # dont need repeats of the measure number. Should be consistant. 
   B <- B[,-1]
   C <- C[,-1]
-    
-  piece <- cbind(measure_col,A,B,C) #combine splines vertically
+  piece <- cbind(measure_col,A,A.n,A.r,B,B.n,B.r,C,C.n,C.r) #combine splines vertically
   
-  colnames(piece) <- c("measure","voice_r_val_1", "voice_n_val_1","voice_r_val_3",
-                       "voice_n_val_3","voice_r_val_5","voice_n_val_5","pR_r_val_1", 
-                       "pR_n_val_1","pR_r_val_3","pR_n_val_3",
-                       "pR_r_val_5","pR_n_val_5","pL_r_val_1", 
-                       "pL_n_val_1","pL_r_val_3",
-                       "pL_n_val_3","pL_r_val_5",
-                       "pL_n_val_5") # rename columns (voice, piano right hand, piano left hand)
-  tf <- 0
+  colnames(piece) <- c("measure","V_r.v_1", "V_n.v_1","V_r.v_3",
+                       "V_n.v_3","V_r.v_5","V_n.v_5","V_n.n_1",
+                       "V_n.n_2","V_n.n_3","V_n.v_1","V_n.v_2","V_n.v_3",
+                       "pR_r.v_1","pR_n.v_1","pR_r.v_3","pR_r.v_3",
+                       "pR_r.v_5","pR_n.v_5","pR_n.n_1","pR_n.n_2","pR_n.n_3",
+                       "pR_n.v_1","pR_n.v_2","pR_n.v_3","pL_r.v_1",
+                       "pL_n.v_1","pL_r.v_3",
+                       "pL_n.v_3","pL_r.v_5","pL_n.v_5",
+                       "pL_n.n_1","pL_n.n_2","pL_n.n_3","pL_n.v_1",
+                       "pL_n.v_2","pL_n.v_3") # rename columns (voice, piano
+                                     # right hand, piano left hand)
+
+    j <- 0
   for(i in 1:ncol(piece)){   # Get rid of collumns with all NA's
-    tf[i] <- all(is.na(piece[,i]))
+    j[i] <- all(is.na(piece[,i]))
   }
-  piece <- piece[,-which(as.logical(tf))]
+  piece <- piece[,-which(as.logical(j))]
   piece
 }
 
-###all_info_piece
-
-#' Takes a piece in three seperate .krn files and combines into
+###############################################################
+#' Takes a piece_df from piece_df()
 #'
-#' @param a .krn file spline 1
-#' @param b .krn file spline 2
-#' @param c .krn file spline 3
+#' @param piece_df
 #' @return list of df of notes, key, time base etc.
 #'
 #'
 
-all_info_piece <- function(a,b,c){ # returns list that includes key signature, etc
+all_info_piece <- function(piece_df){ # returns list that includes key signature, etc
   notes <- piece_df(a,b,c)
   a <- readLines(a)
   b <- readLines(b)
@@ -130,12 +126,11 @@ all_info_piece <- function(a,b,c){ # returns list that includes key signature, e
 }
 
 
-
-### tb_2_rhythm_value##
-
-#' Takes result of all_info_piece to change rhythms to name values (ie changes 4 to quarter note)
+###############################################################
+#' Takes result of all_info_piece to change 
+#' rhythms to name values (ie changes 4 to quarter note)
 #'
-#' @param list_of_pieces
+#' @param piece_data_frame
 #' @return same list, but with added columns with rhythm names
 #'
 #'
@@ -150,9 +145,13 @@ tb_2_rhythm_value <- function(piece_list){
 }
 
 
+###############################################################
 convert_folder <- function(list_of_pieces){ # given a folder with music, listed as spline a,b,c, return list with converted into list for each piece
 
 }
+
+
+
 
 
 
