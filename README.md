@@ -29,8 +29,6 @@ A package for all analysis. Currently only supports pieces with piano and voice.
 
 ## Naming conventions: 
 
-* NNV : numeric note value (0-12) eg A flat = 0
-* DNV : descriptive note value A-flat to G sharp
 
 ## Thesis
 
