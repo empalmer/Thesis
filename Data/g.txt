@@ -1,4 +1,0 @@
-d.krn:	16
-e.krn:	96
-f.krn:	8
-all:	96
