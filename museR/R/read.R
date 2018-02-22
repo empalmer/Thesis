@@ -14,7 +14,7 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   data <- data[-grep("!!linebreak", data)] #removes all linebreak text
   data <- data[-grep("\\*", data)] # removes ... 
 
-  measures <- grep( "="   ,data, value = F) # measures in .krn start wtih = 1
+  measures <- grep("=",data, value = F) # measures in .krn start wtih = 1
   measure_numbers <- 1:length(measures) # how many measures there are
   list_notes <- grep("^\\(*[0-9]|\\[|\\.", data) # makes a list of notes and . s
   val_list_notes <- grep("^\\(*[0-9]|\\[|\\.", data, value = T) # match ( maybe once,  [0-9 maybe once])
