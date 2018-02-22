@@ -47,12 +47,12 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   note_fifth <- str_extract(piece[,4],"[A-z]{1,2}.*")
 
   spline_df <- data.frame(measure = measure_column,
-                      rhythm_val_base = r1,
-                      note_val_base = note_base,
-                      rhy_val_third = r2,
-                      note_val_third = note_third,
-                      rhy_val_fifth = r3,
-                      note_val_fifth = note_fifth)
+                      r.v.1 = r1,
+                      r.v.2 = r2,
+                      r.v.3 = r3,
+                      n.v.1 = note_base,
+                      n.v.2 = note_third,
+                      n.v.3 = note_fifth)
   spline_df
 }
 
@@ -76,28 +76,39 @@ piece_df <- function(a,b,c){
   A.r <- add_r.n(A) # Add rhythm names
   B.r <- add_r.n(B)
   C.r <- add_r.n(C)
-  A <- A[,-1] # dont need repeats of the measure number. Should be consistant. 
-  B <- B[,-1]
-  C <- C[,-1]
-  piece <- cbind(measure_col,A,A.n,A.r,B,B.n,B.r,C,C.n,C.r) #combine splines vertically
-  
-  colnames(piece) <- c("measure","V_r.v_1", "V_n.v_1","V_r.v_3",
-                       "V_n.v_3","V_r.v_5","V_n.v_5","V_n.n_1",
-                       "V_n.n_2","V_n.n_3","V_n.v_1","V_n.v_2","V_n.v_3",
-                       "pR_r.v_1","pR_n.v_1","pR_r.v_3","pR_r.v_3",
-                       "pR_r.v_5","pR_n.v_5","pR_n.n_1","pR_n.n_2","pR_n.n_3",
-                       "pR_n.v_1","pR_n.v_2","pR_n.v_3","pL_r.v_1",
-                       "pL_n.v_1","pL_r.v_3",
-                       "pL_n.v_3","pL_r.v_5","pL_n.v_5",
-                       "pL_n.n_1","pL_n.n_2","pL_n.n_3","pL_n.v_1",
-                       "pL_n.v_2","pL_n.v_3") # rename columns (voice, piano
-                                     # right hand, piano left hand)
-
-    j <- 0
-  for(i in 1:ncol(piece)){   # Get rid of collumns with all NA's
+  # The following is for better organization of data frame
+  Ap <- cbind(A[,2],A.r[,1],A[,5],A.n[,1:2], # 1st note
+              A[,3],A.r[,2],A[,6],A.n[,3:4], # 2nd note
+              A[,4],A.r[,3],A[,7],A.n[5:6])  # 2rd note
+  Bp <- cbind(B[,2],B.r[,1],B[,5],B.n[,1:2], # 1st note
+              B[,3],B.r[,2],B[,6],B.n[,3:4], # 2nd note
+              B[,4],B.r[,3],B[,7],B.n[5:6])  # 2rd note
+  Cp <- cbind(C[,2],C.r[,1],C[,5],C.n[,1:2], # 1st note
+           C[,3],C.r[,2],C[,6],C.n[,3:4], # 2nd note
+           C[,4],C.r[,3],C[,7],C.n[5:6])  # 2rd note
+  # Create the data frame
+  piece <- cbind(measure_col, Ap, Bp, Cp) 
+  # Name the columns, voice, piano right hand, piano left hand
+  colnames(piece) <- c("measure","V_r.v_1", "V_r.n_1", "V_n.o_1",
+                        "V_n.n_1","V_n.v_1","V_r.v_2", "V_r.n_2", 
+                       "V_n.o_2","V_n.n_2","V_n.v_2","V_r.v_3", 
+                       "V_r.n_3", "V_n.o_3","V_n.n_3","V_n.v_3",
+                       "pR_r.v_1", "pR_r.n_1", "pR_n.o_1",
+                       "pR_n.n_1","pR_n.v_1","pR_r.v_2", "pR_r.n_2", 
+                       "pR_n.o_2","pR_n.n_2","pR_n.v_2","pR_r.v_3", 
+                       "pR_r.n_3", "pR_n.o_3","pR_n.n_3","pR_n.v_3",
+                       "pL_r.v_1", "pL_r.n_1", "pL_n.o_1",
+                       "pL_n.n_1","pL_n.v_1","pL_r.v_2", "pL_r.n_2", 
+                       "pL_n.o_2","pL_n.n_2","pL_n.v_2","pL_r.v_3", 
+                       "pL_r.n_3", "pL_n.o_3","pL_n.n_3","pL_n.v_3"
+                       ) 
+  # Get rid of columns with all NA's
+  j <- 0
+  for(i in 1:ncol(piece)){   
     j[i] <- all(is.na(piece[,i]))
   }
   piece <- piece[,-which(as.logical(j))]
+  # Return piece
   piece
 }
 

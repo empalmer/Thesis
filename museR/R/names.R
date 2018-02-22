@@ -1,5 +1,5 @@
 
-
+library(dplyr)
 #### n.v_n.n #### 
 #' Identifies the note and note value of a .krn note
 #'  
@@ -94,13 +94,13 @@ n.v_n.n <- function(note){
 
 # should be run on indifidual instruments... 
 add_n.v_n.n <- function(spline){
-  df <- data.frame(colnames(c("n.n_1","n.n_2","n.n_3","n.v_1","n.v_2","n.v_3")))
+  df <- data.frame(colnames(c("n.n_1","n.v_1","n.n_2","n.v_2","n.n_3","n.v_3")))
   for(i in 1:nrow(spline)){
-    df[i,1] <- n.v_n.n(spline[i,3])[1] 
-    df[i,2] <- n.v_n.n(spline[i,5])[1]
-    df[i,3] <- n.v_n.n(spline[i,7])[1]
-    df[i,4] <- n.v_n.n(spline[i,3])[2] 
-    df[i,5] <- n.v_n.n(spline[i,5])[2]
+    df[i,1] <- n.v_n.n(spline[i,5])[1] 
+    df[i,2] <- n.v_n.n(spline[i,5])[2] 
+    df[i,3] <- n.v_n.n(spline[i,6])[1]
+    df[i,4] <- n.v_n.n(spline[i,6])[2]
+    df[i,5] <- n.v_n.n(spline[i,7])[1]
     df[i,6] <- n.v_n.n(spline[i,7])[2]
   }
   df
@@ -133,15 +133,21 @@ r.n <- function(note){
 #'
 #'
 add_r.n <- function(spline){
-  df <- data.frame(colnames(c("r1","r2","r3")))
+  df <- data.frame(colnames(c("r.n.1","r.n.2","r.n.3")))
   for(i in 1:nrow(spline)){
     df[i,1] <- r.n(spline[i,2])
-    df[i,2] <- r.n(spline[i,4])
-    df[i,3] <- r.n(spline[i,6])
+    df[i,2] <- r.n(spline[i,3])
+    df[i,3] <- r.n(spline[i,4])
   }
   df
 }
   
   
+time_instance <- function(spline){
+  spline %>%
+    group_by(measure) %>%
+    summarize(nbeats = )
+    
+}
   
   

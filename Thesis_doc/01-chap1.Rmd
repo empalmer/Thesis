@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In everyday conversation and music liturature, music is often often described using subjective summary "statistics". For example we talk about Beethoven's Symphony 9 (think ode to joy) as 'majestic', 'powerful', 'expertly written', 'etc', music critics go more in depth to talk about the performance and reception, and those with a musical background might go into more description into the actual music, couterpoint, melodic arc, etc., compared to the emotional affect. 
+In everyday conversation and music liturature, music is often often described using subjective summary "statistics". For example we talk about Beethoven's Symphony 9 (think ode to joy) as 'majestic', 'powerful', 'expertly written', etc. Music critics go more in depth to talk about the performance and reception, and those with a musical background might go into more description into the actual music, couterpoint, melodic arc, etc., compared to the emotional affect. 
 
 What if one wanted to compare Beethoven to Bach? One might say that Beethoven was a classical composer, whereas Bach was a baroque composer. What exactly to those classifiers mean? Sure, it is very well documented the years each composer was active in, and that there were large changes in the popular aspects of classical music. Even the untrained ear can distinguish differences between Bach and Beethoven. What exactly is the difference that one can hear? Does Bach follow counterpoint rules more exactly? What ways can we empirically differentiate those two composers? How about contemporary composers such as Mozart and Saliery? While those familiar with classical music can spot the differences between these two composers, it is more difficult for the untrained ear or eye to spot the differences. 
 
@@ -40,7 +40,7 @@ In our case, for each song, we will have vector $X$ which will be a vector of al
 
 Especially in research regarding gene expression and text categorization, data sets have enormous numbers of variables. We use "feature" and "variable" interchangably, with the exception when features are created from variables, and the distinction will be made in that case. [@guyon2003]. There are several variable selection algorithms that select the "important" variables. If we included every variable that we extract from the piece, our model would very likely be overfit. 
 
-The start of feature selection is domain knowledge. Thank to John Cox in the music department for suggesting a list of valuable features. These will be described in Chapter 2. 
+The start of feature selection is domain knowledge. Thanks to John Cox in the music department for suggesting a list of valuable features. These will be described in Chapter 2. 
 
 Several variable selection algorithms include variable ranking. Variable ranking uses a score function to assign a score to each possible variable. It is a computationally efficient method and is robust against overfitting as it introduces bias but may result in less variance. It is tempting to only include variables that have a high score. However, this possibly leads to redundancy. In addition, variables that are not important by themselves can have a significant performance improvement when considered with other variables. Popular variable ranking methods for classification are single variable classfiers and information theoretic ranking criteria. 
 
@@ -82,7 +82,8 @@ Deciding on and extracting features of music is the first step to analysis. Depe
 
 In addition to what kinds of features, in music there is also the question of the scale at where those features take place. They can be features for a given instruemnt, the entire piece, or each measure. Also windowing techniques can be used where a "window" is created over a given number of bars or notes, and moves thorugh the whole piece. For each window, a feature is recorded. These can be overlapping windows by creating an "ofset" of a number of beats or notes. This produces more data, as instead of one feature for each piece, there is a feature for each window, and there an be tens of windows in each piece. 
 
-Common types of features used before in music analysis are: Frequencies or fractions of notes, chords, etc are a common low-level feature. These include the fraction of the score that consisted of dissonant sororities, as well as the fraction of bars that begin with a dissonant sonority
+Common types of features used before in music analysis are: Frequencies or fractions of notes, chords, etc are a common low-level feature. These include the fraction of the score that consisted of dissonant sororities, as well as the fraction of bars that begin with a dissonant sonority. Other features include the tipe of intervals or consonances present in a piece: perfect consonance, imperfect consonances, and dissonance. In polyphonic pieces, the four types of motion, (parallel, similar, oblique, and contrary) can also be used as features. 
+
 
 Features measuring "stability" are also popular. Stability is computed by dividing the standard deviation of the lengths of the fragment by the mean length of the fragments. It is normalized in this way to be comparable over differing time signatures. [@backer2005]
 
@@ -96,6 +97,7 @@ Aditionally, a number of previous papers have focused on  Josquin des Prez. This
 
 Work by Speiser and Gupta [@CompStyleAttri] analyzed Josquin and his contemporaries to attempt to classify unknown works.  They extracted four categories of features, frequencies of individual notes, frequencies of pairwise interval combinations between each of the voices, Markov transition matrices for the rhythms of the pieces, and Markov transition matrices of the pitches in each piece. In total, this lead to a total of 3000 features.
 
+Other work looking at renessance and baroque composers looked specifically at differences in counterpoint. Since most composers in that era for the most part followed the rules of counterpoint, there is a question of if there are distinguising differences. Using counterpoint movement types, dissonance distributions, parallel intervals of each kind, and vertical interval distributions, a classifier using a WEKA algorithm, as well as Naive Bayes and a Decision Tree was created that correctly predicted composer 2/3 of the time. [@mearns2010]
 
 
 ### Previous applications

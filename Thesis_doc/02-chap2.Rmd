@@ -5,7 +5,7 @@ Vocab | description
 ----- | -----------
 piece | the entirety of one opus, referred to as a piece in any stage
 staff | one instrument composed of one staff line
-
+etc ... 
 
 ## About the data and conversion process
 
@@ -75,7 +75,7 @@ MusicXML on its own is not conducive to converting into a data frame as represen
 ```  
 
 MusicXML is used commonly as it is conducive to representing sheet music and music notation, and it can be transferable to many different music softwares. 
-We then need to convert into a format more easily readable into R. We do this by using Humdrum's function xml2hum that converts a musicXML file into a .krn file. This file time can be read much more easily into R. Compared to above, the code for a single middle c whole note would be : 
+We then need to convert into a format more easily readable into R. We do this by using Humdrum's function xml2hum that converts a musicXML file into a .krn file. (Talk about Humdrum) This file time can be read much more easily into R. Compared to above, the code for a single middle c whole note would be : 
 
 ```{}
 **kern
@@ -86,7 +86,7 @@ We then need to convert into a format more easily readable into R. We do this by
 1c/
 ```
 
-The import_xml_files.sh file goes through the process of converting scores from musicXML to .krn. The files need to be separated into having a separate file for each staff, which would mean a seperate file for each instrument. In our case for each piece there are always two or three files for each piece, which are voice, piano right hand, and piano left hand. This is necessary to avoid the bugs in xml2hum that have issues when staffs don't necessarily match up as a result of the conversion process, most often by rhythm.
+The import_xml_files.sh file goes through the process of converting scores from musicXML to .krn. (insert stuff about online repositories of baroque and rennesaince composers already in this format) The files need to be separated into having a separate file for each staff, which would mean a seperate file for each instrument. In our case for each piece there are always two or three files for each piece, which are voice, piano right hand, and piano left hand. This is necessary to avoid the bugs in xml2hum that have issues when staffs don't necessarily match up as a result of the conversion process, most often by rhythm.
 
 ### .krn to R
 
