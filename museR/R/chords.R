@@ -1,6 +1,8 @@
 
 # for piano left hand
 select_chords <- function(){
+  base <- 
+  nex <- 
   
 }
 

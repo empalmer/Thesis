@@ -51,11 +51,18 @@ is_mel_int <- function(n1,n2, int){
 voice_mel_ints <- function(piece,col){
   mel <- piece[,col]
   mel <- as.numeric(as.vector(na.omit(mel)))
-  mel_dif <- diff(mel)
+  mel_dif <- c()
+  for(i in 1:length(mel)-1){
+    mel_dif[i] <- min(max(mel[i],mel[i+1]) - min(mel[i],mel[i+1]),
+                      min(mel[i],mel[i+1]) + 12 - max(mel[i],mel[i+1]))
+  }
+  # Change indexing to start at 1
+  mel_dif <- mel_dif + 1
   ints <- c("unison","m2", "M2","m3", "M3","p4","tt",
                 "p5", "m6","M6","m7","M7")
-  mel_fac <- factor(ints[mel_diff], levels = ints)
+  mel_fac <- factor(ints[mel_dif], levels = ints, ordered = T)
   m <- table(mel_fac)/sum(table(mel_fac))
+  m
 }
  
  
