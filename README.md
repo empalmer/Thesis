@@ -15,12 +15,15 @@
 
 * Feb 23rd - Finish rough draft 
 
-
 * Mar 1 
   + Actually have all data scanned and edited
   + rewrite first and second chapters
   + edit read.R file so it picks up on dynamic markings etc. 
   + Catch up on music theory and code chords and cadance fetures
+  + 2-3 visializations of differences in composers
+  + look up submission to CCARH?
+  
+*   
 
 
 ### Big Deadlines

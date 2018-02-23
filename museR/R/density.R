@@ -1,4 +1,4 @@
-
+library(dplyr)
 ###############################################################
 #' measure_density
 #' 
@@ -8,5 +8,7 @@
 
 measure_density <- function(piece){
   piece %>%
-    group_by(measure)
+    group_by(measure) %>%
+    summarize()
 }
+

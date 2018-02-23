@@ -1,4 +1,4 @@
-
+library(bazar)
 ###############################################################
 #' remove_rest_nas
 #' 
@@ -40,6 +40,45 @@ is_mel_int <- function(n1,n2, int){
   
 #############################################################  
 
+
+ 
+
+
+#####################################################
+#' top_line
+#' 
+#' @param piece 
+#' @param col one instrument name name 
+#' @return gives the top melodic line of a instrument
+#' 
+
+top_line <- function(piece,inst){
+  inst_cols <- grep(inst,colnames(piece),value = T)
+  note_cols <- grep("n\\.v", inst_cols,value = T)
+  n1 <- grep("1" ,note_cols,value = T)
+  n2 <- grep("3" ,note_cols,value = T)
+  n3 <- grep("5" ,note_cols,value = T)
+  for(i in 1:nrow(piece)){
+    if(!is.empty(n3)){
+      if(is.na(piece[i,n3])){ # is there a note in the fifth of the chord?
+        if(is.na(piece[i,n2])){ # is there a note on 2nd?
+          if(!is.na(piece[i,n1])){ # is the row empty?, if not
+            notes[i] <- piece[i,n1]
+          }
+        } else notes[i] <- piece[i,n2]
+      }else notes[i] <- piece[i,n3]
+    }
+    else if(!is.empty(n2)){
+      if(is.na(piece[i,n2])){ # is there a note on 2nd?
+        if(!is.na(piece[i,n1])){ # is the row empty?, if not
+          notes[i] <- piece[i,n1]
+        }
+      } else notes[i] <- piece[i,n2]
+    } else notes[i] <- piece[i,n1]
+  }
+  notes
+}
+
 #####################################################
 #' voice_mel_ints
 #' 
@@ -48,8 +87,8 @@ is_mel_int <- function(n1,n2, int){
 #' @return vector of counts for melodic intervals
 #' 
 
-voice_mel_ints <- function(piece,col){
-  mel <- piece[,col]
+mel_ints <- function(piece,col){
+  mel <- top_line(piece,col)
   mel <- as.numeric(as.vector(na.omit(mel)))
   mel_dif <- c()
   for(i in 1:length(mel)-1){
@@ -59,47 +98,8 @@ voice_mel_ints <- function(piece,col){
   # Change indexing to start at 1
   mel_dif <- mel_dif + 1
   ints <- c("unison","m2", "M2","m3", "M3","p4","tt",
-                "p5", "m6","M6","m7","M7")
+            "p5", "m6","M6","m7","M7")
   mel_fac <- factor(ints[mel_dif], levels = ints, ordered = T)
   m <- table(mel_fac)/sum(table(mel_fac))
   m
 }
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-
-
-top_line <- function(piece,inst){
-  inst_cols <- grep(inst,colnames(piece),value = T)
-  note_cols <- grep("n\\.v", inst_cols,value = T)
-  n1 <- grep("1" ,note_cols,value = T)
-  n2 <- grep("3" ,note_cols,value = T)
-  n3 <- grep("5" ,note_cols,value = T)
-  notes <- c()
-  for(i in 1:nrow(piece)){
-    if(is.na(piece[i,n3])){ # is there a note in the fifth of the chord?
-      if(is.na(piece[i,n2])){ # is there a note on 2nd?
-        if(!is.na(piece[i,n1])){ # is the row empty?, if not
-          notes[i] <- piece[i,n1]
-        }
-      } else notes[i] <- piece[i,n2]
-    }else notes[i] <- piece[i,n3]
-  }
-  notes
-}
-
