@@ -28,9 +28,9 @@ acknowledgements: |
   I want to thank a few people.
 dedication: |
   You can have a dedication here if you wish. 
-preface: |
-  This is an example of a thesis setup to use the reed thesis document class
-  (for LaTeX) and the R bookdown package, in general.
+#preface: |
+#  This is an example of a thesis setup to use the reed thesis document class
+#  (for LaTeX) and the R bookdown package, in general.
 bibliography: bib/thesis.bib
 # Download your specific bibliography database file and refer to it in the line above.
 csl: csl/apa.csl
@@ -41,7 +41,7 @@ lof: true
 # Delete the # at the beginning of the previous line if you'd like
 # to have a blank new line between each paragraph
 header-includes:
-- \usepackage{tikz}
+- \usepackage{tikz,amsmath}
 
 ---
 

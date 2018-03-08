@@ -4,13 +4,14 @@
 
 I want to thank a few people.
 
-## Preface {-}
+<!-- ## Preface {-}
 
-This is an example of a thesis setup to use the reed thesis document class
-(for LaTeX) and the R bookdown package, in general.
+This is an example of a thesis setup to use the reed thesis document class(for LaTeX) and the R bookdown package, in general.
+
+-->
 
 ## Dedication {-}
 
-You can have a dedication here if you wish. 
+Thank you to my cat for knowing when my writing was bad and sitting on my keyboard to delete a paragraph.  
 
 `r if(!knitr:::is_latex_output()) '## Abstract {-}'`

@@ -8,24 +8,26 @@ xml2hum "$file" > "$file.krn"; done
 mv *.krn Kern_files   # After conversion, move to new file... still working
 
 ### Individual files: 
-xml2hum -s1 h21.xml > c1.krn
-xml2hum -s2 h21.xml > c2.krn
-xml2hum -s3 h21.xml > c3.krn
+xml2hum -s1 h13.xml > c1.krn
+xml2hum -s2 h13.xml > c2.krn
+xml2hum -s3 h13.xml > c3.krn
 
 rcheck c1.krn | grep = | tail -5
 rcheck c2.krn | grep = | tail -5
 rcheck c3.krn | grep = | tail -5
 
-minrhy c2.krn c3.krn > ry.txt
+extract -i '**kern' c1.krn > tc1.krn
+extract -i '**kern' c3.krn > tc3.krn
+minrhy c2.krn tc3.krn > ry.txt
 grep -h 'all:' ry.txt > r.txt
 egrep -h -o '[0-9]{1,2}' r.txt
-extract -i '**kern' c1.krn > tc1.krn
 
-timebase -t 24 tc1.krn > x1.krn
-timebase -t 24 c2.krn > x2.krn
-timebase -t 24 c3.krn > x3.krn
 
-assemble x3.krn x2.krn x1.krn | rid -d > h1.krn
+timebase -t 16 tc1.krn > h13.xml-a.krn
+timebase -t 16 c2.krn > h13.xml-b.krn
+timebase -t 16 tc3.krn > h13.xml-c.krn
+
+#assemble x3.krn x2.krn x1.krn | rid -d > h3.krn
 
 # Function to convert entire file (still error when rhythem is wrong)
 convert_krn
@@ -39,9 +41,9 @@ do
 
     extract -i '**kern' a.krn > d.krn
     extract -i '**kern' b.krn > e.krn
-    extract -i '**kern' c.krn > f.krn
+    extract -i '**kern' c.krn > z.krn
 
-    minrhy d.krn e.krn f.krn > g.txt
+    minrhy d.krn e.krn z.krn > g.txt
     grep -h 'all:' g.txt > r.txt
     rh=$(egrep -h -o '[0-9]{1,2}' r.txt)
 
@@ -63,9 +65,9 @@ convert_one_krn(){
 
     extract -i '**kern' a.krn > d.krn
     extract -i '**kern' b.krn > e.krn
-    extract -i '**kern' c.krn > f.krn
+    extract -i '**kern' c.krn > z.krn
 
-    minrhy d.krn e.krn f.krn > g.txt
+    minrhy d.krn e.krn z.krn > g.txt
     grep -h 'all:' g.txt > r.txt
     rh=$(egrep -h -o '[0-9]{1,2}' r.txt)
 

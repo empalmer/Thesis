@@ -125,8 +125,7 @@ You can have a dedication here if you wish.
 }
 
 \Preface{
-This is an example of a thesis setup to use the reed thesis document
-class (for LaTeX) and the R bookdown package, in general.
+
 }
 
 \Abstract{
@@ -135,7 +134,7 @@ The preface pretty much says it all. \par
 Second paragraph of abstract starts here.
 }
 
-	\usepackage{tikz}
+	\usepackage{tikz,amsmath}
 % End of CII addition
 %%
 %% End Preamble
@@ -166,10 +165,7 @@ Second paragraph of abstract starts here.
   \begin{acknowledgements}
     I want to thank a few people.
   \end{acknowledgements}
-  \begin{preface}
-    This is an example of a thesis setup to use the reed thesis document
-    class (for LaTeX) and the R bookdown package, in general.
-  \end{preface}
+
   \hypersetup{linkcolor=black}
   \setcounter{tocdepth}{2}
   \tableofcontents
@@ -190,82 +186,113 @@ Second paragraph of abstract starts here.
 
 \chapter{}\label{section}
 
-\section{Introduction}\label{introduction}
+\section{Introduction:}\label{introduction}
 
-In everyday conversation and music liturature, music is often often
-described using subjective summary ``statistics''. For example we talk
-about Beethoven's Symphony 9 (think ode to joy) as `majestic',
-`powerful', `expertly written', `etc', music critics go more in depth to
-talk about the performance and reception, and those with a musical
-background might go into more description into the actual music,
-couterpoint, melodic arc, etc., compared to the emotional affect.
+In the digital age data sets are everywhere. Billions of new data are
+generated daily, in banking, social media, or in other scientific
+studies. These data can be in numerous forms. With the availability of
+the internet, text classification has become an interesting form of
+data. While text classification problems are very frequent, similar
+methods that instead classify music have not been explored as much.
 
-What if one wanted to compare Beethoven to Bach? One might say that
-Beethoven was a classical composer, whereas Bach was a baroque composer.
-What exactly to those classifiers mean? Sure, it is very well documented
-the years each composer was active in, and that there were large changes
-in the popular aspects of classical music. Even the untrained ear can
-distinguish differences between Bach and Beethoven. What exactly is the
-difference that one can hear? Does Bach follow counterpoint rules more
-exactly? What ways can we empirically differentiate those two composers?
-How about contemporary composers such as Mozart and Saliery? While those
-familiar with classical music can spot the differences between these two
-composers, it is more difficult for the untrained ear or eye to spot the
-differences.
+Thinking of text or music as data has its own challenges. If we normally
+think of data as something with lots of numbers in a spreadsheet, and
+then running analysis on that spreadsheet. Analysis of text using
+machine learning can find patterns, authors, or categories of text.
+Similar methods can in fact be used to classify music.
 
-What if we had a piece and didn't know who wrote it? What features are
-inherent in a composers style that would allow us to identify the true
-composer?
+The essential part of either text or music classification is feature
+selection. Unlike in a data set of numerical or categorical values, text
+and music must first go through a processing stage where hopefully
+features of interest can be extracted before any models can be fit.
 
-\section{Literature Review}\label{literature-review}
+For music, th interest is in building a model that uses the extracted
+features would be able to correctly classify a likely composer for that
+piece of music. For musically trained humans, this might be an easy
+task. Some are able to either by listening to a recording, or looking at
+sheet music, automatically distinguish a piece composed by Bach or
+Mozart. This becomes more difficult when composers are contemporaries.
+Mozart and Saliery might be distinguishable to a scholar or music fan,
+but it might be harder. Harder still is when a piece of music has a
+disputed composer history. These examples exist throughout music
+history, most notably in the Renaissance. Music classification has
+attempted to assign composers to pieces to be disputed to be Josquin Des
+Prez.
 
-\subsection{Federalist Papers}\label{federalist-papers}
+In both text and music classification, we must create features that can
+be calculated that would give some signal to indicate some unconscious
+tendendency of the composer that would make them distinguishable.
 
-Text classification has recently become a large field. One of the
-earliest instances of text classification was on the Federalist
-papers.(Mosteller \& Wallace, 1964). The famous Federalist Papers were
-written under the pen name `Publius'. There are several disputed papers
-attributed to James Madison or Alexander Hamilton. Historians have often
-examined the papers using styles of previously known writings of Madison
-and Hamilton. () Using the frequency of words such as and `by', `from',
-and `upon' Mosteller and Wallace trained the writings on a set of pieces
-of each. These unconscious indicators were able to differentiate between
-the two writers, and when a model was trained (using \ldots{}. ), the
-model was able to identify the author of the disputed paper.
+There have been numerous other interesting applications of machine
+learning to music. Many studies have used neural nets etc trained on
+composers music to have the computer create a similar composition.
+\ldots{}.
 
-\subsection{Music}\label{music}
+\section{Brief history of text
+classification}\label{brief-history-of-text-classification}
 
-Almost any piece by any composer has already been thoroughly examined by
-music historians. (Paragraph about things that music historians talk
-about when analyzing music. find sources for this. )
+One of the earliest instances of text classification was on the
+Federalist papers.(Mosteller \& Wallace, 1964). The famous Federalist
+Papers were written under the pen name `Publius'. There are several
+disputed papers attributed to James Madison or Alexander Hamilton. The
+authors never admitted authorship, as some of the writings were
+contradictory to their later political platforms. (Adair, 1944)
+Historians have often examined the papers using styles of previously
+known writings of Madison and Hamilton. Their analysis is often
+partially based on the content of the letters, for example the existence
+of citing English history is a trait more common to Hamilton. (Ford \&
+Bourne, 1897)
 
-The human eye, no matter how well trained in music, has an extremely
-hard time noticing small features throughout a piece. Even if one has a
-feature in mind, would one want to count the number of times an author
-used the word `as' in a 500 page book? Would one trust that count to be
-accurate? Say one composer was very fond of middle C, and consistently
-used it slightly more than other composers. Unless the use of C was
-extreme, likely breaking rules of counterpoint and making odd melodic
-and harmonic choices, a human might not be able to catch this
-characteristic. Writing has certain rules of grammar, that one would
-expect all published writers to mostly follow. Writers would likely
-never have the word `as' written twice in a row. Similarly, classical
-music has rules and conventions. Counterpoint (described in Chapter 2),
-melody, and characteristics of the instrument composed for constrict a
-composer.
+In contrast, using the frequency of words such as and `by', `from', and
+`upon', Mosteller and Wallace trained the writings on a set of known
+writings by each author. These unconscious indicators were able to
+differentiate between the two writers, and when a model was trained, the
+model was able to identify the likely author of the disputed paper.
 
-How can one find similar unconscious features comparable to word
-frequency for a composer? There are two main ways to look at features in
-a piece of music. The first option is using a recording of the piece.
-This way has been used succesfully using a perfomrance in MIDI format to
-distinguish certain genres of music. (De León \& Inesta, 2003) They used
-self-organizing neural maps to classify music as either jazz or
-classical.
+\section{Methods for classification.}\label{methods-for-classification.}
 
-The second is using the sheet music of the piece. Performances of the
-same piece vary extremely, and there is information at a higher
-resonlution with easier access (intervals, etc.) in sheet music. Thus,
-in this paper sheet music will be used for analysis.
+Initial approaches often use linear methods for classification. If we
+are trying to predict the author,
+\(y \in \{\text{Fanny},\text{Felix}\}\), or more generally,
+\(y \in \{\text{list of composers}\}\), given features or predictors
+\(\textbf{X} = \{X_{i \cdots X_p}\), we can divide the input space* into
+a collection of regions labeled according to the classification.
+
+We can create linear decision boundaries for \(K\) classes where the
+fitted linear model for the \(k\)th indicator response is
+\(\hat{f}_k(x) = \hat{\beta}_{k0} + \hat{\beta}_{k}^Tx.\) The decision
+boundary between classes \(i\) and \(j\) is the set of points for which
+\(\hat{f}_i(x) = \hat{f}_j(x)\), or in other words, the set
+\(\{x : (\hat{\beta}_{i0} - \hat{\beta}_{j0}) + (\hat{\beta}_{i} - \hat{\beta}_j)^Tx = 0 \}\)
+which defines a hyperplane.
+
+Similarly quadratic decision boundaries can be used when we increase our
+predictor space to include squares and higher polynomials of \(X\). We
+then fit linear decision boundaries, which then map down to quadratic
+functions in the original space.*.
+
+Logistic regression is often used when the response is binary. It models
+the probability that \(Y\) belongs to either category. We use the
+logistic function
+\(p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}\) To
+calculate estimates of \(\hat{\beta_0},\hat{\beta_1}\), we use maximum
+likelihood. To do this, we choose \(\hat{\beta_0},\hat{\beta_1}\) to
+maximize the function \ldots{}
+
+The Naive Bayes classifier is often used for musical classification as
+it is good when the dimension \(p\) of the features space is large,
+makeing density estimation unattractive*. It makes the (naive)
+assumption that all the features are independent for a given class
+\(i\). \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]
+
+The idea of separating Hyperplanes is essential to Support Vector
+Machines (SVM)
+
+Linear discriminant analysis: Using
+
+GDA
+
+\section{Feature selection}\label{feature-selection}
 
 Text analysis, such as in the federalist papers, is read one word after
 another. Information in piece of music, however, is read in a variety of
@@ -275,32 +302,69 @@ with several instruments, the above happens at the same time for each
 instrument. There are also aspects that take place over large sections,
 such as phrasing, or cadencial patterns. There are rules of counterpoint
 that are followed throughout the entire piece. Thus we need to find
-`features' or `variables' (see below) that can be measured for each
-piece, or perhaps each measure or instrument, that can describe a
-certain piece of music. Then we must decide which features are those of
-rules and practices of classical music, and where the creativeness and
-individuality of a composer happens?
+features that can be measured for each piece, or perhaps each measure or
+instrument, that can describe a certain piece of music. Then we must
+decide which features are those of rules and practices of classical
+music, and where the creativeness and individuality of a composer
+happens. As there are so many different aspects of a piece, the melodic
+changes, harmonic ** etc, we can end up with very many (x) features to
+describe one piece. As in this insteance when we only have
+\textasciitilde{}150 total pieces, we have that \(p > n\). We thus need
+to figure a clever way to decrease our predictor space. This can happen
+in choosing what features we want to use to model, or using a dimension
+reduction technique such as PCA.
 
 Most of the musical stylometry papers have focused on composers in the
 Renaissance, Baroque, and Classical eras. The Mendelssohns were
 composing in the Romantic period. This choice might be because composers
-in earlier eras had less ``expressive'' allowances for their composing,
-thus making features easier, although this is just speculation. There
-are also more pieces with doubtful authorship in those eras.
+in earlier eras followed rules of counterpoint more exactly, or perhaps
+had less ``expressive'' allowances for their composing, thus making
+features easier, although this is just speculation. There are also more
+pieces with doubtful authorship in those eras. In addition Computer
+Assisted Research in the Humanities (CCARH) has a large corpus of
+encoded music from these times. * have a citation list of all the ones
+that use these*
 
-\subsection{Classification}\label{classification}
+\section{A Very Short Introduction to Music
+Theory}\label{a-very-short-introduction-to-music-theory}
 
-Assigning likely composers to a piece of music is a classification
-problem. Classic approaches to this problem are described in the next
-section.
+Western sheet music is presented on a five line staff. The vertical
+distance between notes (also known as an interval) depends on how many
+half steps occur between two notes. There are 12 half steps in the
+western scale. Melodic intervals are defined as the number of half steps
+between two adjacent notes. Harmonic intervals are defined as the number
+of half steps between notes played at the same time. Cadences are a type
+of chord progresssion, usually occuring at the end of a phrase and
+especially at the end of a piece. Musical notes are in the set
+\(\text{note} \in \{A,B,C,D,E,F,G\}\) The value of a note can be changed
+up or down a halfstep, by adding a sharp or flat. There are 12 unique
+note value per octave. Intervals and chords can be either dissonant or
+connsonant. Consonant intervals sound nice to our ears, whereas
+dissonant intervals add a sense of tension or unease, which is used to
+shape the feel of the music. In addition chords and intervals can be
+minor or major. Minor intervals feel ``sad'', whereas major intervals
+feel ``happy''.
 
-In our case, for each song, we will have vector \(X\) which will be a
-vector of all the \(p\) variables and features we are measuring. These
-will be the predictors. For each song we will also have, or be trying to
-predict \(y\), or the identity of the composer.
+\section{Musical features}\label{musical-features}
 
-\subsection{Background on Variable and Feature
-Selection}\label{background-on-variable-and-feature-selection}
+Features calculated from music often closely follow music theory. In
+music, addition to deciding the features, there is also the decision of
+the scope at where those features take place. They can be features for a
+given instruemnt, the entire piece, or each measure. Also windowing
+techniques can be used where a ``window'' is created over a given number
+of bars or notes, and shifts accross the whole piece For each window, a
+feature is recorded. These can be overlapping windows by creating an
+``ofset'' of a number of beats or notes. This produces more data, as
+instead of one feature for each piece, there is a feature for each
+window.
+
+Musical features are often thought about as either high level, or low
+level. While the exact definition of each often varies, low level is
+often understood to be features such as note frequency, etc. High level
+features are more about a broader sense of the piece, including chord
+progressions, etc. High level features are often what music experts use
+in their analysis, whereas low-level features are more easily done with
+computer analysis.
 
 Especially in research regarding gene expression and text
 categorization, data sets have enormous numbers of variables. We use
@@ -311,9 +375,19 @@ selection algorithms that select the ``important'' variables. If we
 included every variable that we extract from the piece, our model would
 very likely be overfit.
 
-The start of feature selection is domain knowledge. Thank to John Cox in
-the music department for suggesting a list of valuable features. These
-will be described in Chapter 2.
+The start of feature selection is domain knowledge. Thanks to John Cox
+in the music department for suggesting a list of valuable features.
+These will be described in Chapter 2.
+
+\subsection{Background on Variable and Feature
+Selection}\label{background-on-variable-and-feature-selection}
+
+Often, especially in musical research, before analysis is done, numerous
+features are extracted from the music without knowing a priori which
+ones will be helpful in identifying a composers' style. Thus we have to
+choose which features we want to use in our model. There are many ways
+to do this. There are exissting variable selection algorithms that can
+help with this process.
 
 Several variable selection algorithms include variable ranking. Variable
 ranking uses a score function to assign a score to each possible
@@ -365,31 +439,34 @@ backward elimination. These both give nested subsets of variables
 Often there is a need for dimensionality reduction. Is there a way to
 combine enough of the information given in the features in a smaller
 dimensinoal space? This results in feature creationg; using the recorded
-variables to create new features to fit the model on.
-
-These include clustering, basic linear tranformations of the input
-variables, such as PCa/SVd, and LDA. Also more sophistecated linear
-transformas like Fourier and Hadamard.
-
-Two basic goals of these feature creations, are that we can achieve a
-good reconstruction of the data. The second is that we can be most
-efficeint in making our predictors. The first is an unsupervised
-problem. The second is supervised.
+variables to create new features to fit the model on. These include
+clustering, basic linear tranformations of the input variables, such as
+PCa/SVd, and LDA. Also more sophistecated linear transformas like
+Fourier and Hadamard. Two basic goals of these feature creations are
+that we can achieve a good reconstruction of the data. The second is
+that we can be most efficeint in making our predictors. The first is an
+unsupervised problem. The second is supervised.
 
 Clustering is in fact a type of feature construciton. The group of
 clusterd points thereby becomes a feature. Examples of this include
 K-means and hierarchical clustering.
 
-SVD, singlar value decomposition is another form of feature
-construciton.
+\section{Previous research.}\label{previous-research.}
 
-Trees
+Research on musical stylometry focuses on two areas, data in the form of
+audio, and data in the form of sheet music. Our analysis uses data in
+the form of sheet music. To predict a composer, a training data set of
+pieces of known composer is needed. Then that model can be fit to a
+testing data set to predict composer. If that shows good predictions,
+that model can be used on the pieces of unknown authorship.
 
-K-means
-
-PCA
-
-Floating Forward Selection
+Musical stylometry can be used disputed authorship, but also to detect
+distinguishing musical styles of composer, even if there are no disputed
+pieces. One such study did both. Backer et. al. first looked at
+differences in style between J.S. Bach, Telemann, and Handel,Haydn and
+Mozart. Next they looked at piece BWV 534 which is disputed to be
+composed by either J.S. Bach, J.L. Krebs, or W.F. Bach (J.S. Bach's
+son). (Backer \& Kranenburg, 2005)
 
 \subsection{Previous choices of
 features}\label{previous-choices-of-features}
@@ -414,7 +491,10 @@ Common types of features used before in music analysis are: Frequencies
 or fractions of notes, chords, etc are a common low-level feature. These
 include the fraction of the score that consisted of dissonant
 sororities, as well as the fraction of bars that begin with a dissonant
-sonority
+sonority. Other features include the tipe of intervals or consonances
+present in a piece: perfect consonance, imperfect consonances, and
+dissonance. In polyphonic pieces, the four types of motion, (parallel,
+similar, oblique, and contrary) can also be used as features.
 
 Features measuring ``stability'' are also popular. Stability is computed
 by dividing the standard deviation of the lengths of the fragment by the
@@ -454,6 +534,16 @@ frequencies of pairwise interval combinations between each of the
 voices, Markov transition matrices for the rhythms of the pieces, and
 Markov transition matrices of the pitches in each piece. In total, this
 lead to a total of 3000 features.
+
+Other work looking at renessance and baroque composers looked
+specifically at differences in counterpoint. Since most composers in
+that era for the most part followed the rules of counterpoint, there is
+a question of if there are distinguising differences. Using counterpoint
+movement types, dissonance distributions, parallel intervals of each
+kind, and vertical interval distributions, a classifier using a WEKA
+algorithm, as well as Naive Bayes and a Decision Tree was created that
+correctly predicted composer 2/3 of the time. (Mearns, Tidhar, \& Dixon,
+2010)
 
 \subsection{Previous applications}\label{previous-applications}
 
@@ -501,6 +591,8 @@ Bayes for classification, but it had a large training error as the
 independence assumption does not work well with musical data. Next they
 used support vector machines with a Gaussian kernel and GCA learning
 algorithms.
+
+** insert picture **
 
 \section{Fanny and Felix Mendelssohn}\label{fanny-and-felix-mendelssohn}
 
@@ -606,6 +698,8 @@ stage\tabularnewline
 staff & one instrument composed of one staff line\tabularnewline
 \bottomrule
 \end{longtable}
+etc \ldots{}
+
 \section{About the data and conversion
 process}\label{about-the-data-and-conversion-process}
 
@@ -640,16 +734,17 @@ rhythm. The staff gives a normalization that is helpful, essentially
 defining the size of what notes and Rhythm will look like. Staff removal
 methods include projections, histograms, run lengths, Candidates
 assemblage, contour tracking, and Graph path search. - which i don't
-understand and may not write about \ldots{} - ({\textbf{???}}) The next
-step is music symbol extraction and classification. These methods
-include template matching, where the object in question is compared to
-existing known musical symbols, simple operators, such as analysis of
-bounding boxes and projections, joining graphical primatives, such as
-combining extracted objects such as notes, note heads, and note beams to
-connect them in a musically correct way to form chords etc. Other
-methods use statistical models for analyzing musical primitives (the
-objects its trying to classify) such as Neural Networks, Support Vector
-Machines, k-Nearest Neighbor, and Hidden Markov Models.
+understand and may not write about \ldots{} - (Doermann, Tombre, \&
+others, 2014) The next step is music symbol extraction and
+classification. These methods include template matching, where the
+object in question is compared to existing known musical symbols, simple
+operators, such as analysis of bounding boxes and projections, joining
+graphical primatives, such as combining extracted objects such as notes,
+note heads, and note beams to connect them in a musically correct way to
+form chords etc. Other methods use statistical models for analyzing
+musical primitives (the objects its trying to classify) such as Neural
+Networks, Support Vector Machines, k-Nearest Neighbor, and Hidden Markov
+Models.
 
 The next step is syntactical analysis and validation. This step
 essentially uses defined grammars describing the organization of music
@@ -711,9 +806,9 @@ MusicXML is used commonly as it is conducive to representing sheet music
 and music notation, and it can be transferable to many different music
 softwares. We then need to convert into a format more easily readable
 into R. We do this by using Humdrum's function xml2hum that converts a
-musicXML file into a .krn file. This file time can be read much more
-easily into R. Compared to above, the code for a single middle c whole
-note would be :
+musicXML file into a .krn file. (Talk about Humdrum) This file time can
+be read much more easily into R. Compared to above, the code for a
+single middle c whole note would be :
 \begin{verbatim}
 **kern
 *clefG2
@@ -723,18 +818,21 @@ note would be :
 1c/
 \end{verbatim}
 The import\_xml\_files.sh file goes through the process of converting
-scores from musicXML to .krn. The files need to be separated into having
-a separate file for each staff, which would mean a seperate file for
-each instrument. In our case for each piece there are always two or
-three files for each piece, which are voice, piano right hand, and piano
-left hand. This is necessary to avoid the bugs in xml2hum that have
-issues when staffs don't necessarily match up as a result of the
-conversion process, most often by rhythm.
+scores from musicXML to .krn. (insert stuff about online repositories of
+baroque and rennesaince composers already in this format) The files need
+to be separated into having a separate file for each staff, which would
+mean a seperate file for each instrument. In our case for each piece
+there are always two or three files for each piece, which are voice,
+piano right hand, and piano left hand. This is necessary to avoid the
+bugs in xml2hum that have issues when staffs don't necessarily match up
+as a result of the conversion process, most often by rhythm.
 
 \subsection{.krn to R}\label{krn-to-r}
 
 Once we have .krn files to represent each piece (usually 2 or 3 files),
 we use regular expressions to extract key information.
+
+Mention removal of text
 
 \section{Raw data frame:}\label{raw-data-frame}
 
@@ -760,7 +858,7 @@ These features are mostly features suggested by John Cox.
 
 \chapter{}\label{section-2}
 
-\section{Feature Selection}\label{feature-selection}
+\section{Feature Selection}\label{feature-selection-1}
 
 Next they computed the entropy of the probability of occurrence of ways
 of thinking about chords; chords are the same no matter what scale
@@ -824,9 +922,6 @@ chunk tag) to help with readibility and/or setup.
 \end{Shaded}
 \textbf{In Chapter \ref{ref-labels}:}
 
-\chapter{The Second Appendix, for
-Fun}\label{the-second-appendix-for-fun}
-
 \backmatter
 
 \chapter*{References}\label{references}
@@ -840,6 +935,11 @@ Fun}\label{the-second-appendix-for-fun}
 \setlength{\parskip}{8pt}
 
 \hypertarget{refs}{}
+\hypertarget{ref-adair1944}{}
+Adair, D. (1944). The authorship of the disputed federalist papers.
+\emph{The William and Mary Quarterly: A Magazine of Early American
+History,} 98--122.
+
 \hypertarget{ref-backer2005}{}
 Backer, E., \& Kranenburg, P. van. (2005). On musical stylometry---a
 pattern recognition approach. \emph{Pattern Recognition Letters},
@@ -850,9 +950,14 @@ Brinkman, A., Shanahan, D., \& Sapp, C. (n.d.). Musical stylometry,
 machine learning, and attribution studies: A semi-supervised approach to
 the works of josquin.
 
-\hypertarget{ref-de2003feature}{}
-De León, P. J. P., \& Inesta, J. M. (2003). Feature-driven recognition
-of music styles, 773--781.
+\hypertarget{ref-OMR}{}
+Doermann, D., Tombre, K., \& others. (2014). \emph{Handbook of document
+image processing and recognition}. Springer.
+
+\hypertarget{ref-authorshipfed}{}
+Ford, P. L., \& Bourne, E. G. (1897). The authorship of the federalist.
+\emph{The American Historical Review}, \emph{2}(4), 675--687. Retrieved
+from \url{http://www.jstor.org/stable/1833983}
 
 \hypertarget{ref-guyon2003}{}
 Guyon, I., \& Elisseeff, A. (2003). An introduction to variable and
@@ -862,6 +967,12 @@ feature selection. \emph{Journal of Machine Learning Research},
 \hypertarget{ref-mace2013}{}
 Mace, A. R. (2013). \emph{Fanny hensel, felix mendelssohn bartholdy, and
 the formation of the`` mendelssohnian'' style} (PhD thesis).
+
+\hypertarget{ref-mearns2010}{}
+Mearns, L., Tidhar, D., \& Dixon, S. (2010). Characterisation of
+composer style using high-level musical features. In \emph{Proceedings
+of 3rd international workshop on machine learning and music} (pp.
+37--40). ACM.
 
 \hypertarget{ref-mosteller1964inference}{}
 Mosteller, F., \& Wallace, D. (1964). \emph{Inference and disputed

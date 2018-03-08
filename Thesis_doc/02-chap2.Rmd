@@ -92,6 +92,8 @@ The import_xml_files.sh file goes through the process of converting scores from 
 
 Once we have .krn files to represent each piece (usually 2 or 3 files), we use regular expressions to extract key information. 
 
+Mention removal of text
+
 ## Raw data frame: 
 
 The data frame representing one piece: 

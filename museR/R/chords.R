@@ -6,6 +6,7 @@ select_chords <- function(piece,inst){
   n1 <- grep("1" ,note_cols,value = T)
   n2 <- grep("3" ,note_cols,value = T)
   n3 <- grep("5" ,note_cols,value = T)
+  notes <- vector()
   for(i in 1:nrow(piece)){
     if(!is.empty(n3)){
       if(is.na(piece[i,n3])){ # is there a note in the fifth of the chord?

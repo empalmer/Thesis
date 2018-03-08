@@ -1,0 +1,46 @@
+#  
+
+## Introduction: 
+
+Increasing now in the digital age, data sets are everywhere. Billions of new data are generated daily, in banking, social media, or in other scientific studies. These data can be in numerous forms. With the availability of the internet, text classification has become an interesting form of data. While text classification problems are very frequent, similar methods that instead classify music have not been explored as much. 
+
+Thinking of text or music as data has its own challenges. If we normally think of data as something with lots of numbers in a spreadsheet, and then running analysis on that spreadsheet. Analysis of text using machine learning can find patterns, authors, or categories of text. Similar methods can in fact be used to classify music. 
+
+The essential part of either text or music classification is features selection. Unlike in a data set of numerical or categorical values, text and music must first go through a processing stage where hopefully features of interest can be extracted before any models can be fit. 
+
+For music, we are interested in building a model that using the extracted features would be able to correctly classify a likely composer for that piece of music. For musically trained humans, this might be an easy task. Some are able to either by listening to a recording, or looking at sheet music, automatically distinguish a piece composed by Bach or Mozart. This becomes more difficult when composers are contemporaries. Mozart and Saliery might be distinguishable to a scholar or music fan, but it might be harder. Harder still is when a piece of music has a disputed composer history. These examples exist throughout music history, most notably in the Renaissance. Music classification has attempted to assign composers to pieces to be disputed to be Josquin Des Prez. 
+
+In both text and music classification, we must create features that can be calculated that would give some signal to indicate some unconscious tendendency of the composer that would make them distinguishable. 
+
+## Brief history of text classification
+
+One of the earliest instances of text classification was on the Federalist papers.[@mosteller1964inference]. The famous Federalist Papers were written under the pen name 'Publius'. There are several disputed papers attributed to James Madison or Alexander Hamilton. The authors never admitted authorship, as some of the writings were contradictory to their later political platforms. [@adair1944] Historians have often examined the papers using styles of previously known writings of Madison and Hamilton. Their analysis is often partially based on the content of the letters, for example the existence of citing English history is a trait more common to Hamilton. [@authorshipfed] 
+
+In contrast, using the frequency of words such as and 'by', 'from', and 'upon', Mosteller and Wallace trained the writings on a set of known writings by each author. These unconscious indicators were able to differentiate between the two writers, and when a model was trained (using .... ), the model was able to identify the likely author of the disputed paper.
+
+## Methods for classification. 
+
+Initial approaches often use linear methods for classification. If we are trying to predict the author, $y \in \{\text{Fanny},\text{Felix}\}$, or more generally, $y \in \{\text{list of composers}\}$, given features or predictors $\textbf{X} = \{X_{i \cdots X_p}$, we can divide the input space* into a collection of regions labeled according to the classification. 
+
+We can create linear decision boundaries for $K$ classes where the fitted linear model for the $k$th indicator response is $\hat{f}_k(x) = \hat{\beta}}_{k0} + \hat{\beta}}_{k}^Tx.$ The decision boundary between classes $i$ and $j$ is the set of points for which $\hat{f}_i(x) = \hat{f}_j(x)$, or in other words, the set $\{x : (\hat{\beta}_{i0} - \hat{\beta}_{j0}) + (\hat{\beta}_{i} - \hat{\beta}_{j})^Tx = 0 \}$ which defines a hyperplane. 
+
+Similarly quadratic decision boundaries can be used when we increase our predictor space to include squares and higher polynomials of $X$. We then fit linear decision boundaries, which then map down to quadratic functions in the original space.*. 
+
+Logistic regression is often used when the response is binary. It models the probability that $Y$ belongs to either category. We use the logistic function $p(X) = \frac{e^{\beta_0 + \beta_1X}{1 + 3^{\beta_0 + \beta_1X}}}$ To calculate estimates of $\hat{\beta_0},\hat{\beta_1}$, we use maximum likelihood. To do this, we choose $\hat{\beta_0},\hat{\beta_1}$ to maximize the function ... 
+
+The idea of separating Hyperplanes is essential to Support Vector Machines (SVM)
+
+Linear discriminant analysis: Using 
+
+
+
+
+
+
+## Features selection
+
+Text analysis, such as in the federalist papers, is read one word after another. Information in piece of music, however, is read in a variety of ways. It can be read left to right note by note, but it can also be read vertically as the harmony, or the notes played together. Also in a piece with several instruments, the above happens at the same time for each instrument. There are also aspects that take place over large sections, such as phrasing, or cadencial patterns. There are rules of counterpoint that are followed throughout the entire piece. Thus we need to find features that can be measured for each piece, or perhaps each measure or instrument, that can describe a certain piece of music. Then we must decide which features are those of rules and practices of classical music, and where the creativeness and individuality of a composer happens.
+
+Most of the musical stylometry papers have focused on composers in the Renaissance, Baroque, and Classical eras. The Mendelssohns were composing in the Romantic period. This choice might be because composers in earlier eras had less "expressive" allowances for their composing, thus making features easier, although this is just speculation. There are also more pieces with doubtful authorship in those eras. 
+
+

@@ -1,4 +1,5 @@
 library(stringr)
+library(tidyverse)
 source("~/Desktop/Thesis/museR/R/names.R")
 
 ###############################################################
@@ -13,24 +14,29 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   data <- readLines(spline)
   data <- data[-grep("!!linebreak", data)] #removes all linebreak text
   data <- data[-grep("\\*", data)] # removes ... 
-
+  
+  data <- c("=0",data)
   measures <- grep("=",data, value = F) # measures in .krn start wtih = 1
-  measure_numbers <- 1:length(measures) # how many measures there are
-  list_notes <- grep("^\\(*[0-9]|\\[|\\.", data) # makes a list of notes and . s
-  val_list_notes <- grep("^\\(*[0-9]|\\[|\\.", data, value = T) # match ( maybe once,  [0-9 maybe once])
+  val_list_notes <- data[-measures]
+  measure_numbers <- 0:(length(measures)) # how many measures there are
+  #val_list_notes <- grep("^\\(*[0-9]|\\[|\\.", data, value = T) # match ( maybe once,  [0-9 maybe once])
   measure_column <- vector() # make a vector of which row each is in.
-  for( i in 2:length(measures)){
+  for(i in 2:length(measures)){
     len <- as.numeric(measures[i]-measures[(i-1)])-1
     val <- measure_numbers[i-1]
+    #if(len == -1){
+    #  len = 0
+    #}
     measure_column <- c(measure_column, rep(val, len))
   }
+  
   sep_chord <- list() #creates a list that seperates 4E 8n into two
-  for(i in 1:length(list_notes)){ # if not, seperate the notes
+  for(i in 1:length(val_list_notes)){ # if not, seperate the notes
     sep_chord[[i]] <- unlist(strsplit(val_list_notes[i],"\\/|\\\\"))
   }
   n <- data.frame() # seperates chords from list to data frame
   for( j in 1:3){
-    for( i in 1:length(list_notes)){
+    for( i in 1:length(val_list_notes)){
       n[i,j]<-sep_chord[[i]][j]
     }
   }
@@ -60,15 +66,13 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
 #' Takes several splines in .krn that are part of a piece 
 #' and calls kern2df to create one df for entire piece
 #'
-#' @param a first spline .krn file
-#' @param b second spline .krn file
-#' @param c third spline .krn file
+#' @param v vector with three splines .krn file strings
 #' @return dataframe for entire piece - combined splines
 
-piece_df <- function(a,b,c){
-  A <- kern2df(a)
-  B <- kern2df(b)
-  C <- kern2df(c)
+piece_df <- function(v){
+  A <- kern2df(v[1])
+  B <- kern2df(v[2])
+  C <- kern2df(v[3])
   measure_col <- A[,1]
   A.n <- add_n.v_n.n(A) # add note names and int values
   B.n <- add_n.v_n.n(B)
@@ -157,9 +161,7 @@ tb_2_rhythm_value <- function(piece_list){
 
 
 ###############################################################
-convert_folder <- function(list_of_pieces){ # given a folder with music, listed as spline a,b,c, return list with converted into list for each piece
 
-}
 
 
 
