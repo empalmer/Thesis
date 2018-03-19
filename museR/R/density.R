@@ -1,8 +1,5 @@
-library(dplyr)
-library(purrr)
-library(purrrlyr)
-###############################################################
-#' measure_density
+#==============================================================
+#' beat_density
 #' 
 #' @param piece in raw data frame
 #' @return density for each measure
@@ -20,7 +17,22 @@ beat_density <- function(piece){
   c(mean(d),sd(d))
 }
 
-map(felix_df,beat_density)
-map(fanny_pieces,beat_density)
+#==============================================================
+#' note_duration
+#' 
+#' @param piece in raw data frame
+#' @return density for each measure
+#'
+
+note_duration <- function(piece,inst){
+  rhy_cols <- grep("measure|r\\.v_1", colnames(piece) ,value = T)
+  rhy_df <- piece[,note_cols]
+  onote_df <- note_df[,-1]
+  rhy_no_na <- as.numeric(as.vector(na.omit()))
+}
+
+
+
+
 
 

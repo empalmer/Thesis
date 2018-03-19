@@ -1,10 +1,4 @@
-library(purrr)
-library(stringr)
-library(bazar)
-
-fanny <- list(c(1,"Wo kommst du her"), 
-              c(2,"Das stille Fleh'n"),
-              c(3,))
+library(museR)
 
 wo_komst <- piece_df(c("h1.xml-a.krn","h1.xml-b.krn","h1.xml-c.krn"))
 das_stille <- piece_df(c("h2.xml-a.krn","h2.xml-b.krn","h2.xml-c.krn"))
@@ -25,29 +19,45 @@ die_alof <- piece_df(c("h19.xml-a.krn","h19.xml-b.krn","h19.xml-c.krn"))
 #am_leuct <- piece_df("h21.xml-a.krn","h21.xml-b.krn","h21.xml-c.krn")
 und_wii <- piece_df(c("h22.xml-a.krn","h22.xml-b.krn","h22.xml-c.krn"))
 
+#==============================================================
+# fanny
 fanny_pieces <- list(wo_komst,das_stille,lied_des,mein_herz,
                      friiling,eilig,ave_maria, lebewohl,die_nonne,nn,
                      wanderlied,zchwishen, die_alof, und_wii)
 
+fanny_pieces <- list.files(path = "~/Desktop/Thesis/Data",
+                           pattern = "^h.+xml.*krn$")
+fanny_krn <- fanny_pieces %>%
+  map_chr(substring,1,4) %>%
+  unique() %>%
+  map(grep,fanny_pieces, value = T)
 
+fanny_df <- map(fanny_krn,piece_df2,c("V","pR","pL"))
+
+#==============================================================
+# felix
 felix <- list(c("f1o8p.xml","Minelied im Mai"), 
               c("f2o8p.xml","Das Heimweh"),
               c("f4o8p.xml","Erntelied"),
               c("f5o8p.xml","Pilgerspruch"))
-
-felix_pieces <- list.files(pattern = "f...........krn") 
-  
+felix_pieces <- list.files(path = "~/Desktop/Thesis/Data",
+                           pattern = "^f.+krn$")
 felix_krn <- felix_pieces %>%
   map_chr(substring,1,5) %>%
   unique() %>%
   map(grep,felix_pieces, value = T)
+felix_krn <- felix_krn[-c(3,4)]  
 
-felix_krn <- felix_krn[-c(3,4)]  # isnt working yet... grr
+felix_df <- map(felix_krn, piece_df2, insts = c("V","pR","pL"))
 
-felix_df <- map(felix_krn, piece_df)
+#==============================================================
+# bach
+bach_pieces <- list.files(path = "~/Desktop/Thesis/BAch")
+bach_df <- map(bach_pieces,piece_df2, insts = "piano")
 
-mel_felix <- map(felix_df,mel_ints,"V")
-mel_fanny <- map(fanny_pieces,mel_ints,"V")
+
+
+
 
 
 

@@ -1,5 +1,3 @@
-
-library(dplyr)
 #### n.v_n.n #### 
 #' Identifies the note and note value of a .krn note
 #'  
@@ -12,67 +10,67 @@ n.v_n.n <- function(note){
     v <- NA
     val <- NA
   } else if(str_detect(note, "[Aa]-")){
-    v <- "A flat"
+    v <- "Ab"
     val <- 1
   } else if(str_detect(note, "[Aa]$")){
     v <- "A"
     val <- 2
   } else if (str_detect(note, "[Aa]#")){
-    v <- "A sharp"
+    v <- "A#"
     val <- 3
   } else if (str_detect(note, "[Bb]-")){
-    v <- "B flat"
+    v <- "Bb"
     val <- 3
   } else if (str_detect(note, "[Bb]$")){
     v <- "B"
     val <- 4
   }else if (str_detect(note, "[Bb]#")){
-    v <- "B sharp"
+    v <- "B#"
     val <- 5
   } else if (str_detect(note, "[Cc]-")){
-    v <- "C flat"
+    v <- "Cb"
     val <- 4
   }  else if (str_detect(note, "[Cc]$")){
     v <- "C"
     val <- 5
   } else if (str_detect(note, "[Cc]#")){
-    v <- "C sharp"
+    v <- "C#"
     val <- 6
   } else if (str_detect(note, "[Dd]-")){
-    v <- "D flat"
+    v <- "Db"
     val <- 6
   } else if (str_detect(note, "[Dd]$")){
     v <- "D"
     val <- 7
   } else if (str_detect(note, "[Dd]#")){
-    v <- "D sharp"
+    v <- "D#"
     val <- 8
   } else if (str_detect(note, "[Ee]-")){
-    v <- "E flat"
+    v <- "Eb"
     val <- 8
   } else if (str_detect(note, "[Ee]$")){
     v <- "E"
     val <- 9
   } else if (str_detect(note, "[Ee]#")){
-    v <- "E sharp"
+    v <- "E#"
     val <- 10
   } else if (str_detect(note, "[Ff]-")){
-    v <- "F flat"
+    v <- "Fb"
     val <- 9
   } else if (str_detect(note, "[Ff]$")){
     v <- "F"
     val <- 10
   } else if (str_detect(note, "[Ff]#")){
-    v <- "F sharp"
+    v <- "F#"
     val <- 11
   } else if (str_detect(note, "[Gg]-")){
-    v <- "G flat"
+    v <- "Gb"
     val <- 11
   } else if (str_detect(note, "[Gg]$")){
     v <- "G"
     val <- 12
   } else if (str_detect(note, "[Gg]#")){
-    v <- "G sharp"
+    v <- "G#"
     val <- 1
   } else if (str_detect(note, "r")){
     v <- "rest"
@@ -84,30 +82,35 @@ n.v_n.n <- function(note){
   r <- c(v,val)
   return(r)
 }
-
+#==============================================================
 #### note_value #### 
 #' Adds columns with more easily analyzable note names
 #'  
-#' @param spline .krn file 
+#' @param notes one note line for one instrument
 #' @return data frame with orriginal piece and NNV and DNV
 #' 
 
-# should be run on indifidual instruments... 
-add_n.v_n.n <- function(spline){
-  df <- data.frame(colnames(c("n.n_1","n.v_1","n.n_2","n.v_2","n.n_3","n.v_3")))
-  for(i in 1:nrow(spline)){
-    df[i,1] <- n.v_n.n(spline[i,5])[1] 
-    df[i,2] <- n.v_n.n(spline[i,5])[2] 
-    df[i,3] <- n.v_n.n(spline[i,6])[1]
-    df[i,4] <- n.v_n.n(spline[i,6])[2]
-    df[i,5] <- n.v_n.n(spline[i,7])[1]
-    df[i,6] <- n.v_n.n(spline[i,7])[2]
+add_n.v_n.n <- function(notes){
+  df <- data.frame(colnames(c("n.n","n.v")))
+  for(i in 1:length(notes)){
+    df[i,1] <- n.v_n.n(notes[i])[1] 
+    df[i,2] <- n.v_n.n(notes[i])[2] 
   }
   df
+  #df <- data.frame(colnames(c("n.n_1","n.v_1","n.n_2","n.v_2","n.n_3","n.v_3")))
+  #for(i in 1:nrow(spline)){
+  #  df[i,1] <- n.v_n.n(spline[i,5])[1] 
+  #  df[i,2] <- n.v_n.n(spline[i,5])[2] 
+  #  df[i,3] <- n.v_n.n(spline[i,6])[1]
+  #  df[i,4] <- n.v_n.n(spline[i,6])[2]
+  #  df[i,5] <- n.v_n.n(spline[i,7])[1]
+  #  df[i,6] <- n.v_n.n(spline[i,7])[2]
+  #}
+  #df
 }  
 
 
-
+#==============================================================
 #' Gives the name of a given rhythm value
 #'
 #' @param note
@@ -124,30 +127,30 @@ r.n <- function(note){
   }
   return(n)
 }
-
+#==============================================================
 #' Takes result of kern_2_df and changes
 #' rhythms to name values (ie changes 4 to quarter note)
 #'
-#' @param piece_data_frame
+#' @param ri individual note vector
 #' @return columns with rhythm names
 #'
 #'
-add_r.n <- function(spline){
-  df <- data.frame(colnames(c("r.n.1","r.n.2","r.n.3")))
-  for(i in 1:nrow(spline)){
-    df[i,1] <- r.n(spline[i,2])
-    df[i,2] <- r.n(spline[i,3])
-    df[i,3] <- r.n(spline[i,4])
+add_r.n <- function(ri){
+  v <- vector()
+  for(i in 1:length(ri)){
+   v[i] <- r.n(ri[i]) 
   }
-  df
+  v
+  #df <- data.frame(colnames(c("r.n.1","r.n.2","r.n.3")))
+  #for(i in 1:nrow(spline)){
+  #  df[i,1] <- r.n(spline[i,2])
+  #  df[i,2] <- r.n(spline[i,3])
+  #  df[i,3] <- r.n(spline[i,4])
+  #}
+  #df
 }
   
   
-time_instance <- function(spline){
-  spline %>%
-    group_by(measure) %>%
-    summarize(nbeats = )
-    
-}
+
   
   

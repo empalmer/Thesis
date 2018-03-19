@@ -1,15 +1,4 @@
-library(bazar)
-###############################################################
-#' remove_rest_nas
-#' 
-#' @param spline .krn file 
-#' @return dataframe of stuff
-#' 
-
-remove_rest_nas <- function(piece){
-}
-
-###############################################################
+#==============================================================
 #' tot_mel_int
 #' How many melodic intervals each spline has
 #' 
@@ -24,7 +13,7 @@ tot_mel_int <- function(spline){
   sum(is.na(spline))
 }
 
-###############################################################
+#==============================================================
 #' is_mel_int
 #' Checks if two notes is a specified melodic interval
 #' 
@@ -38,13 +27,8 @@ is_mel_int <- function(n1,n2, int){
   ifelse(n1$V-n2$V == int,T,F)
 }  
   
-#############################################################  
 
-
- 
-
-
-#####################################################
+#==============================================================
 #' top_line
 #' 
 #' @param piece 
@@ -80,7 +64,24 @@ top_line <- function(piece,inst){
   notes
 }
 
-#####################################################
+#==============================================================
+#==============================================================
+#' top_line2
+#' 
+#' @param piece 
+#' @param col one instrument name name 
+#' @return gives the top melodic line of a instrument
+#'
+top_line2 <- function(piece,inst){
+  inst_cols <- grep(inst,colnames(piece),value = T)
+  note_cols <- grep("n\\.v", inst_cols,value = T)
+  n <- piece[,note_cols]
+  x <- map_df(n,is.na)
+  x <- cbind(rep(F,nrow(x)),x)
+  f <- function(i){max(which(i == F))-1}
+  notes <- by_row(x,f, .collate = "cols", .labels = F)[[1]]
+}
+#==============================================================
 #' voice_mel_ints
 #' 
 #' @param piece One instrument 
@@ -89,7 +90,7 @@ top_line <- function(piece,inst){
 #' 
 
 mel_ints <- function(piece,col){
-  mel <- top_line(piece,col)
+  mel <- top_line2(piece,col)
   mel <- as.numeric(as.vector(na.omit(mel)))
   mel_dif <- c()
   for(i in 1:length(mel)-1){
@@ -104,3 +105,23 @@ mel_ints <- function(piece,col){
   m <- table(mel_fac)/sum(table(mel_fac))
   m
 }
+
+#==============================================================
+#' consonances
+#' 
+#' @param piece One piece
+#' @param col name of intstrument
+#' @return vector of counts for consonances
+#' 
+consonances <- function(piece,col){
+  mel <- mel_ints(piece,col)
+  perfect <- sum(mel[c(1,6,8)])
+  imperfect <- sum(mel[c(4,5,9,10)])
+  dissonant <- sum(mel[c(2,3,7,11,12)])
+  c(perfect,imperfect,dissonant)
+}
+  
+#==============================================================
+
+
+
