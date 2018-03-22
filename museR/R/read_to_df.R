@@ -1,3 +1,5 @@
+
+
 ###############################################################
 #' Takes a .krn spline and converts into data frame
 #'
@@ -6,7 +8,10 @@
 
 kern2df <- function(spline){ # takes a spline(".krn") as input
   data <- readLines(spline)
-  key <- grep("\\*{1}k\\[",data,value = T)
+  key <- grep(":$",data,value = T)
+  if(identical(key,character(0))){
+    key <- grep("\\*{1}k\\[",data,value = T)
+  }
   meter <- grep("\\*{1}M[0-9]",data,value = T)
   data <- data[-grep("^!|\\*", data)] #removes extra text and info
   measures <- grep("=",data, value = F) # measures in .krn start wtih = 1

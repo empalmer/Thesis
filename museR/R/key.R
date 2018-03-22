@@ -1,14 +1,18 @@
 #==============================================================
-key_sigs <- c("","f#","f#c#","f#c#g#","f#c#g#d#","f#c#g#d#a#",
+key_sigs <- c("nosf","f#","f#c#","f#c#g#","f#c#g#d#","f#c#g#d#a#",
               "f#c#g#d#a#e#","f#c#g#d#a#e#b#",
               "b-e-a-d-g-c-f-","b-e-a-d-g-c-","b-e-a-d-g-",
               "b-e-a-d-","b-e-a-","b-e-","b-")
 major_keys <- c("C","G","D","A","E","B","Fs","Cs",
-                "Cb","Gb","Db","Ab","Eb","Bb","F")
+                "Cb","Gb","Db","Ab","Eb","Bb","FM")
 minor_keys <- c("a","e","b","fs","cs","gs","ds","as","ab",
                 "eb","bb","f","c","g","d")
+notes <- as.factor(c("A","Ab","A#","B","Bb","B#","C","Cb","C#",
+                     "D","Db","D#","E","Eb","E#","F","Fb","F#",
+                     "G","Gb","G#","rest"))
+key <- t(data.frame(major_keys,minor_keys))
+colnames(key) <- key_sigs
 
-key <- data.frame(key_sigs,major_keys,minor_keys)
 
 #==============================================================
 
@@ -56,6 +60,40 @@ scales <- data.frame(scale_degree_names,scale_degree_roman_major,
                      C,G,D,A,E,B,Fs,Cs,
                      Cb,Gb,Db,Ab,Eb,Bb,FM,scale_degree_roman_minor,
                      a,e,b,fs,cs,gs,ds,as,ab,eb,bb,f,c,g,d)
+
+Major_minor <- function(piece){
+  krn_key <- piece[1,1]
+  krn_key <- gsub("\t.*","",krn_key)
+  key_s <- gsub("\\*k","",krn_key)
+  key_s <- gsub("\\[","",key_s)
+  key_s <- gsub("\\]","",key_s)
+  note_cols <- grep("n\\.n", colnames(piece),value = T)
+  note_df <-  piece[,note_cols]
+  if(key_s ==""){key_s <- "nosf"}
+  m_m <- key[,key_s] %>% unname() 
+  tonics <- scales[1,m_m] %>% unlist()%>% unname() %>% as.character()
+  fifths <- scales[5,m_m] %>% unlist()%>% unname() %>% as.character()
+  tonics_fifths_count <- rep(0,2)
+  for(i in 1:ncol(note_df)){
+    a <- table(note_df[,i])
+    a
+    mmtonic <- a[tonics] %>% as.vector
+    mmtonic[is.na(mmtonic)]<- 0
+    mmfifth <- a[fifths] %>% as.vector
+    mmfifth[is.na(mmfifth)]<- 0
+    tonics_fifths_count <- tonics_fifths_count + mmtonic + mmfifth
+  }
+  names(tonics_fifths_count) <- tonics
+  Major <- tonics_fifths_count[1] %>% unname
+  minor <- tonics_fifths_count[2] %>% unname
+  if(Major >= minor){x <- c(tonics[1],"Major")
+  }else{x <- c(tonics[2],"minor")}
+  x
+}
+
+
+
+
 
 
 

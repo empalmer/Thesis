@@ -97,8 +97,7 @@ mel_ints <- function(piece,col){
     mel_dif[i] <- min(max(mel[i],mel[i+1]) - min(mel[i],mel[i+1]),
                       min(mel[i],mel[i+1]) + 12 - max(mel[i],mel[i+1]))
   }
-  # Change indexing to start at 1
-  mel_dif <- mel_dif + 1
+  mel_dif <- mel_dif + 1 # Change indexing to start at 1
   ints <- c("unison","m2", "M2","m3", "M3","p4","tt",
             "p5", "m6","M6","m7","M7")
   mel_fac <- factor(ints[mel_dif], levels = ints, ordered = T)

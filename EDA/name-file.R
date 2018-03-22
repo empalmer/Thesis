@@ -46,7 +46,7 @@ felix_krn <- felix_pieces %>%
   map_chr(substring,1,5) %>%
   unique() %>%
   map(grep,felix_pieces, value = T)
-felix_krn <- felix_krn[-c(3,4)]  
+felix_krn <- felix_krn[-c(3,4)]
 
 felix_df <- map(felix_krn, piece_df2, insts = c("V","pR","pL"))
 

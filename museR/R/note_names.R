@@ -12,7 +12,7 @@ n.v_n.n <- function(note){
   } else if(str_detect(note, "[Aa]-")){
     v <- "Ab"
     val <- 1
-  } else if(str_detect(note, "[Aa]$")){
+  } else if(str_detect(note, "[Aa](?!#|-)[kTp;n\\)_]*$")){
     v <- "A"
     val <- 2
   } else if (str_detect(note, "[Aa]#")){
@@ -21,7 +21,7 @@ n.v_n.n <- function(note){
   } else if (str_detect(note, "[Bb]-")){
     v <- "Bb"
     val <- 3
-  } else if (str_detect(note, "[Bb]$")){
+  } else if (str_detect(note, "[Bb](?!#|-)[kTp;n\\)_]*$")){
     v <- "B"
     val <- 4
   }else if (str_detect(note, "[Bb]#")){
@@ -30,7 +30,7 @@ n.v_n.n <- function(note){
   } else if (str_detect(note, "[Cc]-")){
     v <- "Cb"
     val <- 4
-  }  else if (str_detect(note, "[Cc]$")){
+  }  else if (str_detect(note, "[Cc](?!#|-)[kTp;n\\)_]*$")){
     v <- "C"
     val <- 5
   } else if (str_detect(note, "[Cc]#")){
@@ -39,7 +39,7 @@ n.v_n.n <- function(note){
   } else if (str_detect(note, "[Dd]-")){
     v <- "Db"
     val <- 6
-  } else if (str_detect(note, "[Dd]$")){
+  } else if (str_detect(note, "[Dd](?!#|-)[kTp;n\\)_]*$")){
     v <- "D"
     val <- 7
   } else if (str_detect(note, "[Dd]#")){
@@ -48,7 +48,7 @@ n.v_n.n <- function(note){
   } else if (str_detect(note, "[Ee]-")){
     v <- "Eb"
     val <- 8
-  } else if (str_detect(note, "[Ee]$")){
+  } else if (str_detect(note, "[Ee](?!#|-)[kTp;n\\)_]*$")){
     v <- "E"
     val <- 9
   } else if (str_detect(note, "[Ee]#")){
@@ -57,7 +57,7 @@ n.v_n.n <- function(note){
   } else if (str_detect(note, "[Ff]-")){
     v <- "Fb"
     val <- 9
-  } else if (str_detect(note, "[Ff]$")){
+  } else if (str_detect(note, "[Ff](?!#|-)[kTp;n\\)_]*$")){
     v <- "F"
     val <- 10
   } else if (str_detect(note, "[Ff]#")){
@@ -66,7 +66,7 @@ n.v_n.n <- function(note){
   } else if (str_detect(note, "[Gg]-")){
     v <- "Gb"
     val <- 11
-  } else if (str_detect(note, "[Gg]$")){
+  } else if (str_detect(note, "[Gg](?!#|-)[kTp;n\\)_]*$")){
     v <- "G"
     val <- 12
   } else if (str_detect(note, "[Gg]#")){
