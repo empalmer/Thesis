@@ -2,9 +2,12 @@
 % Please edit documentation in R/note_names.R
 \name{r.n}
 \alias{r.n}
-\title{Gives the name of a given rhythm value}
+\title{r.n}
 \usage{
 r.n(note)
+}
+\arguments{
+\item{note}{one note}
 }
 \value{
 rhythm name

@@ -2,7 +2,9 @@
 % Please edit documentation in R/read_to_df.R
 \name{kern2df}
 \alias{kern2df}
-\title{Takes a .krn spline and converts into data frame}
+\title{kern2df
+Kern 2 data frame
+Takes a .krn spline and converts into data frame}
 \usage{
 kern2df(spline)
 }
@@ -13,5 +15,7 @@ kern2df(spline)
 dataframe of stuff
 }
 \description{
+kern2df
+Kern 2 data frame
 Takes a .krn spline and converts into data frame
 }

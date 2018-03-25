@@ -9,70 +9,70 @@ n.v_n.n <- function(note){
   if (is.na(note)){
     v <- NA
     val <- NA
-  } else if(str_detect(note, "[Aa]-")){
+  } else if(stringr::str_detect(note, "[Aa]-")){
     v <- "Ab"
     val <- 1
-  } else if(str_detect(note, "[Aa](?!#|-)[kTp;n\\)_]*$")){
+  } else if(stringr::str_detect(note, "[Aa](?!#|-)[kTp;n\\)_]*$")){
     v <- "A"
     val <- 2
-  } else if (str_detect(note, "[Aa]#")){
+  } else if(stringr::str_detect(note, "[Aa]#")){
     v <- "A#"
     val <- 3
-  } else if (str_detect(note, "[Bb]-")){
+  } else if(stringr::str_detect(note, "[Bb]-")){
     v <- "Bb"
     val <- 3
-  } else if (str_detect(note, "[Bb](?!#|-)[kTp;n\\)_]*$")){
+  } else if (stringr::str_detect(note, "[Bb](?!#|-)[kTp;n\\)_]*$")){
     v <- "B"
     val <- 4
-  }else if (str_detect(note, "[Bb]#")){
+  }else if (stringr::str_detect(note, "[Bb]#")){
     v <- "B#"
     val <- 5
-  } else if (str_detect(note, "[Cc]-")){
+  } else if (stringr::str_detect(note, "[Cc]-")){
     v <- "Cb"
     val <- 4
-  }  else if (str_detect(note, "[Cc](?!#|-)[kTp;n\\)_]*$")){
+  }  else if (stringr::str_detect(note, "[Cc](?!#|-)[kTp;n\\)_]*$")){
     v <- "C"
     val <- 5
-  } else if (str_detect(note, "[Cc]#")){
+  } else if (stringr::str_detect(note, "[Cc]#")){
     v <- "C#"
     val <- 6
-  } else if (str_detect(note, "[Dd]-")){
+  } else if (stringr::str_detect(note, "[Dd]-")){
     v <- "Db"
     val <- 6
-  } else if (str_detect(note, "[Dd](?!#|-)[kTp;n\\)_]*$")){
+  } else if (stringr::str_detect(note, "[Dd](?!#|-)[kTp;n\\)_]*$")){
     v <- "D"
     val <- 7
-  } else if (str_detect(note, "[Dd]#")){
+  } else if (stringr::str_detect(note, "[Dd]#")){
     v <- "D#"
     val <- 8
-  } else if (str_detect(note, "[Ee]-")){
+  } else if (stringr::str_detect(note, "[Ee]-")){
     v <- "Eb"
     val <- 8
-  } else if (str_detect(note, "[Ee](?!#|-)[kTp;n\\)_]*$")){
+  } else if (stringr::str_detect(note, "[Ee](?!#|-)[kTp;n\\)_]*$")){
     v <- "E"
     val <- 9
-  } else if (str_detect(note, "[Ee]#")){
+  } else if (stringr::str_detect(note, "[Ee]#")){
     v <- "E#"
     val <- 10
-  } else if (str_detect(note, "[Ff]-")){
+  } else if (stringr::str_detect(note, "[Ff]-")){
     v <- "Fb"
     val <- 9
-  } else if (str_detect(note, "[Ff](?!#|-)[kTp;n\\)_]*$")){
+  } else if (stringr::str_detect(note, "[Ff](?!#|-)[kTp;n\\)_]*$")){
     v <- "F"
     val <- 10
-  } else if (str_detect(note, "[Ff]#")){
+  } else if (stringr::str_detect(note, "[Ff]#")){
     v <- "F#"
     val <- 11
-  } else if (str_detect(note, "[Gg]-")){
+  } else if (stringr::str_detect(note, "[Gg]-")){
     v <- "Gb"
     val <- 11
-  } else if (str_detect(note, "[Gg](?!#|-)[kTp;n\\)_]*$")){
+  } else if (stringr::str_detect(note, "[Gg](?!#|-)[kTp;n\\)_]*$")){
     v <- "G"
     val <- 12
-  } else if (str_detect(note, "[Gg]#")){
+  } else if (stringr::str_detect(note, "[Gg]#")){
     v <- "G#"
     val <- 1
-  } else if (str_detect(note, "r")){
+  } else if (stringr::str_detect(note, "r")){
     v <- "rest"
     val <- NA
   }else {
@@ -84,6 +84,8 @@ n.v_n.n <- function(note){
 }
 #==============================================================
 #### note_value #### 
+#' add_n.v_n.n
+#' Add note value note name
 #' Adds columns with more easily analyzable note names
 #'  
 #' @param notes one note line for one instrument
@@ -97,23 +99,15 @@ add_n.v_n.n <- function(notes){
     df[i,2] <- n.v_n.n(notes[i])[2] 
   }
   df
-  #df <- data.frame(colnames(c("n.n_1","n.v_1","n.n_2","n.v_2","n.n_3","n.v_3")))
-  #for(i in 1:nrow(spline)){
-  #  df[i,1] <- n.v_n.n(spline[i,5])[1] 
-  #  df[i,2] <- n.v_n.n(spline[i,5])[2] 
-  #  df[i,3] <- n.v_n.n(spline[i,6])[1]
-  #  df[i,4] <- n.v_n.n(spline[i,6])[2]
-  #  df[i,5] <- n.v_n.n(spline[i,7])[1]
-  #  df[i,6] <- n.v_n.n(spline[i,7])[2]
-  #}
-  #df
 }  
 
 
 #==============================================================
+#' r.n
+#' 
 #' Gives the name of a given rhythm value
 #'
-#' @param note
+#' @param note one note
 #' @return rhythm name
 #'
 #'
@@ -141,13 +135,6 @@ add_r.n <- function(ri){
    v[i] <- r.n(ri[i]) 
   }
   v
-  #df <- data.frame(colnames(c("r.n.1","r.n.2","r.n.3")))
-  #for(i in 1:nrow(spline)){
-  #  df[i,1] <- r.n(spline[i,2])
-  #  df[i,2] <- r.n(spline[i,3])
-  #  df[i,3] <- r.n(spline[i,4])
-  #}
-  #df
 }
   
   

@@ -1,5 +1,9 @@
 library(museR)
+library(tidyverse)
 
+
+#==============================================================
+# fanny
 wo_komst <- piece_df(c("h1.xml-a.krn","h1.xml-b.krn","h1.xml-c.krn"))
 das_stille <- piece_df(c("h2.xml-a.krn","h2.xml-b.krn","h2.xml-c.krn"))
 huet_in <- piece_df(c("h3v2.a.krn","h3v2.b.krn","h3v2.c.krn"))
@@ -25,36 +29,37 @@ fanny_pieces <- list(wo_komst,das_stille,lied_des,mein_herz,
                      friiling,eilig,ave_maria, lebewohl,die_nonne,nn,
                      wanderlied,zchwishen, die_alof, und_wii)
 
-fanny_pieces <- list.files(path = "~/Desktop/Thesis/Data",
-                           pattern = "^h.+xml.*krn$")
-fanny_krn <- fanny_pieces %>%
+fanny <- list.files(path = "~/Desktop/Thesis/Data",
+                        pattern = "^h.+xml.*krn$") %>%
   map_chr(substring,1,4) %>%
   unique() %>%
-  map(grep,fanny_pieces, value = T)
-
-fanny_df <- map(fanny_krn,piece_df2,c("V","pR","pL"))
+  map(grep,fanny_pieces, value = T) %>%
+  map(piece_df2,c("V","pR","pL"))
 
 #==============================================================
 # felix
-felix <- list(c("f1o8p.xml","Minelied im Mai"), 
+felix_names <- list(c("f1o8p.xml","Minelied im Mai"), 
               c("f2o8p.xml","Das Heimweh"),
               c("f4o8p.xml","Erntelied"),
               c("f5o8p.xml","Pilgerspruch"))
-felix_pieces <- list.files(path = "~/Desktop/Thesis/Data",
-                           pattern = "^f.+krn$")
-felix_krn <- felix_pieces %>%
+
+felix_krn <- list.files(path = "~/Desktop/Thesis/Data",
+                        pattern = "^f.+krn$") %>%
   map_chr(substring,1,5) %>%
   unique() %>%
   map(grep,felix_pieces, value = T)
 felix_krn <- felix_krn[-c(3,4)]
-
-felix_df <- map(felix_krn, piece_df2, insts = c("V","pR","pL"))
+felix <- map(felix_krn, piece_df2, insts = c("V","pR","pL"))
 
 #==============================================================
 # bach
-bach_pieces <- list.files(path = "~/Desktop/Thesis/BAch")
-bach_df <- map(bach_pieces,piece_df2, insts = "piano")
 
+old <- getwd()
+setwd("~/Desktop/Thesis/BAch")
+bach <- list.files(path = "~/Desktop/Thesis/BAch") %>%
+  map(piece_df, insts = "piano")
+setwd(old)
+ 
 
 
 

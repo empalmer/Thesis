@@ -27,48 +27,10 @@ is_mel_int <- function(n1,n2, int){
   ifelse(n1$V-n2$V == int,T,F)
 }  
   
-
-#==============================================================
-#' top_line
-#' 
-#' @param piece 
-#' @param col one instrument name name 
-#' @return gives the top melodic line of a instrument
-#' 
-
-top_line <- function(piece,inst){
-  inst_cols <- grep(inst,colnames(piece),value = T)
-  note_cols <- grep("n\\.v", inst_cols,value = T)
-  n1 <- grep("1" ,note_cols,value = T)
-  n2 <- grep("3" ,note_cols,value = T)
-  n3 <- grep("5" ,note_cols,value = T)
-  notes <- vector()
-  for(i in 1:nrow(piece)){
-    if(!is.empty(n3)){
-      if(is.na(piece[i,n3])){ # is there a note in the fifth of the chord?
-        if(is.na(piece[i,n2])){ # is there a note on 2nd?
-          if(!is.na(piece[i,n1])){ # is the row empty?, if not
-            notes[i] <- piece[i,n1]
-          }
-        } else notes[i] <- piece[i,n2]
-      }else notes[i] <- piece[i,n3]
-    }
-    else if(!is.empty(n2)){
-      if(is.na(piece[i,n2])){ # is there a note on 2nd?
-        if(!is.na(piece[i,n1])){ # is the row empty?, if not
-          notes[i] <- piece[i,n1]
-        }
-      } else notes[i] <- piece[i,n2]
-    } else notes[i] <- piece[i,n1]
-  }
-  notes
-}
-
-#==============================================================
 #==============================================================
 #' top_line2
 #' 
-#' @param piece 
+#' @param piece piece of krn 
 #' @param col one instrument name name 
 #' @return gives the top melodic line of a instrument
 #'
@@ -79,7 +41,8 @@ top_line2 <- function(piece,inst){
   x <- map_df(n,is.na)
   x <- cbind(rep(F,nrow(x)),x)
   f <- function(i){max(which(i == F))-1}
-  notes <- by_row(x,f, .collate = "cols", .labels = F)[[1]]
+  notes <- purrrlyr::by_row(x,f, .collate = "cols",
+                            .labels = F)[[1]]
 }
 #==============================================================
 #' voice_mel_ints

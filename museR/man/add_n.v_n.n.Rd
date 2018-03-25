@@ -2,7 +2,9 @@
 % Please edit documentation in R/note_names.R
 \name{add_n.v_n.n}
 \alias{add_n.v_n.n}
-\title{Adds columns with more easily analyzable note names}
+\title{add_n.v_n.n
+Add note value note name
+Adds columns with more easily analyzable note names}
 \usage{
 add_n.v_n.n(notes)
 }
@@ -13,5 +15,7 @@ add_n.v_n.n(notes)
 data frame with orriginal piece and NNV and DNV
 }
 \description{
+add_n.v_n.n
+Add note value note name
 Adds columns with more easily analyzable note names
 }
