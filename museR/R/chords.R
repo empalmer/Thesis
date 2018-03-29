@@ -62,7 +62,23 @@ find_harm_int <- function(v){ # lenghth 2
   f <- abs(v[1]-v[2] %% 12) # first(lower) note minus 2nd
   ints <- c("unison","m2", "M2","m3", "M3","p4","tt",
             "p5", "m6","M6","m7","M7")
+  ints <- factor(ints, ordered = T)
   ints[f + 1]
+}
+
+
+harm_ints <- function(piece){
+  a <- extract_chord_value_beat(piece)
+  l <- map(a,length)
+  harms <- a[which(l == 2)]
+  ints <- map(harms, find_harm_int)
+  ints
+}
+
+freq_harm_ints <- function(piece){
+  harm_ints_list <- harm_ints(piece) %>% unlist()
+  freq <- table(harm_ints_list)/sum(table(harm_ints_list))
+  freq
 }
 
 block_chord <- function(v){

@@ -18,6 +18,10 @@ composer <- c(rep("bach",length(bach)),rep("mendelssohn",length(mendelssohn)))
 mel_intsb <- map(bach,mel_ints,"piano") # each 
 mel_intsf <- map(mendelssohn,mel_ints,"V")
 
+#compute feature: harm ints
+
+harm_intb <- map(bach, freq_harm_ints)
+harm_intm <- map(mendelssohn, freq_harm_ints)
 
 # Compute feature: connsonance
 cons_b <- map(bach,consonances,"piano")
