@@ -29,12 +29,12 @@ fanny_pieces <- list(wo_komst,das_stille,lied_des,mein_herz,
                      friiling,eilig,ave_maria, lebewohl,die_nonne,nn,
                      wanderlied,zchwishen, die_alof, und_wii)
 
-fanny <- list.files(path = "~/Desktop/Thesis/Data",
-                        pattern = "^h.+xml.*krn$") %>%
-  map_chr(substring,1,4) %>%
-  unique() %>%
-  map(grep,fanny_pieces, value = T) %>%
-  map(piece_df2,c("V","pR","pL"))
+fanny_l <- list.files(path = "~/Desktop/Thesis/Data",pattern = "^h.+xml-.*krn$")
+fanny_u <- fanny_l %>%map_chr(substring,1,4) %>% unique()
+fanny_piece <-  map(fanny_u,grep,fanny_l, value = T) 
+fanny_piece <- fanny_piece[-c(4,5,12,13,17)]
+fanny_piece <- fanny_piece[-c(6)]
+fanny <-  map(fanny_piece,piece_df,c("V","pR","pL"))
 
 #==============================================================
 # felix
@@ -42,25 +42,27 @@ felix_names <- list(c("f1o8p.xml","Minelied im Mai"),
               c("f2o8p.xml","Das Heimweh"),
               c("f4o8p.xml","Erntelied"),
               c("f5o8p.xml","Pilgerspruch"))
-
-felix_krn <- list.files(path = "~/Desktop/Thesis/Data",
-                        pattern = "^f.+krn$") %>%
-  map_chr(substring,1,5) %>%
-  unique() %>%
-  map(grep,felix_pieces, value = T)
+felix_krn <- list.files(path = "~/Desktop/Thesis/Data", pattern= "^f.+krn$") 
+felix_unique <- felix_krn %>%  map_chr(substring,1,5) %>% unique()
+felix_krn <- map(felix_unique,grep,felix_krn,value = T)
 felix_krn <- felix_krn[-c(3,4)]
-felix <- map(felix_krn, piece_df2, insts = c("V","pR","pL"))
-
+old <- getwd()
+setwd("~/Desktop/Thesis/Data")
+felix <- map(felix_krn, piece_df, insts = c("V","pR","pL"))
+setwd(old)
 #==============================================================
 # bach
 
 old <- getwd()
-setwd("~/Desktop/Thesis/BAch")
-bach <- list.files(path = "~/Desktop/Thesis/BAch") %>%
+setwd("~/Desktop/Thesis/Data/Bach")
+bach <- list.files(path = "~/Desktop/Thesis/Data/Bach") %>%
   map(piece_df, insts = "piano")
+  #map(kern2df)
 setwd(old)
  
-
+for(i in list.files(path="~/Desktop/Thesis/Data/Bach")){
+  print(i) 
+  a <-piece_df(i,insts = "piano")}
 
 
 

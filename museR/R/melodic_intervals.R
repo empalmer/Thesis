@@ -38,8 +38,13 @@ top_line2 <- function(piece,inst){
   inst_cols <- grep(inst,colnames(piece),value = T)
   note_cols <- grep("n\\.v", inst_cols,value = T)
   n <- piece[,note_cols]
-  x <- map_df(n,is.na)
-  x <- cbind(rep(F,nrow(x)),x)
+  if(length(note_cols)==1){
+    x <- map_lgl(n,is.na)
+    x <- data.frame(rep(F,length(x)),x)
+  }else{
+    x <- map_df(n,is.na)
+    x <- cbind(rep(F,nrow(x)),x)
+  }
   f <- function(i){max(which(i == F))-1}
   notes <- purrrlyr::by_row(x,f, .collate = "cols",
                             .labels = F)[[1]]

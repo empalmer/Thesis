@@ -10,7 +10,7 @@ n.v_n.n <- function(note){
     v <- NA
     val <- NA
   } else if(stringr::str_detect(note, "[Aa]-")){
-    v <- "Ab"
+    v <- "A-"
     val <- 1
   } else if(stringr::str_detect(note, "[Aa](?!#|-)[kTp;n\\)_]*$")){
     v <- "A"
@@ -19,7 +19,7 @@ n.v_n.n <- function(note){
     v <- "A#"
     val <- 3
   } else if(stringr::str_detect(note, "[Bb]-")){
-    v <- "Bb"
+    v <- "B-"
     val <- 3
   } else if (stringr::str_detect(note, "[Bb](?!#|-)[kTp;n\\)_]*$")){
     v <- "B"
@@ -28,7 +28,7 @@ n.v_n.n <- function(note){
     v <- "B#"
     val <- 5
   } else if (stringr::str_detect(note, "[Cc]-")){
-    v <- "Cb"
+    v <- "C-"
     val <- 4
   }  else if (stringr::str_detect(note, "[Cc](?!#|-)[kTp;n\\)_]*$")){
     v <- "C"
@@ -37,7 +37,7 @@ n.v_n.n <- function(note){
     v <- "C#"
     val <- 6
   } else if (stringr::str_detect(note, "[Dd]-")){
-    v <- "Db"
+    v <- "D-"
     val <- 6
   } else if (stringr::str_detect(note, "[Dd](?!#|-)[kTp;n\\)_]*$")){
     v <- "D"
@@ -46,7 +46,7 @@ n.v_n.n <- function(note){
     v <- "D#"
     val <- 8
   } else if (stringr::str_detect(note, "[Ee]-")){
-    v <- "Eb"
+    v <- "E-"
     val <- 8
   } else if (stringr::str_detect(note, "[Ee](?!#|-)[kTp;n\\)_]*$")){
     v <- "E"
@@ -55,7 +55,7 @@ n.v_n.n <- function(note){
     v <- "E#"
     val <- 10
   } else if (stringr::str_detect(note, "[Ff]-")){
-    v <- "Fb"
+    v <- "F-"
     val <- 9
   } else if (stringr::str_detect(note, "[Ff](?!#|-)[kTp;n\\)_]*$")){
     v <- "F"
@@ -64,7 +64,7 @@ n.v_n.n <- function(note){
     v <- "F#"
     val <- 11
   } else if (stringr::str_detect(note, "[Gg]-")){
-    v <- "Gb"
+    v <- "G-"
     val <- 11
   } else if (stringr::str_detect(note, "[Gg](?!#|-)[kTp;n\\)_]*$")){
     v <- "G"

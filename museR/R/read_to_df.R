@@ -8,10 +8,11 @@
 
 kern2df <- function(spline){ # takes a spline(".krn") as input
   data <- readLines(spline)
-  key <- grep(":$",data,value = T)
-  if(identical(key,character(0))){
-    key <- grep("\\*{1}k\\[",data,value = T)
+  key_v <- grep("^\\*.*[^I]:$",data,value = T)
+  if(identical(key_v,character(0))){
+    key_v <- grep("\\*{1}k\\[",data,value = T)
   }
+  key_v<- gsub("\t.*","",key_v)
   meter <- grep("\\*{1}M[0-9]",data,value = T)
   data <- data[-grep("^!|\\*", data)] #removes extra text and info
   measures <- grep("=",data, value = F) # measures in .krn start wtih = 1
@@ -38,8 +39,7 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   piece <- cbind(measure_column, n)
   piece <- as.data.frame(lapply(piece, function(y) gsub("L|J", "", y)))
   piece <- as.data.frame(lapply(piece, function(y) gsub("\\[|\\]|\\\\|\\/", "", y)))
-
-  spline_df <- data.frame(rep(key,nrow(piece)),
+  spline_df <- data.frame(rep(key_v,nrow(piece)),
                           rep(meter,nrow(piece)),
                           measure_column)
   for(i in 2:(max_notes+1)){

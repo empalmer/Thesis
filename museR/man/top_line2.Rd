@@ -7,7 +7,7 @@
 top_line2(piece, inst)
 }
 \arguments{
-\item{piece}{}
+\item{piece}{piece of krn}
 
 \item{col}{one instrument name name}
 }
