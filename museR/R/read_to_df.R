@@ -62,6 +62,8 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
 #' including instrument names for each spline
 #' @return dataframe for entire piece - combined splines
  
+
+
 piece_df <- function(v,insts){
   len <- length(v)
   c <- vector()

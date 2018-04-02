@@ -81,6 +81,10 @@ freq_harm_ints <- function(piece){
   freq
 }
 
+
+
+
+
 block_chord <- function(v){
   #first_note <- 
   #second_note <- 

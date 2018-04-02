@@ -1,6 +1,4 @@
-# 
-
-## About the data and conversion process
+# About the data and conversion process
 
 ## Pieces used
 The majority of the pieces used in this paper were Lieder of Felix Mendelssohn and Fanny Hensel. While both composers composed different types of music, the majority of available scores from Fanny Hensel were Lieder. Felix Mendelssohn composed many different styles of music, orchestral, piano, etc. Fanny Hensel in contrast has an available existing corpus of mostly Lieder, although she did compose many works for solo piano and orchestra.  Of Felix's music, 
@@ -10,7 +8,7 @@ Of Fanny's music, 23 lieder were used from her Lieder without Name collection, 1
 
 Data from JS Bach was also used. These data were available in Kern Score format. from the Center for Computer Assisted Research in the Humanities. (CCARH). The pieces used were the Well tempered clavier. These were written as training pieces and each book contains 24 pieces with one in every possible key. These were chosen as the data were more easily accessible (no scanning was required), and they were a similar format as the Mendelssohn songs, written as for solo piano(or harpsichord).
 
-```{r}
+```{r,fig.height=1,echo = F,fig.cap = 'A picture of a score'}
 knitr::include_graphics("images/scorephoto.JPG")
 ```
 
@@ -37,6 +35,7 @@ The OMR used in this paper was Photo Score. Photo Score works by scanning the sc
 
 MusicXML on its own is not conducive to converting into a data frame as representing the single half note middle C looks like this: 
 
+\newpage
 ```{}
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
@@ -115,6 +114,12 @@ To the best of my knowledge, there is currently no package of R that has been bu
 #### Melodic intervals
 
 Melodic intervals, or the interval between two succesive notes, are found using the `mel_ints()` function. This first calculates the top line of any instrument.
+
+\begin{abc}[name=c-dur]
+X: 1 % start of header
+K: C % scale: C major
+C4 G4 | (3FED c4 G2 |
+\end{abc}
 
 This outputs the proportion of each melodic interval happening over the whole piece. 
 

@@ -1,11 +1,5 @@
-cd ~emilypalmer/Desktop/Thesis/Data
 
 # to get to humdrum file ~/humdrum-tools/humdrum
-# For folder
-for file in *.xml; do
-xml2hum "$file" > "$file.krn"; done
-
-mv *.krn Kern_files   # After conversion, move to new file... still working
 
 ### Individual files: 
 xml2hum -s1 h13.xml > c1.krn
@@ -50,17 +44,27 @@ do
     echo "$file"
     timebase -t "$rh" d.krn > $file.a.krn
     timebase -t "$rh" e.krn > $file.b.krn
-    timebase -t "$rh" f.krn > $file.c.krn
+    timebase -t "$rh" z.krn > $file.c.krn
     
-#    assemble j.krn i.krn h.krn | rid -d > $file.krn
-
+   assemble $file.a.krn $file.b.krn $file.c.krn | rid -d > $file.krn
+   rm g.txt
+   rm a.krn
+   rm b.krn
+   rm c.krn
+   rm d.krn
+   rm e.krn
+   rm z.krn
+   rm r.txt
+   rm $file.a.krn
+   rm $file.b.krn
+   rm $file.c.krn
 done
 }
 
 convert_one_krn(){
 
     xml2hum -s1 $1 > a.krn
-    xml2hum -s2 $1 > b.krn
+    xml2hum -s2_ $1 > b.krn
     xml2hum -s3 $1 > c.krn
 
     extract -i '**kern' a.krn > d.krn
@@ -73,7 +77,7 @@ convert_one_krn(){
 
     timebase -t "$rh" d.krn > $1.a.krn
     timebase -t "$rh" e.krn > $1.b.krn
-    timebase -t "$rh" f.krn > $1.c.krn
+    timebase -t "$rh" z.krn > $1.c.krn
     
 #    assemble j.krn i.krn h.krn | rid -d > $file.krn
 

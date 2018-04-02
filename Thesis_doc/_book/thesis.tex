@@ -134,7 +134,7 @@ The preface pretty much says it all. \par
 Second paragraph of abstract starts here.
 }
 
-	\usepackage{tikz,amsmath}
+	\usepackage{tikz,amsmath,abc}
 % End of CII addition
 %%
 %% End Preamble
@@ -714,13 +714,11 @@ with one in every possible key. These were chosen as the data were more
 easily accessible (no scanning was required), and they were a similar
 format as the Mendelssohn songs, written as for solo piano(or
 harpsichord).
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"images/scorephoto.JPG"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{figure}
+\centering
 \includegraphics{images/scorephoto.JPG}
-
+\caption{\label{fig:unnamed-chunk-1}A picture of a score}
+\end{figure}
 \section{Optical music recognition}\label{optical-music-recognition}
 
 The vast majority of classical music is found solely in PDF or physical
@@ -792,6 +790,8 @@ output as a musicXML file.
 
 MusicXML on its own is not conducive to converting into a data frame as
 representing the single half note middle C looks like this:
+
+\newpage
 \begin{verbatim}
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
@@ -924,7 +924,11 @@ form (musicXML or .krn) and does all of the analysis using R.
 Melodic intervals, or the interval between two succesive notes, are
 found using the \texttt{mel\_ints()} function. This first calculates the
 top line of any instrument.
-
+\begin{abc}[name=c-dur]
+X: 1 % start of header
+K: C % scale: C major
+C4 G4 | (3FED c4 G2 |
+\end{abc}
 This outputs the proportion of each melodic interval happening over the
 whole piece.
 
@@ -995,7 +999,128 @@ Finally a measure of suspensions was found. (Backer)
 
 \chapter{}\label{section-3}
 
-\section{Model selection}\label{model-selection}
+\section{Models}\label{models}
+
+For classification, we are interested in using a set of features to
+predict the response, or composer. We denote the features \(X\), where
+\(X_i\) is a certain feature. Each song has a composer or response,
+known or unknown, denoted by \(Y\). The \(i^{th}\) song has features
+\(x_i\) and composer \(Y_i\), where \(x_i\) is a vector of \(p\)
+features. The composer takes values in a discrete set, which is the
+possible composers. Thus we can always divide the input space into a
+collection of regions labeled according to the classificatoin
+
+\section{Linear Methods for
+Classification}\label{linear-methods-for-classification}
+
+\subsection{Linear Regression:}\label{linear-regression}
+
+A naive model for classification is linear regression. If our predictor
+space \(G\) has \(K\) classes, we code the response \(K\) different
+indicator responses \(Y_k\) where \(Y_k = 1\) if \(G = k\) and 0
+otherwise. We can use the resulting \(k\) hyperplanes as a decision
+boundary. We find the coefficients for the line by finding coefficients
+\(\beta\) to minimize the residual sum of squares.
+
+\[ RSS(\beta) = (\textbf{y} - \textbf{X}\beta)^T(\textbf{y} - \textbf{X}\beta) \]
+
+where \(\textbf{X}\) is an \(N\times p\) matrix with each row an input
+vector, and \(\textbf{y}\) is an \(N\)-vector of the outputs of the
+training set. This gives the unique solution:
+
+\[ \hat{\beta} = (\textbf{X}^T\textbf{X})^{-1}\textbf{X}^T\textbf{y}\]
+
+This gives us;
+
+\[\hat{\textbf{Y}} = \textbf{X}(\textbf{X}^T\textbf{X})^{-1}\textbf{X}^T
+\textbf{Y}\] If there are \(K\) classes, and we have that the fitted
+linear model for the \(kth\) class is
+\(\hat{f}_k(x) = \hat{\beta}_{k0} + \hat{\beta}^T_kx\), the decision
+boundary between class \(k\) and class \(l\) is the set of points for
+which \(\hat{f}_k(x) = \hat{f}_l(x)\) which is equivalent to the set
+\(\{x: (\hat{\beta}_{k0} - \hat{l0}) + (\hat{\beta}_k - \hat{\beta}_l)^Tx = 0\}\)
+which is the hyperplane.
+
+\subsubsection{Linear Discriminant
+Analysis}\label{linear-discriminant-analysis}
+
+Linear regression on a categorical variable that has multiple variables
+has issues when there isn't a natural ordering with the categories. For
+large \(K\) and small \(p\), groups can be masked. When there is a
+binary response, we can calculate \(P(Y|X)\), but linear regression can
+give predictions that arent valid probabilities, namely negative
+probabilities or probabilities greater than 1.
+
+Knowing the class posteriors \(P(Y = k|X)\) gives us an optimal
+classification. If we assume \(f_k(x)\) is the class-conditional density
+of \(X\) in class \(G = k\) and that \(\pi_k\) is the prior probability
+of class \(k\) with \(\sum_{k=1}^K \pi_k = 1\). We can then model
+\(P(Y = k | X)\) by modeling the distribution of the features \(X\)
+seperately in each response class, and then use Bayes' theorem to
+calculate \(P(Y = k |X)\) which gives us the following:
+
+\[ P(Y = k | X = x) = \frac{f_k(x)\pi_k}{\sum_{l = 1}^Kf_l(x)\pi_l}\]
+
+We thus must have a model to find \(f_k(x)\). Linear and quadratic
+discriminant analysis assume a multivariate Gaussian density, given by:
+\[f_k(x) = \frac{1}{(2\pi)^{p/2}|\mathbf{\Sigma}_k^{1/2}}e^{-\frac{1}{2}(x-\mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k)}\]
+
+Linear discriminant analysis (LDA) assumes that the covariance matrix is
+equal for every \(k\):
+\(\mathbf{\Sigma}_k = \mathbf{\Sigma} \forall k\). Quadratic
+discriminant analysis does not have this assumption. In addition we
+assume \(\hat{\pi}_k = N_k/N\) where \(N_k\) is the number of class -
+\(k\) observations, \(\hat{\mu}_k = \sum_{g_i = k}x_i/N_k\), and
+\(\mathbf{\hat{\Sigma}} = \sum_{k = 1}^{K}\sum_{g_i = k}(x_i - \hat \mu_k)(x_i - \hat\mu_k)^T / (N- K)\)
+
+For LDA we can lok at the log ratio comparing two classes \(k\) and
+\(l\) and can show:
+
+\[\log\frac{P(Y= k|x = x)}{P(Y = l|X = x)} = \log\frac{f_k(x)}{f_l(x)} + \log\frac{\pi_k}{\pi_l} = \log \frac{\pi_k}{\pi_l} - \frac{1}{2}(\mu_k + \mu_l)^T\mathbf{\Sigma}^{-1}(\mu_k- \mu_l) + x^T\mathbf{\Sigma}^{-1}(\mu_k - \mu_l) \]
+
+This is a linear equation, so the classes will be seperated by
+hyperplanes. From the above, we can find that the predicted class for
+any \(x\) is :
+
+\[ \delta_k(x) = x^T\mathbf{\Sigma}^{-1}\mu_k - \frac{1}{2}\mu_k^T\mathbf{\Sigma}^{-1}\mu_k + \log \pi_k \]
+
+These functions are known as \(\textit{linear discriminant functions}\)
+We predict the class by finding the maximum value of the discriminant
+funcitions of all \(k\).
+
+For QDA we get the following discriminant functions:
+\[ \delta_k(x) = -\frac{1}{2}\log|\mathbf{\Sigma}_k| - \frac{1}{2}(x - \mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k) + \log \pi_k \]
+
+Linear discriminant analysis is helpful when the classes are well
+seperated, when \(n\) is small and the distribution of the predictors
+\(X\) is approximately normal in each of the classes, and when there are
+more than two response classes.
+
+\subsubsection{Logistic Regression}\label{logistic-regression}
+
+Logistic regression differes from linear discriminant analysis by
+directly modeling \(P(Y = k|X)\) by using the logistic function.
+
+\section{K- nearest - neaighbor}\label{k--nearest---neaighbor}
+
+Another method for classification is k-nearest neighbor methods. It uses
+observations in the training set closest to \(x\) to form \(\hat{Y}\),
+the outputs. We often use Euclidean distance as a metric for closness,
+although other methods exist. It is defined as
+\[ \hat{Y}(x) = \frac{1}{k}\sum_{x_i \in N_k(x)}y_i\]
+
+where \(N_k(x)\) is the \(k\) closest points, or neighbors, \(x_i\) in
+the training set. This is equivalent to taking the average of \(k\)
+observations with \(x_i\) closest to \(x\). This gives a predicted class
+of taking the mode of the \(k\) nearest neighbors.
+
+\subsection{Logistic Regression}\label{logistic-regression-1}
+
+For logistic regression, we are interested in measureing the probability
+a certain occurance is in a group. In our case, this corresoponds to if
+a certain piece is composed by a certain composer. Linear regression is
+not a good application in this case, as it gives probabilities that re
+not in 0 to 1. Logistic regression uses
 
 \chapter{}\label{section-4}
 
