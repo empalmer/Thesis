@@ -4,6 +4,12 @@ library(tree)
 library(randomForest)
 library(e1071)
 library(ggplot2)
+library(GGally)
+library(ISLR)
+library(boot)
+library(glmnet)
+library(caret)
+library(plotmo)
 
 # get all data
 mendelssohn <- c(felix,fanny)
@@ -16,7 +22,7 @@ composer <- c(rep("bach",length(bach)),rep("mendelssohn",length(mendelssohn)))
 
 # Compute feature: mel ints
 mel_intsb <- map(bach,mel_ints,"piano") # each 
-mel_intsf <- map(mendelssohn,mel_ints,"V")
+mel_intsf <- map(mendelssohn,mel_ints,"piece")
 
 #compute feature: harm ints
 
@@ -25,7 +31,7 @@ harm_intm <- map(mendelssohn, freq_harm_ints)
 
 # Compute feature: connsonance
 cons_b <- map(bach,consonances,"piano")
-cons_m <- map(mendelssohn,consonances,"V")
+cons_m <- map(mendelssohn,consonances,"piece")
 
 cons_perf <- c(map(cons_b,1),map(cons_m,1)) %>% unlist()
 cons_imp <- c(map(cons_b,2),map(cons_m,2)) %>% unlist()
@@ -51,16 +57,27 @@ sf_5 <- map(sf_freqs,5)%>% unlist
 sf_6 <- map(sf_freqs,6)%>% unlist
 sf_7 <- map(sf_freqs,7)%>% unlist
 
-# FEATURES!!! 
-
+#==============================================================
+#==============================================================
+# FEATURES create data frame
 features <- data.frame(composer,
                        cons_dis,cons_imp,cons_perf,
                        dens_mean,dens_sd,
                        sf_1,sf_2,sf_3,sf_4,sf_5,sf_6,sf_7)
 features2 <- features[,-c(4)]
-values <- sample(1:54,40)
-test <- features[-values,]
-train <- features[values,]
+#==============================================================
+# Look at pairs plots and correlations
+pairss <- ggpairs(features,aes(color = composer))
+pairss
+nocpair <- ggpairs(features)
+nocpair
+pairs2 <- pairs(features[,-1])
+pairs2
+
+cors <- cor(features[,-1])
+cors
+
+#==============================================================
 #==============================================================
 # Logistic regression
 #Warning messages:
@@ -69,15 +86,59 @@ train <- features[values,]
 glm.fit <- glm(composer ~ dens_mean, data = features, family = binomial,
                subset = values)
 summary(glm.fit)
-glm.probs <- predict(glm.fit, type = "response")
-glm.probs
+#==============================================================
+# LASSO logistic
 
-glm.probs <- predict(glm.fit,test,type = "response")
-glm.probs
-glm.pred <- rep("bach",14)
-glm.pred[glm.probs > .5] = "mendelssohn"
-table(glm.pred,test[,1])
-msclas_logistic <- 2/14
+x <- model.matrix(composer~.,features)[,-1]
+y <- features[,1] %>% unname() %>% as.character
+
+grid <- 10^(seq(10,-2,length = 100))
+lasso.mod <- glmnet(x,y,family = "binomial",alpha = 1, lambda = grid)
+
+train <- sample(1:nrow(x),nrow(x)/2)
+test <- as.matrix(x[-train,])
+y.test <- y[-train]
+y.train <- y[train] %>% unname () %>% as.character()
+
+lasso.mod <- glmnet(x[train,],y.train, family = "binomial" ,alpha= 1,
+                    lambda = grid, thresh = 1e-12)
+lasso.cv.out <- cv.glmnet(x, y,family = "binomial", alpha = 1)
+lasso.bestlam <- lasso.cv.out$lambda.min
+
+lasso.pred <- predict(lasso.mod, s = lasso.bestlam,
+                      newx = test, type = "response")
+lass <- rep("bach",length(y.test))
+lass[lasso.pred > .5] <- "mendelssohn"
+t <- table(lass,y.test)
+MSE_lasso <- (t[1,2]+t[2,1])/sum(t)
+MSE_lasso
+
+plot(lasso.mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")
+plot_glmnet(lasso.mod, xvar = "lambda",xlim = c(-5,0))
+
+#==============================================================
+# 5 fold CV for logistic
+set.seed(1)
+fold <- rep(1:5, each = ceiling(nrow(features)/5))
+fold <- sample(fold, nrow(features))
+features2 <- features
+features$fold <- fold
+
+MSE_i <- rep(NA, 5)
+for(i in 1:5){
+  d_i <- which(features$fold != i)
+  d_im <- which(features$fold == i)
+  m_l <- glm.fit <- glm(composer ~ dens_mean,
+                        data = features, family = binomial,
+                        subset = d_i)
+  pred_i <- predict(m_l,features[d_im,], type = "response")
+  glm.pred <- rep("bach",length(d_im))
+  glm.pred[pred_i > .5] = "mendelssohn"
+  t <-table(glm.pred,features[d_im,1])
+  MSE_i[i] <- (t[1,2]+t[2,1])/sum(t)
+}
+logistic_MSE_k <- mean(MSE_i)
+logistic_MSE_k
 
 #==============================================================
 ### LDA
@@ -86,7 +147,26 @@ plot(lda.fit)
 lda.pred <- predict(lda.fit,test)
 lda.class <- lda.pred$class
 table(lda.class,test$composer)
-msclas_lda <- 0
+
+## 5 fold CV
+fold <- rep(1:5, each = ceiling(nrow(features)/5))
+fold <- sample(fold, nrow(features))
+features$fold <- fold
+
+MSE_i <- rep(NA, 5)
+for(i in 1:5){
+  d_i <- which(features$fold != i)
+  d_im <- which(features$fold == i)
+  m_l <- lda(composer ~ dens_mean,
+                        data = features,
+                        subset = d_i)
+  pred_i <- predict(m_l,features[d_im,], type = "response")
+  lda.class <- pred_i$class
+  t <-table(lda.class,features[d_im,1])
+  MSE_i[i] <- (t[1,2]+t[2,1])/sum(t)
+}
+lda_MSE_k <- mean(MSE_i)
+lda_MSE_k
 
 
 #==============================================================
@@ -98,9 +178,22 @@ qda.fit
 qda.class <- predict(qda.fit, test)
 table(qda.class$class,test[,1])
 
-msclas_qda <- 1/14
+### QDA 5-fold CV
+for(i in 1:5){
+  d_i <- which(features$fold != i)
+  d_im <- which(features$fold == i)
+  m_l <- qda(composer ~ dens_mean,
+                        data = features,
+                        subset = d_i)
+  pred_i <- predict(m_l,features[d_im,], type = "response")
+  t <-table(pred_i$class,features[d_im,1])
+  MSE_i[i] <- (t[1,2]+t[2,1])/sum(t)
+}
+qda_MSE_k <- mean(MSE_i)
+qda_MSE_k
+
 #==============================================================
-## KNN
+## KNN with k = 2
 
 a <- train[,-1]
 b <- test[,-1]
@@ -108,7 +201,20 @@ c <- train[,1]
 
 knn.pred <- knn(a,b,c,k=2)
 table(knn.pred,test[,1])
-msclas_knn <- 1/14
+
+## KNN 5-fold CV 
+for(i in 1:5){
+  d_i <- which(features$fold != i)
+  d_im <- which(features$fold == i)
+  a_i <- features[d_i,-1]
+  b_i <- features[d_im,-1]
+  c_i <- features[d_i,1]
+  m_l <- knn(a_i,b_i,c_i,k = 2)
+  t <-table(m_l,features[d_im,1])
+  MSE_i[i] <- (t[1,2]+t[2,1])/sum(t)
+}
+knn_MSE_k <- mean(MSE_i)
+knn_MSE_k
 
 #==============================================================
 ## Decision trees 
@@ -149,6 +255,12 @@ mis_class_svm <- 1/14
 PCA <- prcomp(features[,-1], scale = T)
 biplot(pr.out,scale = 0)
 
+d <- data.frame(PC = 1:12,
+                PVE = PCA$sdev^2 / sum(PCA$sdev^2))
+ggplot(d, aes(x = PC, y = PVE)) +
+  geom_line() + 
+  geom_point()
+
 
 
 #==============================================================
@@ -159,14 +271,22 @@ km2 <- kmeans(features[,-1],2, nstart = 20)
 d <- data.frame(PC1 = PCA$x[, 1],
                 PC2 = PCA$x[, 2],
                 cluster = as.factor(km2$cluster),
-                compower = features[,1])
+                composer = features[,1])
 
 ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
   geom_point() +
   geom_text(aes(label = composer), vjust = 2)
 
+x <- PCA$x
+km_pca2 <- kmeans(x,2,nstart = 20)
+d <- data.frame(PC1 = PCA$x[, 1],
+                PC2 = PCA$x[, 2],
+                cluster = as.factor(km_pca2$cluster),
+                composer = features[,1])
 
-
+ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
+  geom_point() +
+  geom_text(aes(label = composer), vjust = 2)
 
 
 

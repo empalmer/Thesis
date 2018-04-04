@@ -17,7 +17,7 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   data <- data[-grep("^!|\\*", data)] #removes extra text and info
   measures <- grep("=",data, value = F) # measures in .krn start wtih = 1
   val_list_notes <- data[-measures]
-  if(data[1] != "=1-"){measures <- c(0,measures)}
+  if(!grepl("=1-",data[1])){measures <- c(0,measures)}
   measure_numbers <- 0:(length(measures)) # how many measures there are
   measure_column <- vector() # make a vector of which row each is in.
   for(i in 2:length(measures)){
@@ -44,10 +44,10 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
                           measure_column)
   for(i in 2:(max_notes+1)){
     ri <- stringr::str_extract(piece[,i],"[0-9]{1,2}(\\.*)") # rhythem value
-    rin <- add_r.n(ri) # rhythem name
+    #rin <- add_r.n(ri) # rhythem name
     notei <- stringr::str_extract(piece[,i],"[A-z]{1,2}.*")
     notei_nv <- add_n.v_n.n(notei)
-    spline_df <- cbind(spline_df,ri,rin,notei,notei_nv)
+    spline_df <- cbind(spline_df,ri,notei,notei_nv)
   }
   spline_df
 } 
@@ -78,8 +78,8 @@ piece_df <- function(v,insts){
     }
     max_notes <- (ncol(Ai)-3)/5
     for(k in 1:max_notes){
-      if(first){cols <- c("key","meter","measure","r.v","r.n","n.o","n.n","n.v")}
-      if(!first){cols <- c("r.v","r.n","n.o","n.n","n.v")}
+      if(first){cols <- c("key","meter","measure","r.v","n.o","n.n")}
+      if(!first){cols <- c("r.v","n.o","n.n")}
       c_i <- vector()
       for(j in 1:length(cols)){
         c_i[j] <- paste(insts[i],"_",cols[j],k)

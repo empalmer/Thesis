@@ -79,7 +79,7 @@ n.v_n.n <- function(note){
     v <- note
     val <- NA
   }
-  r <- c(v,val)
+  r <- v
   return(r)
 }
 #==============================================================
@@ -93,12 +93,13 @@ n.v_n.n <- function(note){
 #' 
 
 add_n.v_n.n <- function(notes){
-  df <- data.frame(colnames(c("n.n","n.v")))
+  #df <- data.frame(colnames(c("n.n","n.v")))
+  v <- vector()
   for(i in 1:length(notes)){
-    df[i,1] <- n.v_n.n(notes[i])[1] 
-    df[i,2] <- n.v_n.n(notes[i])[2] 
+    v[i] <- n.v_n.n(notes[i])
+    #df[i,2] <- n.v_n.n(notes[i])[2] 
   }
-  df
+  v
 }  
 
 

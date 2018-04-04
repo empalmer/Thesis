@@ -76,7 +76,8 @@ MusicXML on its own is not conducive to converting into a data frame as represen
 </score-partwise> 
 ```  
 
-We then need to convert into a format more easily readable into R. The Kern Score music format is much more easily readable. The below picture shows how a basic piece of music corresponds to a .krn file. 
+We then need to convert into a format more easily readable into R. The Kern Score music format is much more easily readable. It has clearly expressed time signature, bar, beat and musical voicing informations [@mearns2010](mearns)
+ The below picture shows how a basic piece of music corresponds to a .krn file. 
 
 ![Shows how basic kern files correspond to sheet music](images/krnmusic.png)
 
@@ -104,6 +105,15 @@ Once we have .krn files to represent each piece we use regular expressions to ex
 A lot of data included in the .krn files are not necessary. For example, we assume that whether or not a note has a step up or stem down offers no help in classifying composer style, so this information is removed when converting to an R data frame. 
 
 Inspired by the .krn file type, each row of the data frame contains one time base value. For a given piece, the time base represents the shortest note duration value. For example, if the shortest note a piece contained was a sixteenth note, the time base would be 16. Each measure then would contain 16 rows. This results in many rows of NA for certain instruments, when a note is still being voiced, but it is not the instance of the note being attacked. 
+
+## rules of counterpoint?
+First species: 
+Note against note: both parts contain notes of same duration.
+Begin and end on a perfect consonance (PC). Consonant intervals only between the voices.
+No parallel perfect consonances.
+From one PC to another PC, proceed in contrary or oblique motion.
+From a PC to an IC, proceed in any motion. From an IC to a PC, proceed in contrary or oblique motion.
+From IC to IC, proceed in any motion.
 
 ## About the functions - MuseR
 
