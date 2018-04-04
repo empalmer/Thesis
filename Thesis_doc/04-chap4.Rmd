@@ -1,6 +1,5 @@
-# 
-
-## Feature Selection
+# EDA and Feature Selection
 
 
- Next they computed the entropy of the probability of occurrence of ways of thinking about chords; chords are the same no matter what scale degree they are on, and distinguishing chords differently. Next the entropy was calculated given the probability of each pitch in the score. Entropy was calculated by $-\sum_{i = 1}^{N}p_i\log{p_i}$ where $p_i$ is the probability of occurrence, and $N$ is the total number.Next they the average number of active voices at one time. This represents the voice density of the piece. Then for every interval, the duration of that interval was divided by the total duration of all intervals. Next the total duration of parallel thirds, fourths, and sixths divided by the total duration of all intervals was measured. Finally a measure of suspensions was found. (Backer)
+
+ 

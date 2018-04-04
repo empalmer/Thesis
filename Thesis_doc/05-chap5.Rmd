@@ -86,10 +86,6 @@ The Naive Bayes classifier is often used for musical classification as it is goo
 
 The idea of separating Hyperplanes is essential to Support Vector Machines (SVM)
 
-Linear discriminant analysis: Using 
-
-GDA
-
 
 
 
