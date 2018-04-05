@@ -3,7 +3,7 @@
 
 To the best of my knowledge, there is currently no package of R that has been built to analyze sheet music. There are existing packages (such as tuneR) that examine audio formats of music. The intention of this thesis was to create a package, museR, that takes sheet music in the proper form (musicXML or .krn) and does all of the analysis using R. 
 
-## Reading in data
+#### Reading in data
 
 MuseR is equipped to take in data in the .krn format. The functions for this are `kern2df()` and `piece_df()` These are most usefully in the form of individual splines. This allows for naming the columns according to instrument. If the following piece is represented in .krn format by 
 
@@ -32,6 +32,10 @@ Similarly the `connsonance()` function outputs the proportion of consonant (perf
 
 #### Density
 
+The `beat_density()` function analysis the average and standard devaition of density of each measure in the piece. It is called "beat" density as it only accounts for the instance a note starts. For example if a measure consisted of a single whole note it would be only counted once even though it is voiced the entire measure. 
+
+In the above example, the first measure would have a beat density of 4, and the second measure woudl have a beat density of 2. 
+
 #### Major_minor
 
 For most musical analysis, the key of the piece is important in determining chords, etc. The key is based on the key signature, which is always given in a .krn file. Kern files from CCARH have the key of the piece given, but scanned files do not. 
@@ -39,6 +43,8 @@ For kern files from CCARH, `Major_minor()` extracts the key given by the .krn fi
 (I think I should add some weighting for the first and last note in the future.. )
 
 #### Prop scale degree
+
+Once the key of a piece is determined, the proportion of each scale degree is calculated. The scale degrees consist of : Tonic, Supertonic, Mediant, Submediant, Dominant, Submediant, and Leading tone. In the example above, if we assume the key is F major, the tonic has a tonic scale degree proportion of 2/6, the mediant 1/6, dominant, 1/6, submediant, 2/6.
 
 #### Chords
 
@@ -52,9 +58,8 @@ The possible triad chords are all defined by the intervals between each note. Fo
 
 A similar process is done for seventh chords. 
 
-#### Resolutions
-
 #### Par thirds, par fourths, par sixths
 
+The standardized count of parallel thirds, fourths and sixths are counted, as these are common type of counterpoint movement. 
 
-
+#### To be continued...

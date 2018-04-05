@@ -189,101 +189,102 @@ Second paragraph of abstract starts here.
 \section{Introduction:}\label{introduction}
 
 In the digital age data sets are everywhere. Billions of new data are
-generated daily, in banking, social media, and in other scientific
-studies. These data can be in numerous forms. With the availability of
-the internet and social media data, text classification has become an
-interesting form of data. While text classification problems are very
+generated daily, in banking, social media, and in scientific studies.
+These data can be in numerous forms. With the availability of the
+internet and social media data, text classification has become an
+promising form of data. While text classification problems are very
 frequent, similar methods that instead classify music have not been
-explored as much.
+explored as much. The purpose of this thesis is to use musical
+stylometry to quantify the difference between the compositions of the
+siblings Felix and Fanny Mendelssohn.
 
-Thinking of text or music as data has its own challenges. On its own
-text as data does not contain anything immediately analyzable. The same
-goes for music as data. First, features must be created that can be
-extracted for every text. These can include features such as word
-frequency, length etc. Analysis of text using machine learning can find
-patterns, authors, or categories of text. Similar methods can in fact be
-used to classify music.
+Treating text or music as data has its own challenges. On its own text
+as data does not contain anything immediately analyzable. This also
+holds for music as data. First, analyzable features must identified that
+can be extracted for every text. These features can include word
+frequencies, length etc. Analysis of text using machine learning can
+find patterns, authors, or categories of text. Similar methods can also
+be used to classify music.
 
-The essential part of either text or music classification is feature
-selection. Unlike in a data set of numerical or categorical values, text
-and music must first go through a processing stage where features of
-interest can be extracted before any models can be fit.
+Feature extraction is an essential part in text or music classification.
+Unlike in a data set of numerical or categorical values, text and music
+must first go through a processing stage where features of interest can
+be extracted before any models can be fit.
 
-For music, the interest is in building a model that uses the extracted
-features would be able to correctly classify a likely composer for that
-piece of music. For musically trained humans, this might be an easy
-task. Some are able to either by listening to a recording, or looking at
-sheet music, automatically distinguish a piece composed by Bach or
-Mozart. This becomes more difficult when composers are contemporaries.
-Mozart and Saliery might be distinguishable to a scholar or music fan,
-but it might be harder. Harder still is when a piece of music has a
-disputed composer history. These examples exist throughout music
-history, most notably in the Renaissance. Music classification has
-attempted to assign composers to pieces to be disputed to be Josquin Des
-Prez.
+For music, the extracted features are used to build a model that can
+correctly classify a likely composer for that piece of music. Studies
+that examine the style of a type of music or composer are known as
+musical stylometry studies. For musically trained humans, this might be
+an easy task. Some are able to automatically distinguish a piece
+composed by Bach or Mozart either by listening to a recording, or
+looking at sheet music. This becomes more difficult when composers are
+contemporaries. Mozart and Salieri might be distinguishable to a more
+discerning listener or scholar, but it might be harder. Harder still is
+when the identity of the composer piece of music is disputed. Examples
+of such disputed authorship exist throughout music history, most notably
+in the Renaissance.
 
 In both text and music classification, we must create features that can
-be calculated that would give some signal to indicate some unconscious
-tendency of the composer that would make them distinguishable.
-
-There have been numerous other applications of machine learning to
-music. Previous studies have used machine learning trained on a
-composer's music to have the computer learn the style and and compose a
-piece in a similar style. (Papadopoulos \& Wiggins, n.d.)
+be calculated that would give some signal to indicate some conscious or
+unconscious tendency of the composer that would make them
+distinguishable.
 
 \section{Brief history of text
 classification}\label{brief-history-of-text-classification}
 
 One of the earliest instances of text classification for determining
-authorship was on the Federalist papers.(Mosteller \& Wallace, 1964).
+authorship was on the Federalist Papers.(Mosteller \& Wallace, 1964).
 The famous Federalist Papers were written under the pen name `Publius'.
-There are several disputed papers attributed to James Madison or
-Alexander Hamilton. The authors never admitted authorship, as some of
-the writings were contradictory to their later political platforms.
-(Adair, 1944) Historians have often examined the papers using styles of
-previously known writings of Madison and Hamilton. Their analysis is
-often partially based on the content of the letters, for example the
-existence of citing English history is a trait more common to Hamilton.
-(Ford \& Bourne, 1897)
+There are several of these disputed papers attributed to James Madison
+or Alexander Hamilton. The authors never admitted authorship, as some of
+the writings were contradictory to their later political positions
+(Adair, 1944). Prior to quantitatice analysis, historians had often
+examined the papers using styles of previously known writings of Madison
+and Hamilton. Their analysis was often partially based on the content of
+the letters, for example the existence of citing English history is a
+trait more common to Hamilton. (Ford \& Bourne, 1897)
 
-In contrast, using the frequency of words such as and `by', `from', and
-`upon', Mosteller and Wallace trained the writings on a set of known
-writings by each author. These unconscious indicators were able to
-differentiate between the two writers, and when a model was trained, the
-model was able to identify the likely author of the disputed paper.
+In contrast, Mosteller and Wallace (1964) used the frequency of words
+such as and `by', `from', and `upon', to train the writings on a set of
+known writings by each author. These unconscious indicators were able to
+differentiate between the two writers, and the model was able to
+identify the likely author of the disputed paper.
 
 \section{Feature selection}\label{feature-selection}
 
-Text analysis, such as in the federalist papers, is read one word after
-another. Information in piece of music, however, is read in a variety of
-ways. It can be read left to right note by note, but it can also be read
-vertically as the harmony, or the notes played together. Also in a piece
-with several instruments, the above happens at the same time for each
-instrument. There are also aspects that take place over large sections,
-such as phrasing, or cadencial patterns. There are rules of counterpoint
-that are followed throughout the entire piece. Thus we need to find
-features that can be measured for each piece, or perhaps each measure or
-instrument, that can describe a certain piece of music. Then we must
-decide which features are those of rules and practices of classical
-music, and where the creativeness and individuality of a composer
-happens. As there are many different aspects of a piece, melodic
-changes, harmonies, etc, we can end up with many features to describe
-one piece. As in this instance when we only have \textasciitilde{}150
-total pieces, we can have that \(p > n\). We thus need to figure a
-clever way to decrease our predictor space. This can happen in choosing
-what features we want to use to model, or using a dimension reduction
-technique such as PCA.
+Text analysis, such as in the Federalist Papers, is read one word after
+another. Information in a piece of music, however, is read in a variety
+of ways. It can be read left to right note by note, but it can also be
+read vertically as the harmony, or the notes played together. Also in a
+piece with several instruments, the above happens at the same time for
+each instrument. There are also aspects that take place over large
+sections, such as phrasing, or cadencial patterns. There are rules of
+counterpoint that are followed throughout the entire piece. Thus we need
+to find features that can be measured for each piece, or perhaps each
+measure or instrument, that can describe a certain piece of music. Then
+we must decide which features are those of rules and practices of
+classical music, and where the creativeness and individuality of a
+composer happens. As there are many different aspects of a piece,
+melodic changes, harmonies, etc, we can end up with many features to
+describe one piece. As in the case to be described in this thesis, we
+only have \textasciitilde{}150 total pieces, it is possible that the
+number of predictors \((p)\) can be greater than the sample size \((n)\)
+(I wrote this when I though there would be a lot more features\ldots{})
+We thus need to figure a clever way to decrease our predictor space.
+This can happen in choosing what features we want to use to model, or
+using a dimension reduction technique such as PCA.
 
 Most of the musical stylometry papers have focused on composers in the
 Renaissance, Baroque, and Classical eras. The Mendelssohns were
 composing in the Romantic period. This choice might be because composers
 in earlier eras followed rules of counterpoint more exactly, or perhaps
 had less ``expressive'' allowances for their composing, thus making
-features easier, although this is just speculation. There are also more
-pieces with doubtful authorship in those eras. In addition Computer
-Assisted Research in the Humanities (CCARH) has a large corpus of
-encoded music from these times. As will be described later, having music
-in a format immediately conducive to analysis is a huge time saver.
+features easier. There are also more pieces with doubtful authorship in
+those eras. In addition Computer Assisted Research in the Humanities
+(CCARH) has a large corpus of encoded music from these times. As will be
+described later, the initial step of coding the music is the most time
+consuming, having music in a format immediately conducive to analysis is
+very helpful.
 
 \section{A Very Short Introduction to Music
 Theory}\label{a-very-short-introduction-to-music-theory}
@@ -293,30 +294,32 @@ distance between notes (also known as an interval) depends on how many
 half steps occur between two notes. There are 12 half steps in the
 western scale. Melodic intervals are defined as the number of half steps
 between two adjacent notes. Harmonic intervals are defined as the number
-of half steps between notes played at the same time. Cadences are a type
-of chord progression, usually occurring at the end of a phrase and
-especially at the end of a piece. Musical notes are in the set
-\(\text{note} \in \{A,B,C,D,E,F,G\}\) The value of a note can be changed
-up or down a half step, by adding a sharp or flat. There are 12 unique
-note value per octave. The key signature of the piece indicates how many
-sharps or flats are normal for the piece. A pieces key can be major or
-minor. The possible keys are in the set \(\text{key} \in {}\). Intervals
-and chords can be either dissonant or consonant. Consonant intervals
-sound nice to our ears, whereas dissonant intervals add a sense of
-tension or unease, which is used to shape the feel of the music. In
-addition chords and intervals can be minor or major. Minor intervals
-feel ``sad'', whereas major intervals feel ``happy''.
+of half steps between notes played at the same time. Chords occur when
+there are more than two notes being played simultaneously. The type of
+chord is also determined by the harmonic intervals it contains. Cadences
+are a type of chord progression, usually occurring at the end of a
+phrase and especially at the end of a piece. Musical notes are in the
+set \(\text{note} \in \{A,B,C,D,E,F,G\}\). The value of a note can be
+changed up or down a half step, by adding a sharp or flat. The key
+signature of the piece indicates how many sharps or flats are normal for
+the piece. A piece's key can be major or minor, although the piece can
+internally modulate between the two. Intervals and chords can be either
+dissonant or consonant. Consonant intervals sound nice to our ears,
+whereas dissonant intervals add a sense of tension or unease, which is
+used to shape the feel of the music. In addition chords and intervals
+can be minor or major. Minor intervals feel ``sad'', whereas major
+intervals feel ``happy''.
 
 For classical music there are some ``rules'' that most composers follow
-to some extent or another. These were followed more strictly in the
-Baroque era than the Romantic era. These rules are known as
-counterpoint. First species counter point is a type of counterpoint. One
-rule is that there are no parallel perfect consonances. Perfect
-consonances are octaves, fourths and fifths. Parrallel indicates that
-they occur one after another. Another rule is that from one perfect
-consonance to another, the must proceed in contrary or oblique motion.
-This means that if a fourth interval wants to move to a fifth, that the
-direction of increase must be opposite.
+to some extent. These were followed more strictly in the Baroque era
+than the Romantic era. These rules are known as counterpoint. First
+species counterpoint is a type of counterpoint. One rule is that there
+are no parallel perfect consonances. Perfect consonances are octaves,
+fourths and fifths. Parallel indicates that they occur one after
+another. Another rule is that from one perfect consonance to another,
+the must proceed in contrary or oblique motion. This means that if a
+fourth interval changes to a fifth, that the direction of increase must
+be opposite.
 
 \section{Musical features}\label{musical-features}
 
@@ -327,9 +330,9 @@ for a given instrument, the entire piece, or each measure. Also
 windowing techniques can be used where a ``window'' is created over a
 given number of bars or notes, and shifts across the whole piece For
 each window, a feature is recorded. These can be overlapping windows by
-creating an ``offset'' of a number of beats or notes. This produces more
-data, as instead of one feature for each piece, there is a feature for
-each window.
+creating an ``offset'' of a number of beats or notes. Windowing produces
+more data, as instead of one feature for each piece, there is a feature
+for each window.
 
 Musical features are often thought about as either high level, or low
 level. While the exact definition of each often varies, low level is
@@ -339,45 +342,42 @@ progressions, etc. High level features are often what music experts use
 in their analysis, whereas low-level features are more easily done with
 computer analysis.
 
-Especially in research regarding gene expression and text
-categorization, data sets have enormous numbers of variables. We use
-``feature'' and ``variable'' interchangeably, with the exception when
-features are created from variables, and the distinction will be made in
-that case. (Guyon \& Elisseeff, 2003). There are several variable
-selection algorithms that select the ``important'' variables. If we
-included every variable that we extract from the piece, our model would
-very likely be over fit.
+Especially in research regarding text categorization, data sets have
+enormous numbers of variables. We use ``feature'' and ``variable''
+interchangeably, with the exception when features are created from
+variables, and the distinction will be made in that case (Guyon \&
+Elisseeff, 2003). There are several variable selection algorithms that
+select the ``important'' variables. If we included every variable that
+we extract from the piece, our model would very likely be over fit.
 
-The start of feature selection is domain knowledge. Thanks to John Cox
-in the music department for suggesting a list of valuable features.
-These will be described in Chapter 2.
+The first stage of feature selection is domain knowledge. These will be
+described in Chapter 2.
 
-\subsection{Background on Variable and Feature
+\section{Background on Variable and Feature
 Selection}\label{background-on-variable-and-feature-selection}
 
-Often, especially in musical research, before analysis is done, numerous
-features are extracted from the music without knowing a prior i which
-ones will be helpful in identifying a composers' style. Thus we have to
-choose which features we want to use in our model. There are many ways
-to do this. There are existing variable selection algorithms that can
-help with this process.
+Before analysis is done, numerous features are often extracted from the
+music without knowing a priori which ones will be helpful in identifying
+a composers' style. Thus we have to choose which features we want to use
+in our model. There are many ways to do this and existing variable
+selection algorithms that can help with this process.
 
 Several variable selection algorithms include variable ranking. Variable
 ranking uses a score function to assign a score to each possible
 variable. It is a computationally efficient method and is robust against
-over fitting as it introduces bias but may result in less variance. It
-is tempting to only include variables that have a high score. However,
-this possibly leads to redundancy. In addition, variables that are not
+overfitting as it introduces bias but may result in less variance. It is
+tempting to only include variables that have a high score. However, this
+possibly leads to redundancy. In addition, variables that are not
 important by themselves can have a significant performance improvement
 when considered with other variables. Popular variable ranking methods
 for classification are single variable classifiers and information
 theoretic ranking criteria.
 
-Single variable classifiers rank the variable according to their
+Single variable classifiers rank the variable according to its
 individual predictive power. The predictive power can be measured in
 terms or error rate, or using the false positive or false negative rate
 (fpr, fnr). This classifier cannot distinguish variables that perfectly
-seperate the data.
+separate the data.
 
 After knowing the ranking of a variable we then select which variables
 will be useful for our model. This is known as variable subset
@@ -400,20 +400,25 @@ results in feature creation; using the recorded variables to create new
 features to fit the model on. Dimensional reduction techniques include
 include clustering and PCA/SVD. The two goals of these feature creations
 are that we can achieve a good reconstruction of the data. The second is
-that we can be most efficient in making our predictors. The first is an
+that we can be successful in making our predictors. The first is an
 unsupervised problem. The second is supervised.
 
 \section{Previous research.}\label{previous-research.}
 
-Research on musical stylometry focuses on two areas, data in the form of
-audio, and data in the form of sheet music. Our analysis uses data in
-the form of sheet music. To predict a composer, a training data set of
-pieces of known composer is needed. Then that model can be fit to a
-testing data set to predict composer. If that shows good predictions,
-that model can be used on the pieces of unknown authorship. Musical
-stylometry can be used disputed authorship, but also to detect
-distinguishing musical styles of composer, even if there are no disputed
-pieces.
+There have been numerous other applications of machine learning to
+music. Previous studies have used machine learning trained on a
+composer's music to have the computer learn the style and and compose a
+piece in a similar style. (Papadopoulos \& Wiggins, n.d.)
+
+Research on musical stylometry has focused on two types of data: audio,
+and sheet music. This analysis uses data in the form of sheet music. To
+predict a composer, a training data set of pieces of known composer is
+needed. Then that model can be fit to a testing data set to predict
+composer. If that shows good predictions, that model can be used on the
+pieces of unknown authorship. Musical stylometry can be used to resolve
+disputed authorship, but also to detect distinguishing musical styles of
+composer, even if there are no disputed pieces. This can also be used to
+look at the development of a composers musical style over time.
 
 To my knowledge there are currently four studies that have looked at the
 question of classifying composers by extracting features from sheet
@@ -424,15 +429,15 @@ Research Project (``The josquin research project,'' n.d.). In addition
 there are a number of pieces of disputed authorship that have been
 attributed to him.
 
-Work by Brinkman et al. (Brinkman, Shanahan, \& Sapp, n.d.) use machine
-learning approaches to evaluate attribution of compositions by Josquin
-des Prez. They first compared music of Josquin and JS Bach's four part
-chorals. Many listeners could easily distinguish these two composers as
-they were separated by two centuries. They also compared Josquin to
-composers closer in time and style: Ockeghem and Du Fay, who are only
-one or two generations separated. These composers could likely be
-differentiated by experienced listeners of Renaissance music. Finally
-they compared Josquin's contemporaries, de Orto, and La Rue.
+Work by Brinkman et al. (Brinkman, Shanahan, \& Sapp, n.d.) uses machine
+learning to evaluate attribution of compositions by Josquin des Prez.
+They first compared music of Josquin and JS Bach's four part chorales.
+Many listeners could easily distinguish these two composers as they were
+separated by two centuries. They also compared Josquin to composers
+closer in time and style: Ockeghem and Du Fay, who are only one or two
+generations separated. These composers could likely be differentiated by
+experienced listeners of Renaissance music. Finally they compared
+Josquin's contemporaries de Orto and La Rue.
 
 Work by Speiser and Gupta (Speiser \& Gupta, n.d.) also analyzed Josquin
 and his contemporaries to attempt to classify unknown works. They had
@@ -440,14 +445,11 @@ and his contemporaries to attempt to classify unknown works. They had
 possibly attributed to Josquin.
 
 Work by Backer et. al.(2005) looked at differences in style between J.S.
-Bach, Telemann, and Handel,Haydn and Mozart and then examined a disputed
+Bach, Telemann, Handel,Haydn and Mozart and then examined a disputed
 piece: BWV 534 which is believed to be composed by J.S. Bach, J.L.
-Krebs, or W.F. Bach (J.S. Bach's son). (Backer \& Kranenburg, 2005) The
-above techniques were used to analyze the music of Bach, Handel,
-Telemann, Mozart and Haydn and compare J.S. Bach, W.F. Bach and J.L
-Krebs in an attempt to classify BWV 534.(Backer \& Kranenburg, 2005)
+Krebs, or W.F. Bach (J.S. Bach's son). (Backer \& Kranenburg, 2005)
 
-Means et. al. (Mearns, Tidhar, \& Dixon, 2010) did an exploration of
+Mearns et. al. (Mearns, Tidhar, \& Dixon, 2010) did an exploration of
 extracting high level musical features on J.S. Bach, Buxtehude, Ruggero,
 Vivaldi, Monteverdi, Corelli, and Frescobaldi. The idea was that they
 all adhered to the laws of counterpoint, and that they possibly still
@@ -455,28 +457,28 @@ had distinct uses of the counterpoint. They used pieces across
 instrumental genres with the idea that stylistic counterpoint would
 remain constant across com positional type.
 
-\subsection{Previous choices of features in
+\section{Previous choices of features in
 applications}\label{previous-choices-of-features-in-applications}
 
-Deciding on and extracting features of music is the first step to
+Deciding on and extracting features of music is the first step of
 analysis. Depending on the characteristics of the composer and time
 period different features would be useful. Often features are extracted
 en masse and then work is done later to determine which features are
 important or useful in identifying style.
 
 In addition to what kinds of features, there is also the question of the
-scale at where those features take place. They can be features for a
-given instrument, the entire piece, or each measure. Also windowing
-techniques can be used where a ``window'' is created over a given number
-of bars or notes, and moves through the whole piece. For each window, a
-feature is recorded. These can be overlapping windows by creating an
-``offset'' of a number of beats or notes. This produces more data, as
-instead of one feature for each piece, there is a feature for each
-window, and there an be tens of windows in each piece.
+scale of those features. They can be features for a given instrument,
+the entire piece, or each measure. Also windowing techniques can be used
+where a ``window'' is created over a given number of bars or notes, and
+moves through the whole piece. For each window, a feature is recorded.
+These can be overlapping windows by creating an ``offset'' of a number
+of beats or notes. This produces more data, as instead of one feature
+for each piece, there is a feature for each window, and there an be tens
+of windows in each piece.
 
 Common types of features used before in music analysis are: Frequencies
-or fractions of notes, chords, etc are a common low-level feature. These
-include the fraction of the score that consisted of dissonant
+or fractions of notes, chords, etc. are a common low-level feature.
+These include the fraction of the score that consisted of dissonant
 sororities, as well as the fraction of bars that begin with a dissonant
 sonority. Other features include the type of intervals or consonances
 present in a piece: perfect consonance, imperfect consonances, and
@@ -505,11 +507,11 @@ divided by the total duration of all intervals. Next the total duration
 of parallel thirds, fourths, and sixths divided by the total duration of
 all intervals was measured. Finally a measure of suspensions was found.
 
-Brinkman et.al (Brinkman et al., n.d.) used both high level and low
-level features. The high level features were 9-8 suspensions, oblique
-motion, contrary motion, similar motion and parallel motion. The low
-level features were average melodic entropy, normalized pairwise
-variability index (?), and note-to-note transition probabilities.
+Brinkman et.al (Brinkman et al., n.d.) used both high-level and
+low-level features. The high level features were 9-8 suspensions,
+oblique motion, contrary motion, similar motion and parallel motion. The
+low level features were average melodic entropy, normalized pairwise
+variability index, and note-to-note transition probabilities.
 
 Speiser and Gupta (Speiser \& Gupta, n.d.) extracted four categories of
 features, frequencies of individual notes, frequencies of pairwise
@@ -538,20 +540,17 @@ addition of a passing or neighbor note in another voice or voices. For
 this reason, only notes that occur at strong metrical positions, in this
 case on each beat of the bar, are used for contrapuntal evaluation. This
 is a relatively simplistic method of choosing structurally important
-notes. In Bach, for example,the majority of voice progressions take
-place at a closer level. The counterpoint method is therefore given
-successive `on the beat' note groups from which it generates a series of
-features based on contrapuntal principles applied to voice pairs within
-note groups. The features include the nature of the approach to a
-perfect consonance, whether a dissonance is properly prepared
-(i.e.~preceded by a consonant interval containing the same note which
-then becomes dissonant), whether a dissonance is correctly resolved
-downwards by step, details of parallel intervals, and the overall
-distribution of contrapuntal movements (oblique / contrary / similar /
-parallel / other). The final data set also contains the total vertical
-interval content as previously described. (reword)
+notes. In Bach, for example, the majority of voice progressions take
+place at a closer level. The features for counterpoint method include
+the nature of the approach to a perfect consonance, whether a dissonance
+is properly prepared (i.e.~preceded by a consonant interval containing
+the same note which then becomes dissonant), whether a dissonance is
+correctly resolved downwards by step, details of parallel intervals, and
+the overall distribution of contrapuntal movements (oblique / contrary /
+similar / parallel / other). A feature for total vertical interval count
+is also used.
 
-\subsection{Previous modeling in
+\section{Previous modeling in
 applications}\label{previous-modeling-in-applications}
 
 Most of the previous research has needed to do some kind of feature
@@ -605,8 +604,8 @@ the time. (Mearns et al., 2010)
 
 \section{Fanny and Felix Mendelssohn}\label{fanny-and-felix-mendelssohn}
 
-Most musical stylometry analysis focuses on music of the Renaissance and
-Baroque period, as there are more questions of authorship in that
+Most musical stylometry analysis has focused on music of the Renaissance
+and Baroque period, as there are more questions of authorship in that
 period. As the Romantic period is much more modern in comparison, there
 are many more surviving records of original manuscripts that include the
 composer.
@@ -615,34 +614,34 @@ Felix Mendelssohn, often considered a prodigy akin to Mozart, was a
 prolific composer. Before he was fourteen years old, he had already
 written over 100 compositions.
 
-His lesser known sister Fanny Hensel was also a composer of incredible
-skill. The two were very close, for many years training and studying
-together. In their early education living in Berlin, Felix and Fanny
-received the same musical education, first piano lessons by Madam Bigot,
-a famous pianist esteemed by Haydn and Beethoven. Beginning in 1818,
-Carl Friedrich Zelter, a somewhat removed student of Bach and the most
-influential Berlin musician of the time, began to teach them both
-composition. In addition to music, the children were tutored by some of
-the finest scholars in Berlin in subjects such as languages, history,
-and drawing. Goethe himself claimed that Fanny was ``as gifted as
-Felix''. (Tillard, 1996)
+His lesser known sister Fanny Hensel née Mendelssohn was also a composer
+of incredible skill. The two were very close, for many years training
+and studying together. In their early education living in Berlin, Felix
+and Fanny received the same musical education, first piano lessons by
+Madam Bigot, a famous pianist esteemed by Haydn and Beethoven. Beginning
+in 1818, Carl Friedrich Zelter, a somewhat removed student of Bach and
+the most influential Berlin musician of the time, began to teach them
+both composition. In addition to music, the children were tutored by
+some of the finest scholars in Berlin in subjects such as languages,
+history, and drawing. Goethe himself claimed that Fanny was ``as gifted
+as Felix'' (Tillard, 1996).
 
 As Fanny grew up, her father started implying that she should focus her
 energy on the domestic sphere of her life. While the fact that she never
 became a world famous composer and performer is often attributed to the
 gender politics of her time, it is also likely due to her high class.
-(Reich, 1991) Especially considering the anti-semetic feelings of the
+(Reich, 1991) Especially considering the anti-Semitic feelings of the
 time, and since the family had recently converted from Judaism to
 Christianity, the family did not want any other unusual characteristic
 such as a professional female composer to set them further apart from
 ``polite'' society.
 
-Most of Fanny's available work are Lieder, short pieces of voice
+Most of Fanny's available work are lieder, short pieces of voice
 accompanied by piano. They were accepted at the time as the more
 feminine, domestic compositions, acceptable for women to compose. Her
-brother moved on to more elaborate compositions such as operas and
-orchestral concertos. Her father pressured Fanny to remain composing
-Lider. (Todd, 2003)
+brother moved on to more elaborate compositions such as operas,
+orchestral concertos and symphonies. Her father pressured Fanny to
+remain composing Lieder. (Todd, 2003)
 \begin{quote}
 ``Music will perhaps become his profession, while for you it can and
 must only be an ornament, never the root of your being and doing. We may
@@ -656,7 +655,7 @@ ornament to your sex.''
 Throughout their lives, Felix and Fanny maintained contact through
 letters until Fanny's death in 1847 and Felix's death shortly
 thereafter. These letters contain many instances of Felix asking for
-advice on his compositions (include quote)
+advice on his compositions.
 
 Unlike Felix who conducted and performed piano and organ in some of
 Berlin's most esteemed concert halls, most of Fanny's performances were
@@ -664,15 +663,17 @@ private, only performed in small circles of her friends and family at
 intimate parties. Similarly, although she was quite a prolific composer,
 under recommendation of her father Abraham Mendelssohn, and to a lesser
 extent Felix, Fanny did not publish her work until later in her life. In
-1846 after her fathers death and though her brothers disapproval, she
+1846 after her father's death and though her brother disapproved, she
 published her first collection of Lieder. Many of Fanny's unpublished
-notebooks are in private collections and are inaccessible
+notebooks are in private collections and are inaccessible for study.
 
-However, it is widely speculated (known?) that some of Fanny's work was
-published under her brother's name, Especially three pieces each in his
-Op 8 and 9 lieder. Famously, when Felix met the Queen of England, she
-sang Felix's Lied ``Italien'', and Felix had to admit that in fact, it
-was his sister that had written it. In a letter to Felix, Fanny admits:
+However, it is widely speculated that some of Fanny's work was published
+under her brother's name, especially three pieces each in his Op 8 and 9
+lieder.
+
+Famously, when Felix met the Queen of England, she sang Felix's lied
+``Italien'', and Felix had to admit that in fact, it was his sister that
+had written it. In a letter to Felix, Fanny admits:
 \begin{quote}
 ``I have just recently received a letter from Vienna, which contained
 basically nothing but the question of whether ``On Wings of Song'' was
@@ -682,36 +683,58 @@ themselves to separate the wheat from the chaff.'' (Mace, 2013)
 \end{quote}
 As she never made such a list, we are left to wonder if there are any
 other pieces of hers that have been published under her brothers name
-and reputation.
-
-This project will use Lieder of Fanny and Felix Mendelssohn. Most of the
-available work by Fanny are Lieder, of which Felix also composed a great
+and reputation. It is suspected that most of Fanny's friends and family
+would have known at the time that she had composed the pieces published
+by felix. An article written in the Harmonicon in 1830, an influential
+music journal in London, mentioned that all the lied in Felix's
+collection were not written about him:
+\begin{quote}
+" I possess twelve published songs under Mr.~Mendelssohn's name, which
+he wrote when a boy of fifteen. One of these appears in the musical
+annual, ``Apollo's Gift,'' and deserves all the praise you have in your
+review bestowed on it. But the whole of the twelve are not by him: three
+of the best are by his sister, a young lady of great talents and
+accomplishments. I cannot refrain from mentioning Miss Mendelsshon's
+name in connexion with these songs, more particularly when I see so many
+ladies without one atom of genius, coming forward to the public with
+their musical crudities, and, because these are printed, holding up
+their heads as if they were finished musicians. Miss Mendelssohn is a
+first-rate piano-forte player, of which you may form some idea when I
+mention that she can express the varied beauties of Beethoven's
+extraordinary trio in Bb, beginning She has not the wild energy of her
+brother; but possesses sufficient power and nerve for the accurate
+performance of Beethoven's music. She is no superficial musician; she
+has studied the science deeply, and writes with the freedom of a master.
+Her songs are distinguished by tenderness, warmth, and originality: some
+which I heard were exquisite.``(Ayrton, 1830)
+\end{quote}
+This project will use lieder of Fanny and Felix Mendelssohn. Most of the
+available work by Fanny are lieder, of which Felix also composed a great
 deal. We will see if there is a determinable difference in style of
 these siblings who grew up very close and received mostly the same
-musical education. We will then look at the (disputed?) Op 8 and 9.
-Additionally, using Lieder that have been decidedly written by Felix, we
-will see if any other of his earlier publications could have potentially
-been written by Fanny.
+musical education. All other previous composership studies cannot be
+adjusted for training and upbringing, so it might be challenging to
+detect a difference.
 
 \chapter{About the data and conversion
 process}\label{about-the-data-and-conversion-process}
 
 \section{Pieces used}\label{pieces-used}
 
-The majority of the pieces used in this paper were Lieder of Felix
+The majority of the pieces used in this paper were lieder of Felix
 Mendelssohn and Fanny Hensel. While both composers composed different
 types of music, the majority of available scores from Fanny Hensel were
-Lieder. Felix Mendelssohn composed many different styles of music,
+lieder. Felix Mendelssohn composed many different styles of music,
 orchestral, piano, etc. Fanny Hensel in contrast has an available
-existing corpus of mostly Lieder, although she did compose many works
+existing corpus of mostly lieder, although she did compose many works
 for solo piano and orchestra. Of Felix's music there were a total of 116
-pieces: Lieder of Op 8 (12 pieces), op 9 (12 pieces), op 19(6 pieces),
+pieces: lieder of Op 8 (12 pieces), op 9 (12 pieces), op 19(6 pieces),
 op 34 (6 pieces), op 47 (6 pieces), op 57 (6 pieces), op 71 (6 pieces),
-and 6 pieces of Lied without opus numbers, also 56 Lied without a
+and 6 pieces of lied without opus numbers, also 56 lied without a
 collection.
 
 Of Fanny's music, a total of 43 pieces were used: 23 lieder were used
-from her Lieder without Name collection, 10 from her wo kommst du her
+from her lieder without name collection, 10 from her Wo kommst du Her
 collection, and 10 from an unnamed collection.
 
 Data from JS Bach was also used. These data were available in Kern Score
@@ -961,7 +984,7 @@ tuneR) that examine audio formats of music. The intention of this thesis
 was to create a package, museR, that takes sheet music in the proper
 form (musicXML or .krn) and does all of the analysis using R.
 
-\section{Reading in data}\label{reading-in-data}
+\subsubsection{Reading in data}\label{reading-in-data}
 
 MuseR is equipped to take in data in the .krn format. The functions for
 this are \texttt{kern2df()} and \texttt{piece\_df()} These are most
@@ -998,6 +1021,15 @@ by calling \texttt{mel\_ints()}.
 
 \subsubsection{Density}\label{density}
 
+The \texttt{beat\_density()} function analysis the average and standard
+devaition of density of each measure in the piece. It is called ``beat''
+density as it only accounts for the instance a note starts. For example
+if a measure consisted of a single whole note it would be only counted
+once even though it is voiced the entire measure.
+
+In the above example, the first measure would have a beat density of 4,
+and the second measure woudl have a beat density of 2.
+
 \subsubsection{Major\_minor}\label{major_minor}
 
 For most musical analysis, the key of the piece is important in
@@ -1015,6 +1047,13 @@ it correctly classified x/48 of them. (I think I should add some
 weighting for the first and last note in the future.. )
 
 \subsubsection{Prop scale degree}\label{prop-scale-degree}
+
+Once the key of a piece is determined, the proportion of each scale
+degree is calculated. The scale degrees consist of : Tonic, Supertonic,
+Mediant, Submediant, Dominant, Submediant, and Leading tone. In the
+example above, if we assume the key is F major, the tonic has a tonic
+scale degree proportion of 2/6, the mediant 1/6, dominant, 1/6,
+submediant, 2/6.
 
 \subsubsection{Chords}\label{chords}
 
@@ -1042,19 +1081,120 @@ above the base, which is 3 half steps, then 5 half steps.
 
 A similar process is done for seventh chords.
 
-\subsubsection{Resolutions}\label{resolutions}
-
 \subsubsection{Par thirds, par fourths, par
 sixths}\label{par-thirds-par-fourths-par-sixths}
 
+The standardized count of parallel thirds, fourths and sixths are
+counted, as these are common type of counterpoint movement.
+
+\subsubsection{To be continued\ldots{}}\label{to-be-continued}
+
 \chapter{EDA and Feature Selection}\label{eda-and-feature-selection}
 
+\section{Bach and Mendelssohns}\label{bach-and-mendelssohns}
+
+Explanation\ldots{} We can see that the density features show higher
+seperation. As we can see from the above, we have that there are
+stronger correlations between sf\_3 and sf\_6, which correspond to scale
+degree 3 and 6.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# PCA }
+
+\NormalTok{PCA <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(features[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{scale =}\NormalTok{ T)}
+\KeywordTok{biplot}\NormalTok{(PCA,}\DataTypeTok{scale =} \DecValTok{0}\NormalTok{)}
+
+\NormalTok{d <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{PC =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{,}
+                \DataTypeTok{PVE =}\NormalTok{ PCA}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(PCA}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ PC, }\DataTypeTok{y =}\NormalTok{ PVE)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+From the biplot, it appears that the first PC encodes information about
+the consonant scale degrees (3 and 6)
+
+There is no clear elbow from the skree plot.
+
+\section{Felix and Fanny}\label{felix-and-fanny}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{composer_m <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"felix"}\NormalTok{,}\KeywordTok{length}\NormalTok{(felix)),}\KeywordTok{rep}\NormalTok{(}\StringTok{"fanny"}\NormalTok{,}\KeywordTok{length}\NormalTok{(fanny)))}
+
+\CommentTok{# Compute feature: mel ints}
+\CommentTok{#mel_intsb <- map(bach,mel_ints,"piano") # each }
+\CommentTok{#mel_intsf <- map(mendelssohn,mel_ints,"piece")}
+
+\CommentTok{#compute feature: harm ints}
+
+\CommentTok{#harm_intb <- map(bach, freq_harm_ints)}
+\CommentTok{#harm_intm <- map(mendelssohn, freq_harm_ints)}
+
+\CommentTok{# Compute feature: connsonance}
+\CommentTok{#cons_b <- map(bach,consonances,"piano")}
+\CommentTok{#cons_m <- map(mendelssohn,consonances,"piece")}
+
+\CommentTok{#cons_perf <- c(map(cons_b,1),map(cons_m,1)) %>% unlist()}
+\CommentTok{#cons_imp <- c(map(cons_b,2),map(cons_m,2)) %>% unlist()}
+\CommentTok{#cons_dis <- c(map(cons_b,3),map(cons_m,3)) %>% unlist()}
+
+\CommentTok{# Compute features: density}
+\NormalTok{dens_f <-}\StringTok{ }\KeywordTok{map}\NormalTok{(felix,beat_density)}
+\NormalTok{dens_h <-}\StringTok{ }\KeywordTok{map}\NormalTok{(fanny,beat_density) }\CommentTok{# mean then sd}
+
+\NormalTok{dens_mean <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{map}\NormalTok{(dens_f,}\DecValTok{1}\NormalTok{),}\KeywordTok{map}\NormalTok{(dens_h,}\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unlist}\NormalTok{()}
+\NormalTok{dens_sd <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{map}\NormalTok{(dens_f,}\DecValTok{2}\NormalTok{),}\KeywordTok{map}\NormalTok{(dens_h,}\DecValTok{2}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unlist}\NormalTok{()}
+
+\CommentTok{# Compute features: scale degree freq}
+
+\NormalTok{sf_f <-}\StringTok{ }\KeywordTok{map}\NormalTok{(felix,scale_degree_freq) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unname}\NormalTok{()}
+\NormalTok{sf_h <-}\StringTok{ }\KeywordTok{map}\NormalTok{(fanny,scale_degree_freq)}
+\NormalTok{sf_freqs <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{map}\NormalTok{(sf_f,}\DecValTok{3}\NormalTok{) ,}\KeywordTok{map}\NormalTok{(sf_h,}\DecValTok{3}\NormalTok{))}
+\NormalTok{sf_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{1}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
+\NormalTok{sf_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
+\NormalTok{sf_}\DecValTok{3}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{3}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
+\NormalTok{sf_}\DecValTok{4}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{4}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
+\NormalTok{sf_}\DecValTok{5}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{5}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
+\NormalTok{sf_}\DecValTok{6}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{6}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
+\NormalTok{sf_}\DecValTok{7}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{7}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
+
+\CommentTok{#==============================================================}
+\CommentTok{#==============================================================}
+\CommentTok{# FEATURES create data frame}
+\NormalTok{featuresm <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(composer_m,}
+\NormalTok{                       dens_mean,dens_sd,}
+\NormalTok{                       sf_}\DecValTok{1}\NormalTok{,sf_}\DecValTok{2}\NormalTok{,sf_}\DecValTok{3}\NormalTok{,sf_}\DecValTok{4}\NormalTok{,sf_}\DecValTok{5}\NormalTok{,sf_}\DecValTok{6}\NormalTok{,sf_}\DecValTok{7}\NormalTok{)}
+\CommentTok{#==============================================================}
+\end{Highlighting}
+\end{Shaded}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pairs_m <-}\StringTok{ }\KeywordTok{ggpairs}\NormalTok{(featuresm,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ composer_m))}
+\NormalTok{pairs_m}
+\end{Highlighting}
+\end{Shaded}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# PCA }
+
+\NormalTok{PCAm <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(featuresm[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{scale =}\NormalTok{ T)}
+\KeywordTok{biplot}\NormalTok{(PCA,}\DataTypeTok{scale =} \DecValTok{0}\NormalTok{)}
+
+\NormalTok{d <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{PC =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{,}
+                \DataTypeTok{PVE =}\NormalTok{ PCA}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(PCA}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ PC, }\DataTypeTok{y =}\NormalTok{ PVE)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 \chapter{Models}\label{models}
 
 For classification, we are interested in using a set of features to
 predict the response, or composer. We denote the features \(X\), where
 \(X_i\) is a certain feature. Each song has a composer or response,
-known or unknown, denoted by \(Y\). The \(i^{th}\) song has features
+known or unknown, denoted by \(Y\). In our case we have
+\(Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}\), or more generally,
+\(y \in \{\text{list of composers}\}\),The \(i^{th}\) song has features
 \(x_i\) and composer \(Y_i\), where \(x_i\) is a vector of \(p\)
 features. The composer takes values in a discrete set, which is the
 possible composers. Thus we can always divide the input space into a
@@ -1066,8 +1206,8 @@ Classification}\label{linear-methods-for-classification}
 \subsection{Linear Regression:}\label{linear-regression}
 
 A naive model for classification is linear regression. If our predictor
-space \(G\) has \(K\) classes, we code the response \(K\) different
-indicator responses \(Y_k\) where \(Y_k = 1\) if \(G = k\) and 0
+space \(Y\) has \(K\) classes, we code the response \(K\) different
+indicator responses \(y_k\) where \(y_k = 1\) if \(Y = k\) and 0
 otherwise. We can use the resulting \(k\) hyperplanes as a decision
 boundary. We find the coefficients for the line by finding coefficients
 \(\beta\) to minimize the residual sum of squares.
@@ -1166,11 +1306,19 @@ log-likelihood for \(N\) observations is:
 \(p_k(x_i;\theta) = P(Y = k|X = x_i;\theta)\) We then choose \(\theta\)
 to maximize this function.
 
+\section{Naive Bayes}\label{naive-bayes}
+
+The Naive Bayes classifier is often used for musical classification as
+it is good when the dimension \(p\) of the features space is large,
+makeing density estimation unattractive*. It makes the (naive)
+assumption that all the features are independent for a given class
+\(i\). \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]
+
 \section{K- nearest - neighbor}\label{k--nearest---neighbor}
 
 Another method for classification is k-nearest neighbor methods. It uses
 observations in the training set closest to \(x\) to form \(\hat{Y}\),
-the outputs. We often use Euclidean distance as a metric for closness,
+the outputs. We often use Euclidean distance as a metric for closeness,
 although other methods exist. It is defined as
 \[ \hat{Y}(x) = \frac{1}{k}\sum_{x_i \in N_k(x)}y_i\]
 
@@ -1179,46 +1327,52 @@ the training set. This is equivalent to taking the average of \(k\)
 observations with \(x_i\) closest to \(x\). This gives a predicted class
 of taking the mode of the \(k\) nearest neighbors.
 
-Initial approaches often use linear methods for classification. If we
-are trying to predict the author,
-\(y \in \{\text{Fanny},\text{Felix}\}\), or more generally,
-\(y \in \{\text{list of composers}\}\), given features or predictors
-\(\textbf{X} = \{X_{i \cdots X_p}\), we can divide the input space* into
-a collection of regions labeled according to the classification.
-
-We can create linear decision boundaries for \(K\) classes where the
-fitted linear model for the \(k\)th indicator response is
-\(\hat{f}_k(x) = \hat{\beta}_{k0} + \hat{\beta}_{k}^Tx.\) The decision
-boundary between classes \(i\) and \(j\) is the set of points for which
-\(\hat{f}_i(x) = \hat{f}_j(x)\), or in other words, the set
-\(\{x : (\hat{\beta}_{i0} - \hat{\beta}_{j0}) + (\hat{\beta}_{i} - \hat{\beta}_j)^Tx = 0 \}\)
-which defines a hyperplane.
-
-Similarly quadratic decision boundaries can be used when we increase our
-predictor space to include squares and higher polynomials of \(X\). We
-then fit linear decision boundaries, which then map down to quadratic
-functions in the original space.*.
-
-Logistic regression is often used when the response is binary. It models
-the probability that \(Y\) belongs to either category. We use the
-logistic function
-\(p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}\) To
-calculate estimates of \(\hat{\beta_0},\hat{\beta_1}\), we use maximum
-likelihood. To do this, we choose \(\hat{\beta_0},\hat{\beta_1}\) to
-maximize the function \ldots{}
-
-The Naive Bayes classifier is often used for musical classification as
-it is good when the dimension \(p\) of the features space is large,
-makeing density estimation unattractive*. It makes the (naive)
-assumption that all the features are independent for a given class
-\(i\). \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]
-
-The idea of separating Hyperplanes is essential to Support Vector
-Machines (SVM)
-
 \chapter{Model Fit}\label{model-fit}
 
-\section{Model Fit}\label{model-fit-1}
+\section{Model Fit -
+Bach/Mendelssohn}\label{model-fit---bachmendelssohn}
+
+\subsubsection{Lasso logistic}\label{lasso-logistic}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x <-}\StringTok{ }\KeywordTok{model.matrix}\NormalTok{(composer}\OperatorTok{~}\NormalTok{.,features)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{y <-}\StringTok{ }\NormalTok{features[,}\DecValTok{1}\NormalTok{] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unname}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\NormalTok{as.character}
+
+\NormalTok{grid <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{,}\DataTypeTok{length =} \DecValTok{100}\NormalTok{))}
+\NormalTok{lasso.mod <-}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x,y,}\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{,}\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lambda =}\NormalTok{ grid)}
+
+\NormalTok{train <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(x),}\KeywordTok{nrow}\NormalTok{(x)}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{test <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(x[}\OperatorTok{-}\NormalTok{train,])}
+\NormalTok{y.test <-}\StringTok{ }\NormalTok{y[}\OperatorTok{-}\NormalTok{train]}
+\NormalTok{y.train <-}\StringTok{ }\NormalTok{y[train] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unname}\NormalTok{ () }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.character}\NormalTok{()}
+
+\NormalTok{lasso.mod <-}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x[train,],y.train, }\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{ ,}\DataTypeTok{alpha=} \DecValTok{1}\NormalTok{,}
+                    \DataTypeTok{lambda =}\NormalTok{ grid, }\DataTypeTok{thresh =} \FloatTok{1e-12}\NormalTok{)}
+\NormalTok{lasso.cv.out <-}\StringTok{ }\KeywordTok{cv.glmnet}\NormalTok{(x, y,}\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{, }\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{)}
+\NormalTok{lasso.bestlam <-}\StringTok{ }\NormalTok{lasso.cv.out}\OperatorTok{$}\NormalTok{lambda.min}
+
+\NormalTok{lasso.pred <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(lasso.mod, }\DataTypeTok{s =}\NormalTok{ lasso.bestlam,}
+                      \DataTypeTok{newx =}\NormalTok{ test, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{lass <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\StringTok{"bach"}\NormalTok{,}\KeywordTok{length}\NormalTok{(y.test))}
+\NormalTok{lass[lasso.pred }\OperatorTok{>}\StringTok{ }\NormalTok{.}\DecValTok{5}\NormalTok{] <-}\StringTok{ "mendelssohn"}
+\NormalTok{t <-}\StringTok{ }\KeywordTok{table}\NormalTok{(lass,y.test)}
+\NormalTok{MSE_lasso <-}\StringTok{ }\NormalTok{(t[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{+}\NormalTok{t[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(t)}
+\NormalTok{MSE_lasso}
+
+\CommentTok{#plot(lasso.mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")}
+\KeywordTok{plot_glmnet}\NormalTok{(lasso.mod, }\DataTypeTok{xvar =} \StringTok{"lambda"}\NormalTok{,}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\subsubsection{K means}\label{k-means}
+
+K means fitted on the principle components
+
+\section{Model Fit - Felix/Fanny}\label{model-fit---felixfanny}
+
+Unsurprisingly, since there is so few data and features currently, there
+are not many results.
+
+\subsubsection{Lasso Logistic}\label{lasso-logistic-1}
 
 \chapter{Discussion}\label{discussion}
 
@@ -1257,6 +1411,20 @@ chunk tag) to help with readibility and/or setup.
 \ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(thesisdown))}
 \NormalTok{  devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"ismayc/thesisdown"}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(thesisdown)}
+\KeywordTok{library}\NormalTok{(MASS)}
+\KeywordTok{library}\NormalTok{(class)}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(tree)}
+\KeywordTok{library}\NormalTok{(randomForest)}
+\KeywordTok{library}\NormalTok{(e1071)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(GGally)}
+\KeywordTok{library}\NormalTok{(ISLR)}
+\KeywordTok{library}\NormalTok{(boot)}
+\KeywordTok{library}\NormalTok{(glmnet)}
+\KeywordTok{library}\NormalTok{(caret)}
+\KeywordTok{library}\NormalTok{(plotmo)}
+\KeywordTok{library}\NormalTok{(museR)}
 \end{Highlighting}
 \end{Shaded}
 \textbf{In Chapter \ref{ref-labels}:}
@@ -1278,6 +1446,9 @@ chunk tag) to help with readibility and/or setup.
 Adair, D. (1944). The authorship of the disputed federalist papers.
 \emph{The William and Mary Quarterly: A Magazine of Early American
 History,} 98--122.
+
+\hypertarget{ref-harmonicon}{}
+Ayrton, W. (1830). \emph{The harmonicon} (Vol. 8). W. Pinnock.
 
 \hypertarget{ref-backer2005}{}
 Backer, E., \& Kranenburg, P. van. (2005). On musical stylometry---a

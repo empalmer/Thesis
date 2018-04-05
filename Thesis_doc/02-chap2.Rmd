@@ -2,9 +2,9 @@
 
 ## Pieces used
 
-The majority of the pieces used in this paper were Lieder of Felix Mendelssohn and Fanny Hensel. While both composers composed different types of music, the majority of available scores from Fanny Hensel were Lieder. Felix Mendelssohn composed many different styles of music, orchestral, piano, etc. Fanny Hensel in contrast has an available existing corpus of mostly Lieder, although she did compose many works for solo piano and orchestra.  Of Felix's music there were a total of 116 pieces: Lieder of Op 8 (12 pieces), op 9 (12 pieces), op 19(6 pieces), op 34 (6 pieces), op 47 (6 pieces), op 57 (6 pieces), op 71 (6 pieces), and 6 pieces of Lied without opus numbers, also 56 Lied without a collection. 
+The majority of the pieces used in this paper were lieder of Felix Mendelssohn and Fanny Hensel. While both composers composed different types of music, the majority of available scores from Fanny Hensel were lieder. Felix Mendelssohn composed many different styles of music, orchestral, piano, etc. Fanny Hensel in contrast has an available existing corpus of mostly lieder, although she did compose many works for solo piano and orchestra.  Of Felix's music there were a total of 116 pieces: lieder of Op 8 (12 pieces), op 9 (12 pieces), op 19(6 pieces), op 34 (6 pieces), op 47 (6 pieces), op 57 (6 pieces), op 71 (6 pieces), and 6 pieces of lied without opus numbers, also 56 lied without a collection. 
 
-Of Fanny's music, a total of 43 pieces were used: 23 lieder were used from her Lieder without Name collection, 10 from her wo kommst du her collection, and 10 from an unnamed collection.
+Of Fanny's music, a total of 43 pieces were used: 23 lieder were used from her lieder without name collection, 10 from her Wo kommst du Her collection, and 10 from an unnamed collection.
 
 Data from JS Bach was also used. These data were available in Kern Score format. from the Center for Computer Assisted Research in the Humanities. (CCARH). The pieces used were from the Well Tempered Clavier (WTC). These were written as training pieces and each book contains 24 pieces with one in every possible key. These were chosen as the data were more easily accessible (no scanning was required), and they were a similar format as the Mendelssohn songs, written as for solo piano(or harpsichord).
 

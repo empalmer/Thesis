@@ -6,7 +6,7 @@
 #'
 
 beat_density <- function(piece){
-  note_cols <- grep("measure|n\\.v", colnames(piece) ,value = T)
+  note_cols <- grep("measure|n\\.n", colnames(piece) ,value = T)
   note_df <- piece[,note_cols]
   onote_df <- note_df[,-1]
   d <- vector()

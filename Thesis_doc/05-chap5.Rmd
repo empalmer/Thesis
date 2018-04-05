@@ -1,10 +1,10 @@
 # Models
 
-For classification, we are interested in using a set of features to predict the response, or composer. We denote the features $X$, where $X_i$ is a certain feature. Each song has a composer or response, known or unknown, denoted by $Y$. The $i^{th}$ song has features $x_i$ and composer $Y_i$, where $x_i$ is a vector of $p$ features. The composer takes values in a discrete set, which is the possible composers. Thus we can always divide the input space into a collection of regions labeled according to the classificatoin 
+For classification, we are interested in using a set of features to predict the response, or composer. We denote the features $X$, where $X_i$ is a certain feature. Each song has a composer or response, known or unknown, denoted by $Y$. In our case we have $Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}$, or more generally, $y \in \{\text{list of composers}\}$,The $i^{th}$ song has features $x_i$ and composer $Y_i$, where $x_i$ is a vector of $p$ features. The composer takes values in a discrete set, which is the possible composers. Thus we can always divide the input space into a collection of regions labeled according to the classificatoin 
 
 ## Linear Methods for Classification 
 ### Linear Regression: 
-A naive model for classification is linear regression. If our predictor space $G$ has $K$ classes, we code the response $K$ different indicator responses $Y_k$ where $Y_k = 1$ if $G = k$ and 0 otherwise. We can use the resulting $k$ hyperplanes as a decision boundary. We  find the coefficients for the line by finding coefficients $\beta$ to minimize the residual sum of squares. 
+A naive model for classification is linear regression. If our predictor space $Y$ has $K$ classes, we code the response $K$ different indicator responses $y_k$ where $y_k = 1$ if $Y = k$ and 0 otherwise. We can use the resulting $k$ hyperplanes as a decision boundary. We  find the coefficients for the line by finding coefficients $\beta$ to minimize the residual sum of squares. 
 
 $$ RSS(\beta) = (\textbf{y} - \textbf{X}\beta)^T(\textbf{y} - \textbf{X}\beta) $$
 
@@ -62,10 +62,12 @@ $$ \ell(\theta) = \sum_{i = 1}^N \log p_{g_i}(x_i;\theta)$$
 where $p_k(x_i;\theta) = P(Y = k|X = x_i;\theta)$
 We then choose $\theta$ to maximize this function.
 
+## Naive Bayes
+The Naive Bayes classifier is often used for musical classification as it is good when the dimension $p$ of the features space is large, makeing density estimation unattractive*. It makes the (naive) assumption that all the features are independent for a given class $i$. $$f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)$$
 
 ## K- nearest - neighbor
 
-Another method for classification is k-nearest neighbor methods. It uses observations in the training set closest to $x$ to form $\hat{Y}$, the outputs. We often use Euclidean distance as a metric for closness, although other methods exist. It is defined as
+Another method for classification is k-nearest neighbor methods. It uses observations in the training set closest to $x$ to form $\hat{Y}$, the outputs. We often use Euclidean distance as a metric for closeness, although other methods exist. It is defined as
 $$ \hat{Y}(x) = \frac{1}{k}\sum_{x_i \in N_k(x)}y_i$$
 
 where $N_k(x)$ is the $k$ closest points, or neighbors, $x_i$ in the training set. This is equivalent to taking the average of $k$ observations with $x_i$ closest to $x$. This gives a predicted class of taking the mode of the $k$ nearest neighbors.
@@ -73,18 +75,8 @@ where $N_k(x)$ is the $k$ closest points, or neighbors, $x_i$ in the training se
 
 
 
-Initial approaches often use linear methods for classification. If we are trying to predict the author, $y \in \{\text{Fanny},\text{Felix}\}$, or more generally, $y \in \{\text{list of composers}\}$, given features or predictors $\textbf{X} = \{X_{i \cdots X_p}$, we can divide the input space* into a collection of regions labeled according to the classification. 
-
-We can create linear decision boundaries for $K$ classes where the fitted linear model for the $k$th indicator response is $\hat{f}_k(x) = \hat{\beta}_{k0} + \hat{\beta}_{k}^Tx.$ The decision boundary between classes $i$ and $j$ is the set of points for which $\hat{f}_i(x) = \hat{f}_j(x)$, or in other words, the set $\{x : (\hat{\beta}_{i0} - \hat{\beta}_{j0}) + (\hat{\beta}_{i} - \hat{\beta}_j)^Tx = 0 \}$ which defines a hyperplane. 
-
-Similarly quadratic decision boundaries can be used when we increase our predictor space to include squares and higher polynomials of $X$. We then fit linear decision boundaries, which then map down to quadratic functions in the original space.*. 
-
-Logistic regression is often used when the response is binary. It models the probability that $Y$ belongs to either category. We use the logistic function $p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$ To calculate estimates of $\hat{\beta_0},\hat{\beta_1}$, we use maximum likelihood. To do this, we choose $\hat{\beta_0},\hat{\beta_1}$ to maximize the function ... 
-
-The Naive Bayes classifier is often used for musical classification as it is good when the dimension $p$ of the features space is large, makeing density estimation unattractive*. It makes the (naive) assumption that all the features are independent for a given class $i$. $$f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)$$
 
 
-The idea of separating Hyperplanes is essential to Support Vector Machines (SVM)
 
 
 

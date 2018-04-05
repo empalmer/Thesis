@@ -76,7 +76,7 @@ piece_df <- function(v,insts){
     if(!first){
       piece <- cbind(piece,Ai[,-(1:3)])
     }
-    max_notes <- (ncol(Ai)-3)/5
+    max_notes <- (ncol(Ai)-3)/3
     for(k in 1:max_notes){
       if(first){cols <- c("key","meter","measure","r.v","n.o","n.n")}
       if(!first){cols <- c("r.v","n.o","n.n")}
