@@ -1,10 +1,9 @@
 #  
 ## Introduction: 
 
-In the digital age data sets are everywhere. Billions of new data are generated daily, in banking, social media, and in scientific studies. These data can be in numerous forms. With the availability of the internet and social media data, text classification has become an promising form of data. While text classification problems are very frequent, similar methods that instead classify music have not been explored as much. 
-The purpose of this thesis is to use musical stylometry to quantify the difference between the compositions of the siblings Felix and Fanny Mendelssohn.
+In the digital age data sets are everywhere. Billions of new data are generated daily, in banking, social media, and in scientific studies. These data can be in numerous forms. With the availability of the internet and social media data, text classification has become an promising form of data analysis. While text classification problems are very frequent, similar methods that classify music have not been explored as commonly explored. The purpose of this thesis is to use musical stylometry to quantify the difference between the compositions of the siblings Felix and Fanny Mendelssohn.
 
-Treating text or music as data has its own challenges. On its own text as data does not contain anything immediately analyzable. This also holds for music as data. First, analyzable features must identified that can be extracted for every text. These features can include word frequencies, length etc.  Analysis of text using machine learning can find patterns, authors, or categories of text. Similar methods can also be used to classify music. 
+Treating text or music as data has challenges. Neither contains anything immediately analyzable. This also holds for music as data. First, analyzable features must identified that can be extracted for every text. These features can include word frequencies, length etc.  Analysis of text using machine learning can find patterns, authors, or categories of text. Similar methods can also be used to classify music. 
 
 Feature extraction is an essential part in text or music classification. Unlike in a data set of numerical or categorical values, text and music must first go through a processing stage where features of interest can be extracted before any models can be fit. 
 

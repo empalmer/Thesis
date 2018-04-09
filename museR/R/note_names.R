@@ -79,7 +79,7 @@ n.v_n.n <- function(note){
     v <- note
     val <- NA
   }
-  r <- v
+  r <- c(v,val)
   return(r)
 }
 #==============================================================
@@ -92,14 +92,15 @@ n.v_n.n <- function(note){
 #' @return data frame with orriginal piece and NNV and DNV
 #' 
 
-add_n.v_n.n <- function(notes){
-  #df <- data.frame(colnames(c("n.n","n.v")))
-  v <- vector()
-  for(i in 1:length(notes)){
-    v[i] <- n.v_n.n(notes[i])
-    #df[i,2] <- n.v_n.n(notes[i])[2] 
+add_n.v_n.n <- function(notez){
+  df <- data.frame(colnames(c("n.n","n.v")))
+  #v <- vector()
+  for(i in 1:length(notez)){
+    #v[i] <- n.v_n.n(notes[i])
+    df[i,1] <- n.v_n.n(notez[i])[1]
+    df[i,2] <- n.v_n.n(notez[i])[2] 
   }
-  v
+  df
 }  
 
 

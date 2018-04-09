@@ -12,72 +12,75 @@ library(caret)
 library(plotmo)
 
 # get all data
-mendelssohn <- c(felix,fanny)
-data <- c(bach,felix,fanny)
-name<- c(rep("bach",length(bach)),rep("felix",length(felix)),
-         rep("fanny",length(fanny)))
-data <- rbind(name,data)                
 
-composer <- c(rep("bach",length(bach)),rep("mendelssohn",length(mendelssohn)))
+fdata <- c(felix,fanny)
+fcomposer<- c(rep("felix",length(felix)),
+         rep("fanny",length(fanny)))
+fdata <- rbind(fcomposer,fdata)                
 
 # Compute feature: mel ints
-mel_intsb <- map(bach,mel_ints,"piano") # each 
-mel_intsm <- map(mendelssohn,mel_ints,"piece")
+mel_intsh <- map(fanny,mel_ints,"piece") # each 
+mel_intsf <- map(felix,mel_ints,"piece")
 
 #compute feature: length
-lenb <- map(bach,length_measures)
-lenm <- map(mendelssohn,length_measures)
-len <- c(lenb,lenm) %>% unlist()
+lenh <- map(fanny,length_measures)
+lenf <- map(felix,length_measures)
+flen <- c(lenh,lenf) %>% unlist()
 #compute feature: harm ints
 #harm_intb <- map(bach, freq_harm_ints)
 #harm_intm <- map(mendelssohn, freq_harm_ints)
 
 # Compute feature: connsonance
-cons_b <- map(bach,consonances,"piano")
-cons_m <- map(mendelssohn,consonances,"piece")
+cons_h <- map(fanny,consonances,"piece")
+cons_f <- map(felix,consonances,"piece")
 
-cons_perf <- c(map(cons_b,1),map(cons_m,1)) %>% unlist()
-cons_imp <- c(map(cons_b,2),map(cons_m,2)) %>% unlist()
-cons_dis <- c(map(cons_b,3),map(cons_m,3)) %>% unlist()
+fcons_perf <- c(map(cons_h,1),map(cons_f,1)) %>% unlist()
+fcons_imp <- c(map(cons_h,2),map(cons_f,2)) %>% unlist()
+fcons_dis <- c(map(cons_h,3),map(cons_f,3)) %>% unlist()
 
 # Compute features: density
-dens_b <- map(bach,beat_density)
-dens_m <- map(mendelssohn,beat_density) # mean then sd
+dens_h <- map(fanny,beat_density)
+dens_f <- map(felix,beat_density) # mean then sd
 
-dens_mean <- c(map(dens_b,1),map(dens_m,1)) %>% unlist()
-dens_sd <- c(map(dens_b,2),map(dens_m,2)) %>% unlist()
+fdens_mean <- c(map(dens_h,1),map(dens_f,1)) %>% unlist()
+fdens_sd <- c(map(dens_h,2),map(dens_f,2)) %>% unlist()
 
 # Compute features: scale degree freq
 
-sf_b <- map(bach,scale_degree_freq) %>% unname()
-sf_m <- map(mendelssohn,scale_degree_freq)
-sf_freqs <- c(map(sf_b,3) ,map(sf_m,3))
-sf_1 <- map(sf_freqs,1) %>% unlist
-sf_2 <- map(sf_freqs,2) %>% unlist
-sf_3 <- map(sf_freqs,3)%>% unlist
-sf_4 <- map(sf_freqs,4)%>% unlist
-sf_5 <- map(sf_freqs,5)%>% unlist
-sf_6 <- map(sf_freqs,6)%>% unlist
-sf_7 <- map(sf_freqs,7)%>% unlist
+sf_h <- map(fanny,scale_degree_freq) %>% unname()
+sf_f <- map(felix,scale_degree_freq)
+sf_freqs <- c(map(sf_h,3) ,map(sf_f,3))
+fsf_1 <- map(sf_freqs,1) %>% unlist
+fsf_2 <- map(sf_freqs,2) %>% unlist
+fsf_3 <- map(sf_freqs,3)%>% unlist
+fsf_4 <- map(sf_freqs,4)%>% unlist
+fsf_5 <- map(sf_freqs,5)%>% unlist
+fsf_6 <- map(sf_freqs,6)%>% unlist
+fsf_7 <- map(sf_freqs,7)%>% unlist
 
 #==============================================================
 #==============================================================
 # FEATURES create data frame
-features <- data.frame(composer,
-                       cons_dis,cons_imp,cons_perf,
-                       dens_mean,dens_sd,
-                       sf_1,sf_2,sf_3,sf_4,sf_5,sf_6,sf_7,len)
+ffeatures <- data.frame(fcomposer,
+                       fcons_dis,fcons_imp,fcons_perf,
+                       fdens_mean,fdens_sd,
+                       fsf_1,fsf_2,fsf_3,fsf_4,fsf_5,fsf_6,fsf_7,flen)
 #==============================================================
 # Look at pairs plots and correlations
-pairss <- ggpairs(features,aes(color = composer))
-pairss
-nocpair <- ggpairs(features)
-nocpair
-pairs2 <- pairs(features[,-1])
-pairs2
+fpairss <- ggpairs(ffeatures,aes(color = fcomposer))
+fpairss
 
-cors <- cor(features[,-1])
-cors
+#==============================================================
+# PCA 
+fPCA <- prcomp(ffeatures[,-1], scale = T)
+biplot(fPCA,scale = 0)
+
+d <- data.frame(PC = 1:13,
+                PVE = PCA$sdev^2 / sum(PCA$sdev^2))
+ggplot(d, aes(x = PC, y = PVE)) +
+  geom_line() + 
+  geom_point()
+
 
 #==============================================================
 #==============================================================
@@ -85,14 +88,14 @@ cors
 #Warning messages:
 #  1: glm.fit: algorithm did not converge 
 #2: glm.fit: fitted probabilities numerically 0 or 1 occurred 
-glm.fit <- glm(composer ~ dens_mean, data = features, family = binomial,
+glm.fit <- glm(fcomposer ~ ., data = ffeatures, family = binomial,
                subset = values)
 summary(glm.fit)
 #==============================================================
 # LASSO logistic
 
-x <- model.matrix(composer~.,features)[,-1]
-y <- features[,1] %>% unname() %>% as.character
+x <- model.matrix(fcomposer~.,ffeatures)[,-1]
+y <- ffeatures[,1] %>% unname() %>% as.character
 
 grid <- 10^(seq(10,-2,length = 100))
 lasso.mod <- glmnet(x,y,family = "binomial",alpha = 1, lambda = grid)
@@ -121,21 +124,20 @@ plot_glmnet(lasso.mod, xvar = "lambda",xlim = c(-5,0))
 #==============================================================
 # 5 fold CV for logistic
 set.seed(1)
-fold <- rep(1:5, each = ceiling(nrow(features)/5))
-fold <- sample(fold, nrow(features))
-features2 <- features
-features$fold <- fold
+fold <- rep(1:5, each = ceiling(nrow(ffeatures)/5))
+fold <- sample(fold, nrow(ffeatures))
+ffeatures$fold <- fold
 
 MSE_i <- rep(NA, 5)
 for(i in 1:5){
-  d_i <- which(features$fold != i)
-  d_im <- which(features$fold == i)
-  m_l <- glm.fit <- glm(composer ~ dens_mean,
-                        data = features, family = binomial,
+  d_i <- which(ffeatures$fold != i)
+  d_im <- which(ffeatures$fold == i)
+  m_l <- glm.fit <- glm(fcomposer ~ .,
+                        data = ffeatures, family = binomial,
                         subset = d_i)
   pred_i <- predict(m_l,features[d_im,], type = "response")
-  glm.pred <- rep("bach",length(d_im))
-  glm.pred[pred_i > .5] = "mendelssohn"
+  glm.pred <- rep("felix",length(d_im))
+  glm.pred[pred_i > .5] = "fanny"
   t <-table(glm.pred,features[d_im,1])
   MSE_i[i] <- (t[1,2]+t[2,1])/sum(t)
 }
@@ -144,30 +146,35 @@ logistic_MSE_k
 
 #==============================================================
 ### LDA
+xPC <- fPCA$x %>% as.data.frame
+PCAfit <- cbind(composer =ffeatures$fcomposer,xPC)
+
+test <- sample(1:40,10)
+train <- PCAfit[-test,]
 lda.fit <- lda(composer ~., data = train)
 plot(lda.fit)
 lda.pred <- predict(lda.fit,test)
 lda.class <- lda.pred$class
-table(lda.class,test$composer)
+table(lda.class,test$fcomposer)
 
 ## 5 fold CV
-fold <- rep(1:5, each = ceiling(nrow(features)/5))
-fold <- sample(fold, nrow(features))
-features$fold <- fold
+fold <- rep(1:5, each = ceiling(nrow(ffeatures)/5))
+fold <- sample(fold, nrow(ffeatures))
+ffeatures$fold <- fold
 
-MSE_i2 <- rep(NA, 5)
+MSE_i <- rep(NA, 5)
 for(i in 1:5){
-  d_i <- which(features$fold != i)
-  d_im <- which(features$fold == i)
-  m_l <- lda(composer ~ .,
-                        data = features,
-                        subset = d_i)
-  pred_i <- predict(m_l,features[d_im,], type = "response")
+  d_i <- which(ffeatures$fold != i)
+  d_im <- which(ffeatures$fold == i)
+  m_l <- lda(fcomposer ~ .,
+             data = ffeatures,
+             subset = d_i)
+  pred_i <- predict(m_l,ffeatures[d_im,], type = "response")
   lda.class <- pred_i$class
-  t <-table(lda.class,features[d_im,1])
+  t <-table(lda.class,ffeatures[d_im,1])
   MSE_i[i] <- (t[1,2]+t[2,1])/sum(t)
 }
-lda_MSE_k <- mean(MSE_i2)
+lda_MSE_k <- mean(MSE_i)
 lda_MSE_k
 
 
@@ -185,8 +192,8 @@ for(i in 1:5){
   d_i <- which(features$fold != i)
   d_im <- which(features$fold == i)
   m_l <- qda(composer ~ dens_mean,
-                        data = features,
-                        subset = d_i)
+             data = features,
+             subset = d_i)
   pred_i <- predict(m_l,features[d_im,], type = "response")
   t <-table(pred_i$class,features[d_im,1])
   MSE_i[i] <- (t[1,2]+t[2,1])/sum(t)
@@ -250,18 +257,7 @@ preds <- predict(bestmod,test[,-1])
 
 table(predict = preds, truth = test[,1])
 mis_class_svm <- 1/14
-  
-#==============================================================
-# PCA 
 
-PCA <- prcomp(features[,-1], scale = T)
-biplot(PCA,scale = 0)
-
-d <- data.frame(PC = 1:12,
-                PVE = PCA$sdev^2 / sum(PCA$sdev^2))
-ggplot(d, aes(x = PC, y = PVE)) +
-  geom_line() + 
-  geom_point()
 
 
 
@@ -289,6 +285,5 @@ d <- data.frame(PC1 = PCA$x[, 1],
 ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
   geom_point() +
   geom_text(aes(label = composer), vjust = 2)
-
 
 

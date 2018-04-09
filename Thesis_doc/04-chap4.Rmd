@@ -1,184 +1,34 @@
 # EDA and Feature Selection
 
 ## Bach and Mendelssohns
-```{r, echo = F, eval = F}
-old <- getwd()
-setwd("~/Desktop/Thesis/Data/Fanny_working_krn")
-fanny_l <- list.files(path = "~/Desktop/Thesis/Data/Fanny_working_krn")
-fanny <-  map(fanny_l,piece_df,c("piece"))
-setwd(old)
-#==============================================================
-# felix
-felix_names <- list(c("f1o8p.xml","Minelied im Mai"), 
-              c("f2o8p.xml","Das Heimweh"),
-              c("f4o8p.xml","Erntelied"),
-              c("f5o8p.xml","Pilgerspruch"))
-felix_krn <- list.files(path = "~/Desktop/Thesis/Data/Felix_working_krn") 
-old <- getwd()
-setwd("~/Desktop/Thesis/Data/Felix_working_krn")
-felix <- map(felix_krn, piece_df, insts = c("piece"))
-setwd(old)
-#==============================================================
-# bach
 
-old <- getwd()
-setwd("~/Desktop/Thesis/Data/Bach")
-bach <- list.files(path = "~/Desktop/Thesis/Data/Bach") %>%
-  map(piece_df, insts = "piano")
-setwd(old)
+Below are the pairwise distributions of each of the features used for Bach and the Mendelssohns. There are higher correlations between scale degree frequencies 3 and 6. There is also a surprising separation between the composers for the mean density. 
 
+```{r,echo = F,fig.cap = 'Pairs plot'}
+knitr::include_graphics("images/Couplet.png")
 ```
-
-```{r, eval = F, echo = F}
-# get all data
-mendelssohn <- c(felix,fanny)
-data <- c(bach,felix,fanny)
-name<- c(rep("bach",length(bach)),rep("felix",length(felix)),
-         rep("fanny",length(fanny)))
-data <- rbind(name,data)                
-
-composer <- c(rep("bach",length(bach)),rep("mendelssohn",length(mendelssohn)))
-
-# Compute feature: mel ints
-#mel_intsb <- map(bach,mel_ints,"piano") # each 
-#mel_intsf <- map(mendelssohn,mel_ints,"piece")
-
-#compute feature: harm ints
-
-#harm_intb <- map(bach, freq_harm_ints)
-#harm_intm <- map(mendelssohn, freq_harm_ints)
-
-# Compute feature: connsonance
-#cons_b <- map(bach,consonances,"piano")
-#cons_m <- map(mendelssohn,consonances,"piece")
-
-#cons_perf <- c(map(cons_b,1),map(cons_m,1)) %>% unlist()
-#cons_imp <- c(map(cons_b,2),map(cons_m,2)) %>% unlist()
-#cons_dis <- c(map(cons_b,3),map(cons_m,3)) %>% unlist()
-
-# Compute features: density
-dens_b <- map(bach,beat_density)
-dens_m <- map(mendelssohn,beat_density) # mean then sd
-
-dens_mean <- c(map(dens_b,1),map(dens_m,1)) %>% unlist()
-dens_sd <- c(map(dens_b,2),map(dens_m,2)) %>% unlist()
-
-# Compute features: scale degree freq
-
-sf_b <- map(bach,scale_degree_freq) %>% unname()
-sf_m <- map(mendelssohn,scale_degree_freq)
-sf_freqs <- c(map(sf_b,3) ,map(sf_m,3))
-sf_1 <- map(sf_freqs,1) %>% unlist
-sf_2 <- map(sf_freqs,2) %>% unlist
-sf_3 <- map(sf_freqs,3)%>% unlist
-sf_4 <- map(sf_freqs,4)%>% unlist
-sf_5 <- map(sf_freqs,5)%>% unlist
-sf_6 <- map(sf_freqs,6)%>% unlist
-sf_7 <- map(sf_freqs,7)%>% unlist
-
-#==============================================================
-#==============================================================
-# FEATURES create data frame
-features <- data.frame(composer,
-                       dens_mean,dens_sd,
-                       sf_1,sf_2,sf_3,sf_4,sf_5,sf_6,sf_7)
-#==============================================================
-```
-
-```{r, echo = F, eval = F}
-pairss <- ggpairs(features,aes(color = composer))
-pairss
-```
-
-Explanation...
-We can see that the density features show higher seperation.
-As we can see from the above, we have that there are stronger correlations between sf_3 and sf_6, which correspond to scale degree 3 and 6.
-
-```{r, eval = F}
-# PCA 
-
-PCA <- prcomp(features[,-1], scale = T)
-biplot(PCA,scale = 0)
-
-d <- data.frame(PC = 1:9,
-                PVE = PCA$sdev^2 / sum(PCA$sdev^2))
-ggplot(d, aes(x = PC, y = PVE)) +
-  geom_line() + 
-  geom_point()
-```
-
-From the biplot, it appears that the first PC encodes information about the consonant scale degrees (3 and 6) 
  
-There is no clear elbow from the skree plot.  
- 
+```{r,echo = F,fig.cap = 'PCA'}
+knitr::include_graphics("images/PCA_bach.png")
+```
+
+As we can see from the above biplot, it seems like the second principal component encodes a sense of pleasant consonances. We have perfect consonances and frequencies of first and fourth scale degrees grouped together. 
+
 ## Felix and Fanny
-```{r, eval = F}
 
-composer_m <- c(rep("felix",length(felix)),rep("fanny",length(fanny)))
-
-# Compute feature: mel ints
-#mel_intsb <- map(bach,mel_ints,"piano") # each 
-#mel_intsf <- map(mendelssohn,mel_ints,"piece")
-
-#compute feature: harm ints
-
-#harm_intb <- map(bach, freq_harm_ints)
-#harm_intm <- map(mendelssohn, freq_harm_ints)
-
-# Compute feature: connsonance
-#cons_b <- map(bach,consonances,"piano")
-#cons_m <- map(mendelssohn,consonances,"piece")
-
-#cons_perf <- c(map(cons_b,1),map(cons_m,1)) %>% unlist()
-#cons_imp <- c(map(cons_b,2),map(cons_m,2)) %>% unlist()
-#cons_dis <- c(map(cons_b,3),map(cons_m,3)) %>% unlist()
-
-# Compute features: density
-dens_f <- map(felix,beat_density)
-dens_h <- map(fanny,beat_density) # mean then sd
-
-dens_mean <- c(map(dens_f,1),map(dens_h,1)) %>% unlist()
-dens_sd <- c(map(dens_f,2),map(dens_h,2)) %>% unlist()
-
-# Compute features: scale degree freq
-
-sf_f <- map(felix,scale_degree_freq) %>% unname()
-sf_h <- map(fanny,scale_degree_freq)
-sf_freqs <- c(map(sf_f,3) ,map(sf_h,3))
-sf_1 <- map(sf_freqs,1) %>% unlist
-sf_2 <- map(sf_freqs,2) %>% unlist
-sf_3 <- map(sf_freqs,3)%>% unlist
-sf_4 <- map(sf_freqs,4)%>% unlist
-sf_5 <- map(sf_freqs,5)%>% unlist
-sf_6 <- map(sf_freqs,6)%>% unlist
-sf_7 <- map(sf_freqs,7)%>% unlist
-
-#==============================================================
-#==============================================================
-# FEATURES create data frame
-featuresm <- data.frame(composer_m,
-                       dens_mean,dens_sd,
-                       sf_1,sf_2,sf_3,sf_4,sf_5,sf_6,sf_7)
-#==============================================================
+```{r,echo = F,fig.cap = 'Felix/Fanny Correlations'}
+knitr::include_graphics("images/corrfanny.png")
 ```
 
-```{r, fig.cap = "Scatter plots and correlations of the predictors", eval = F}
-pairs_m <- ggpairs(featuresm,aes(color = composer_m))
-pairs_m
+We can see from the above pairwise distribution plot that we still have a high correlation between scale degrees 3 and 6. However we do not see the difference in beat density. This is likely due to the fact that fanny and Felix data set is composed of the same type of song, whereas the Bach data set is only solo piano music.   
+
+```{r,echo = F,fig.cap = 'PCA felix/fanny'}
+knitr::include_graphics("images/fPCA.png")
 ```
 
-```{r, eval = F}
-# PCA 
 
-PCAm <- prcomp(featuresm[,-1], scale = T)
-biplot(PCA,scale = 0)
-
-d <- data.frame(PC = 1:9,
-                PVE = PCA$sdev^2 / sum(PCA$sdev^2))
-ggplot(d, aes(x = PC, y = PVE)) +
-  geom_line() + 
-  geom_point()
+```{r,echo = F,fig.cap = 'Felix/Fanny skree plot'}
+knitr::include_graphics("images/fpca_skree.png")
 ```
- 
- 
- 
+
+

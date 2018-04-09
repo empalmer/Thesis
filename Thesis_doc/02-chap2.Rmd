@@ -35,7 +35,6 @@ After being scanned by PhotoScore and read into Muse Score, each piece was proof
 
 MusicXML on its own is not conducive to converting into a data frame as representing the single half note middle C looks like this: 
 
-\newpage
 ```{fig.cap = "Musicxml code for middle c"}
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC

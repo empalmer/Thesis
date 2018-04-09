@@ -13,7 +13,7 @@ extract_chord_name_beat <- function(piece){
   for(i in 1:nrow(x)){
     chords[[i]] <- note_df[i,x[i,]] %>%unname() %>% as.character()
     }
-  return(chords)
+  chords
 }
 
 #==============================================================
@@ -31,7 +31,7 @@ extract_chord_value_beat <- function(piece){
 
 #==============================================================
 convert_chords2_scale_degree <- function(piece){
-  chords_notes <- extract_chord_note_beat(piece)
+  chords_notes <- extract_chord_value_beat(piece)
   key_sig <- Major_minor(piece)[1]
   scale <- scales[,key_sig] %>% unname() %>% as.character()
   deg <- scales[,"scale_degree_names"] %>% unname %>% as.character
@@ -41,6 +41,7 @@ convert_chords2_scale_degree <- function(piece){
   chords_deg
 }
 #==============================================================
+
 
 chord_or_harm_int <- function(chord){
   u <- unique(chord)
@@ -80,10 +81,6 @@ freq_harm_ints <- function(piece){
   freq <- table(harm_ints_list)/sum(table(harm_ints_list))
   freq
 }
-
-
-
-
 
 block_chord <- function(v){
   #first_note <- 

@@ -62,8 +62,6 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
 #' including instrument names for each spline
 #' @return dataframe for entire piece - combined splines
  
-
-
 piece_df <- function(v,insts){
   len <- length(v)
   c <- vector()
@@ -76,10 +74,10 @@ piece_df <- function(v,insts){
     if(!first){
       piece <- cbind(piece,Ai[,-(1:3)])
     }
-    max_notes <- (ncol(Ai)-3)/3
+    max_notes <- (ncol(Ai)-3)/4
     for(k in 1:max_notes){
-      if(first){cols <- c("key","meter","measure","r.v","n.o","n.n")}
-      if(!first){cols <- c("r.v","n.o","n.n")}
+      if(first){cols <- c("key","meter","measure","r.v","n.o","n.n","n.v")}
+      if(!first){cols <- c("r.v","n.o","n.n","n.v")}
       c_i <- vector()
       for(j in 1:length(cols)){
         c_i[j] <- paste(insts[i],"_",cols[j],k)

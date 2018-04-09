@@ -192,19 +192,18 @@ In the digital age data sets are everywhere. Billions of new data are
 generated daily, in banking, social media, and in scientific studies.
 These data can be in numerous forms. With the availability of the
 internet and social media data, text classification has become an
-promising form of data. While text classification problems are very
-frequent, similar methods that instead classify music have not been
-explored as much. The purpose of this thesis is to use musical
-stylometry to quantify the difference between the compositions of the
-siblings Felix and Fanny Mendelssohn.
+promising form of data analysis. While text classification problems are
+very frequent, similar methods that classify music have not been
+explored as commonly explored. The purpose of this thesis is to use
+musical stylometry to quantify the difference between the compositions
+of the siblings Felix and Fanny Mendelssohn.
 
-Treating text or music as data has its own challenges. On its own text
-as data does not contain anything immediately analyzable. This also
-holds for music as data. First, analyzable features must identified that
-can be extracted for every text. These features can include word
-frequencies, length etc. Analysis of text using machine learning can
-find patterns, authors, or categories of text. Similar methods can also
-be used to classify music.
+Treating text or music as data has challenges. Neither contains anything
+immediately analyzable. This also holds for music as data. First,
+analyzable features must identified that can be extracted for every
+text. These features can include word frequencies, length etc. Analysis
+of text using machine learning can find patterns, authors, or categories
+of text. Similar methods can also be used to classify music.
 
 Feature extraction is an essential part in text or music classification.
 Unlike in a data set of numerical or categorical values, text and music
@@ -826,8 +825,6 @@ pieces were then entered into MuseScore by hand and then proofread.
 
 MusicXML on its own is not conducive to converting into a data frame as
 representing the single half note middle C looks like this:
-
-\newpage
 \begin{verbatim}
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
@@ -1093,114 +1090,63 @@ counted, as these are common type of counterpoint movement.
 
 \section{Bach and Mendelssohns}\label{bach-and-mendelssohns}
 
-Explanation\ldots{} We can see that the density features show higher
-seperation. As we can see from the above, we have that there are
-stronger correlations between sf\_3 and sf\_6, which correspond to scale
-degree 3 and 6.
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# PCA }
-
-\NormalTok{PCA <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(features[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{scale =}\NormalTok{ T)}
-\KeywordTok{biplot}\NormalTok{(PCA,}\DataTypeTok{scale =} \DecValTok{0}\NormalTok{)}
-
-\NormalTok{d <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{PC =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{,}
-                \DataTypeTok{PVE =}\NormalTok{ PCA}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(PCA}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
-\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ PC, }\DataTypeTok{y =}\NormalTok{ PVE)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-From the biplot, it appears that the first PC encodes information about
-the consonant scale degrees (3 and 6)
-
-There is no clear elbow from the skree plot.
+Below are the pairwise distributions of each of the features used for
+Bach and the Mendelssohns. There are higher correlations between scale
+degree frequencies 3 and 6. There is also a surprising separation
+between the composers for the mean density.
+\begin{figure}
+\centering
+\includegraphics{images/Couplet.png}
+\caption{\label{fig:unnamed-chunk-8}Pairs plot}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics{images/PCA_bach.png}
+\caption{\label{fig:unnamed-chunk-9}PCA}
+\end{figure}
+As we can see from the above biplot, it seems like the second principal
+component encodes a sense of pleasant consonances. We have perfect
+consonances and frequencies of first and fourth scale degrees grouped
+together.
 
 \section{Felix and Fanny}\label{felix-and-fanny}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{composer_m <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"felix"}\NormalTok{,}\KeywordTok{length}\NormalTok{(felix)),}\KeywordTok{rep}\NormalTok{(}\StringTok{"fanny"}\NormalTok{,}\KeywordTok{length}\NormalTok{(fanny)))}
-
-\CommentTok{# Compute feature: mel ints}
-\CommentTok{#mel_intsb <- map(bach,mel_ints,"piano") # each }
-\CommentTok{#mel_intsf <- map(mendelssohn,mel_ints,"piece")}
-
-\CommentTok{#compute feature: harm ints}
-
-\CommentTok{#harm_intb <- map(bach, freq_harm_ints)}
-\CommentTok{#harm_intm <- map(mendelssohn, freq_harm_ints)}
-
-\CommentTok{# Compute feature: connsonance}
-\CommentTok{#cons_b <- map(bach,consonances,"piano")}
-\CommentTok{#cons_m <- map(mendelssohn,consonances,"piece")}
-
-\CommentTok{#cons_perf <- c(map(cons_b,1),map(cons_m,1)) %>% unlist()}
-\CommentTok{#cons_imp <- c(map(cons_b,2),map(cons_m,2)) %>% unlist()}
-\CommentTok{#cons_dis <- c(map(cons_b,3),map(cons_m,3)) %>% unlist()}
-
-\CommentTok{# Compute features: density}
-\NormalTok{dens_f <-}\StringTok{ }\KeywordTok{map}\NormalTok{(felix,beat_density)}
-\NormalTok{dens_h <-}\StringTok{ }\KeywordTok{map}\NormalTok{(fanny,beat_density) }\CommentTok{# mean then sd}
-
-\NormalTok{dens_mean <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{map}\NormalTok{(dens_f,}\DecValTok{1}\NormalTok{),}\KeywordTok{map}\NormalTok{(dens_h,}\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unlist}\NormalTok{()}
-\NormalTok{dens_sd <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{map}\NormalTok{(dens_f,}\DecValTok{2}\NormalTok{),}\KeywordTok{map}\NormalTok{(dens_h,}\DecValTok{2}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unlist}\NormalTok{()}
-
-\CommentTok{# Compute features: scale degree freq}
-
-\NormalTok{sf_f <-}\StringTok{ }\KeywordTok{map}\NormalTok{(felix,scale_degree_freq) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unname}\NormalTok{()}
-\NormalTok{sf_h <-}\StringTok{ }\KeywordTok{map}\NormalTok{(fanny,scale_degree_freq)}
-\NormalTok{sf_freqs <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{map}\NormalTok{(sf_f,}\DecValTok{3}\NormalTok{) ,}\KeywordTok{map}\NormalTok{(sf_h,}\DecValTok{3}\NormalTok{))}
-\NormalTok{sf_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{1}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
-\NormalTok{sf_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
-\NormalTok{sf_}\DecValTok{3}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{3}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
-\NormalTok{sf_}\DecValTok{4}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{4}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
-\NormalTok{sf_}\DecValTok{5}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{5}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
-\NormalTok{sf_}\DecValTok{6}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{6}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
-\NormalTok{sf_}\DecValTok{7}\NormalTok{ <-}\StringTok{ }\KeywordTok{map}\NormalTok{(sf_freqs,}\DecValTok{7}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }\NormalTok{unlist}
-
-\CommentTok{#==============================================================}
-\CommentTok{#==============================================================}
-\CommentTok{# FEATURES create data frame}
-\NormalTok{featuresm <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(composer_m,}
-\NormalTok{                       dens_mean,dens_sd,}
-\NormalTok{                       sf_}\DecValTok{1}\NormalTok{,sf_}\DecValTok{2}\NormalTok{,sf_}\DecValTok{3}\NormalTok{,sf_}\DecValTok{4}\NormalTok{,sf_}\DecValTok{5}\NormalTok{,sf_}\DecValTok{6}\NormalTok{,sf_}\DecValTok{7}\NormalTok{)}
-\CommentTok{#==============================================================}
-\end{Highlighting}
-\end{Shaded}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{pairs_m <-}\StringTok{ }\KeywordTok{ggpairs}\NormalTok{(featuresm,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ composer_m))}
-\NormalTok{pairs_m}
-\end{Highlighting}
-\end{Shaded}
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# PCA }
-
-\NormalTok{PCAm <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(featuresm[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{scale =}\NormalTok{ T)}
-\KeywordTok{biplot}\NormalTok{(PCA,}\DataTypeTok{scale =} \DecValTok{0}\NormalTok{)}
-
-\NormalTok{d <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{PC =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{,}
-                \DataTypeTok{PVE =}\NormalTok{ PCA}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(PCA}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
-\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ PC, }\DataTypeTok{y =}\NormalTok{ PVE)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
+\begin{figure}
+\centering
+\includegraphics{images/corrfanny.png}
+\caption{\label{fig:unnamed-chunk-10}Felix/Fanny Correlations}
+\end{figure}
+We can see from the above pairwise distribution plot that we still have
+a high correlation between scale degrees 3 and 6. However we do not see
+the difference in beat density. This is likely due to the fact that
+fanny and Felix data set is composed of the same type of song, whereas
+the Bach data set is only solo piano music.
+\begin{figure}
+\centering
+\includegraphics{images/fPCA.png}
+\caption{\label{fig:unnamed-chunk-11}PCA felix/fanny}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics{images/fpca_skree.png}
+\caption{\label{fig:unnamed-chunk-12}Felix/Fanny skree plot}
+\end{figure}
 \chapter{Models}\label{models}
 
 For classification, we are interested in using a set of features to
-predict the response, or composer. We denote the features \(X\), where
-\(X_i\) is a certain feature. Each song has a composer or response,
-known or unknown, denoted by \(Y\). In our case we have
+predict the response, or composer. The notation used in this chapter is
+inspired by \emph{The Elements of Statistical Learning} (Friedman,
+Hastie, \& Tibshirani, 2001) and \emph{An Introduction to Statistical
+Learning} (James, Witten, Hastie, \& Tibshirani, 2013) .We denote the
+features \(X\), where \(X_i\) is a certain feature. We have \(p\)
+features. Each song has a composer or response, known or unknown,
+denoted by \(Y\). In our case we have
 \(Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}\), or more generally,
-\(y \in \{\text{list of composers}\}\),The \(i^{th}\) song has features
-\(x_i\) and composer \(Y_i\), where \(x_i\) is a vector of \(p\)
-features. The composer takes values in a discrete set, which is the
-possible composers. Thus we can always divide the input space into a
-collection of regions labeled according to the classificatoin
+\(y \in \{\text{list of composers}\}\). The composer takes values in a
+discrete set, which is the possible composers. Thus we can always divide
+the input space into a collection of regions labeled according to the
+classification
 
-\section{Linear Methods for
+\subsection{Linear Methods for
 Classification}\label{linear-methods-for-classification}
 
 \subsection{Linear Regression:}\label{linear-regression}
@@ -1238,7 +1184,7 @@ Linear regression on a categorical variable that has multiple variables
 has issues when there isn't a natural ordering with the categories. For
 large \(K\) and small \(p\), groups can be masked. When there is a
 binary response, we can calculate \(P(Y|X)\), but linear regression can
-give predictions that arent valid probabilities, namely negative
+give predictions that aren't valid probabilities, namely negative
 probabilities or probabilities greater than 1.
 
 Knowing the class posteriors \(P(Y = k|X)\) gives us an optimal
@@ -1246,7 +1192,7 @@ classification. If we assume \(f_k(x)\) is the class-conditional density
 of \(X\) in class \(G = k\) and that \(\pi_k\) is the prior probability
 of class \(k\) with \(\sum_{k=1}^K \pi_k = 1\). We can then model
 \(P(Y = k | X)\) by modeling the distribution of the features \(X\)
-seperately in each response class, and then use Bayes' theorem to
+separately in each response class, and then use Bayes' theorem to
 calculate \(P(Y = k |X)\) which gives us the following:
 
 \[ P(Y = k | X = x) = \frac{f_k(x)\pi_k}{\sum_{l = 1}^Kf_l(x)\pi_l}\]
@@ -1263,12 +1209,12 @@ assume \(\hat{\pi}_k = N_k/N\) where \(N_k\) is the number of class -
 \(k\) observations, \(\hat{\mu}_k = \sum_{g_i = k}x_i/N_k\), and
 \(\mathbf{\hat{\Sigma}} = \sum_{k = 1}^{K}\sum_{g_i = k}(x_i - \hat \mu_k)(x_i - \hat\mu_k)^T / (N- K)\)
 
-For LDA we can lok at the log ratio comparing two classes \(k\) and
+For LDA we can look at the log ratio comparing two classes \(k\) and
 \(l\) and can show:
 
 \[\log\frac{P(Y= k|x = x)}{P(Y = l|X = x)} = \log\frac{f_k(x)}{f_l(x)} + \log\frac{\pi_k}{\pi_l} = \log \frac{\pi_k}{\pi_l} - \frac{1}{2}(\mu_k + \mu_l)^T\mathbf{\Sigma}^{-1}(\mu_k- \mu_l) + x^T\mathbf{\Sigma}^{-1}(\mu_k - \mu_l) \]
 
-This is a linear equation, so the classes will be seperated by
+This is a linear equation, so the classes will be separated by
 hyperplanes. From the above, we can find that the predicted class for
 any \(x\) is :
 
@@ -1276,19 +1222,26 @@ any \(x\) is :
 
 These functions are known as \(\textit{linear discriminant functions}\)
 We predict the class by finding the maximum value of the discriminant
-funcitions of all \(k\).
+functions of all \(k\).
 
 For QDA we get the following discriminant functions:
 \[ \delta_k(x) = -\frac{1}{2}\log|\mathbf{\Sigma}_k| - \frac{1}{2}(x - \mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k) + \log \pi_k \]
 
 Linear discriminant analysis is helpful when the classes are well
-seperated, when \(n\) is small and the distribution of the predictors
+separated, when \(n\) is small and the distribution of the predictors
 \(X\) is approximately normal in each of the classes, and when there are
 more than two response classes.
 
+\subsubsection{Naive Bayes}\label{naive-bayes}
+
+The Naive Bayes classifier is often used for musical classification as
+it is good when the dimension \(p\) of the features space is large. It
+makes the (naive) assumption that all the features are independent for a
+given class \(i\). \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]
+
 \subsubsection{Logistic Regression}\label{logistic-regression}
 
-Logistic regression differes from linear discriminant analysis by
+Logistic regression differs from linear discriminant analysis by
 directly modeling \(P(Y = k|X)\) by using the logistic function. The
 idea is to model the posterior probabilities of each of the \(K\)
 classes as linear functions in \(x\) and requiring that the
@@ -1299,22 +1252,14 @@ which can be written as:
 
 \[ p(X) = \frac{e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p}}{1 +e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p} }\]
 
-We estimate the regression coefficients by using maximum likelyhood. The
+We estimate the regression coefficients by using maximum likelihood. The
 log-likelihood for \(N\) observations is:
 
 \[ \ell(\theta) = \sum_{i = 1}^N \log p_{g_i}(x_i;\theta)\] where
 \(p_k(x_i;\theta) = P(Y = k|X = x_i;\theta)\) We then choose \(\theta\)
 to maximize this function.
 
-\section{Naive Bayes}\label{naive-bayes}
-
-The Naive Bayes classifier is often used for musical classification as
-it is good when the dimension \(p\) of the features space is large,
-makeing density estimation unattractive*. It makes the (naive)
-assumption that all the features are independent for a given class
-\(i\). \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]
-
-\section{K- nearest - neighbor}\label{k--nearest---neighbor}
+\subsubsection{K- nearest - neighbor}\label{k--nearest---neighbor}
 
 Another method for classification is k-nearest neighbor methods. It uses
 observations in the training set closest to \(x\) to form \(\hat{Y}\),
@@ -1332,48 +1277,34 @@ of taking the mode of the \(k\) nearest neighbors.
 \section{Model Fit -
 Bach/Mendelssohn}\label{model-fit---bachmendelssohn}
 
-\subsubsection{Lasso logistic}\label{lasso-logistic}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\KeywordTok{model.matrix}\NormalTok{(composer}\OperatorTok{~}\NormalTok{.,features)[,}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-\NormalTok{y <-}\StringTok{ }\NormalTok{features[,}\DecValTok{1}\NormalTok{] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unname}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\NormalTok{as.character}
+\subsubsection{Logistic Regression}\label{logistic-regression-1}
 
-\NormalTok{grid <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{,}\DataTypeTok{length =} \DecValTok{100}\NormalTok{))}
-\NormalTok{lasso.mod <-}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x,y,}\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{,}\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lambda =}\NormalTok{ grid)}
+When a lasso logistic classifier was fit, we got a mean standard error
+(MSE) of 0.154. We see that the density features stayed in the longest.
+\begin{figure}
+\centering
+\includegraphics{images/lasso_bach.png}
+\caption{\label{fig:unnamed-chunk-13}Lasso Bach/Mendelssohn}
+\end{figure}
+\subsubsection{LDA}\label{lda}
 
-\NormalTok{train <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(x),}\KeywordTok{nrow}\NormalTok{(x)}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{test <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(x[}\OperatorTok{-}\NormalTok{train,])}
-\NormalTok{y.test <-}\StringTok{ }\NormalTok{y[}\OperatorTok{-}\NormalTok{train]}
-\NormalTok{y.train <-}\StringTok{ }\NormalTok{y[train] }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unname}\NormalTok{ () }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.character}\NormalTok{()}
+For linear discriminant analysis, we have a 5-fold cross validated MSE
+of 0.1558.
 
-\NormalTok{lasso.mod <-}\StringTok{ }\KeywordTok{glmnet}\NormalTok{(x[train,],y.train, }\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{ ,}\DataTypeTok{alpha=} \DecValTok{1}\NormalTok{,}
-                    \DataTypeTok{lambda =}\NormalTok{ grid, }\DataTypeTok{thresh =} \FloatTok{1e-12}\NormalTok{)}
-\NormalTok{lasso.cv.out <-}\StringTok{ }\KeywordTok{cv.glmnet}\NormalTok{(x, y,}\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{, }\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{)}
-\NormalTok{lasso.bestlam <-}\StringTok{ }\NormalTok{lasso.cv.out}\OperatorTok{$}\NormalTok{lambda.min}
+Most commonly our models incorrectly predict Mendelssohn songs to be
+composed by Bach.
 
-\NormalTok{lasso.pred <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(lasso.mod, }\DataTypeTok{s =}\NormalTok{ lasso.bestlam,}
-                      \DataTypeTok{newx =}\NormalTok{ test, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
-\NormalTok{lass <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\StringTok{"bach"}\NormalTok{,}\KeywordTok{length}\NormalTok{(y.test))}
-\NormalTok{lass[lasso.pred }\OperatorTok{>}\StringTok{ }\NormalTok{.}\DecValTok{5}\NormalTok{] <-}\StringTok{ "mendelssohn"}
-\NormalTok{t <-}\StringTok{ }\KeywordTok{table}\NormalTok{(lass,y.test)}
-\NormalTok{MSE_lasso <-}\StringTok{ }\NormalTok{(t[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{+}\NormalTok{t[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(t)}
-\NormalTok{MSE_lasso}
+\section{Model fit Felix/Fanny}\label{model-fit-felixfanny}
 
-\CommentTok{#plot(lasso.mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")}
-\KeywordTok{plot_glmnet}\NormalTok{(lasso.mod, }\DataTypeTok{xvar =} \StringTok{"lambda"}\NormalTok{,}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{0}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-\subsubsection{K means}\label{k-means}
+\subsubsection{Logistic regression}\label{logistic-regression-2}
 
-K means fitted on the principle components
-
-\section{Model Fit - Felix/Fanny}\label{model-fit---felixfanny}
-
-Unsurprisingly, since there is so few data and features currently, there
-are not many results.
-
-\subsubsection{Lasso Logistic}\label{lasso-logistic-1}
-
+When a lasso classifier was fit, we got a MSE of 0.35. We see that the
+density features and fifth scale degree stayed in the longest.
+\begin{figure}
+\centering
+\includegraphics{images/lassofelix.png}
+\caption{\label{fig:unnamed-chunk-14}Lasso Fanny/Felix}
+\end{figure}
 \chapter{Discussion}\label{discussion}
 
 \section{Discussion}\label{discussion-1}
@@ -1469,10 +1400,19 @@ Ford, P. L., \& Bourne, E. G. (1897). The authorship of the federalist.
 \emph{The American Historical Review}, \emph{2}(4), 675--687. Retrieved
 from \url{http://www.jstor.org/stable/1833983}
 
+\hypertarget{ref-esl}{}
+Friedman, J., Hastie, T., \& Tibshirani, R. (2001). \emph{The elements
+of statistical learning} (Vol. 1). Springer series in statistics New
+York.
+
 \hypertarget{ref-guyon2003}{}
 Guyon, I., \& Elisseeff, A. (2003). An introduction to variable and
 feature selection. \emph{Journal of Machine Learning Research},
 \emph{3}(Mar), 1157--1182.
+
+\hypertarget{ref-isl}{}
+James, G., Witten, D., Hastie, T., \& Tibshirani, R. (2013). \emph{An
+introduction to statistical learning} (Vol. 112). Springer.
 
 \hypertarget{ref-mace2013}{}
 Mace, A. R. (2013). \emph{Fanny hensel, felix mendelssohn bartholdy, and

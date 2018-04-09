@@ -1,8 +1,8 @@
 # Models
 
-For classification, we are interested in using a set of features to predict the response, or composer. We denote the features $X$, where $X_i$ is a certain feature. Each song has a composer or response, known or unknown, denoted by $Y$. In our case we have $Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}$, or more generally, $y \in \{\text{list of composers}\}$,The $i^{th}$ song has features $x_i$ and composer $Y_i$, where $x_i$ is a vector of $p$ features. The composer takes values in a discrete set, which is the possible composers. Thus we can always divide the input space into a collection of regions labeled according to the classificatoin 
+For classification, we are interested in using a set of features to predict the response, or composer. The notation used in this chapter is inspired by *The Elements of Statistical Learning* [@esl] and *An Introduction to Statistical Learning* [@isl] .We denote the features $X$, where $X_i$ is a certain feature. We have $p$ features. Each song has a composer or response, known or unknown, denoted by $Y$. In our case we have $Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}$, or more generally, $y \in \{\text{list of composers}\}$. The composer takes values in a discrete set, which is the possible composers. Thus we can always divide the input space into a collection of regions labeled according to the classification 
 
-## Linear Methods for Classification 
+### Linear Methods for Classification 
 ### Linear Regression: 
 A naive model for classification is linear regression. If our predictor space $Y$ has $K$ classes, we code the response $K$ different indicator responses $y_k$ where $y_k = 1$ if $Y = k$ and 0 otherwise. We can use the resulting $k$ hyperplanes as a decision boundary. We  find the coefficients for the line by finding coefficients $\beta$ to minimize the residual sum of squares. 
 
@@ -21,9 +21,9 @@ If there are $K$ classes, and we have that the fitted linear model for the $kth$
 
 #### Linear Discriminant Analysis
 
-Linear regression on a categorical variable that has multiple variables has issues when there isn't a natural ordering with the categories. For large $K$ and small $p$, groups can be masked.  When there is a binary response, we can calculate $P(Y|X)$, but linear regression can give predictions that arent valid probabilities, namely negative probabilities or probabilities greater than 1. 
+Linear regression on a categorical variable that has multiple variables has issues when there isn't a natural ordering with the categories. For large $K$ and small $p$, groups can be masked.  When there is a binary response, we can calculate $P(Y|X)$, but linear regression can give predictions that aren't valid probabilities, namely negative probabilities or probabilities greater than 1. 
 
-Knowing the class posteriors $P(Y = k|X)$ gives us an optimal classification. If we assume $f_k(x)$ is the class-conditional density of $X$ in class $G = k$ and that $\pi_k$ is the prior probability of class $k$ with $\sum_{k=1}^K \pi_k = 1$. We can then model $P(Y = k | X)$ by modeling the distribution of the features $X$ seperately in each response class, and then use Bayes' theorem to calculate $P(Y = k |X)$ which gives us the following: 
+Knowing the class posteriors $P(Y = k|X)$ gives us an optimal classification. If we assume $f_k(x)$ is the class-conditional density of $X$ in class $G = k$ and that $\pi_k$ is the prior probability of class $k$ with $\sum_{k=1}^K \pi_k = 1$. We can then model $P(Y = k | X)$ by modeling the distribution of the features $X$ separately in each response class, and then use Bayes' theorem to calculate $P(Y = k |X)$ which gives us the following: 
 
 $$ P(Y = k | X = x) = \frac{f_k(x)\pi_k}{\sum_{l = 1}^Kf_l(x)\pi_l}$$
 
@@ -31,41 +31,42 @@ We thus must have a model to find $f_k(x)$. Linear and quadratic discriminant an
 
 Linear discriminant analysis (LDA) assumes that the covariance matrix is equal for every $k$: $\mathbf{\Sigma}_k = \mathbf{\Sigma} \forall k$. Quadratic discriminant analysis does not have this assumption. In addition we assume $\hat{\pi}_k = N_k/N$ where $N_k$ is the number of class - $k$ observations, $\hat{\mu}_k = \sum_{g_i = k}x_i/N_k$, and $\mathbf{\hat{\Sigma}} = \sum_{k = 1}^{K}\sum_{g_i = k}(x_i - \hat \mu_k)(x_i - \hat\mu_k)^T / (N- K)$
 
-For LDA we can lok at the log ratio comparing two classes $k$ and $l$ and can show:
+For LDA we can look at the log ratio comparing two classes $k$ and $l$ and can show:
 
 $$\log\frac{P(Y= k|x = x)}{P(Y = l|X = x)} = \log\frac{f_k(x)}{f_l(x)} + \log\frac{\pi_k}{\pi_l} = \log \frac{\pi_k}{\pi_l} - \frac{1}{2}(\mu_k + \mu_l)^T\mathbf{\Sigma}^{-1}(\mu_k- \mu_l) + x^T\mathbf{\Sigma}^{-1}(\mu_k - \mu_l) $$
 
-This is a linear equation, so the classes will be seperated by hyperplanes. From the above, we can find that the predicted class for any $x$ is :
+This is a linear equation, so the classes will be separated by hyperplanes. From the above, we can find that the predicted class for any $x$ is :
 
 $$ \delta_k(x) = x^T\mathbf{\Sigma}^{-1}\mu_k - \frac{1}{2}\mu_k^T\mathbf{\Sigma}^{-1}\mu_k + \log \pi_k $$
 
 These functions are known as $\textit{linear discriminant functions}$
-We predict the class by finding the maximum value of the discriminant funcitions of all $k$. 
+We predict the class by finding the maximum value of the discriminant functions of all $k$. 
 
 For QDA we get the following discriminant functions: 
 $$ \delta_k(x) = -\frac{1}{2}\log|\mathbf{\Sigma}_k| - \frac{1}{2}(x - \mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k) + \log \pi_k $$
 
-Linear discriminant analysis is helpful when the classes are well seperated, when $n$ is small and the distribution of the predictors $X$ is approximately normal in each of the classes, and when there are more than two response classes. 
+Linear discriminant analysis is helpful when the classes are well separated, when $n$ is small and the distribution of the predictors $X$ is approximately normal in each of the classes, and when there are more than two response classes. 
+
+#### Naive Bayes
+The Naive Bayes classifier is often used for musical classification as it is good when the dimension $p$ of the features space is large. It makes the (naive) assumption that all the features are independent for a given class $i$. $$f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)$$
 
 #### Logistic Regression
-Logistic regression differes from linear discriminant analysis by directly modeling $P(Y = k|X)$ by using the logistic function. The idea is to model the posterior probabilities of each of the $K$ classes as linear functions in $x$ and requiring that the probabilities sum to 1. The model has the form: 
+Logistic regression differs from linear discriminant analysis by directly modeling $P(Y = k|X)$ by using the logistic function. The idea is to model the posterior probabilities of each of the $K$ classes as linear functions in $x$ and requiring that the probabilities sum to 1. The model has the form: 
 $$ \log \bigg( \frac{p(X)}{1-p(X)} \bigg) = \beta_0 + \beta_1 X_1 + \cdots + \beta_pX_p$$
 
 which can be written as: 
 
 $$ p(X) = \frac{e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p}}{1 +e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p} }$$
 
-We estimate the regression coefficients by using maximum likelyhood. 
+We estimate the regression coefficients by using maximum likelihood. 
 The log-likelihood for $N$ observations is: 
 
 $$ \ell(\theta) = \sum_{i = 1}^N \log p_{g_i}(x_i;\theta)$$
 where $p_k(x_i;\theta) = P(Y = k|X = x_i;\theta)$
 We then choose $\theta$ to maximize this function.
 
-## Naive Bayes
-The Naive Bayes classifier is often used for musical classification as it is good when the dimension $p$ of the features space is large, makeing density estimation unattractive*. It makes the (naive) assumption that all the features are independent for a given class $i$. $$f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)$$
 
-## K- nearest - neighbor
+#### K- nearest - neighbor
 
 Another method for classification is k-nearest neighbor methods. It uses observations in the training set closest to $x$ to form $\hat{Y}$, the outputs. We often use Euclidean distance as a metric for closeness, although other methods exist. It is defined as
 $$ \hat{Y}(x) = \frac{1}{k}\sum_{x_i \in N_k(x)}y_i$$

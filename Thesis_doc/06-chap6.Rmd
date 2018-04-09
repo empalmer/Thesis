@@ -2,121 +2,28 @@
 
 ## Model Fit - Bach/Mendelssohn
 
-#### Lasso logistic
-```{r, eval = F}
-x <- model.matrix(composer~.,features)[,-1]
-y <- features[,1] %>% unname() %>% as.character
+#### Logistic Regression
 
-grid <- 10^(seq(10,-2,length = 100))
-lasso.mod <- glmnet(x,y,family = "binomial",alpha = 1, lambda = grid)
+When a lasso logistic classifier was fit, we got a mean standard error (MSE) of 0.154. We see that the density features stayed in the longest.
 
-train <- sample(1:nrow(x),nrow(x)/2)
-test <- as.matrix(x[-train,])
-y.test <- y[-train]
-y.train <- y[train] %>% unname () %>% as.character()
-
-lasso.mod <- glmnet(x[train,],y.train, family = "binomial" ,alpha= 1,
-                    lambda = grid, thresh = 1e-12)
-lasso.cv.out <- cv.glmnet(x, y,family = "binomial", alpha = 1)
-lasso.bestlam <- lasso.cv.out$lambda.min
-
-lasso.pred <- predict(lasso.mod, s = lasso.bestlam,
-                      newx = test, type = "response")
-lass <- rep("bach",length(y.test))
-lass[lasso.pred > .5] <- "mendelssohn"
-t <- table(lass,y.test)
-MSE_lasso <- (t[1,2]+t[2,1])/sum(t)
-MSE_lasso
-
-#plot(lasso.mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")
-plot_glmnet(lasso.mod, xvar = "lambda",xlim = c(-5,0))
+```{r,echo = F,fig.cap = 'Lasso Bach/Mendelssohn'}
+knitr::include_graphics("images/lasso_bach.png")
 ```
 
+#### LDA
+For linear discriminant analysis, we have a 5-fold cross validated MSE of 0.1558.
 
-#### K means
-```{r, eval = F, echo = F}
-km2 <- kmeans(features[,-1],2, nstart = 20)
+Most commonly our models incorrectly predict Mendelssohn songs to be composed by Bach. 
 
-d <- data.frame(PC1 = PCA$x[, 1],
-                PC2 = PCA$x[, 2],
-                cluster = as.factor(km2$cluster),
-                composer = features[,1])
 
-ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
-  geom_point() +
-  geom_text(aes(label = composer), vjust = 2)
+## Model fit Felix/Fanny
 
-x <- PCA$x
-km_pca2 <- kmeans(x,2,nstart = 20)
-d <- data.frame(PC1 = PCA$x[, 1],
-                PC2 = PCA$x[, 2],
-                cluster = as.factor(km_pca2$cluster),
-                composer = features[,1])
+#### Logistic regression
+When a lasso classifier was fit, we got a MSE of 0.35. We see that the density features and fifth scale degree stayed in the longest.
 
-ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
-  geom_point() +
-  geom_text(aes(label = composer), vjust = 2)
+```{r,echo = F,fig.cap = 'Lasso Fanny/Felix'}
+knitr::include_graphics("images/lassofelix.png")
 ```
+  
 
-K means fitted on the principle components
-
-## Model Fit - Felix/Fanny
-
-```{r, echo = F, eval = F}
-km2 <- kmeans(featuresm[,-1],2, nstart = 20)
-
-d <- data.frame(PC1 = PCAm$x[, 1],
-                PC2 = PCAm$x[, 2],
-                cluster = as.factor(km2$cluster),
-                composer = featuresm[,1])
-
-ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
-  geom_point() +
-  geom_text(aes(label = composer_m), vjust = 2)
-
-x <- PCA$x
-km_pca2 <- kmeans(x,2,nstart = 20)
-d <- data.frame(PC1 = PCAm$x[, 1],
-                PC2 = PCAm$x[, 2],
-                cluster = as.factor(km_pca2$cluster),
-                composer = featuresm[,1])
-
-ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
-  geom_point() +
-  geom_text(aes(label = composer_m), vjust = 2)
-
-```
-
-Unsurprisingly, since there is so few data and features currently, there are not many results. 
-
-#### Lasso Logistic
-
-```{r,eval  = F, echo = F}
-x <- model.matrix(composer_m~.,featuresm)[,-1]
-y <- featuresm[,1] %>% unname() %>% as.character
-
-grid <- 10^(seq(10,-2,length = 100))
-lasso.mod <- glmnet(x,y,family = "binomial",alpha = 1, lambda = grid)
-
-train <- sample(1:nrow(x),nrow(x)/2)
-test <- as.matrix(x[-train,])
-y.test <- y[-train]
-y.train <- y[train] %>% unname () %>% as.character()
-
-lasso.mod <- glmnet(x[train,],y.train, family = "binomial" ,alpha= 1,
-                    lambda = grid, thresh = 1e-12)
-lasso.cv.out <- cv.glmnet(x, y,family = "binomial", alpha = 1)
-lasso.bestlam <- lasso.cv.out$lambda.min
-
-lasso.pred <- predict(lasso.mod, s = lasso.bestlam,
-                      newx = test, type = "response")
-lass <- rep("felix",length(y.test))
-lass[lasso.pred > .5] <- "fanny"
-t <- table(lass,y.test)
-MSE_lasso <- (t[1,2]+t[2,1])/sum(t)
-MSE_lasso
-
-plot(lasso.mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")
-plot_glmnet(lasso.mod, xvar = "lambda",xlim = c(-5,0))
-```
-
+  

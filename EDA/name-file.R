@@ -42,15 +42,17 @@ setwd("~/Desktop/Thesis/Data/Fanny_working_krn")
 fanny_l <- list.files(path = "~/Desktop/Thesis/Data/Fanny_working_krn")
 fanny <-  map(fanny_l,piece_df,c("piece"))
 setwd(old)
+
+
 #==============================================================
 # felix
 felix_names <- list(c("f1o8p.xml","Minelied im Mai"), 
               c("f2o8p.xml","Das Heimweh"),
               c("f4o8p.xml","Erntelied"),
               c("f5o8p.xml","Pilgerspruch"))
-felix_krn <- list.files(path = "~/Desktop/Thesis/Data/Felix(working)_krn") 
+felix_krn <- list.files(path = "~/Desktop/Thesis/Data/Felix_working_krn") 
 old <- getwd()
-setwd("~/Desktop/Thesis/Data/Felix(working)_krn")
+setwd("~/Desktop/Thesis/Data/Felix_working_krn")
 felix <- map(felix_krn, piece_df, insts = c("piece"))
 setwd(old)
 #==============================================================

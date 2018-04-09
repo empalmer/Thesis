@@ -36,7 +36,7 @@ is_mel_int <- function(n1,n2, int){
 #'
 top_line2 <- function(piece,inst){
   inst_cols <- grep(inst,colnames(piece),value = T)
-  note_cols <- grep("n\\.v", inst_cols,value = T)
+  note_cols <- grep("n\\.n", inst_cols,value = T)
   n <- piece[,note_cols]
   if(length(note_cols)==1){
     x <- map_lgl(n,is.na)
@@ -48,6 +48,7 @@ top_line2 <- function(piece,inst){
   f <- function(i){max(which(i == F))-1}
   notes <- purrrlyr::by_row(x,f, .collate = "cols",
                             .labels = F)[[1]]
+  notes
 }
 #==============================================================
 #' voice_mel_ints
@@ -62,8 +63,9 @@ mel_ints <- function(piece,col){
   mel <- as.numeric(as.vector(na.omit(mel)))
   mel_dif <- c()
   for(i in 1:length(mel)-1){
-    mel_dif[i] <- min(max(mel[i],mel[i+1]) - min(mel[i],mel[i+1]),
-                      min(mel[i],mel[i+1]) + 12 - max(mel[i],mel[i+1]))
+    mel_dif[i] <- abs(mel[i]-mel[i+1] %% 12)
+      #min(max(mel[i],mel[i+1]) - min(mel[i],mel[i+1]),
+      #                min(mel[i],mel[i+1]) + 12 - max(mel[i],mel[i+1]))
   }
   mel_dif <- mel_dif + 1 # Change indexing to start at 1
   ints <- c("unison","m2", "M2","m3", "M3","p4","tt",
