@@ -1,7 +1,6 @@
 library(museR)
 library(tidyverse)
 
-
 #==============================================================
 # fanny
 fanny_names <- list(c("Wo_kommst_du_her","h1.krn"),
@@ -55,6 +54,12 @@ old <- getwd()
 setwd("~/Desktop/Thesis/Data/Felix_working_krn")
 felix <- map(felix_krn, piece_df, insts = c("piece"))
 setwd(old)
+
+# for(i in 1:length(felix_krn)){
+#   print(felix_krn[i])
+#   piece_df(felix_krn[i],"x")
+# }
+
 #==============================================================
 # bach
 

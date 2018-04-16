@@ -26,8 +26,8 @@ abstract: |
 # needed on the line after the |.
 acknowledgements: |
   I want to thank a few people.
-dedication: |
-  You can have a dedication here if you wish. 
+#dedication: |
+#  You can have a dedication here if you wish. 
 #preface: |
 #  This is an example of a thesis setup to use the reed thesis document class
 #  (for LaTeX) and the R bookdown package, in general.

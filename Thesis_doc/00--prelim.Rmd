@@ -2,7 +2,7 @@
 
 ## Acknowledgements {-}
 
-I want to thank a few people.
+Thanks guys
 
 <!-- ## Preface {-}
 
@@ -10,8 +10,9 @@ This is an example of a thesis setup to use the reed thesis document class(for L
 
 -->
 
-## Dedication {-}
+<!-- ## Dedication {-}
 
 Thank you to my cat for knowing when my writing was bad and sitting on my keyboard to delete a paragraph.  
+-->
 
 `r if(!knitr:::is_latex_output()) '## Abstract {-}'`

@@ -1,3 +1,10 @@
+for file in *
+do 
+  extract -f 1 "$file" > v_$file
+  extract -f 2 "$file" > pR_$file
+  extract -f 3 "$file" > pL_$file
+done
+
 
 # to get to humdrum file ~/humdrum-tools/humdrum
 rcheck c1.krn | grep = | tail -5
@@ -29,10 +36,10 @@ do
    rm g.txt
    rm a.krn
    rm b.krn
+   rm f.krn
    rm c.krn
    rm d.krn
    rm e.krn
-   rm z.krn
    rm r.txt
    rm $file.a.krn
    rm $file.b.krn
