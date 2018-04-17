@@ -41,7 +41,11 @@ lof: true
 # Delete the # at the beginning of the previous line if you'd like
 # to have a blank new line between each paragraph
 header-includes:
-- \usepackage{tikz,amsmath,abc}
+- \usepackage{tikz,amsmath,graphicx,}
+- \usetikzlibrary{shapes,arrows}
+- \newcommand*{\h}{\hspace{5pt}}% for indentation
+- \newcommand*{\hh}{\h\h}% double indentation
+
 
 ---
 

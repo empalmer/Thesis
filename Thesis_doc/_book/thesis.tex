@@ -134,23 +134,27 @@ infrequently explored field. In theory composers leave behind unconsious
 (or perhaps consious) signals that indicate a piece of music as thier
 own. Ideally these signals, or features can be extracted and used to
 build a model to predict the composer of a piece of music. For instance
-the siblings Fanny Hensel and Felix Mendelssohn, although very similar,
-likely have distingushing markers that mark their music apart. It is
-speculated that there are at least \ldots{} pieces that Fanny wrote that
-were published by Felix. Low level features, including frequencies of
-chords and scale degree usage were extracted from \ldots{} pieces known
-to be written by Felix and \ldots{} pieces known to be written by Fanny.
-These features were extracted using museR, an R package written by me*.
-Additionally, to check the validity of the model, pieces from J.S.
-Bach's Well Tempered Clavier were used to compare against Felix and
-Fanny. A lasso logistic model was then trained on Bach and Mendelsssohn
-data using 5-fold cross validation with a missclassification rate of
-\ldots{} . A lasso logistic model was then trained in the same way on
-Felix and Fanny data with a missclassification rate of \ldots{} Finally
-the 12 disputed pieces were checked and \ldots{}
+the siblings Fanny Hensel and Felix Mendelssohn, although very similar
+in compositional style, likely have featuresthat distingush their music.
+It is speculated that there are at least \ldots{} pieces that Fanny
+wrote that were published by Felix. Low level features, including
+frequencies of chords and scale degree usage were extracted from
+\ldots{} pieces known to be written by Felix and \ldots{} pieces known
+to be written by Fanny. These features were extracted using museR, an R
+package written by me*. Additionally, to check the validity of the
+model, pieces from J.S. Bach's Well Tempered Clavier were used to
+compare against Felix and Fanny. A lasso logistic model was then trained
+on Bach and Mendelsssohn data using 5-fold cross validation with a
+missclassification rate of \ldots{} . A lasso logistic model was then
+trained in the same way on Felix and Fanny data with a
+missclassification rate of \ldots{} Finally the 12 disputed pieces were
+checked and \ldots{}
 }
 
-	\usepackage{tikz,amsmath,abc}
+	\usepackage{tikz,amsmath,graphicx,}
+	\usetikzlibrary{shapes,arrows}
+	\newcommand*{\h}{\hspace{5pt}}% for indentation
+	\newcommand*{\hh}{\h\h}% double indentation
 % End of CII addition
 %%
 %% End Preamble
@@ -195,20 +199,21 @@ the 12 disputed pieces were checked and \ldots{}
     (or perhaps consious) signals that indicate a piece of music as thier
     own. Ideally these signals, or features can be extracted and used to
     build a model to predict the composer of a piece of music. For instance
-    the siblings Fanny Hensel and Felix Mendelssohn, although very similar,
-    likely have distingushing markers that mark their music apart. It is
-    speculated that there are at least \ldots{} pieces that Fanny wrote that
-    were published by Felix. Low level features, including frequencies of
-    chords and scale degree usage were extracted from \ldots{} pieces known
-    to be written by Felix and \ldots{} pieces known to be written by Fanny.
-    These features were extracted using museR, an R package written by me*.
-    Additionally, to check the validity of the model, pieces from J.S.
-    Bach's Well Tempered Clavier were used to compare against Felix and
-    Fanny. A lasso logistic model was then trained on Bach and Mendelsssohn
-    data using 5-fold cross validation with a missclassification rate of
-    \ldots{} . A lasso logistic model was then trained in the same way on
-    Felix and Fanny data with a missclassification rate of \ldots{} Finally
-    the 12 disputed pieces were checked and \ldots{}
+    the siblings Fanny Hensel and Felix Mendelssohn, although very similar
+    in compositional style, likely have featuresthat distingush their music.
+    It is speculated that there are at least \ldots{} pieces that Fanny
+    wrote that were published by Felix. Low level features, including
+    frequencies of chords and scale degree usage were extracted from
+    \ldots{} pieces known to be written by Felix and \ldots{} pieces known
+    to be written by Fanny. These features were extracted using museR, an R
+    package written by me*. Additionally, to check the validity of the
+    model, pieces from J.S. Bach's Well Tempered Clavier were used to
+    compare against Felix and Fanny. A lasso logistic model was then trained
+    on Bach and Mendelsssohn data using 5-fold cross validation with a
+    missclassification rate of \ldots{} . A lasso logistic model was then
+    trained in the same way on Felix and Fanny data with a
+    missclassification rate of \ldots{} Finally the 12 disputed pieces were
+    checked and \ldots{}
   \end{abstract}
 
 \mainmatter % here the regular arabic numbering starts
@@ -218,22 +223,20 @@ the 12 disputed pieces were checked and \ldots{}
 
 \section{Introduction:}\label{introduction}
 
-In the digital age data sets are everywhere. Billions of new data are
-generated daily, in banking, social media, and in scientific studies.
-These data can be in numerous forms. With the availability of the
-internet and social media data, text classification has become an
-promising form of data analysis. While text classification problems are
-very frequent, similar methods that classify music have not been
-explored as commonly explored. The purpose of this thesis is to use
-musical stylometry to quantify the difference between the compositions
-of the siblings Felix and Fanny Mendelssohn.
+The purpose of this thesis is to use musical stylometry to quantify the
+difference between the compositions of the siblings Felix and Fanny
+Mendelssohn. (I hate starting things help\ldots{})
 
 Treating text or music as data has challenges. Neither contains anything
-immediately analyzable. This also holds for music as data. First,
-analyzable features must identified that can be extracted for every
-text. These features can include word frequencies, length etc. Analysis
-of text using machine learning can find patterns, authors, or categories
-of text. Similar methods can also be used to classify music.
+immediately analyzable. With the increasing availability of the internet
+and social media data, text classification has become an promising form
+of data analysis. While text classification problems are very frequent,
+similar methods that classify music have not been as commonly explored.
+To exploret these problems, first analyzable features must identified
+that can be extracted for every text. These features can include word
+frequencies, length etc. Analysis of text using machine learning can
+find patterns, authors, or categories of text. Similar methods can also
+be used to classify music.
 
 Feature extraction is an essential part in text or music classification.
 Unlike in a data set of numerical or categorical values, text and music
@@ -254,66 +257,66 @@ of such disputed authorship exist throughout music history, most notably
 in the Renaissance.
 
 In both text and music classification, we must create features that can
-be calculated that would give some signal to indicate some conscious or
+be calculated that would give a signal to indicate some conscious or
 unconscious tendency of the composer that would make them
 distinguishable.
 
 \section{Brief history of text
 classification}\label{brief-history-of-text-classification}
 
-One of the earliest instances of text classification for determining
-authorship was on the Federalist Papers.(Mosteller \& Wallace, 1964).
+The Federalist Papers were one of the earliest instances of text
+classification for determining authorship.(Mosteller \& Wallace, 1964).
 The famous Federalist Papers were written under the pen name `Publius'.
 There are several of these disputed papers attributed to James Madison
 or Alexander Hamilton. The authors never admitted authorship, as some of
 the writings were contradictory to their later political positions
-(Adair, 1944). Prior to quantitatice analysis, historians had often
+(Adair, 1944). Prior to quantitative analysis, historians had often
 examined the papers using styles of previously known writings of Madison
 and Hamilton. Their analysis was often partially based on the content of
 the letters, for example the existence of citing English history is a
 trait more common to Hamilton. (Ford \& Bourne, 1897)
 
 In contrast, Mosteller and Wallace (1964) used the frequency of words
-such as and `by', `from', and `upon', to train the writings on a set of
-known writings by each author. These unconscious indicators were able to
-differentiate between the two writers, and the model was able to
+such as `and', `by', `from', and `upon', to train the writings on a set
+of known writings by each author. These unconscious indicators were able
+to differentiate between the two writers, and the model was able to
 identify the likely author of the disputed paper.
 
 \section{Feature selection}\label{feature-selection}
 
-Text analysis, such as in the Federalist Papers, is read one word after
-another. Information in a piece of music, however, is read in a variety
-of ways. It can be read left to right note by note, but it can also be
-read vertically as the harmony, or the notes played together. Also in a
-piece with several instruments, the above happens at the same time for
-each instrument. There are also aspects that take place over large
-sections, such as phrasing, or cadencial patterns. There are rules of
-counterpoint that are followed throughout the entire piece. Thus we need
-to find features that can be measured for each piece, or perhaps each
-measure or instrument, that can describe a certain piece of music. Then
-we must decide which features are those of rules and practices of
-classical music, and where the creativeness and individuality of a
-composer happens. As there are many different aspects of a piece,
-melodic changes, harmonies, etc, we can end up with many features to
-describe one piece. As in the case to be described in this thesis, we
-only have \textasciitilde{}150 total pieces, it is possible that the
-number of predictors \((p)\) can be greater than the sample size \((n)\)
-(I wrote this when I though there would be a lot more features\ldots{})
-We thus need to figure a clever way to decrease our predictor space.
-This can happen in choosing what features we want to use to model, or
-using a dimension reduction technique such as PCA.
+Text analysis, such as in the Federalist Papers, is accomplished by
+reading one word after another. Information in a piece of music,
+however, is read in a variety of ways. It can be read left to right note
+by note, but it can also be read vertically as the harmony, or the notes
+played together. Also in a piece with several instruments, the above
+happens at the same time for each instrument. There are also aspects
+that take place over large sections, such as phrasing, or cadential
+patterns. There are rules of counterpoint that are followed throughout
+the entire piece. Thus we need to find features that can be measured for
+each piece, or perhaps each measure or instrument, that can describe a
+certain piece of music. Then we must decide which features are those of
+rules and practices of classical music, and where the creativeness and
+individuality of a composer happens. As there are many different aspects
+of a piece, melodic changes, harmonies, etc, one can end up with many
+features to describe one piece. It is possible that the number of
+predictors \((p)\) can be greater than the sample size \((n)\), or that
+many features encode essentially the same thing. We thus need to figure
+a clever way to decrease our predictor space. This can happen in
+choosing what features we want to use to model, or using a dimension
+reduction technique such as PCA.
 
-Most of the musical stylometry papers have focused on composers in the
-Renaissance, Baroque, and Classical eras. The Mendelssohns were
-composing in the Romantic period. This choice might be because composers
-in earlier eras followed rules of counterpoint more exactly, or perhaps
-had less ``expressive'' allowances for their composing, thus making
-features easier. There are also more pieces with doubtful authorship in
-those eras. In addition Computer Assisted Research in the Humanities
-(CCARH) has a large corpus of encoded music from these times. As will be
-described later, the initial step of coding the music is the most time
-consuming, having music in a format immediately conducive to analysis is
-very helpful.
+Most of the classical musical stylometry papers have focused on
+composers in the Renaissance(1400-1600), Baroque(1600-1750), and
+Classical(1730-1820) eras. The Mendelssohns were composing in the
+Romantic era(1780-1910). The focus of earlier papers may have been
+because composers in earlier eras followed rules of counterpoint more
+exactly, or perhaps had less ``expressive'' allowances for their
+composing, thus making features easier. There are also more pieces with
+doubtful authorship in those eras. In addition Computer Assisted
+Research in the Humanities (CCARH) has a large corpus of encoded music
+from these times. As will be described later, the initial step of coding
+the music is the most time consuming, having music in a format
+immediately conducive to analysis is very helpful.
 
 \section{A Very Short Introduction to Music
 Theory}\label{a-very-short-introduction-to-music-theory}
@@ -332,12 +335,17 @@ set \(\text{note} \in \{A,B,C,D,E,F,G\}\). The value of a note can be
 changed up or down a half step, by adding a sharp or flat. The key
 signature of the piece indicates how many sharps or flats are normal for
 the piece. A piece's key can be major or minor, although the piece can
-internally modulate between the two. Intervals and chords can be either
-dissonant or consonant. Consonant intervals sound nice to our ears,
-whereas dissonant intervals add a sense of tension or unease, which is
-used to shape the feel of the music. In addition chords and intervals
-can be minor or major. Minor intervals feel ``sad'', whereas major
-intervals feel ``happy''.
+internally modulate between the two. The scale degree of a note depends
+on its position of the key that it is in. The time signature of a piece
+determines the number of beats that are in each measure. Intervals and
+chords can be either dissonant or consonant. Consonant intervals sound
+nice to our ears, whereas dissonant intervals add a sense of tension or
+unease, which is used to shape the feel of the music. In addition chords
+and intervals can be minor or major. Minor intervals feel ``sad'',
+whereas major intervals feel ``happy''. These are also known as
+sonorities, and divided into three types. Imperfect sonorities
+are\ldots{} perfect sonorities are \ldots{} and and dissonant sonorities
+are..
 
 For classical music there are some ``rules'' that most composers follow
 to some extent. These were followed more strictly in the Baroque era
@@ -346,9 +354,7 @@ species counterpoint is a type of counterpoint. One rule is that there
 are no parallel perfect consonances. Perfect consonances are octaves,
 fourths and fifths. Parallel indicates that they occur one after
 another. Another rule is that from one perfect consonance to another,
-the must proceed in contrary or oblique motion. This means that if a
-fourth interval changes to a fifth, that the direction of increase must
-be opposite.
+the notes must proceed in contrary or oblique motion.
 
 \section{Musical features}\label{musical-features}
 
@@ -369,18 +375,23 @@ often understood to be features such as note frequency, etc. High level
 features are more about a broader sense of the piece, including chord
 progressions, etc. High level features are often what music experts use
 in their analysis, whereas low-level features are more easily done with
-computer analysis.
+computer analysis. High level features often depend on the context of
+where the features was extracted from. For example, cadences and
+modulations (brief changes in key) throughout the piece are easily found
+when a human analyzes a piece of music, but are very hard to generalize
+as a feature. If one wants to use high-level features, they would first
+have to train the feature to see if it was performing accurately. For
+this reason, this paper focuses only on low level pieces, or pieces that
+are context independent.
 
 Especially in research regarding text categorization, data sets have
 enormous numbers of variables. We use ``feature'' and ``variable''
 interchangeably, with the exception when features are created from
 variables, and the distinction will be made in that case (Guyon \&
 Elisseeff, 2003). There are several variable selection algorithms that
-select the ``important'' variables. If we included every variable that
-we extract from the piece, our model would very likely be over fit.
-
-The first stage of feature selection is domain knowledge. These will be
-described in Chapter 2.
+select the ``important'' variables. If one included every variable that
+was extracted from a piece, the model would very likely be overfit. Thus
+some feature selection is important before fitting a model.
 
 \section{Background on Variable and Feature
 Selection}\label{background-on-variable-and-feature-selection}
@@ -389,34 +400,31 @@ Before analysis is done, numerous features are often extracted from the
 music without knowing a priori which ones will be helpful in identifying
 a composers' style. Thus we have to choose which features we want to use
 in our model. There are many ways to do this and existing variable
-selection algorithms that can help with this process.
+selection algorithms can help with this process.
 
-Several variable selection algorithms include variable ranking. Variable
-ranking uses a score function to assign a score to each possible
-variable. It is a computationally efficient method and is robust against
-overfitting as it introduces bias but may result in less variance. It is
-tempting to only include variables that have a high score. However, this
-possibly leads to redundancy. In addition, variables that are not
-important by themselves can have a significant performance improvement
-when considered with other variables. Popular variable ranking methods
-for classification are single variable classifiers and information
-theoretic ranking criteria.
+Variable ranking uses a score function to assign a score to each
+possible variable. It is a computationally efficient method and is
+robust against overfitting as it introduces bias but may result in less
+variance. It is tempting to only include variables that have a high
+score. However, this possibly leads to redundancy. In addition,
+variables that are not important by themselves can have a significant
+performance improvement when considered with other variables.
 
 Single variable classifiers rank the variable according to its
 individual predictive power. The predictive power can be measured in
-terms or error rate, or using the false positive or false negative rate
-(fpr, fnr). This classifier cannot distinguish variables that perfectly
-separate the data.
+terms of error rate, or using the false positive or false negative rate.
+This classifier cannot distinguish variables that perfectly separate the
+data.
 
-After knowing the ranking of a variable we then select which variables
+After knowing the ranking of a variable, we then select which variables
 will be useful for our model. This is known as variable subset
 selection. The three most common types of variable subset selection are
-wrappers, filters, and embedded methods. Filters do not involve any
+filters, wrappers, and embedded methods. Filters do not involve any
 machine learning to create the criteria for variable subset selection.
-Wrappers on the other hand use the ``performance of a learning machine
-trained using a given feature subset.'' Embedded methods perform
-variable selection in the process of training and are usually specific
-to given learning machines
+Wrappers on the other hand use the resulting performance from training a
+given features subset. Embedded methods perform variable selection in
+the process of training a model and are usually specific to given
+learning machines. **
 
 All possible subsets of variables is \(2^p-1\), which for large \(p\) is
 often computationally impossible. Strategies like best-first, branch and
@@ -435,19 +443,20 @@ unsupervised problem. The second is supervised.
 \section{Previous research.}\label{previous-research.}
 
 There have been numerous other applications of machine learning to
-music. Previous studies have used machine learning trained on a
+music. For example, a previous study used machine learning trained on a
 composer's music to have the computer learn the style and and compose a
 piece in a similar style. (Papadopoulos \& Wiggins, n.d.)
 
-Research on musical stylometry has focused on two types of data: audio,
+Research on musical stylometry has focused on two types of data: audio
 and sheet music. This analysis uses data in the form of sheet music. To
 predict a composer, a training data set of pieces of known composer is
-needed. Then that model can be fit to a testing data set to predict
-composer. If that shows good predictions, that model can be used on the
-pieces of unknown authorship. Musical stylometry can be used to resolve
-disputed authorship, but also to detect distinguishing musical styles of
-composer, even if there are no disputed pieces. This can also be used to
-look at the development of a composers musical style over time.
+needed. Then a model can be fit to a testing data set to predict
+composer. If the fitted model shows good predictions, that model can be
+used on the pieces of unknown authorship. Musical stylometry can be used
+to resolve disputed authorship, but also to detect distinguishing
+musical styles of composer, even if there are no disputed pieces. This
+same process can also be used to look at the development of a composers
+musical style over time.
 
 To my knowledge there are currently four studies that have looked at the
 question of classifying composers by extracting features from sheet
@@ -466,11 +475,12 @@ separated by two centuries. They also compared Josquin to composers
 closer in time and style: Ockeghem and Du Fay, who are only one or two
 generations separated. These composers could likely be differentiated by
 experienced listeners of Renaissance music. Finally they compared
-Josquin's contemporaries de Orto and La Rue.
+Josquin's contemporaries de Orto and La Rue to find differences in
+style.
 
 Work by Speiser and Gupta (Speiser \& Gupta, n.d.) also analyzed Josquin
 and his contemporaries to attempt to classify unknown works. They had
-130 works by Josquin, 93 of Ockeghem, 183 of la Rue, and 287 works
+130 works by Josquin, 93 b Ockeghem, 183 by la Rue, and 287 works
 possibly attributed to Josquin.
 
 Work by Backer et. al.(2005) looked at differences in style between J.S.
@@ -478,13 +488,13 @@ Bach, Telemann, Handel,Haydn and Mozart and then examined a disputed
 piece: BWV 534 which is believed to be composed by J.S. Bach, J.L.
 Krebs, or W.F. Bach (J.S. Bach's son). (Backer \& Kranenburg, 2005)
 
-Mearns et. al. (Mearns, Tidhar, \& Dixon, 2010) did an exploration of
-extracting high level musical features on J.S. Bach, Buxtehude, Ruggero,
-Vivaldi, Monteverdi, Corelli, and Frescobaldi. The idea was that they
-all adhered to the laws of counterpoint, and that they possibly still
-had distinct uses of the counterpoint. They used pieces across
-instrumental genres with the idea that stylistic counterpoint would
-remain constant across com positional type.
+Mearns et. al. (Mearns, Tidhar, \& Dixon, 2010) extrected high level
+musical features on J.S. Bach, Buxtehude, Ruggero, Vivaldi, Monteverdi,
+Corelli, and Frescobaldi. The idea was that they all adhered to the laws
+of counterpoint, and that they possibly still had distinct uses of the
+counterpoint. They used pieces across instrumental genres with the idea
+that stylistic counterpoint would remain constant across compositional
+type.
 
 \section{Previous choices of features in
 applications}\label{previous-choices-of-features-in-applications}
@@ -502,13 +512,13 @@ where a ``window'' is created over a given number of bars or notes, and
 moves through the whole piece. For each window, a feature is recorded.
 These can be overlapping windows by creating an ``offset'' of a number
 of beats or notes. This produces more data, as instead of one feature
-for each piece, there is a feature for each window, and there an be tens
-of windows in each piece.
+for each piece, there is a feature for each window, and there can be
+tens of windows in each piece.
 
 Common types of features used before in music analysis are: Frequencies
 or fractions of notes, chords, etc. are a common low-level feature.
 These include the fraction of the score that consisted of dissonant
-sororities, as well as the fraction of bars that begin with a dissonant
+sonorities, as well as the fraction of bars that begin with a dissonant
 sonority. Other features include the type of intervals or consonances
 present in a piece: perfect consonance, imperfect consonances, and
 dissonance. In polyphonic pieces, the four types of motion, (parallel,
@@ -524,17 +534,19 @@ They chose a window of 30 bars to create a high enough number of
 fragments per piece and a low enough variance of the feature values
 between fragments. They chose to extract 20 features including features
 of fractions and measuring stability, and entropy. They computed the
-entropy of the probability of occurrence of ways of thinking about
-chords; chords are the same no matter what scale degree they are on, and
-distinguishing chords differently. Next the entropy was calculated given
-the probability of each pitch in the score. Entropy was calculated by
+entropy of the probability of occurrence chords. They measured this two
+different ways, defining chords to be the same no matter what scale
+degree they are on, and distinguishing chords differently depending on
+scale degree. Next the entropy was calculated given the probability of
+each pitch in the score. Entropy was calculated by
 \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where \(p_i\) is the probability of
-occurrence, and \(N\) is the total number.Next they the average number
-of active voices at one time. This represents the voice density of the
-piece. Then for every interval, the duration of that interval was
-divided by the total duration of all intervals. Next the total duration
-of parallel thirds, fourths, and sixths divided by the total duration of
-all intervals was measured. Finally a measure of suspensions was found.
+occurrence, and \(N\) is the total number. Next they the calculated
+average number of active voices at one time which represents the voice
+density of the piece. Then for every interval, the duration of that
+interval was divided by the total duration of all intervals. Next the
+total duration of parallel thirds, fourths, and sixths divided by the
+total duration of all intervals was measured. Finally a measure of
+suspensions was found.
 
 Brinkman et.al (Brinkman et al., n.d.) used both high-level and
 low-level features. The high level features were 9-8 suspensions,
@@ -549,42 +561,43 @@ matrices for the rhythms of the pieces, and Markov transition matrices
 of the pitches in each piece. In total, this lead to a total of 3000
 features.
 
-Other features that can be helpful for Renaissance and baroque composers
-look specifically at differences in counterpoint. Since most composers
-in that era for the most part followed the rules of counterpoint, these
-features are created to try to detect specific identifiable uses of
-counterpoint. These features include counterpoint movement types,
-dissonance distributions, parallel intervals of each kind, and vertical
-interval distributions. Mearns used such features (Mearns et al., 2010).
-They calculated intervals for every subsequent pitch in each part. A
-weighted count of each interval was stored. They were weighted according
-to duration to account for the perception of use. The count vector was
-then normalized to account for the weighted interval content of the
-score. For movement types, they used ideas based on the rules of first
-species counterpoint. (Similar, oblique, parallel, and contrary). It
-does not make musical sense to compare every single adjacent group of
-notes. Many of the note groups occurring at fractional metrical
-positions consist of notes held from the previous note group with the
-addition of a passing or neighbor note in another voice or voices. For
-this reason, only notes that occur at strong metrical positions, in this
-case on each beat of the bar, are used for contrapuntal evaluation. This
-is a relatively simplistic method of choosing structurally important
-notes. In Bach, for example, the majority of voice progressions take
-place at a closer level. The features for counterpoint method include
-the nature of the approach to a perfect consonance, whether a dissonance
-is properly prepared (i.e.~preceded by a consonant interval containing
-the same note which then becomes dissonant), whether a dissonance is
-correctly resolved downwards by step, details of parallel intervals, and
-the overall distribution of contrapuntal movements (oblique / contrary /
-similar / parallel / other). A feature for total vertical interval count
-is also used.
+Other features that can be helpful for distinguishing Renaissance and
+Baroque composers look specifically at differences in counterpoint.
+Since most composers in that era for the most part followed the rules of
+counterpoint, these features are created to try to detect specific
+identifiable uses of counterpoint. These features include counterpoint
+movement types, dissonance distributions, parallel intervals of each
+kind, and vertical interval distributions. Mearns used such features
+(Mearns et al., 2010). They calculated intervals for every subsequent
+pitch in each part. A weighted count of each interval was stored. They
+were weighted according to duration to account for the perception of
+use. The count vector was then normalized to account for the weighted
+interval content of the score. For movement types, they used ideas based
+on the rules of first species counterpoint. (Similar, oblique, parallel,
+and contrary). It does not make musical sense to compare every single
+adjacent group of notes. Many of the note groups occurring at fractional
+metrical positions consist of notes held from the previous note group
+with the addition of a passing or neighbor note in another voice or
+voices. For this reason, only notes that occur at strong metrical
+positions, in this case on each beat of the bar, are used for
+contrapuntal evaluation. This is a relatively simplistic method of
+choosing structurally important notes. In Bach, for example, the
+majority of voice progressions take place at a closer level. The
+features for counterpoint method include the nature of the approach to a
+perfect consonance, whether a dissonance is properly prepared
+(i.e.~preceded by a consonant interval containing the same note which
+then becomes dissonant), whether a dissonance is correctly resolved
+downwards by step, details of parallel intervals, and the overall
+distribution of contrapuntal movements (oblique / contrary / similar /
+parallel / other). A feature for total vertical interval count is also
+used.
 
 \section{Previous modeling in
 applications}\label{previous-modeling-in-applications}
 
 Most of the previous research has needed to do some kind of feature
-selection. A lot of features are extracted as a prior i we don't know
-which features are distinguishing.
+selection. Usually features are extracted before any analysis is done,
+and we dont know before hand which features are distinguishing.
 
 A modification of a forward selection (Floating Forward Selection
 (Pudil, Novovičová, \& Kittler, 1994) was used in Backer's (2005) study
@@ -751,31 +764,32 @@ process}\label{about-the-data-and-conversion-process}
 \section{Pieces used}\label{pieces-used}
 
 The majority of the pieces used in this paper were lieder of Felix
-Mendelssohn and Fanny Hensel. While both composers composed different
-types of music, the majority of available scores from Fanny Hensel were
-lieder. Felix Mendelssohn composed many different styles of music,
-orchestral, piano, etc. Fanny Hensel in contrast has an available
-existing corpus of mostly lieder, although she did compose many works
-for solo piano and orchestra. Of Felix's music there were a total of 116
-pieces: lieder of Op 8 (12 pieces), op 9 (12 pieces), op 19(6 pieces),
-op 34 (6 pieces), op 47 (6 pieces), op 57 (6 pieces), op 71 (6 pieces),
-and 6 pieces of lied without opus numbers, also 56 lied without a
-collection.
+Mendelssohn and Fanny Hensel. Felix Mendelssohn composed many different
+styles of music, orchestral, piano, etc. Fanny Hensel in contrast has an
+available existing corpus of mostly lieder, although she did compose
+many works for solo piano and orchestra. Of Felix's music there were a
+total of 116 pieces: lieder of Op 8 (12 pieces), op 9 (12 pieces), op
+19(6 pieces), op 34 (6 pieces), op 47 (6 pieces), op 57 (6 pieces), op
+71 (6 pieces), and 6 pieces of lied without opus numbers, also 56 lied
+without a collection.
 
 Of Fanny's music, a total of 43 pieces were used: 23 lieder were used
 from her lieder without name collection, 10 from her Wo kommst du Her
 collection, and 10 from an unnamed collection.
 
-Data from JS Bach was also used. These data were available in Kern Score
-format. from the Center for Computer Assisted Research in the
+Data from JS Bach were also used. These data were available in Kern
+Score format from the Center for Computer Assisted Research in the
 Humanities. (CCARH). The pieces used were from the Well Tempered Clavier
-(WTC). These were written as training pieces and each book contains 24
-pieces with one in every possible key. These were chosen as the data
-were more easily accessible (no scanning was required), and they were a
-similar format as the Mendelssohn songs, written as for solo piano(or
-harpsichord).
-\begin{figure}
-\includegraphics[width=0.5\linewidth]{images/scorephoto} \caption{A picture of a score}\label{fig:unnamed-chunk-1}
+(WTC). These were written as training pieces and each collection
+contains 24 pieces with one in every possible key. Pieces from the Well
+Tempered Clavier were chosen as the data were more easily accessible (no
+scanning was required) and they were a similar format as the Mendelssohn
+songs, written as for solo piano (or harpsichord).
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/test.png}
+\caption{Flowchart of the conversion process from physical copy to dataframe}
+\label{subd}
 \end{figure}
 \section{Optical music recognition}\label{optical-music-recognition}
 
@@ -784,15 +798,21 @@ copies. Sheet music as a form of data requires a lengthy process of
 conversion before being able to be used in any analysis. Simply scanning
 the scores into, say, a PDF, gives no musical semantics and can only be
 viewed on screen or printed on paper. Thus, the two main steps in
-reading in data from sheet music are: using optical music recognition
-software to transform physical scores into digital formats, and
-second,to read the digital format in to R where subsequent analysis can
-be done.
-
+reading in data from sheet music are: first using optical music
+recognition software to transform physical scores into digital formats,
+and second, to read the digital format in to R where subsequent analysis
+can be done.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.50]{images/scorephoto.JPG}
+\caption{Score in physical form before conversion process has started}
+\label{subd}
+\end{figure}
 The scores used in this paper were obtained from physical copies
 available in the Reed music library. These scores were then scanned
-using software designed for optical music recognition (OMR). Optical
-music recognition requires learning from graphical and textual
+using software designed for optical music recognition (OMR).
+
+Optical music recognition requires learning from graphical and textual
 information. The main things the software must pick up are the locations
 of bar lines, notes, rests, slurs, dynamic markings, tempo markings,
 lyrics etc. Basic optical music recognition has been around since 1966.
@@ -813,26 +833,32 @@ analysis of bounding boxes and projections, joining graphical
 primitives, such as combining extracted objects such as notes, note
 heads, and note beams to connect them in a musically correct way to form
 chords etc. Other methods use statistical models for analyzing musical
-primitives (the objects its trying to classify) such as Neural Networks,
-Support Vector Machines, k-Nearest Neighbor, and Hidden Markov Models.
+primitives (the objects the OMR is trying to classify) such as Neural
+Networks, Support Vector Machines, k-Nearest Neighbor, and Hidden Markov
+Models.
 
-The next step OMR preforms is syntactical analysis and validation. This
+The next step OMR performs is syntactical analysis and validation. This
 step essentially uses defined grammars describing the organization of
 music notation in terms of music symbols. This makes the classification
 problem simpler, as there are existing rules and relationships between
 musical symbols.
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"images/museScore.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-\begin{figure}
-\includegraphics[width=400px]{images/museScore} \caption{A score in MuseScore format after being read by PhotoScore}\label{fig:unnamed-chunk-2}
+
+The two OMR softwares used in this paper were PhotoScore and Audiveris.
+Each has its own benefits and issues. Photo Score works by scanning the
+physical score on a flatbed scanner at a high resolution. It then uses
+OMR techniques to output a musicXML file that can be read in by most
+music composing software, such as Sibelius, Finale or Muse Score.
+
+Audiveris in contrast works by inputting a high resolution PDF and then
+uses OMR techniques to output a music XML file. Often, high enough
+resolution PDFs do not exist, so the physical scores must also be
+scanned by any garden variety scanner.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.30]{images/museScore.png}
+\caption{A score in MuseScore format after being read by an OMR like PhotoScore or Audiveris}
+\label{subd}
 \end{figure}
-The OMR used in this paper was Photo Score. Photo Score works by
-scanning the score on a flatbed scanner at a high resolution. It then
-uses OMR techniques to output a musicXML file that can be read in by
-most music composing software, such as Sibelius, Finale or Muse Score.
 MusicXML is commonly used as a format for digital music, as it is
 conducive to representing sheet music and music notation, and it can be
 transferable to many different music software. Muse Score was chosen to
@@ -842,68 +868,46 @@ software that can read MusicXML.
 After being scanned by PhotoScore and read into Muse Score, each piece
 was proof-read and corrected. This involves looking through every piece
 line by line for each bar to ``spell check'' the digital version.
-PhotoScore did a very impressive job recognizing notes, but often had
-issues recognizing rhythms. There were on average approximately 6 issues
-per piece. Unfortunately, the scanning process is very lengthy and time
-consuming, as the scanning often gives a large number of mistakes. Often
-the score must be then scanned again. In addition the proof-reading
-process is lengthy. We must check each note and theme for errors against
-the original score, and change the afflicted notes using Muse Score. The
+PhotoScore did a good job recognizing notes, but often had issues
+recognizing rhythms, and had issues keeping the structure of the piece.
+Often in the scanning process clefs or bar lines were not found, causing
+PhotoScore to output every staff on one line. Using PhotoScore, there
+were on average approximately 6 minor issues per piece, although there
+were on occasion major structural issues. Audiveris often added extra
+beats to measures. It also always identified a bass clef as a baritone
+clef.
+
+Unfortunately, the scanning process is very lengthy and time consuming,
+as the scanning often gives a large number of mistakes. Often the score
+must be then scanned again. In addition the proof-reading process is
+lengthy. One must check each note and theme for errors against the
+original score, and change the afflicted notes using Muse Score. The
 corrected score must then be output as a musicXML file. In addition,
-there were some pieces that PhotoScore had a hard time reading. These
-pieces were then entered into MuseScore by hand and then proofread.
+there were some pieces that PhotoScore or Audiveris had a hard time
+reading. These pieces were then entered into MuseScore by hand and then
+proofread.
 
 MusicXML on its own is not conducive to converting into a data frame as
 representing the single half note middle C looks like this:
-\begin{verbatim}
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC
-    "-//Recordare//DTD MusicXML 0.5 Partwise//EN"
-    "http://www.musicxml.org/dtds/partwise.dtd">
-<score-partwise>
-  <part-list>
-    <score-part id="P1">
-      <part-name>Music</part-name>
-    </score-part>
-  </part-list>
-  <part id="P1">
-     <measure number="1">
-      <attributes>
-        <divisions>1</divisions>
-        <key>
-          <fifths>0</fifths>
-        </key>
-        <time>
-          <beats>4</beats>
-          <beat-type>4</beat-type>
-        </time>
-        <clef>
-          <sign>G</sign>
-          <line>2</line>
-        </clef>
-      </attributes>
-      <note>
-        <pitch>
-          <step>C</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <type>whole</type>
-      </note>
-    </measure>
-  </part>
-</score-partwise> 
-\end{verbatim}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.30]{images/mxlc.png}
+\caption{A half middle C in musicXML encoding}
+\label{subd}
+\end{figure}
 We then need to convert into a format more easily readable into R. The
 Kern Score music format is much more easily readable. It has clearly
 expressed time signature, bar, beat and musical voicing information
-(Mearns et al., 2010)(mearns). Because of this, it is also more
-conducive to being read into an R data frame. The below picture shows
-how a basic piece of music corresponds to a .krn file.
-\begin{figure}
-\includegraphics[width=0.5\linewidth]{images/krnmusic} \caption{How sheet music corresponds to kern files}\label{fig:unnamed-chunk-4}
+(Mearns et al., 2010). Because of this, it is also more conducive to
+being read into an R data frame. The below picture shows how a basic
+piece of music corresponds to a .krn file.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.50]{images/krnmusic.png}
+\caption{How sheet music corresponds to kern files}
+\label{subd}
 \end{figure}
-Kern files are organized with columns each representing one line of
+Kern files are organized with columns each representing one staff of
 music. Each line of a Kern file represents one note of one value of a
 time base. The time base for a Kern file is based on the smallest
 (shortest) rhythm value of a note found in a piece. For example, if a
@@ -915,8 +919,8 @@ The pitch of each note is represented by the letters a through g. The
 case (lower or upper) as well as the repetition (c or ccc) represents
 which octave the pitch occurs. Any accidental is represented with a \#,
 -, or n symbol. Each instrument/staff in a piece is represented using
-one (or more) columns called splines. For example, in most Lied, there
-is voice and piano. There are thus three splines, one for voice, one for
+one (or more) columns called splines. For example, most lieder consist
+of voice and piano. There are thus three splines, one for voice, one for
 the treble clef staff of the piano, and one for the bass clef of the
 piano. In addition, there are splines that contain the text for the
 voice for the corresponding notes. This was not of interest to the
@@ -932,12 +936,12 @@ In addition, there is a lot of information about the appearance of the
 piece, stem direction etc for notes, but this was decided as not
 important for determining style, so it was removed.
 
-We convert to .krn format by using Humdrum's function xml2hum that
-converts a musicXML file into a .krn file. Humdrum is a computational
-music software used to analyze music. It is a command line tool that has
-many functions for music analysis. The Kern file type can be read much
-more easily into R. Compared to above, the code for a single middle c
-whole note would be :
+We convert to kern format by using Humdrum's function \texttt{xml2hum}
+that converts a musicXML file into a kern file. Humdrum is a
+computational music software used to analyze music. It is a command line
+tool that has many functions for music analysis. The Kern file type can
+be read much more easily into R. Compared to above, the code for a
+single middle c whole note would be :
 \begin{verbatim}
 **kern
 *clefG2
@@ -954,16 +958,19 @@ notes and the soprano line has a lot of 32nds). This conversion
 essentially adds dots as placements so that the splines can line up
 correctly by measure and beat.
 
-The CCARH has a large data base mainly baroque and Renaissance composers
-already in the Kern format, which is where the Bach data came from. The
-files that were scanned need to be separated into having a separate file
-for each staff, which would mean a seperate file for each instrument. In
-addition, since we are focused on musical style, the text of the pieces
-are removed in this stage. In our case for each piece there are always
-two or three files for each piece, which are voice, piano right hand,
-and piano left hand. This is necessary to avoid the bugs in xml2hum that
-have issues when staffs don't necessarily match up as a result of the
-conversion process, most often by rhythm.
+The CCARH has a large data base containing work mostly Baroque and
+Renaissance composers already in the Kern format, which is where the
+Bach data came from.
+
+The files that were scanned (ie all pieces by Felix and Fanny) need to
+be separated into separate file for each staff, ie a seperate file for
+each instrument. In addition, since we are focused on musical style, the
+text of the pieces is removed in this stage. In the case of analyzing
+lieder, each piece always has two or three files. These files consist of
+voice, piano right hand, and piano left hand. This is necessary to avoid
+the bugs in \texttt{xml2hum} that have issues when staffs don't
+necessarily match up as a result of the conversion process. This is
+often caused by an inconsistency in time base.
 
 \section{.krn to R}\label{krn-to-r}
 
@@ -974,7 +981,7 @@ three. MuseR's \texttt{krn2df()} and \texttt{piece\_df()} functions read
 in .krn files and output a data frame in R for each piece. First the
 data in .krn format are read in line by line using R's
 \texttt{readLines()} function. This takes every line of the .krn file
-and converts it into a vector. Each entry contains the rythem value and
+and converts it into a vector. Each entry contains the rhythem value and
 note value for all notes in that line. If there are multiple notes
 played at the same time, they are all in one line. The notes are
 separated by splitting up the string by spaces. This converts a single
@@ -982,16 +989,16 @@ string representing one Kern line to multiple strings each representing
 one note (or dot placeholder) for one Kern line. Then each entry is
 separated out into the theme and note value for each note. Each line
 contains the following columns: the measure the note occurs in, the
-rhythm value for the (for example 4), note name, octave inclusive (for
-example cc), note name (octave exclusive){[} C sharp{]}. In addition,
-for the whole piece the key signature and meter are recorded as columns.
-If there are 3 splines and each spline has at most one note at a time,
-there would thus be \(3 + 3*3=12\). If there are 3 splines and one of
-the splines has at most 3 values, that is equivalent to having 5 total
-splines there are then \$ 3 + 3*5 = 18\$ columns.
+rhythm value for the note (for example 4), note name, octave inclusive
+(for example cc), note name (octave exclusive){[} C sharp{]}. In
+addition, for the whole piece the key signature and meter are recorded
+as columns. If there are 3 splines and each spline has at most one note
+at a time, there would thus be \(3 + 3*3=12\). If there are 3 splines
+and one of the splines has at most 3 values, that is equivalent to
+having 5 total splines there are then \$ 3 + 3*5 = 18\$ columns.
 
 A lot of data included in the .krn files are not necessary. For example,
-we assume that whether or not a note has a step up or stem down offers
+we assume that whether or not a note has a stem up or stem down offers
 no help in classifying composer style, so this information is removed
 when converting to an R data frame.
 
@@ -1127,12 +1134,12 @@ between the composers for the mean density.
 \begin{figure}
 \centering
 \includegraphics{images/Couplet.png}
-\caption{\label{fig:unnamed-chunk-8}Pairs plot}
+\caption{\label{fig:unnamed-chunk-4}Pairs plot}
 \end{figure}
 \begin{figure}
 \centering
 \includegraphics{images/PCA_bach.png}
-\caption{\label{fig:unnamed-chunk-9}PCA}
+\caption{\label{fig:unnamed-chunk-5}PCA}
 \end{figure}
 As we can see from the above biplot, it seems like the second principal
 component encodes a sense of pleasant consonances. We have perfect
@@ -1143,7 +1150,7 @@ together.
 \begin{figure}
 \centering
 \includegraphics{images/corrfanny.png}
-\caption{\label{fig:unnamed-chunk-10}Felix/Fanny Correlations}
+\caption{\label{fig:unnamed-chunk-6}Felix/Fanny Correlations}
 \end{figure}
 We can see from the above pairwise distribution plot that we still have
 a high correlation between scale degrees 3 and 6. However we do not see
@@ -1153,12 +1160,12 @@ the Bach data set is only solo piano music.
 \begin{figure}
 \centering
 \includegraphics{images/fPCA.png}
-\caption{\label{fig:unnamed-chunk-11}PCA felix/fanny}
+\caption{\label{fig:unnamed-chunk-7}PCA felix/fanny}
 \end{figure}
 \begin{figure}
 \centering
 \includegraphics{images/fpca_skree.png}
-\caption{\label{fig:unnamed-chunk-12}Felix/Fanny skree plot}
+\caption{\label{fig:unnamed-chunk-8}Felix/Fanny skree plot}
 \end{figure}
 \chapter{Models}\label{models}
 
@@ -1314,7 +1321,7 @@ When a lasso logistic classifier was fit, we got a mean standard error
 \begin{figure}
 \centering
 \includegraphics{images/lasso_bach.png}
-\caption{\label{fig:unnamed-chunk-13}Lasso Bach/Mendelssohn}
+\caption{\label{fig:unnamed-chunk-9}Lasso Bach/Mendelssohn}
 \end{figure}
 \subsubsection{LDA}\label{lda}
 
@@ -1333,7 +1340,7 @@ density features and fifth scale degree stayed in the longest.
 \begin{figure}
 \centering
 \includegraphics{images/lassofelix.png}
-\caption{\label{fig:unnamed-chunk-14}Lasso Fanny/Felix}
+\caption{\label{fig:unnamed-chunk-10}Lasso Fanny/Felix}
 \end{figure}
 \chapter{Discussion}\label{discussion}
 
