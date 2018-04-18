@@ -1015,43 +1015,93 @@ instance of the note being attacked.
 To the best of my knowledge, there is currently no package of R that has
 been built to analyze sheet music. There are existing packages (such as
 tuneR) that examine audio formats of music. The intention of this thesis
-was to create a package, museR, that takes sheet music in the proper
-form (musicXML or .krn) and does all of the analysis using R.
+was to create a package, museR, that imports sheet music in the proper
+form (musicXML or Kern) and does all of the analysis using R.
 
-\subsubsection{Reading in data}\label{reading-in-data}
+\section{Importing data into R}\label{importing-data-into-r}
 
-MuseR is equipped to take in data in the .krn format. The functions for
-this are \texttt{kern2df()} and \texttt{piece\_df()} These are most
-usefully in the form of individual splines. This allows for naming the
-columns according to instrument. If the following piece is represented
-in .krn format by
+MuseR is equipped to import data in the Kern format. The functions for
+converting these files are \texttt{kern2df()} and \texttt{piece\_df()}
+These are most usefully in the form of individual splines. This allows
+for naming the columns according to instrument. Below we have a short
+piece appearing as it would look from MuseScore.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/ex1m.png}
+\caption{Example musescore format excerpt}
+\label{subd}
+\end{figure}
+This piece would have the following Kern format representation:
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/ex1k.png}
+\caption{Example kern format excerpt of the above musescore}
+\label{subd}
+\end{figure}
+Using museR's \texttt{piece\_df()} function to create the following data
+frame.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/ex1r.png}
+\caption{Example R data frame converted from the above MuseScore}
+\label{subd}
+\end{figure}
+Data in R are commonly expressed as data frames. Expressing music as a
+data frame has challenges, as music cannot be easily expressed in
+rectangular form. Music as a data structure is very rugged. When
+expressing it in rectangular form, there needs to be placeholder or
+padding entries to account for the nonrectangularness. MuseR's
+\texttt{piece\_df()} works by using regular expressions to extract note
+and rhythem information. It uses NA and . values to indicate empty
+spaces and duration respectively.
 
-\includegraphics[width=0.5\linewidth]{images/ex1m}
-\includegraphics[width=0.5\linewidth]{images/ex1k}
-
-\texttt{piece\_df()} outputs the following data frame
-
-\includegraphics[width=0.75\linewidth]{images/ex1r}
+The output from \texttt{piece\_df()} follows the same ideas as the
+structure of kern files. It has ``.'' values similar to the Kern dots
+that represent the duration of the note for the timebase. This kind
+structure is good for certain types of features, where we are intersted
+only in the type of note happening, the time of the attack of the note,
+or without considering rhythem. Sometimes, we are intersted in how long
+the note lasts. The \texttt{durration\_df()} function corrects this
+issue. It converts the \texttt{NA}s representing duration and replaces
+them with the note value that is currently happening. This allows for
+analysis that considers duration. The below figure represents the
+durrational version of the above data frame.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/ex1r.png}
+\caption{Example of durrationaly conveted data frame equivalent to the above data frame (need to change)}
+\label{subd}
+\end{figure}
+\section{Features currently supported in
+museR}\label{features-currently-supported-in-muser}
 
 \subsubsection{Melodic intervals}\label{melodic-intervals}
 
 Melodic intervals, or the interval between two successive notes, are
-found using the \texttt{mel\_ints()} function. This first calculates the
-top line of any instrument. This then outputs the proportion of each
-melodic interval happening over the whole piece. There are 12 possible
-intervals that are counted (ignoring augmented and diminished):
+found using the \texttt{mel\_ints()} function. It is currently only
+equipped to look at melodic intervals for the top note of each staff. In
+this context, it is most commonely used for analyzing melodic intervals
+of the voice. The function first extracts the top line of any
+instrument, and then outputs the proportion of each melodic interval
+happening over the whole piece. There are 12 possible intervals that are
+counted (ignoring augmented and diminished):
 unison,m2,M2,m3,M3,p4,tt,p5,m6,M6,m7,M7. \texttt{mel\_ints()} outputs a
 vector of the proportion of each of the intervals.
-
-\includegraphics{images/ex2.png}
-
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/ex2.png}
+\caption{Example of calculating proportion of melodic intervals}
+\label{subd}
+\end{figure}
 For example if this function was run on the above piece, the melodic top
 line intervals would be: \(\{(f,c),(c,d),(d,f)\} = \{p4,M2,m3\}\), which
-would output a proportion of: \((0,1/3,1/3,0,0,1/3,0,0,0,0,0,0)\)
+would output the proportion vector \((0,1/3,1/3,0,0,1/3,0,0,0,0,0,0)\).
 
-Similarly the \texttt{connsonance()} function outputs the proportion of
-consonant (perfect, imperfect, dissonant) intervals over the whole piece
-by calling \texttt{mel\_ints()}.
+If we are interested in the types of melodic intervals, we can use the
+\texttt{connsonance()} to examine the proportion of consonant (perfect,
+imperfect, dissonant) intervals over the piece. This function works by
+calling \texttt{mel\_ints()} and then adding up the perfect, imperfect,
+and dissonant intervals proportions.
 
 \subsubsection{Density}\label{density}
 
@@ -1068,17 +1118,15 @@ and the second measure woudl have a beat density of 2.
 
 For most musical analysis, the key of the piece is important in
 determining chords, etc. The key is based on the key signature, which is
-always given in a .krn file. Kern files from CCARH have the key of the
+always given in a Kern file. Kern files from CCARH have the key of the
 piece given, but scanned files do not. For kern files from CCARH,
-\texttt{Major\_minor()} extracts the key given by the .krn file. for
+\texttt{Major\_minor()} extracts the key given by the Kern file. for
 scanned files, \texttt{Major\_minor()} identifies the two options for
 key given the key signature. For example, if there was a key signature
 with one sharp, the options would be G Major or E minor. The tonic for
 each option is identified, and then the count of instances of both
 choices for tonic is made. The key is determined by which of the options
-for tonic has the higher count. When this was tested on the WTC pieces,
-it correctly classified x/48 of them. (I think I should add some
-weighting for the first and last note in the future.. )
+for tonic has the higher count.
 
 \subsubsection{Prop scale degree}\label{prop-scale-degree}
 
@@ -1095,11 +1143,9 @@ Suspended chords are currently not supported by MuseR. Chords that
 begin, or are ``attacked'' at the same time count.
 
 First, the key of the piece is found, as different chords depend on the
-key.
-
-Next, the times notes are played at the same time are extracted into a
-list. Then the number of unique notes played at once is found. If there
-are two notes played at once, \texttt{harm\_int()} calculates the
+key. Next, the times notes are played at the same time are extracted
+into a list. Then the number of unique notes played at once is found. If
+there are two notes played at once, \texttt{harm\_int()} calculates the
 harmonic interval. This is done by calculating
 \[note_1 - note_2 \mod(12)\] This gives the number of half steps between
 each note. That number is then matched with the index of the interval.
@@ -1115,13 +1161,22 @@ above the base, which is 3 half steps, then 5 half steps.
 
 A similar process is done for seventh chords.
 
-\subsubsection{Par thirds, par fourths, par
-sixths}\label{par-thirds-par-fourths-par-sixths}
+\subsubsection{Length}\label{length}
 
-The standardized count of parallel thirds, fourths and sixths are
-counted, as these are common type of counterpoint movement.
+We determine a measure for the length of a piece by how many measures
+the piece has.
 
-\subsubsection{To be continued\ldots{}}\label{to-be-continued}
+\subsection{Voice distance}\label{voice-distance}
+
+The voice distance for each piece is measured as the range of the
+singer, which is the distance in half steps between the lowest note the
+singer sings and the hightest.
+
+\section{Piano distance}\label{piano-distance}
+
+Piano distance is the maximum distance between the lowest note in a
+chord and the highest. Composers with different hand size could possibly
+have different comfortable chords to play.
 
 \chapter{EDA and Feature Selection}\label{eda-and-feature-selection}
 
@@ -1131,15 +1186,17 @@ Below are the pairwise distributions of each of the features used for
 Bach and the Mendelssohns. There are higher correlations between scale
 degree frequencies 3 and 6. There is also a surprising separation
 between the composers for the mean density.
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics{images/Couplet.png}
-\caption{\label{fig:unnamed-chunk-4}Pairs plot}
+\includegraphics[scale = .5]{images/Couplet.png}
+\caption{Pairs plot showing correlations of predictors of features of Mendelssohns and Bach}
+\label{subd}
 \end{figure}
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics{images/PCA_bach.png}
-\caption{\label{fig:unnamed-chunk-5}PCA}
+\includegraphics[scale = .5]{images/PCA_bach.png}
+\caption{Biplot of the first two principal components plotted with all features}
+\label{subd}
 \end{figure}
 As we can see from the above biplot, it seems like the second principal
 component encodes a sense of pleasant consonances. We have perfect
@@ -1150,7 +1207,7 @@ together.
 \begin{figure}
 \centering
 \includegraphics{images/corrfanny.png}
-\caption{\label{fig:unnamed-chunk-6}Felix/Fanny Correlations}
+\caption{\label{fig:unnamed-chunk-1}Felix/Fanny Correlations}
 \end{figure}
 We can see from the above pairwise distribution plot that we still have
 a high correlation between scale degrees 3 and 6. However we do not see
@@ -1160,12 +1217,12 @@ the Bach data set is only solo piano music.
 \begin{figure}
 \centering
 \includegraphics{images/fPCA.png}
-\caption{\label{fig:unnamed-chunk-7}PCA felix/fanny}
+\caption{\label{fig:unnamed-chunk-2}PCA felix/fanny}
 \end{figure}
 \begin{figure}
 \centering
 \includegraphics{images/fpca_skree.png}
-\caption{\label{fig:unnamed-chunk-8}Felix/Fanny skree plot}
+\caption{\label{fig:unnamed-chunk-3}Felix/Fanny skree plot}
 \end{figure}
 \chapter{Models}\label{models}
 
@@ -1321,7 +1378,7 @@ When a lasso logistic classifier was fit, we got a mean standard error
 \begin{figure}
 \centering
 \includegraphics{images/lasso_bach.png}
-\caption{\label{fig:unnamed-chunk-9}Lasso Bach/Mendelssohn}
+\caption{\label{fig:unnamed-chunk-4}Lasso Bach/Mendelssohn}
 \end{figure}
 \subsubsection{LDA}\label{lda}
 
@@ -1340,7 +1397,7 @@ density features and fifth scale degree stayed in the longest.
 \begin{figure}
 \centering
 \includegraphics{images/lassofelix.png}
-\caption{\label{fig:unnamed-chunk-10}Lasso Fanny/Felix}
+\caption{\label{fig:unnamed-chunk-5}Lasso Fanny/Felix}
 \end{figure}
 \chapter{Discussion}\label{discussion}
 

@@ -37,18 +37,20 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
     }
   }
   piece <- cbind(measure_column, n)
-  piece <- as.data.frame(lapply(piece, function(y) gsub("L|J", "", y)))
+  piece <- as.data.frame(lapply(piece, function(y) gsub("L|J|K", "", y)))
   piece <- as.data.frame(lapply(piece, function(y) gsub("\\[|\\]|\\\\|\\/", "", y)))
   spline_df <- data.frame(rep(key_v,nrow(piece)),
                           rep(meter,nrow(piece)),
                           measure_column)
   for(i in 2:(max_notes+1)){
-    ri <- stringr::str_extract(piece[,i],"[0-9]{1,2}(\\.*)") # rhythem value
+    ri <- stringr::str_extract(piece[,i],"[0-9]{1,2}(\\.*)|\\.") # rhythem value
     #rin <- add_r.n(ri) # rhythem name
-    notei <- stringr::str_extract(piece[,i],"[A-z]{1,2}.*")
+    notei <- stringr::str_extract(piece[,i],"[A-z]{1,2}.*|^\\.")
     notei_nv <- add_n.v_n.n(notei)
     spline_df <- cbind(spline_df,ri,notei,notei_nv)
   }
+  spline_df <- as.data.frame(lapply(spline_df,
+                                    function(y) gsub("K", "", y)))
   spline_df
 } 
 

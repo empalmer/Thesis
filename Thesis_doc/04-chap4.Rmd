@@ -4,13 +4,19 @@
 
 Below are the pairwise distributions of each of the features used for Bach and the Mendelssohns. There are higher correlations between scale degree frequencies 3 and 6. There is also a surprising separation between the composers for the mean density. 
 
-```{r,echo = F,fig.cap = 'Pairs plot'}
-knitr::include_graphics("images/Couplet.png")
-```
- 
-```{r,echo = F,fig.cap = 'PCA'}
-knitr::include_graphics("images/PCA_bach.png")
-```
+\begin{figure}[h]
+\centering
+\includegraphics[scale = 1]{images/Couplet.png}
+\caption{Pairs plot showing correlations of predictors of features of Mendelssohns and Bach}
+\label{subd}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/PCA_bach.png}
+\caption{Biplot of the first two principal components plotted with all features}
+\label{subd}
+\end{figure}
 
 As we can see from the above biplot, it seems like the second principal component encodes a sense of pleasant consonances. We have perfect consonances and frequencies of first and fourth scale degrees grouped together. 
 

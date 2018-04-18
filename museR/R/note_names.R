@@ -6,7 +6,7 @@
 #' 
 
 n.v_n.n <- function(note){
-  if (is.na(note)){
+  if(is.na(note)){
     v <- NA
     val <- NA
   } else if(stringr::str_detect(note, "[Aa]-")){
@@ -75,6 +75,9 @@ n.v_n.n <- function(note){
   } else if (stringr::str_detect(note, "r")){
     v <- "rest"
     val <- NA
+  } else if (stringr::str_detect(note,"\\.")){
+    v <- "."
+    val <- "."
   }else {
     v <- note
     val <- NA
