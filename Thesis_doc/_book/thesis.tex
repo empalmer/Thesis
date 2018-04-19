@@ -1485,6 +1485,23 @@ we do not have too many predictors, we will choose to use \(p-1\)
 principal components in subsequent analysis, where \(p\) is the number
 of predictors in our feature space.
 
+We can also use K-means clustering to see if there are any apparent
+groups in the data. When we run K-means on the bach and mendelssohn with
+K = 2 (since there are two composers)
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/Kmeanspca.png}
+\caption{KNN when k = 2}
+\label{subd}
+\end{figure}
+We can also examine when \(K=3\), as the Mendelssohn set is made up of
+fanny and felix, so there are actually three composers. (fix labeling)
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/k3.png}
+\caption{KNN when k = 3}
+\label{subd}
+\end{figure}
 \section{Felix and Fanny}\label{felix-and-fanny}
 
 There will be pairwise scatterplots of features? Which ones? Also
@@ -1523,6 +1540,14 @@ subsequent analysis.
 Unfortunately, as we see in the above picutre, there is absolutely no
 seperation in the groups. This might lead to issues in creating a model
 to classify.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/kmf.png}
+\caption{K-means with k = 2}
+\label{subd}
+\end{figure}
+When we run K-means with \(K=2\) we get the following. It does not seem
+choose groups by composer.
 
 \chapter{Model Fit}\label{model-fit}
 
