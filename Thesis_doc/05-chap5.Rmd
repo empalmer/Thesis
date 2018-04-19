@@ -1,6 +1,6 @@
-# Models
+# About the Models
 
-For classification, we are interested in using a set of features to predict the response, or composer. The notation used in this chapter is inspired by *The Elements of Statistical Learning* [@esl] and *An Introduction to Statistical Learning* [@isl] .We denote the features $X$, where $X_i$ is a certain feature. We have $p$ features. Each song has a composer or response, known or unknown, denoted by $Y$. In our case we have $Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}$, or more generally, $y \in \{\text{list of composers}\}$. The composer takes values in a discrete set, which is the possible composers. Thus we can always divide the input space into a collection of regions labeled according to the classification 
+For classification, we are interested in using a set of features to predict the response, or composer. The notation used in this chapter is inspired by *The Elements of Statistical Learning* [@esl] and *An Introduction to Statistical Learning* [@isl]. Our features space $X$ is an $n \times p$ matrix, where $n$ is the size of our data, and $p$ is the number of predictors. Each $X_i$ is vector of values for a certain feature. $x_{ij}$ denotes the $i^{th}$ values of the $j^{th}$ feature. Each song has a composer or response, known or unknown, denoted by $Y$. In our case we have $Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}$, or more generally, $y \in \{\text{list of composers}\}$. The composer takes values in a discrete set, which is the possible composers. Thus we can always divide the input space into a collection of regions labeled according to the classification 
 
 ### Linear Methods for Classification 
 ### Linear Regression: 
@@ -48,7 +48,7 @@ $$ \delta_k(x) = -\frac{1}{2}\log|\mathbf{\Sigma}_k| - \frac{1}{2}(x - \mu_k)^T\
 Linear discriminant analysis is helpful when the classes are well separated, when $n$ is small and the distribution of the predictors $X$ is approximately normal in each of the classes, and when there are more than two response classes. 
 
 #### Naive Bayes
-The Naive Bayes classifier is often used for musical classification as it is good when the dimension $p$ of the features space is large. It makes the (naive) assumption that all the features are independent for a given class $i$. $$f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)$$
+The Naive Bayes classifier is often used for musical classification as it is good when the dimension $p$ of the features space is large. It makes the (naive) assumption that all the features are independent for a given class $i$, ie that $$f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)$$. In practice this is not the case, but the model still preforms surprisingly well in practice when this assumption does not hold. 
 
 #### Logistic Regression
 Logistic regression differs from linear discriminant analysis by directly modeling $P(Y = k|X)$ by using the logistic function. The idea is to model the posterior probabilities of each of the $K$ classes as linear functions in $x$ and requiring that the probabilities sum to 1. The model has the form: 
@@ -66,19 +66,59 @@ where $p_k(x_i;\theta) = P(Y = k|X = x_i;\theta)$
 We then choose $\theta$ to maximize this function.
 
 
-#### K- nearest - neighbor
+#### K- nearest - neighbor (expand)
 
 Another method for classification is k-nearest neighbor methods. It uses observations in the training set closest to $x$ to form $\hat{Y}$, the outputs. We often use Euclidean distance as a metric for closeness, although other methods exist. It is defined as
 $$ \hat{Y}(x) = \frac{1}{k}\sum_{x_i \in N_k(x)}y_i$$
 
 where $N_k(x)$ is the $k$ closest points, or neighbors, $x_i$ in the training set. This is equivalent to taking the average of $k$ observations with $x_i$ closest to $x$. This gives a predicted class of taking the mode of the $k$ nearest neighbors.
 
+### Dimensionality Reduction
+
+#### Principal component analysis
+
+Principal component analysis (PCA) tranforms the features space into a lower dimensional representation. It choses the transformed features to have maximal variance and be mutually uncorrelated. 
+
+Principal component analysis can be useful when the predictors are correlated. We suspect many of our features are correlated, due to certain patterns in music, as well as the way we created our features. These relationships are caused by similarity in the features, and from music theory rules. (For example, if there is a high frequency of first scale degrees, we might expect a high frequency of chords that include the first scale degree. Another example, if we had a high frequency of seventh scale degrees, we would expect them to resolve to the first scale degree.)
+
+Principal component analysis is also helpful when there are many predictors, and we want to deal with a smaller dimension of predictor space. 
+
+As an unsupervised method, PCA can inform about latent meta variables. 
+
+Used in supervised methods, the transformed features from PCA can be used to fit models instead of the original features space. 
+
+Principal components transforms the feature space. If our original features are $X_1,X_2,\ldots,X_p$, we transform the features to $Z_1,Z_2,\ldots,Z_M$, where $M < p$. Each $Z_i$ is a linear combination of the original predictors, ie, $Z_m = \sum_{j = 1}^p \phi_{jm}X_j$, for constants $\phi_{1m},\phi_{2m},\ldots,\phi_{pm}$ for $m = 1,\ldots,M$. Given an $n\times p$ data set $\mathbf{X}$ where $x_{ij}$ is the $i^{th}$ instance of the $j^{th}$ feature, we solve for the $m^{th}$ principal component loading vector  $\phi_m = \phi_{1m},\phi_{2m},\ldots,\phi_{pm}$ that solves the optimization
+problem:  $$\max_{\phi_{1m},\ldots,\phi_{pm}} \bigg\{\frac{1}{n}\sum_{i=1}^n\bigg(\sum_{j=1}^p \phi_{jm}x_{ij}\bigg)^2\bigg\}$$,
+where the $\phi$s are subject to $\sum_{j = 1}^p\phi_{jm}^2 = 1$. Our principal components are then calculated as $z_{im} = \sum_{j = 1}^p\phi{jm}x_{ij}$
+
+The loadings of the first principal component, $\phi_1$ thus determine the direction in the feature space with the most variance, $Z_1$, or the scores of the first principal component is then a new feature in our transformed feature space. We continue calculating $Z_i$, where each following $Z_i$ has the maximal variance in a direction uncorrelated to the previous principal components. 
+
+Before PCA is performed, we center all features to have mean zero, as the scale of some features are not the same, which will lead to issues in the loadings, as the features with higher scales would automatically have the higher variance. 
+
+We can observe the proportion of variance explained by each principal component. This is usually visualized in a skree plot. We can use this information to decide how many principal components to use. 
 
 
+### Model selection/assesment
+
+#### 5-fold Cross validation (expand)
+
+Cross validation involves fitting a model on a training set, and then using the fitted model to predict the responses in the testing set. $k$-fold cross validation involves splitting the data set into $k$ different parts of equal size, and fitting a model on the the data set with one of the $k$ parts withheld. The model is then tested on the witheld data. This is useful for model selection and determining the accuracy of the model. In this paper, as is common, we use $k = 5$
 
 
+### Lasso model selection
+
+The Lasso penalty was proposed by Robert Tibshirani in 1996. Lasso regression works by giving a penalty to regression coefficients. It essentially performes variable selection, as for high enough penalties, coeficcients shrink to zero. It is often used in linear regression, but can be expended to logistic regression and other generalized linear models. For linear regression, the lasso works by choosing coefficients $\beta_\lambda^L$ that minimize 
+ $$ \sum_{i = 1}^n \bigg( y_i - \beta_0 - \sum_{j = 1}^p \beta_jx_{ij}\bigg)^2 + \lambda \sum_{j = 1}^p|\beta_j|$$
+ We have that $\lambda$ is a tuning parameter. Increasing $\lambda$ will shrink the coefficients. This can be equivantely stated as:
+ $$ \text{minimize}_\beta \bigg\{\sum_{i = 1}^n\bigg(y_i - \beta_0 - \sum_{j = 1}^p \beta_jx_{ij}\bigg) ^2 \text{ subject to } \sum_{j = 1}^p |\beta_j| \leq s$$
+ 
+To expand to generalized linear models, if our model uses some parameter $\beta$ that was estimated by by some function $\ell(\beta)$ (where $\ell(\beta)$ is a log-likelyhood function for example), we maximize $\ell(\beta)$ subject to $\sum_{j=1}^p|\beta_j| < s$ [@lasso]
 
 
+### Some trees? 
+
+
+### K-Measns Clustering (plus other clusterings?)
 
 
 

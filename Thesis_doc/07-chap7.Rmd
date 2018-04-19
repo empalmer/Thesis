@@ -1,3 +1,45 @@
 # Discussion
 
 ## Discussion
+
+On very basic low-level features, consiting mostly of frequencies of notes, intervals and chords, most models comparing Bach to the Mendelssohns do relatively well. This is likely due to the decent seperation of the feature encoding density as shown below. This is likely because the Bach data is for solo piano and the Mendelssohn data has an additional instrument, thus makeing the piece automatically more dense. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/dens.png}
+\caption{Distribution of feature of the mean beat density for Bach and Mendelssohn}
+\label{subd}
+\end{figure}
+
+
+Model       | Miss-classification Rate
+------------|-------------------------
+Naive Bayes | 0
+KNN         | 0
+LDA         | 0
+Logistic    | 0
+
+Table: Miss-classification Rates for differnt models comparing Bach and Mendelssohns
+
+
+On the other hand, models fit to compare Felix and Fanny did not do as well. They are only very slightly better than random guessing. 
+
+
+Model       | Miss-classification Rate
+------------|-------------------------
+Naive Bayes | 0
+KNN         | 0
+LDA         | 0
+Logistic    | 0
+
+Table: Miss-classification Rates for differnt models comparing Felix and Fanny
+
+
+
+## Future suggestions for museR
+
+Future suggestions to improve functionality of the R package museR include equipping it to deal with higher level features...
+
+
+
+

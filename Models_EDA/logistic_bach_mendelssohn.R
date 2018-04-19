@@ -1,34 +1,43 @@
 library(glmnet)
 library(boot)
 
+library(ROCR)
 source("features_bach_mendelssohn.R")
 
 #Amelia::missmap()
 #==============================================================
 # 5 fold CV: w/o lasso
-
 x <- model.matrix(composer ~.,features)[,-1]
 y <- features[,1] %>% unname() %>% as.character()
-
 # full data set
 log_mod <- glm(composer ~.,data = features,family = "binomial")
 # 5-fold logistic regresssion
 cv_log_mod <- cv.glm(data = features, log_mod ,K = 5 )
-
 MSE_log <- cv_log_mod$delta[1]
 MSE_log
 
 #==============================================================
 # LASSO cross validated
 grid <- 10^seq(10,-2,length=100)
-log_lasso_mod <- glmnet(x,y,family = "binomial", alpha = 1, lambda = grid)
+log_lasso_mod <- glmnet(x,y,family = "binomial", alpha = 1, 
+                        lambda = grid)
 # 5-fold CV LASSO logistic. 
 cv_log_lasso_mod <- cv.glmnet(x,y,family = "binomial",
-                              nfolds = 5,type.measure = "mse")
+                              nfolds = 5,type.measure = "class")
 plot(cv_log_lasso_mod)
 min_lambda <- cv_log_lasso_mod$lambda.min
-MSE_lasso <- cv_log_lasso_mod$cvm[which(cv_log_lasso_mod$cvm == min(cv_log_lasso_mod$cvm))]
-MSE_lasso
+
+min_mse <- min(cv_log_lasso_mod$cvm)
+min_mse
+
+
+plot(log_lasso_mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")
+plot_glmnet(log_lasso_mod, xvar = "lambda",xlim = c(-5,0))
+
+
+
+
+
 
 # #==============================================================
 # # LASSO logistic

@@ -1,7 +1,24 @@
 library(MASS)
 library(caret)
 source("~/Desktop/Thesis/Models_EDA/features_fanny_felix.R")
+#==============================================================
+#==============================================================
+# LDA on feature space - currenlty running!
+fold <- rep(1:5,each = ceiling(nrow(features)/5))
+fold <- sample(fold,nrow(features))
+mcr_i <- rep(NA,5)
+for(i in 1:5){
+  train <- features[which(fold !=i),]
+  test <- features[which(fold ==i),]
+  lda_mod <- lda(x = train[,-1], grouping = train[,1])
+  x <- predict(lda_mod,newdata =test[,-1])
+  t <- table(x$class,test[,1])
+  mcr_i[i] <- (t[1,2]+t[2,1])/sum(t)
+}
+mcr_lda <- mean(mcr_i)
+mcr_lda
 
+#==============================================================
 #==============================================================
 ### LDA run on 12 principal components for some reason
 PCA <- prcomp(features[,-1], scale = T)

@@ -4,6 +4,60 @@ library(caret)
 library(e1071)
 
 #==============================================================
+#==============================================================
+# LDA on feature space - currenlty running!
+fold <- rep(1:5,each = ceiling(nrow(ffeatures)/5))
+fold <- sample(fold,nrow(ffeatures))
+mcr_i <- rep(NA,5)
+for(i in 1:5){
+  train <- ffeatures[which(fold !=i),]
+  test <- ffeatures[which(fold ==i),]
+  lda_mod <- lda(x = train[,-1], grouping = train[,1])
+  x <- predict(lda_mod,newdata =test[,-1])
+  t <- table(x$class,test[,1])
+  mcr_i[i] <- (t[1,2]+t[2,1])/sum(t)
+}
+mcr_lda <- mean(mcr_i)
+mcr_lda
+
+
+# predictions!
+
+full_lda_mod <- lda(x = ffeatures[,-1],grouping = ffeatures[,1])
+x <- predict(full_lda_mod, disputed_features)
+x$cl
+#==============================================================
+#==============================================================
+#==============================================================
+#LDA on pcas: 
+PCA <- prcomp(ffeatures[,-1], scale = T)
+x <- PCA$x[,-12:13]
+y <- as.factor(ffeatures[,1])
+df <- cbind(y,x)
+fold <- rep(1:5,each = ceiling(nrow(df)/5))
+fold <- sample(fold,nrow(df))
+mcr_i <- rep(NA,5)
+for(i in 1:5){
+  train <- df[which(fold !=i),]
+  test <- df[which(fold ==i),]
+  lda_mod <- lda(x = train[,-1], grouping = train[,1])
+  x <- predict(lda_mod,newdata =test[,-1])
+  t <- table(x$class,test[,1])
+  mcr_i[i] <- (t[1,2]+t[2,1])/sum(t)
+}
+mcr_lda <- mean(mcr_i)
+mcr_lda
+
+# predictions... errors
+full_pca <- lda(df[,-1],grouping = df[,1])
+
+#==============================================================
+#==============================================================
+#==============================================================
+
+
+
+
 ### LDA run on 12 principal components for some reason
 PCA <- prcomp(ffeatures[,-1], scale = T)
 x <- PCA$x[,-13]

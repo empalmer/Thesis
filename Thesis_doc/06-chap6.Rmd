@@ -4,26 +4,65 @@
 
 #### Logistic Regression
 
-When a lasso logistic classifier was fit, we got a mean standard error (MSE) of 0.154. We see that the density features stayed in the longest.
+A 5-fold cross-validated lasso logistic model was fit. The below graph shows the miss-classification rate for different values of log(lambda). A model fit using the lambda value with the minimum missclassifcation rate resulted in a miss-classification rate of 0.117. 
+We see that the density features stayed in the longest.
 
-```{r,echo = F,fig.cap = 'Lasso Bach/Mendelssohn'}
-knitr::include_graphics("images/lasso_bach.png")
-```
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/lasso_bach.png}
+\caption{Lasso penalties for each feature for changing lambda penalty values}
+\label{subd}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/lasso_bach.png}
+\caption{Cross validated misclassification rates for different lambdas. The left dotted line represents the minimum lambda, and the right line represents the lambda within one standard deviation. It is a more restricted model that can guard against over fitting, but is not used here.}
+\label{subd}
+\end{figure}
 
 #### LDA
-For linear discriminant analysis, we have a 5-fold cross validated MSE of 0.1558.
+For linear discriminant analysis, we have a 5-fold cross validated MSE of 0.13.Most commonly our models incorrectly predict Mendelssohn songs to be composed by Bach. 
 
-Most commonly our models incorrectly predict Mendelssohn songs to be composed by Bach. 
+#### Naive Bayes
+A naive model was fit and resulted a miss-classification rate of 0.07
 
+#### KNN
+
+A K-Nearest Neighbors classifier was fit, with $K$ chosen to be 1 from 5-fold cross validation. This resulted in a miss-classification rate of .22
+
+<!-- =========================================================== -->
+<!-- =========================================================== -->
+<!-- =========================================================== -->
 
 ## Model fit Felix/Fanny
 
+It there seems like there is not enough data to have a stable missclassification rate for different choices of fold. 
+
 #### Logistic regression
-When a lasso classifier was fit, we got a MSE of 0.35. We see that the density features and fifth scale degree stayed in the longest.
+When a logistic classifier was fit, we got an average miss-classification rate of 0.35. We see that the density features and fifth scale degree stayed in the longest.
 
-```{r,echo = F,fig.cap = 'Lasso Fanny/Felix'}
-knitr::include_graphics("images/lassofelix.png")
-```
-  
+#### Naive Bayes
 
+A naive Bayes model was fit and the 5-fold miss-classification rate averaged between .4 and .5.
+
+#### LDA
+An LDA model was fit and predicts correctly about 50/50
+
+#### knn
+With K=8, the missclassification rate was about .43
+
+
+<!-- =========================================================== -->
+<!-- =========================================================== -->
+<!-- =========================================================== -->
+
+## Predictions for Disputed pieces: 
+
+Since we have such high missclassification rates, the following predictions are likely not accurate. 
+
+- Logistic: Predicts Op 8 no 2 and 12 to be written by Felix. 
+- Naive Bayes: Predicted all four as written by Fanny. 
+- knn: Predicted Op 8 no 12 to be written by Felix.
+- LDA: Predicted Op9 no 12 to be written by Felix.
   

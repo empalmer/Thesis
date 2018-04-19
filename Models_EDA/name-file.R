@@ -69,9 +69,13 @@ bach <- list.files(path = "~/Desktop/Thesis/Data/Bach") %>%
   map(piece_df, insts = "piano")
 setwd(old)
  
-
-
-
+#==============================================================
+# Disputed pieces
+old <- getwd()
+setwd("~/Desktop/Thesis/Data/Disputed_pieces")
+disputed <- list.files(path = "~/Desktop/Thesis/Data/Disputed_pieces") %>%
+  map(piece_df, insts = "piece")
+setwd(old)
 
 
 

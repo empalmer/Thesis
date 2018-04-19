@@ -1,38 +1,36 @@
-source("features_bach_mendelssohn.R")
+source("features_fanny_felix.R")
 library(GGally)
-library(cowplot)
-library(ggbiplot)
+
 #==============================================================
 # Look at pairs plots and correlations
-pairss <- ggpairs(features,aes(color = composer))
+pairss <- ggpairs(ffeatures,aes(color = fcomposer))
 pairss
-nocpair <- ggpairs(features)
+nocpair <- ggpairs(ffeatures)
 nocpair
-pairs2 <- pairs(features[,-1])
+pairs2 <- pairs(ffeatures[,-1])
 pairs2
-
-
 
 #==============================================================
 # Correlation matrix
-cor(features)
+cor(ffeatures)
 
 #==============================================================
 # PCA and skree plots 
 
-PCA <- prcomp(features[,-1], scale = T)
-plot(PCA, type = "1", main="Principal Components Analysis")
+PCA <- prcomp(ffeatures[,-1], scale = T)
 
 # biplot
-biplot(PCA,scale = 0,xlabs=rep("", nrow(PCA$x)))
+biplot(PCA,scale = 0, xlabs = rep("",nrow(PCA$x)))
+
 
 # biplot with elipses and color groups, first two principal components
 g <- ggbiplot(PCA, obs.scale = 1, var.scale = 1, 
-              groups = features[,1], ellipse = TRUE, 
+              groups = ffeatures[,1], ellipse = TRUE, 
               circle = F)
+g
 # biplot with elipses and color groups, first two principal components
 h <- ggbiplot(PCA, choices = 2:3,obs.scale = 1, var.scale = 1, 
-              groups = features[,1], ellipse = TRUE, 
+              groups = ffeatures[,1], ellipse = TRUE, 
               circle = F)
 h
 #skreee
@@ -54,46 +52,16 @@ p + geom_text(data=loadings,
   coord_fixed(ratio=1) +
   labs(x = "PC1", y = "PC2")
 
-#==============================================================
-# distributions for all 
 
+#===================================================
+# clustering
 
-a <- ggplot(features, aes(x = features$dens_mean,color = features[,1])) + 
-  geom_density()
-b <- ggplot(features, aes(x = features[,3],color = features[,1])) + 
-  geom_density()
-c <- ggplot(features, aes(x = features[,4],color = features[,1])) + 
-  geom_density()
-
-plot_grid(a,b)
-
-#==============================================================
-# k-means clustering
-
-
-
-km2 <- kmeans(features[ ,-1], 2, nstart = 20)
-pca1 <- prcomp(features[, -1])
+km2 <- kmeans(ffeatures[ ,-1], 2, nstart = 20)
+pca1 <- prcomp(ffeatures[, -1])
 d <- data.frame(PC1 = pca1$x[, 1],
                 PC2 = pca1$x[, 2],
                 cluster = as.factor(km2$cluster),
-                state = features[,1])
+                state = ffeatures[,1])
 ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
   geom_point() +
   geom_text(aes(label = state), vjust = 2)
-
-km3 <- kmeans(features[ ,-1], 3, nstart = 20)
-pca1 <- prcomp(features[, -1])
-d <- data.frame(PC1 = pca1$x[, 1],
-                PC2 = pca1$x[, 2],
-                cluster = as.factor(km3$cluster),
-                state = features[,1])
-ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
-  geom_point() +
-  geom_text(aes(label = state), vjust = 2)
-
-
-
-
-
-

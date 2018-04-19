@@ -1,40 +1,125 @@
-# EDA and Feature Selection
+# Exploratory Data Analysis
 
 ## Bach and Mendelssohns
 
-Below are the pairwise distributions of each of the features used for Bach and the Mendelssohns. There are higher correlations between scale degree frequencies 3 and 6. There is also a surprising separation between the composers for the mean density. 
+Below (will be?) the pairwise distributions of each of the features used for Bach and the Mendelssohn s. There are higher correlations between scale degree frequencies 3 and 6. There is also a surprising separation between the composers for the mean density. 
 
-\begin{figure}[h]
+<!--- \begin{figure}[h]
 \centering
-\includegraphics[scale = 1]{images/Couplet.png}
+\includegraphics[scale = 1]{images/bf_pairs.png}
 \caption{Pairs plot showing correlations of predictors of features of Mendelssohns and Bach}
 \label{subd}
 \end{figure}
+-->
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale = .5]{images/PCA_bach.png}
-\caption{Biplot of the first two principal components plotted with all features}
+\includegraphics[scale = .3]{images/n_label_bi_bm.png}
+\caption{Biplot of the loading vectors of the first two principal components}
 \label{subd}
 \end{figure}
 
-As we can see from the above biplot, it seems like the second principal component encodes a sense of pleasant consonances. We have perfect consonances and frequencies of first and fourth scale degrees grouped together. 
+The above biplot shows the loading vectors plotted on the first two principal components. The loading vectors of features seem to arrange into aproximately three groups. The features: perfect consonances of melodic intervals of the voice, frequency of the first scale degree, frequency of the fourth scale degree are all grouped together. Similarly, frequencies for the 7th, 6th, 2nd, and 3rd are grouped together. In addition we have perfect consonances and imperfect consonances on two sides of the second principal component. This leads me to believe that the second principal component encodes some sense of use of consonant notes.  The first principal does not seem to have a musical interpretation. (I think?)
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/circle_bf_biplot.png}
+\caption{Biplot of the first two principal components plotted with data points colored by composer. }
+\label{subd}
+\end{figure}
+
+The above? plot shows the same prinicpal components, with the addition of points representing each piece graphed by their first two principal components. The elipses represent a ..... The pieces are colored by thier composer. There does seem to be a decent amount of seperation between the groups, although it is not complete. The below plot shows the pieces plotted on the second and third principal compenent, and there is much less seperation. Also there does not seem to be an obvious musical interpretation of the loadings. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/pca23bm.png}
+\caption{Biplot of the second and third principal components plotted with data points colored by composer. }
+\label{subd}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/circle_bm.png}
+\caption{Loadings plotted on a unit circle}
+\label{subd}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/bskree.png}
+\caption{Skree plot of the PCA's}
+\label{subd}
+\end{figure}
+
+
+The skree plot shows no clear elbow. Because of this, and also because we do not have too many predictors, we will choose to use $p-1$ principal components in subsequent analysis, where $p$ is the number of predictors in our feature space.
+
+We can also use K-means clustering to see if there are any apparent groups in the data. When we run K-means on the bach and mendelssohn with K = 2 (since there are two composers)
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/Kmeanspca.png}
+\caption{KNN when k = 2}
+\label{subd}
+\end{figure}
+
+We can also examine when $K=3$, as the Mendelssohn set is made up of fanny and felix, so there are actually three composers. (fix labeling)
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/k3.png}
+\caption{KNN when k = 3}
+\label{subd}
+\end{figure}
+
+
+<!-- ================================================= -->
+<!-- ================================================= -->
+<!-- ================================================= -->
 
 ## Felix and Fanny
 
-```{r,echo = F,fig.cap = 'Felix/Fanny Correlations'}
-knitr::include_graphics("images/corrfanny.png")
-```
+There will be pairwise scatterplots of features? Which ones? Also distributions of composer for certain features? Which ones? Who knows. 
+
 
 We can see from the above pairwise distribution plot that we still have a high correlation between scale degrees 3 and 6. However we do not see the difference in beat density. This is likely due to the fact that fanny and Felix data set is composed of the same type of song, whereas the Bach data set is only solo piano music.   
 
-```{r,echo = F,fig.cap = 'PCA felix/fanny'}
-knitr::include_graphics("images/fPCA.png")
-```
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/ploadff.png}
+\caption{PCA Loadings of the features for Felix and Fanny}
+\label{subd}
+\end{figure}
+
+There doesn't seem to be as much of a musical interpretation of the loadings of the principal components. We do notice that the frequency of perfect consonant melodic intervals in the voice (fcons_perf) has an almost opposite signs of the second principal component to the frequency of imperfect and dissonant melodic intervals. The skree plot also doesnt seem to show a clear elbow as indication of how many PCs to choose in subsequent analysis. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/fpca_skree.png}
+\caption{PCA felix/fanny skree plot}
+\label{subd}
+\end{figure}
 
 
-```{r,echo = F,fig.cap = 'Felix/Fanny skree plot'}
-knitr::include_graphics("images/fpca_skree.png")
-```
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/ff_elipse12.png}
+\caption{Loadings and pieces plotted on the first principal components. }
+\label{subd}
+\end{figure}
+
+Unfortunately, as we see in the above picutre, there is absolutely no seperation in the groups. This might lead to issues in creating a model to classify. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/kmf.png}
+\caption{K-means with k = 2}
+\label{subd}
+\end{figure}
+
+When we run K-means with $K=2$ we get the following. It does not seem choose groups by composer. 
+
+
+
 
 

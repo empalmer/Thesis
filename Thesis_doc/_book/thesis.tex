@@ -1178,62 +1178,18 @@ Piano distance is the maximum distance between the lowest note in a
 chord and the highest. Composers with different hand size could possibly
 have different comfortable chords to play.
 
-\chapter{EDA and Feature Selection}\label{eda-and-feature-selection}
-
-\section{Bach and Mendelssohns}\label{bach-and-mendelssohns}
-
-Below are the pairwise distributions of each of the features used for
-Bach and the Mendelssohns. There are higher correlations between scale
-degree frequencies 3 and 6. There is also a surprising separation
-between the composers for the mean density.
-\begin{figure}[h]
-\centering
-\includegraphics[scale = .5]{images/Couplet.png}
-\caption{Pairs plot showing correlations of predictors of features of Mendelssohns and Bach}
-\label{subd}
-\end{figure}
-\begin{figure}[h]
-\centering
-\includegraphics[scale = .5]{images/PCA_bach.png}
-\caption{Biplot of the first two principal components plotted with all features}
-\label{subd}
-\end{figure}
-As we can see from the above biplot, it seems like the second principal
-component encodes a sense of pleasant consonances. We have perfect
-consonances and frequencies of first and fourth scale degrees grouped
-together.
-
-\section{Felix and Fanny}\label{felix-and-fanny}
-\begin{figure}
-\centering
-\includegraphics{images/corrfanny.png}
-\caption{\label{fig:unnamed-chunk-1}Felix/Fanny Correlations}
-\end{figure}
-We can see from the above pairwise distribution plot that we still have
-a high correlation between scale degrees 3 and 6. However we do not see
-the difference in beat density. This is likely due to the fact that
-fanny and Felix data set is composed of the same type of song, whereas
-the Bach data set is only solo piano music.
-\begin{figure}
-\centering
-\includegraphics{images/fPCA.png}
-\caption{\label{fig:unnamed-chunk-2}PCA felix/fanny}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics{images/fpca_skree.png}
-\caption{\label{fig:unnamed-chunk-3}Felix/Fanny skree plot}
-\end{figure}
-\chapter{Models}\label{models}
+\chapter{About the Models}\label{about-the-models}
 
 For classification, we are interested in using a set of features to
 predict the response, or composer. The notation used in this chapter is
 inspired by \emph{The Elements of Statistical Learning} (Friedman,
 Hastie, \& Tibshirani, 2001) and \emph{An Introduction to Statistical
-Learning} (James, Witten, Hastie, \& Tibshirani, 2013) .We denote the
-features \(X\), where \(X_i\) is a certain feature. We have \(p\)
-features. Each song has a composer or response, known or unknown,
-denoted by \(Y\). In our case we have
+Learning} (James, Witten, Hastie, \& Tibshirani, 2013). Our features
+space \(X\) is an \(n \times p\) matrix, where \(n\) is the size of our
+data, and \(p\) is the number of predictors. Each \(X_i\) is vector of
+values for a certain feature. \(x_{ij}\) denotes the \(i^{th}\) values
+of the \(j^{th}\) feature. Each song has a composer or response, known
+or unknown, denoted by \(Y\). In our case we have
 \(Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}\), or more generally,
 \(y \in \{\text{list of composers}\}\). The composer takes values in a
 discrete set, which is the possible composers. Thus we can always divide
@@ -1331,7 +1287,9 @@ more than two response classes.
 The Naive Bayes classifier is often used for musical classification as
 it is good when the dimension \(p\) of the features space is large. It
 makes the (naive) assumption that all the features are independent for a
-given class \(i\). \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]
+given class \(i\), ie that \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]. In
+practice this is not the case, but the model still preforms surprisingly
+well in practice when this assumption does not hold.
 
 \subsubsection{Logistic Regression}\label{logistic-regression}
 
@@ -1353,7 +1311,8 @@ log-likelihood for \(N\) observations is:
 \(p_k(x_i;\theta) = P(Y = k|X = x_i;\theta)\) We then choose \(\theta\)
 to maximize this function.
 
-\subsubsection{K- nearest - neighbor}\label{k--nearest---neighbor}
+\subsubsection{K- nearest - neighbor
+(expand)}\label{k--nearest---neighbor-expand}
 
 Another method for classification is k-nearest neighbor methods. It uses
 observations in the training set closest to \(x\) to form \(\hat{Y}\),
@@ -1366,6 +1325,205 @@ the training set. This is equivalent to taking the average of \(k\)
 observations with \(x_i\) closest to \(x\). This gives a predicted class
 of taking the mode of the \(k\) nearest neighbors.
 
+\subsection{Dimensionality Reduction}\label{dimensionality-reduction}
+
+\subsubsection{Principal component
+analysis}\label{principal-component-analysis}
+
+Principal component analysis (PCA) tranforms the features space into a
+lower dimensional representation. It choses the transformed features to
+have maximal variance and be mutually uncorrelated.
+
+Principal component analysis can be useful when the predictors are
+correlated. We suspect many of our features are correlated, due to
+certain patterns in music, as well as the way we created our features.
+These relationships are caused by similarity in the features, and from
+music theory rules. (For example, if there is a high frequency of first
+scale degrees, we might expect a high frequency of chords that include
+the first scale degree. Another example, if we had a high frequency of
+seventh scale degrees, we would expect them to resolve to the first
+scale degree.)
+
+Principal component analysis is also helpful when there are many
+predictors, and we want to deal with a smaller dimension of predictor
+space.
+
+As an unsupervised method, PCA can inform about latent meta variables.
+
+Used in supervised methods, the transformed features from PCA can be
+used to fit models instead of the original features space.
+
+Principal components transforms the feature space. If our original
+features are \(X_1,X_2,\ldots,X_p\), we transform the features to
+\(Z_1,Z_2,\ldots,Z_M\), where \(M < p\). Each \(Z_i\) is a linear
+combination of the original predictors, ie,
+\(Z_m = \sum_{j = 1}^p \phi_{jm}X_j\), for constants
+\(\phi_{1m},\phi_{2m},\ldots,\phi_{pm}\) for \(m = 1,\ldots,M\). Given
+an \(n\times p\) data set \(\mathbf{X}\) where \(x_{ij}\) is the
+\(i^{th}\) instance of the \(j^{th}\) feature, we solve for the
+\(m^{th}\) principal component loading vector
+\(\phi_m = \phi_{1m},\phi_{2m},\ldots,\phi_{pm}\) that solves the
+optimization problem:
+\[\max_{\phi_{1m},\ldots,\phi_{pm}} \bigg\{\frac{1}{n}\sum_{i=1}^n\bigg(\sum_{j=1}^p \phi_{jm}x_{ij}\bigg)^2\bigg\}\],
+where the \(\phi\)s are subject to \(\sum_{j = 1}^p\phi_{jm}^2 = 1\).
+Our principal components are then calculated as
+\(z_{im} = \sum_{j = 1}^p\phi{jm}x_{ij}\)
+
+The loadings of the first principal component, \(\phi_1\) thus determine
+the direction in the feature space with the most variance, \(Z_1\), or
+the scores of the first principal component is then a new feature in our
+transformed feature space. We continue calculating \(Z_i\), where each
+following \(Z_i\) has the maximal variance in a direction uncorrelated
+to the previous principal components.
+
+Before PCA is performed, we center all features to have mean zero, as
+the scale of some features are not the same, which will lead to issues
+in the loadings, as the features with higher scales would automatically
+have the higher variance.
+
+We can observe the proportion of variance explained by each principal
+component. This is usually visualized in a skree plot. We can use this
+information to decide how many principal components to use.
+
+\subsection{Model selection/assesment}\label{model-selectionassesment}
+
+\subsubsection{5-fold Cross validation
+(expand)}\label{fold-cross-validation-expand}
+
+Cross validation involves fitting a model on a training set, and then
+using the fitted model to predict the responses in the testing set.
+\(k\)-fold cross validation involves splitting the data set into \(k\)
+different parts of equal size, and fitting a model on the the data set
+with one of the \(k\) parts withheld. The model is then tested on the
+witheld data. This is useful for model selection and determining the
+accuracy of the model. In this paper, as is common, we use \(k = 5\)
+
+\subsection{Lasso model selection}\label{lasso-model-selection}
+
+The Lasso penalty was proposed by Robert Tibshirani in 1996. Lasso
+regression works by giving a penalty to regression coefficients. It
+essentially performes variable selection, as for high enough penalties,
+coeficcients shrink to zero. It is often used in linear regression, but
+can be expended to logistic regression and other generalized linear
+models. For linear regression, the lasso works by choosing coefficients
+\(\beta_\lambda^L\) that minimize
+\[ \sum_{i = 1}^n \bigg( y_i - \beta_0 - \sum_{j = 1}^p \beta_jx_{ij}\bigg)^2 + \lambda \sum_{j = 1}^p|\beta_j|\]
+We have that \(\lambda\) is a tuning parameter. Increasing \(\lambda\)
+will shrink the coefficients. This can be equivantely stated as:
+\[ \text{minimize}_\beta \bigg\{\sum_{i = 1}^n\bigg(y_i - \beta_0 - \sum_{j = 1}^p \beta_jx_{ij}\bigg) ^2 \text{ subject to } \sum_{j = 1}^p |\beta_j| \leq s\]
+
+To expand to generalized linear models, if our model uses some parameter
+\(\beta\) that was estimated by by some function \(\ell(\beta)\) (where
+\(\ell(\beta)\) is a log-likelyhood function for example), we maximize
+\(\ell(\beta)\) subject to \(\sum_{j=1}^p|\beta_j| < s\) (Tibshirani,
+1996)
+
+\subsection{Some trees?}\label{some-trees}
+
+\subsection{K-Measns Clustering (plus other
+clusterings?)}\label{k-measns-clustering-plus-other-clusterings}
+
+\chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}
+
+\section{Bach and Mendelssohns}\label{bach-and-mendelssohns}
+
+Below (will be?) the pairwise distributions of each of the features used
+for Bach and the Mendelssohn s. There are higher correlations between
+scale degree frequencies 3 and 6. There is also a surprising separation
+between the composers for the mean density.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/n_label_bi_bm.png}
+\caption{Biplot of the loading vectors of the first two principal components}
+\label{subd}
+\end{figure}
+The above biplot shows the loading vectors plotted on the first two
+principal components. The loading vectors of features seem to arrange
+into aproximately three groups. The features: perfect consonances of
+melodic intervals of the voice, frequency of the first scale degree,
+frequency of the fourth scale degree are all grouped together.
+Similarly, frequencies for the 7th, 6th, 2nd, and 3rd are grouped
+together. In addition we have perfect consonances and imperfect
+consonances on two sides of the second principal component. This leads
+me to believe that the second principal component encodes some sense of
+use of consonant notes. The first principal does not seem to have a
+musical interpretation. (I think?)
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/circle_bf_biplot.png}
+\caption{Biplot of the first two principal components plotted with data points colored by composer. }
+\label{subd}
+\end{figure}
+The above? plot shows the same prinicpal components, with the addition
+of points representing each piece graphed by their first two principal
+components. The elipses represent a \ldots{}.. The pieces are colored by
+thier composer. There does seem to be a decent amount of seperation
+between the groups, although it is not complete. The below plot shows
+the pieces plotted on the second and third principal compenent, and
+there is much less seperation. Also there does not seem to be an obvious
+musical interpretation of the loadings.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/pca23bm.png}
+\caption{Biplot of the second and third principal components plotted with data points colored by composer. }
+\label{subd}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/circle_bm.png}
+\caption{Loadings plotted on a unit circle}
+\label{subd}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/bskree.png}
+\caption{Skree plot of the PCA's}
+\label{subd}
+\end{figure}
+The skree plot shows no clear elbow. Because of this, and also because
+we do not have too many predictors, we will choose to use \(p-1\)
+principal components in subsequent analysis, where \(p\) is the number
+of predictors in our feature space.
+
+\section{Felix and Fanny}\label{felix-and-fanny}
+
+There will be pairwise scatterplots of features? Which ones? Also
+distributions of composer for certain features? Which ones? Who knows.
+
+We can see from the above pairwise distribution plot that we still have
+a high correlation between scale degrees 3 and 6. However we do not see
+the difference in beat density. This is likely due to the fact that
+fanny and Felix data set is composed of the same type of song, whereas
+the Bach data set is only solo piano music.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/ploadff.png}
+\caption{PCA Loadings of the features for Felix and Fanny}
+\label{subd}
+\end{figure}
+There doesn't seem to be as much of a musical interpretation of the
+loadings of the principal components. We do notice that the frequency of
+perfect consonant melodic intervals in the voice (fcons\_perf) has an
+almost opposite signs of the second principal component to the frequency
+of imperfect and dissonant melodic intervals. The skree plot also doesnt
+seem to show a clear elbow as indication of how many PCs to choose in
+subsequent analysis.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/fpca_skree.png}
+\caption{PCA felix/fanny skree plot}
+\label{subd}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .3]{images/ff_elipse12.png}
+\caption{Loadings and pieces plotted on the first principal components. }
+\label{subd}
+\end{figure}
+Unfortunately, as we see in the above picutre, there is absolutely no
+seperation in the groups. This might lead to issues in creating a model
+to classify.
+
 \chapter{Model Fit}\label{model-fit}
 
 \section{Model Fit -
@@ -1373,49 +1531,140 @@ Bach/Mendelssohn}\label{model-fit---bachmendelssohn}
 
 \subsubsection{Logistic Regression}\label{logistic-regression-1}
 
-When a lasso logistic classifier was fit, we got a mean standard error
-(MSE) of 0.154. We see that the density features stayed in the longest.
-\begin{figure}
+A 5-fold cross-validated lasso logistic model was fit. The below graph
+shows the miss-classification rate for different values of log(lambda).
+A model fit using the lambda value with the minimum missclassifcation
+rate resulted in a miss-classification rate of 0.117. We see that the
+density features stayed in the longest.
+\begin{figure}[h]
 \centering
-\includegraphics{images/lasso_bach.png}
-\caption{\label{fig:unnamed-chunk-4}Lasso Bach/Mendelssohn}
+\includegraphics[scale = .5]{images/lasso_bach.png}
+\caption{Lasso penalties for each feature for changing lambda penalty values}
+\label{subd}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/lasso_bach.png}
+\caption{Cross validated misclassification rates for different lambdas. The left dotted line represents the minimum lambda, and the right line represents the lambda within one standard deviation. It is a more restricted model that can guard against over fitting, but is not used here.}
+\label{subd}
 \end{figure}
 \subsubsection{LDA}\label{lda}
 
 For linear discriminant analysis, we have a 5-fold cross validated MSE
-of 0.1558.
+of 0.13.Most commonly our models incorrectly predict Mendelssohn songs
+to be composed by Bach.
 
-Most commonly our models incorrectly predict Mendelssohn songs to be
-composed by Bach.
+\subsubsection{Naive Bayes}\label{naive-bayes-1}
+
+A naive model was fit and resulted a miss-classification rate of 0.07
+
+\subsubsection{KNN}\label{knn}
+
+A K-Nearest Neighbors classifier was fit, with \(K\) chosen to be 1 from
+5-fold cross validation. This resulted in a miss-classification rate of
+.22
 
 \section{Model fit Felix/Fanny}\label{model-fit-felixfanny}
 
+It there seems like there is not enough data to have a stable
+missclassification rate for different choices of fold.
+
 \subsubsection{Logistic regression}\label{logistic-regression-2}
 
-When a lasso classifier was fit, we got a MSE of 0.35. We see that the
-density features and fifth scale degree stayed in the longest.
-\begin{figure}
-\centering
-\includegraphics{images/lassofelix.png}
-\caption{\label{fig:unnamed-chunk-5}Lasso Fanny/Felix}
-\end{figure}
+When a logistic classifier was fit, we got an average
+miss-classification rate of 0.35. We see that the density features and
+fifth scale degree stayed in the longest.
+
+\subsubsection{Naive Bayes}\label{naive-bayes-2}
+
+A naive Bayes model was fit and the 5-fold miss-classification rate
+averaged between .4 and .5.
+
+\subsubsection{LDA}\label{lda-1}
+
+An LDA model was fit and predicts correctly about 50/50
+
+\subsubsection{knn}\label{knn-1}
+
+With K=8, the missclassification rate was about .43
+
+\section{Predictions for Disputed
+pieces:}\label{predictions-for-disputed-pieces}
+
+Since we have such high missclassification rates, the following
+predictions are likely not accurate.
+\begin{itemize}
+\tightlist
+\item
+  Logistic: Predicts Op 8 no 2 and 12 to be written by Felix.
+\item
+  Naive Bayes: Predicted all four as written by Fanny.
+\item
+  knn: Predicted Op 8 no 12 to be written by Felix.
+\item
+  LDA: Predicted Op9 no 12 to be written by Felix.
+\end{itemize}
 \chapter{Discussion}\label{discussion}
 
 \section{Discussion}\label{discussion-1}
 
+On very basic low-level features, consiting mostly of frequencies of
+notes, intervals and chords, most models comparing Bach to the
+Mendelssohns do relatively well. This is likely due to the decent
+seperation of the feature encoding density as shown below. This is
+likely because the Bach data is for solo piano and the Mendelssohn data
+has an additional instrument, thus makeing the piece automatically more
+dense.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/dens.png}
+\caption{Distribution of feature of the mean beat density for Bach and Mendelssohn}
+\label{subd}
+\end{figure}
+\begin{longtable}[]{@{}ll@{}}
+\caption{Miss-classification Rates for differnt models comparing Bach
+and Mendelssohns}\tabularnewline
+\toprule
+Model & Miss-classification Rate\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Model & Miss-classification Rate\tabularnewline
+\midrule
+\endhead
+Naive Bayes & 0\tabularnewline
+KNN & 0\tabularnewline
+LDA & 0\tabularnewline
+Logistic & 0\tabularnewline
+\bottomrule
+\end{longtable}
+On the other hand, models fit to compare Felix and Fanny did not do as
+well. They are only very slightly better than random guessing.
+\begin{longtable}[]{@{}ll@{}}
+\caption{Miss-classification Rates for differnt models comparing Felix
+and Fanny}\tabularnewline
+\toprule
+Model & Miss-classification Rate\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+Model & Miss-classification Rate\tabularnewline
+\midrule
+\endhead
+Naive Bayes & 0\tabularnewline
+KNN & 0\tabularnewline
+LDA & 0\tabularnewline
+Logistic & 0\tabularnewline
+\bottomrule
+\end{longtable}
+\section{Future suggestions for
+museR}\label{future-suggestions-for-muser}
+
+Future suggestions to improve functionality of the R package museR
+include equipping it to deal with higher level features\ldots{}
+
 \chapter*{Conclusion}\label{conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
-
-If we don't want Conclusion to have a chapter number next to it, we can
-add the \texttt{\{-\}} attribute.
-
-\textbf{More info}
-
-And here's some other random info: the first paragraph after a chapter
-title or section head \emph{shouldn't be} indented, because indents are
-to tell the reader that you're starting a new paragraph. Since that's
-obvious after a chapter or section title, proper typesetting doesn't add
-an indent there.
 
 \appendix
 
@@ -1542,6 +1791,11 @@ Speiser, J., \& Gupta, V. (n.d.). Composer style attribution.
 \hypertarget{ref-jrp}{}
 The josquin research project. (n.d.). \emph{The Josquin Research
 Project}. Retrieved from \url{http://josquin.stanford.edu/}
+
+\hypertarget{ref-lasso}{}
+Tibshirani, R. (1996). Regression shrinkage and selection via the lasso.
+\emph{Journal of the Royal Statistical Society. Series B
+(Methodological)}, 267--288.
 
 \hypertarget{ref-tillard1996}{}
 Tillard, F. (1996). \emph{Fanny mendelssohn}. Hal Leonard Corporation.
