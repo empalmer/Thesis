@@ -11,7 +11,8 @@ nocpair
 pairs2 <- pairs(features[,-1])
 pairs2
 
-
+library(corrplot)
+corrplot(cor(features[,-1]), order = "hclust")
 
 #==============================================================
 # Correlation matrix
@@ -30,6 +31,7 @@ biplot(PCA,scale = 0,xlabs=rep("", nrow(PCA$x)))
 g <- ggbiplot(PCA, obs.scale = 1, var.scale = 1, 
               groups = features[,1], ellipse = TRUE, 
               circle = F)
+g
 # biplot with elipses and color groups, first two principal components
 h <- ggbiplot(PCA, choices = 2:3,obs.scale = 1, var.scale = 1, 
               groups = features[,1], ellipse = TRUE, 

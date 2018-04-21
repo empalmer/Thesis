@@ -3,22 +3,39 @@ library(glmnet)
 library(boot)
 library(plotmo)
 #==============================================================
-# Logistic cv missclasification rate: 
+# lasso self code 
+grid <- 10^seq(10,-2,length=100)
 fold <- rep(1:5,each = ceiling(nrow(ffeatures)/5))
 fold <- sample(fold,nrow(ffeatures))
-mcr_i <- rep(NA,5)
-for(i in 1:5){
+for(j in 1:length(grid)){
   train <- ffeatures[which(fold !=i),]
   test <- ffeatures[which(fold ==i),]
-  mod <- glm(train[,-1],as.factor(train[,1]), family = "binomial")
-  x <- predict(mod,test[,-1],type = "response")
-  x_class <- ifelse(x >.5,"felix","fanny")
-  t <- table(x_class,test[,1])
-  mcr_i[i] <- (t[1,2]+t[2,1])/sum(t)
+  mod <- cv.glmnet(train[,-1],train[1],alpha = 1)
+  
+  best_lambda <
 }
-fmcr <- mean(mcr_i)
-fmcr
 
+
+
+# Logistic cv missclasification rate: 
+fmcr <- 0
+for(j in 1:100){
+  fold <- rep(1:5,each = ceiling(nrow(ffeatures)/5))
+  fold <- sample(fold,nrow(ffeatures))
+  mcr_i <- rep(NA,5)
+  for(i in 1:5){
+    train <- ffeatures[which(fold !=i),]
+    test <- ffeatures[which(fold ==i),]
+    mod <- glm(train[,-1],as.factor(train[,1]), family = "binomial")
+    x <- predict(mod,test[,-1],type = "response")
+    x_class <- ifelse(x >.5,"felix","fanny")
+    t <- table(x_class,test[,1])
+    mcr_i[i] <- (sum(t) - sum(diag(t)))/sum(t)
+  }
+  fmcr[j] <- mean(mcr_i)
+}
+MCR_log_f <- mean(fmcr)
+MCR_log_f
 
 #==============================================================
 # 

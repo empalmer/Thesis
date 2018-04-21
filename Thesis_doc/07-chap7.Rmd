@@ -25,20 +25,16 @@ Table: Miss-classification Rates for differnt models comparing Bach and Mendelss
 On the other hand, models fit to compare Felix and Fanny did not do as well. They are only very slightly better than random guessing. 
 
 
-Model       | Miss-classification Rate
+Model       | Misclassification Rate
 ------------|-------------------------
 Naive Bayes | 0
 KNN         | 0
 LDA         | 0
 Logistic    | 0
 
-Table: Miss-classification Rates for differnt models comparing Felix and Fanny
+Table: Misclassification Rates for differnt models comparing Felix and Fanny
 
 
-
-## Future suggestions for museR
-
-Future suggestions to improve functionality of the R package museR include equipping it to deal with higher level features...
 
 
 

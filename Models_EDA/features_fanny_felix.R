@@ -3,9 +3,9 @@ source("~/Desktop/Thesis/Models_EDA/name-file.R")
 #==============================================================
 # get all data
 
-fdata <- c(felix,fanny)
-fcomposer<- c(rep("felix",length(felix)),
-              rep("fanny",length(fanny)))
+fdata <- c(fanny,felix)
+fcomposer<- c(rep("fanny",length(felix)),
+              rep("felix",length(fanny)))
 fdata <- rbind(fcomposer,fdata)                
 
 #==============================================================
@@ -45,6 +45,7 @@ fmd11 <- map(mel_intsd,11)%>% unlist
 fmd12 <- map(mel_intsd,12)%>% unlist
 
 #==============================================================
+#==============================================================
 #compute feature: length
 lenh <- map(fanny,length_measures)
 lenf <- map(felix,length_measures)
@@ -53,10 +54,12 @@ lend <- map(disputed,length_measures) %>% unlist
 
 flen <- c(lenh,lenf) %>% unlist()
 #==============================================================
+#==============================================================
 #compute feature: harm ints
 #harm_intb <- map(bach, freq_harm_ints)
 #harm_intm <- map(mendelssohn, freq_harm_ints)
 
+#==============================================================
 #==============================================================
 # Compute feature: connsonance
 cons_h <- map(fanny,consonances,"piece")
@@ -73,6 +76,7 @@ cons_imp_d <- map(cons_d,2) %>% unlist
 cons_dis_d <- map(cons_d,3) %>% unlist
 
 #==============================================================
+#==============================================================
 # Compute features: density
 dens_h <- map(fanny,beat_density)
 dens_f <- map(felix,beat_density) # mean then sd
@@ -86,6 +90,7 @@ fdens_sd <- c(map(dens_h,2),map(dens_f,2)) %>% unlist()
 dens_mean_d <- map(dens_d,1) %>% unlist
 dens_sd_d <- map(dens_d,2) %>% unlist
 
+#==============================================================
 #==============================================================
 # Compute features: scale degree freq
 
@@ -112,15 +117,67 @@ fd_7 <- map(sf_fd,7)%>% unlist
 
 #==============================================================
 #==============================================================
+#r freqs
+rfh <- map(fanny,rhythem_freq)
+rfm <- map(felix,rhythem_freq)
+
+rf <- c(rfh,rfm)
+
+rf2 <- map(rf,"2") %>% unlist
+rf2d <- map(rf,"2.") %>% unlist
+rf4 <- map(rf,"4") %>% unlist
+rf4d<- map(rf,"4.") %>% unlist
+rf8<- map(rf,"8") %>% unlist
+rf8d<- map(rf,"8.") %>% unlist
+rf16<- map(rf,"16") %>% unlist
+rf32<- map(rf,"32") %>% unlist
+
+
+#top_dot freqs
+trff <- map(felix,top_dot_freq) %>% unname()
+trfh <- map(fanny,top_dot_freq) %>% unname()
+
+trfm <- c(trfh,trff) %>% unlist %>% unname()
+
+# dotted freqs 
+
+rff <- map(felix,dot_freq) %>% unname()
+rfh <- map(fanny,dot_freq) %>% unname()
+
+rfm <- c(rff,rfh) %>% unlist %>% unname()
+
+rfd <- map(disputed_features,dot_freq) %>% unname() %>% unlist
+#==============================================================
+# Meter
+met <- c(map(fanny,meter), map(felix,meter)) %>% unlist
+
+#==============================================================
+# rhythmic entropy
+
+r_ent <- c(map(fanny,rhy_entropy),map(felix,rhy_entropy)) %>% 
+  unname %>% unlist
+
+#==============================================================
+#==============================================================
+#================ FEATURE DATAFRAME ===========================
+#==============================================================
+#==============================================================
 # FEATURES create data frame
 ffeatures <- data.frame(fcomposer,
                         fcons_dis,fcons_imp,fcons_perf,
                         fdens_mean,fdens_sd,
                         fsf_1,fsf_2,fsf_3,fsf_4,fsf_5,fsf_6,
-                        fsf_7,flen)
-
+                        fsf_7,flen,rf2,rf2d,rf4,rf4d,rf8,rf8d,
+                        rf16,rf32,r_ent)
+#==============================================================
+#==============================================================
+#==============================================================
+#==============================================================
 
 disputed_features <- data.frame(cons_dis_d,cons_imp_d,
                                 cons_perf_d,dens_mean_d,dens_sd_d,
                                 fd_1,fd_2,fd_3,fd_4,fd_5,fd_6,
                                 fd_7,lend)
+
+
+#==============================================================

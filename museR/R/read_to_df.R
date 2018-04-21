@@ -38,6 +38,7 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   }
   piece <- cbind(measure_column, n)
   piece <- as.data.frame(lapply(piece, function(y) gsub("L|J|K", "", y)))
+  piece <- as.data.frame(lapply(piece, function(y) gsub("'", "", y)))
   piece <- as.data.frame(lapply(piece, function(y) gsub("\\[|\\]|\\\\|\\/", "", y)))
   spline_df <- data.frame(rep(key_v,nrow(piece)),
                           rep(meter,nrow(piece)),
@@ -54,18 +55,18 @@ kern2df <- function(spline){ # takes a spline(".krn") as input
   spline_df <- as.data.frame(lapply(spline_df,
                                     function(y) gsub("K", "", y)))
   spline_df
-} 
+}
 
 #==============================================================
-#' piece_df 
-#' Takes splines in .krn and calls kern2df 
+#' piece_df
+#' Takes splines in .krn and calls kern2df
 #' to create one df for entire piece
 #'
 #' @param v vector with splines .krn file strings
-#' @param insts vector of same lenght as v, 
+#' @param insts vector of same lenght as v,
 #' including instrument names for each spline
 #' @return dataframe for entire piece - combined splines
- 
+
 piece_df <- function(v,insts){
   len <- length(v)
   c <- vector()
@@ -91,7 +92,7 @@ piece_df <- function(v,insts){
     }
   }
   colnames(piece) <- c
-  piece  
+  piece
 }
 
 

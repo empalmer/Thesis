@@ -1,3 +1,8 @@
 # Conclusion {-}
 
 
+## Future suggestions for museR
+
+Future suggestions to improve functionality of the R package museR include equipping it to deal with higher level features...
+
+Also examining if some of the combinations were done in a musically correct way, or if they shoudl have remained as seperate features. For example, if the rhthmic entropy shouldhave been computed for each instrument, and how to 

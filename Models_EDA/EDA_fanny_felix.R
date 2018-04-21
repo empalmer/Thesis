@@ -1,5 +1,9 @@
 source("features_fanny_felix.R")
 library(GGally)
+library(devtools)
+install_github("ggobi/ggally")
+install_github("vqv/ggbiplot")
+library(ggbiplot)
 
 #==============================================================
 # Look at pairs plots and correlations
@@ -57,7 +61,7 @@ p + geom_text(data=loadings,
 # clustering
 
 km2 <- kmeans(ffeatures[ ,-1], 2, nstart = 20)
-pca1 <- prcomp(ffeatures[, -1])
+pca1 <- prcomp(ffeatures[, -1],scale = T)
 d <- data.frame(PC1 = pca1$x[, 1],
                 PC2 = pca1$x[, 2],
                 cluster = as.factor(km2$cluster),

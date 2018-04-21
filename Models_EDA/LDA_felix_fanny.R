@@ -6,19 +6,23 @@ library(e1071)
 #==============================================================
 #==============================================================
 # LDA on feature space - currenlty running!
-fold <- rep(1:5,each = ceiling(nrow(ffeatures)/5))
-fold <- sample(fold,nrow(ffeatures))
-mcr_i <- rep(NA,5)
-for(i in 1:5){
-  train <- ffeatures[which(fold !=i),]
-  test <- ffeatures[which(fold ==i),]
-  lda_mod <- lda(x = train[,-1], grouping = train[,1])
-  x <- predict(lda_mod,newdata =test[,-1])
-  t <- table(x$class,test[,1])
-  mcr_i[i] <- (t[1,2]+t[2,1])/sum(t)
+mcr_lda <- 0
+for(j in 1:100){
+  fold <- rep(1:5,each = ceiling(nrow(ffeatures)/5))
+  fold <- sample(fold,nrow(ffeatures))
+  mcr_i <- rep(NA,5)
+  for(i in 1:5){
+    train <- ffeatures[which(fold !=i),]
+    test <- ffeatures[which(fold ==i),]
+    lda_mod <- lda(x = train[,-1], grouping = train[,1])
+    x <- predict(lda_mod,newdata =test[,-1])
+    t <- table(x$class,test[,1])
+    mcr_i[i] <- (t[1,2]+t[2,1])/sum(t)
+  }
+  mcr_lda[j] <- mean(mcr_i)
 }
-mcr_lda <- mean(mcr_i)
-mcr_lda
+MCR_lda_f <- mean(mcr_lda)
+MCR_lda_f
 
 
 # predictions!

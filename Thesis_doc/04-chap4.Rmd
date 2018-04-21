@@ -19,7 +19,7 @@ Below (will be?) the pairwise distributions of each of the features used for Bac
 \label{subd}
 \end{figure}
 
-The above biplot shows the loading vectors plotted on the first two principal components. The loading vectors of features seem to arrange into aproximately three groups. The features: perfect consonances of melodic intervals of the voice, frequency of the first scale degree, frequency of the fourth scale degree are all grouped together. Similarly, frequencies for the 7th, 6th, 2nd, and 3rd are grouped together. In addition we have perfect consonances and imperfect consonances on two sides of the second principal component. This leads me to believe that the second principal component encodes some sense of use of consonant notes.  The first principal does not seem to have a musical interpretation. (I think?)
+The above biplot shows the loading vectors plotted on the first two principal components. The loading vectors of features seem to arrange into approximately three groups. The features: perfect consonances of melodic intervals of the voice, frequency of the first scale degree, frequency of the fourth scale degree are all grouped together. Similarly, frequencies for the 7th, 6th, 2nd, and 3rd are grouped together. In addition we have perfect consonances and imperfect consonances on two sides of the second principal component. This leads me to believe that the second principal component encodes some sense of use of consonant notes.  The first principal does not seem to have a musical interpretation. (I think?)
 
 \begin{figure}[h]
 \centering
@@ -28,7 +28,7 @@ The above biplot shows the loading vectors plotted on the first two principal co
 \label{subd}
 \end{figure}
 
-The above? plot shows the same prinicpal components, with the addition of points representing each piece graphed by their first two principal components. The elipses represent a ..... The pieces are colored by thier composer. There does seem to be a decent amount of seperation between the groups, although it is not complete. The below plot shows the pieces plotted on the second and third principal compenent, and there is much less seperation. Also there does not seem to be an obvious musical interpretation of the loadings. 
+The above? plot shows the same principal components, with the addition of points representing each piece graphed by their first two principal components. The ellipses represent a ..... The pieces are colored by their composer. There does seem to be a decent amount of separation between the groups, although it is not complete. The below plot shows the pieces plotted on the second and third principal competent, and there is much less separation. Also there does not seem to be an obvious musical interpretation of the loading. 
 
 \begin{figure}[h]
 \centering
@@ -40,7 +40,7 @@ The above? plot shows the same prinicpal components, with the addition of points
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .3]{images/circle_bm.png}
-\caption{Loadings plotted on a unit circle}
+\caption{Loading plotted on a unit circle}
 \label{subd}
 \end{figure}
 
@@ -55,7 +55,7 @@ The above? plot shows the same prinicpal components, with the addition of points
 
 The skree plot shows no clear elbow. Because of this, and also because we do not have too many predictors, we will choose to use $p-1$ principal components in subsequent analysis, where $p$ is the number of predictors in our feature space.
 
-We can also use K-means clustering to see if there are any apparent groups in the data. When we run K-means on the bach and mendelssohn with K = 2 (since there are two composers)
+We can also use K-means clustering to see if there are any apparent groups in the data. When we run K-means on the Bach and Mendelssohn with K = 2 (since there are two composers)
 
 \begin{figure}[h]
 \centering
@@ -108,7 +108,7 @@ There doesn't seem to be as much of a musical interpretation of the loadings of 
 \label{subd}
 \end{figure}
 
-Unfortunately, as we see in the above picutre, there is absolutely no seperation in the groups. This might lead to issues in creating a model to classify. 
+Unfortunately, as we see in the above picture, there is absolutely no separation in the groups. This might lead to issues in creating a model to classify. 
 
 \begin{figure}[h]
 \centering

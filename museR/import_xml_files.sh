@@ -1,10 +1,10 @@
+
 for file in *
-do 
+do
   extract -f 1 "$file" > v_$file
   extract -f 2 "$file" > pR_$file
   extract -f 3 "$file" > pL_$file
 done
-
 
 # to get to humdrum file ~/humdrum-tools/humdrum
 rcheck c1.krn | grep = | tail -5
@@ -31,7 +31,7 @@ do
     timebase -t "$rh" d.krn > $file.a.krn
     timebase -t "$rh" e.krn > $file.b.krn
     timebase -t "$rh" f.krn > $file.c.krn
-    
+
    assemble $file.a.krn $file.b.krn $file.c.krn | rid -d > $file.krn
    rm g.txt
    rm a.krn
@@ -64,7 +64,7 @@ convert_one_krn(){
     timebase -t "$rh" d.krn > $1.a.krn
     timebase -t "$rh" e.krn > $1.b.krn
     timebase -t "$rh" z.krn > $1.c.krn
-    
+
     assemble j.krn i.krn h.krn | rid -d > $file.krn
 
 }

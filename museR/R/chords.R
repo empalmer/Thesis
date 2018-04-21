@@ -1,6 +1,6 @@
 #==============================================================
-#' Extract_chord_beat
-#' This function gives all the harmonic notes that are attacked 
+#' Extract_chord_name_beat
+#' This function gives all the harmonic notes that are attacked
 #' at the same time
 #' @param piece A piece of music in R's piece_df
 #' @return A list of all the row by voiced chords
@@ -17,7 +17,14 @@ extract_chord_name_beat <- function(piece){
 }
 
 #==============================================================
+#==============================================================
+#' extract_chord_value_beat
+#' Extracts..
+#' @param piece
+#' @return list of all note value chords
+
 extract_chord_value_beat <- function(piece){
+  piece <- assign_sd(piece)
   note_cols <- grep("n\\.v", colnames(piece),value = T)
   note_df <-  piece[,note_cols]
   chords <- list()
@@ -30,78 +37,64 @@ extract_chord_value_beat <- function(piece){
 }
 
 #==============================================================
-convert_chords2_scale_degree <- function(piece){
-  chords_notes <- extract_chord_value_beat(piece)
-  key_sig <- Major_minor(piece)[1]
-  scale <- scales[,key_sig] %>% unname() %>% as.character()
-  deg <- scales[,"scale_degree_names"] %>% unname %>% as.character
-  g <- function(x){deg[which(scale== x)]}
-  f <- function(note){map(note,g) %>% unlist()}
-  chords_deg <- map(chords_notes,f) 
-  chords_deg
-}
 #==============================================================
-
-
-chord_or_harm_int <- function(chord){
-  u <- unique(chord)
-  l <- length(u)
-  if(l== 2){
-    find_harm_int(u)
-  }else if(l == 3){
-    block_chord(chord)
-  }else if(l ==1){
-    "not a chord"
-  }else{
-    "dont know"
+#' one_chord_harms
+#' Given a chord, this returns the intervals between chord notes.
+#' @param chord A vector of chord notes
+#' @return A vector of the intervals between chord notes
+one_chord_harms <- function(chord){
+  l <- length(chord)
+  if(l < 2){return(chord)}
+  c <- 0
+  for(i in 2:l){
+    c[i-1] <- (chord[i] - chord[i-1]) %% 12
   }
+  c
 }
 
 #==============================================================
-
-find_harm_int <- function(v){ # lenghth 2
-  f <- abs(v[1]-v[2] %% 12) # first(lower) note minus 2nd
-  ints <- c("unison","m2", "M2","m3", "M3","p4","tt",
-            "p5", "m6","M6","m7","M7")
-  ints <- factor(ints, ordered = T)
-  ints[f + 1]
+#' chord_harms
+#' Given a piece, this returns a list of intervals between chord notes.
+#' @param piece
+#' @return A list of chords spelled out by interval
+chord_harms <- function(piece){
+  chords <- extract_chord_value_beat(piece)
+  harm_form <- map(chords,one_chord_harms)
+  harm_form
 }
 
+#==============================================================
+#' harm_ints
+#'
+#' @param piece
+#' @return
 
 harm_ints <- function(piece){
-  a <- extract_chord_value_beat(piece)
-  l <- map(a,length)
-  harms <- a[which(l == 2)]
-  ints <- map(harms, find_harm_int)
-  ints
+  chords <- chord_harms(piece)
+  l <- length(chords)
+  ls <- map(chords,length) %>% unlist
+  harms <- which(ls == 1)
+  twos <- chords[harms] %>% unlist
+  ints <- c("unison","m2", "M2","m3", "M3","p4","tt",
+            "p5", "m6","M6","m7","M7")
+  m <- table(twos)/sum(table(twos))
+  names(m) <- ints
+  m
 }
 
-freq_harm_ints <- function(piece){
-  harm_ints_list <- harm_ints(piece) %>% unlist()
-  freq <- table(harm_ints_list)/sum(table(harm_ints_list))
+
+#==============================================================
+#' freq_chord_size
+#'
+#' @param piece
+#' @param type harmonic interval = 2, triad = 3, seventh = 4
+#' @return
+#'
+freq_chord_size <- function(piece,type){
+  chords <- chord_harms(piece)
+  l <- length(chords)
+  ls <- map(chords,length) %>% unlist
+  two <- sum(ls ==type)
+  freq <- two/l
   freq
 }
-
-block_chord <- function(v){
-  #first_note <- 
-  #second_note <- 
-  #third_note <- 
-  #f1 <- v[1] - v[2] %% 12
-  #f2 <- v[2] - v[3] %% 12
-  #c(f1,f2)
-}
-
-#==============================================================
-
-chords <- function(piece){
-  a <- extract_chord_value_beat(piece)
-  map(a,chord_or_harm_int)
-}
-
-
-#==============================================================
-inverted_chord <- function(a,b,c){
-  
-}
-
-
