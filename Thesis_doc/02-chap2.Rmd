@@ -2,9 +2,11 @@
 
 ## Pieces used
 
-The majority of the pieces used in this paper were lieder of Felix Mendelssohn and Fanny Hensel. Felix Mendelssohn composed many different styles of music, orchestral, piano, etc. Fanny Hensel in contrast has an available existing corpus of mostly lieder, although she did compose many works for solo piano and orchestra.  Of Felix's music there were a total of 116 pieces: lieder of Op 8 (12 pieces), op 9 (12 pieces), op 19(6 pieces), op 34 (6 pieces), op 47 (6 pieces), op 57 (6 pieces), op 71 (6 pieces), and 6 pieces of lied without opus numbers, also 56 lied without a collection. 
+The majority of the pieces used in this paper were lieder of Felix Mendelssohn and Fanny Hensel. Felix Mendelssohn composed many different styles of music, orchestral, piano, etc. Fanny Hensel in contrast has an available existing corpus of mostly lieder, although she did compose many works for solo piano and orchestra.  Of Felix's music there were a total of 116 pieces: lieder of Op 8 (12 pieces), op 9 (12 pieces), op 19(6 pieces), op 34 (6 pieces), op 47 (6 pieces), op 57 (6 pieces), op 71 (6 pieces), and 6 pieces of lieder without opus numbers, also 56 lieder without a collection. 
 
 Of Fanny's music, a total of 43 pieces were used: 23 lieder were used from her lieder without name collection, 10 from her Wo kommst du Her collection, and 10 from an unnamed collection.
+
+The six pieces published by Felix that are thought to be written by Fanny are Op8 no 2, 3 and 12, and Op 9, no ....  
 
 Data from JS Bach were also used. These data were available in Kern Score format from the Center for Computer Assisted Research in the Humanities. (CCARH). The pieces used were from the Well Tempered Clavier (WTC). These were written as training pieces and each collection contains 24 pieces with one in every possible key. Pieces from the Well Tempered Clavier were chosen as the data were more easily accessible (no scanning was required) and they were a similar format as the Mendelssohn songs, written as for solo piano (or harpsichord).
 

@@ -4,8 +4,6 @@ To the best of my knowledge, there is currently no package of R that has been bu
 
 ## Importing data into R
 
-
-
 MuseR is equipped to import data in the Kern format. The functions for converting these files are `kern2df()` and `piece_df()` These are most usefully in the form of individual splines. This allows for naming the columns according to instrument. Below we have a short piece appearing as it would look from MuseScore. 
 
 \begin{figure}[h]
@@ -80,6 +78,8 @@ For kern files from CCARH, `Major_minor()` extracts the key given by the Kern fi
 
 Once the key of a piece is determined, the proportion of each scale degree is calculated. The scale degrees consist of : Tonic, Supertonic, Mediant, Submediant, Dominant, Submediant, and Leading tone. In the example above, if we assume the key is F major, the tonic has a tonic scale degree proportion of 2/6, the mediant 1/6, dominant, 1/6, submediant, 2/6.
 
+
+<!--
 #### Chords
 
 Suspended chords are currently not supported by MuseR. Chords that begin, or are "attacked" at the same time count. 
@@ -89,20 +89,19 @@ First, the key of the piece is found, as different chords depend on the key. Nex
 The possible triad chords are all defined by the intervals between each note. For example, a Major triad is given by the base note, a major third above the base, and a perfect fifth above the base. This corresponds to 4 half steps then 4 half steps. Alternatively a minor triad is given by the base, a minor third above, and a perfect fifth above the base, which is 3 half steps, then 5 half steps. 
 
 A similar process is done for seventh chords. 
-
+-->
 
 #### Length
 
 We determine a measure for the length of a piece by how many measures the piece has.
 
-
-### Voice distance
+<!--
+#### Voice distance
 
 The voice distance for each piece is measured as the range of the singer, which is the distance in half steps between the lowest note the singer sings and the hightest. 
 
-## Piano distance
+#### Piano distance
 
 Piano distance is the maximum distance between the lowest note in a chord and the highest. Composers with different hand size could possibly have different comfortable chords to play. 
 
-
-
+-->
