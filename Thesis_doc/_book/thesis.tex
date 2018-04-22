@@ -138,17 +138,17 @@ instance, the siblings Fanny Hensel and Felix Mendelssohn, although very
 similar in compositional style, likely have features that distingush
 their music. It is speculated that there are at least six pieces that
 Fanny wrote that were published by Felix. Low level features, including
-frequencies of chords and scale degree usage were extracted from
-\ldots{} pieces known to be written by Felix and \ldots{} pieces known
-to be written by Fanny. These features were extracted using museR, an R
-package written by me*. Additionally, to check the validity of the
-model, pieces from J.S. Bach's Well Tempered Clavier were used to
-compare against Felix and Fanny. A logistic lasso, k-nearest neighbors,
-random forests, naive Bayes, and linear discriminant analysis were
-preformed. Comparing between Bach and Menelssohn, --- model resulted in
-the lowest misclassification rate. Between Felix and Fanny --- model
-resulted in the lowest misclassification rate. Finally the six disputed
-pieces were run through the models. and \ldots{}
+frequencies of chords and scale degree usage were extracted from 31
+lieder known to be written by Felix and 35 pieces known to be written by
+Fanny. These features were extracted using museR, an R package written
+by me*. Additionally, to check the validity of the model, 27 solo piano
+pieces from J.S. Bach's Well Tempered Clavier were used to compare
+against Felix and Fanny. A logistic lasso, k-nearest neighbors, random
+forests, naive Bayes, and linear discriminant analysis were preformed.
+Comparing between Bach and Menelssohn, --- model resulted in the lowest
+misclassification rate. Between Felix and Fanny --- model resulted in
+the lowest misclassification rate. Finally the six disputed pieces were
+run through the models. and \ldots{}
 }
 
 	\usepackage{tikz,amsmath,graphicx,}
@@ -203,17 +203,17 @@ pieces were run through the models. and \ldots{}
     similar in compositional style, likely have features that distingush
     their music. It is speculated that there are at least six pieces that
     Fanny wrote that were published by Felix. Low level features, including
-    frequencies of chords and scale degree usage were extracted from
-    \ldots{} pieces known to be written by Felix and \ldots{} pieces known
-    to be written by Fanny. These features were extracted using museR, an R
-    package written by me*. Additionally, to check the validity of the
-    model, pieces from J.S. Bach's Well Tempered Clavier were used to
-    compare against Felix and Fanny. A logistic lasso, k-nearest neighbors,
-    random forests, naive Bayes, and linear discriminant analysis were
-    preformed. Comparing between Bach and Menelssohn, --- model resulted in
-    the lowest misclassification rate. Between Felix and Fanny --- model
-    resulted in the lowest misclassification rate. Finally the six disputed
-    pieces were run through the models. and \ldots{}
+    frequencies of chords and scale degree usage were extracted from 31
+    lieder known to be written by Felix and 35 pieces known to be written by
+    Fanny. These features were extracted using museR, an R package written
+    by me*. Additionally, to check the validity of the model, 27 solo piano
+    pieces from J.S. Bach's Well Tempered Clavier were used to compare
+    against Felix and Fanny. A logistic lasso, k-nearest neighbors, random
+    forests, naive Bayes, and linear discriminant analysis were preformed.
+    Comparing between Bach and Menelssohn, --- model resulted in the lowest
+    misclassification rate. Between Felix and Fanny --- model resulted in
+    the lowest misclassification rate. Finally the six disputed pieces were
+    run through the models. and \ldots{}
   \end{abstract}
 
 \mainmatter % here the regular arabic numbering starts
@@ -222,10 +222,6 @@ pieces were run through the models. and \ldots{}
 \chapter{}\label{section}
 
 \section{Introduction:}\label{introduction}
-
-The purpose of this thesis is to use musical stylometry to quantify the
-difference between the compositions of the siblings Felix and Fanny
-Mendelssohn. (I hate starting things help\ldots{})
 
 Treating text or music as data has challenges. Neither contains anything
 immediately analyzable. With the increasing availability of the internet
@@ -236,9 +232,7 @@ To explore these problems, first analyzable features must identified
 that can be extracted for every text. These features can include word
 frequencies, length etc. Analysis of text using machine learning can
 find patterns, authors, or categories of text. Similar methods can also
-be used to classify music.
-
-Musical stylometry is \ldots{}
+be used to classify music, a field known as musical stylometry.
 
 Feature extraction is an essential part in text or music classification.
 Unlike in a data set of numerical or categorical values, text and music
@@ -1175,8 +1169,8 @@ the piece has.
 
 \chapter{About the Models}\label{about-the-models}
 
-Classification problems attempt to divide observations (of features)
-into groups (composer) based on similarities in the observations. The
+Classification problems attempt to divide observations (features) into
+groups (composer) based on similarities in the observations. The
 notation used in this chapter is inspired by \emph{The Elements of
 Statistical Learning} (Friedman, Hastie, \& Tibshirani, 2001) and
 \emph{An Introduction to Statistical Learning} (James, Witten, Hastie,
@@ -1205,19 +1199,26 @@ classification of composer a model assigns or predicts.
 
 \section{Logistic Regression}\label{logistic-regression}
 
-Logistic regression differs from linear discriminant analysis by
-directly modeling \(P(Y = k|X)\) by using the logistic function. The
-idea is to model the posterior probabilities of each of the \(K\)
-classes as linear functions in \(x\) and requiring that the
-probabilities sum to 1. The model has the form:
+Logistic regression directly modeling \(P(Y = k|X)\), or the probability
+a certain piece is written by a composer, given the features of that
+piece, by using the logistic function. The idea is to model the
+posterior probabilities of each of the \(K\) classes as linear functions
+in \(x\) and requiring that the probabilities sum to 1. As is often the
+case, we use logistic regression to model a binary response: where there
+are two options for composer. Thus in the case of a binary response we
+can use an indicator function with coding 0/1. We then name
+\(p(X) = P(Y=1|X)\) The model has the form:
 \[ \log \bigg( \frac{p(X)}{1-p(X)} \bigg) = \beta_0 + \beta_1 X_1 + \cdots + \beta_pX_p\]
 
-which can be written as:
+where which can be written as:
 
 \[ p(X) = \frac{e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p}}{1 +e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p} }\]
 
-We estimate the regression coefficients by using maximum likelihood. The
-log-likelihood for \(N\) observations is:
+We estimate the regression coefficients by using maximum likelihood.
+This results in coefficient estimates such that for the predicted
+probability \(\hat{p}(x_i)\) for the composer of each piece corresponds
+as closely as possible to the observed composer. The log-likelihood for
+\(N\) observations is:
 
 \[ \ell(\theta) = \sum_{i = 1}^N \log p_{g_i}(x_i;\theta)\] where
 \(p_k(x_i;\theta) = P(Y = k|X = x_i;\theta)\) We then choose \(\theta\)
@@ -1632,8 +1633,8 @@ Bach/Mendelssohn}\label{model-fit---bachmendelssohn}
 \subsubsection{Logistic Regression}\label{logistic-regression-1}
 
 A 5-fold cross-validated lasso logistic model was fit. The below graph
-shows the miss-classification rate for different values of log(lambda).
-As the log(lambda) increases, the coefficients of each of the features
+shows the misclassification rate for different values of log(lambda). As
+the log(lambda) increases, the coefficients of each of the features
 start approaching zero. They do this at differnt times and rates. A
 5-fold crossvalidation fit found that log(lambda) = - A model fit using
 the lambda value with the minimum missclassifcation rate resulted in a
@@ -1670,7 +1671,7 @@ A K-Nearest Neighbors classifier was fit, with \(K\) chosen to be 1 from
 \section{Model fit Felix/Fanny}\label{model-fit-felixfanny}
 
 It there seems like there is not enough data to have a stable
-missclassification rate for different choices of fold.
+misclassification rate for different choices of fold.
 
 \subsubsection{Logistic regression}\label{logistic-regression-2}
 

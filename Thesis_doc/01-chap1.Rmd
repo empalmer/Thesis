@@ -1,11 +1,7 @@
 #  
 ## Introduction: 
 
-The purpose of this thesis is to use musical stylometry to quantify the difference between the compositions of the siblings Felix and Fanny Mendelssohn. (I hate starting things help...)
-
-Treating text or music as data has challenges. Neither contains anything immediately analyzable. With the increasing availability of the internet and social media data, text classification has become an promising form of data analysis. While text classification problems are very frequent, similar methods that classify music have not been as commonly explored. To explore these problems, first analyzable features must identified that can be extracted for every text. These features can include word frequencies, length etc.  Analysis of text using machine learning can find patterns, authors, or categories of text. Similar methods can also be used to classify music.
-
-Musical stylometry is ...
+Treating text or music as data has challenges. Neither contains anything immediately analyzable. With the increasing availability of the internet and social media data, text classification has become an promising form of data analysis. While text classification problems are very frequent, similar methods that classify music have not been as commonly explored. To explore these problems, first analyzable features must identified that can be extracted for every text. These features can include word frequencies, length etc.  Analysis of text using machine learning can find patterns, authors, or categories of text. Similar methods can also be used to classify music, a field known as musical stylometry.
 
 Feature extraction is an essential part in text or music classification. Unlike in a data set of numerical or categorical values, text and music must first go through a processing stage where features of interest can be extracted before any models can be fit. 
 

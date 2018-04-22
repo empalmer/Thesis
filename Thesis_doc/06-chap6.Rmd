@@ -4,7 +4,7 @@
 
 #### Logistic Regression
 
-A 5-fold cross-validated lasso logistic model was fit. The below graph shows the miss-classification rate for different values of log(lambda). As the log(lambda) increases, the coefficients of each of the features start approaching zero. They do this at differnt times and rates. A 5-fold crossvalidation fit found that log(lambda) = -  A model fit using the lambda value with the minimum missclassifcation rate resulted in a miss-classification rate of 0.117. 
+A 5-fold cross-validated lasso logistic model was fit. The below graph shows the misclassification rate for different values of log(lambda). As the log(lambda) increases, the coefficients of each of the features start approaching zero. They do this at differnt times and rates. A 5-fold crossvalidation fit found that log(lambda) = -  A model fit using the lambda value with the minimum missclassifcation rate resulted in a miss-classification rate of 0.117. 
 We see that the density features stayed in the longest.
 
 \begin{figure}[h]
@@ -37,7 +37,7 @@ A K-Nearest Neighbors classifier was fit, with $K$ chosen to be 1 from 5-fold cr
 
 ## Model fit Felix/Fanny
 
-It there seems like there is not enough data to have a stable missclassification rate for different choices of fold. 
+It there seems like there is not enough data to have a stable misclassification rate for different choices of fold. 
 
 #### Logistic regression
 When a logistic classifier was fit, we got an average miss-classification rate of 0.35. We see that the density features and fifth scale degree stayed in the longest.
