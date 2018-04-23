@@ -118,9 +118,10 @@ fd_7 <- map(sf_fd,7)%>% unlist
 #==============================================================
 #==============================================================
 #r freqs
-rfh <- map(fanny,rhythem_freq)
-rfm <- map(felix,rhythem_freq)
-
+rfh <- purrr::map(fanny,rhythem_freq)
+rfm <- purrr::map(felix,rhythem_freq)
+rfd <- purrr::map(disputed,rhythem_freq)
+  
 rf <- c(rfh,rfm)
 
 rf2 <- map(rf,"2") %>% unlist
@@ -132,6 +133,14 @@ rf8d<- map(rf,"8.") %>% unlist
 rf16<- map(rf,"16") %>% unlist
 rf32<- map(rf,"32") %>% unlist
 
+drf2 <- purrr::map(rfd,"2") %>% unlist
+drf2d <- purrr::map(rfd,"2.") %>% unlist
+drf4 <- purrr::map(rfd,"4") %>% unlist
+drf4d<- purrr::map(rfd,"4.") %>% unlist
+drf8<- purrr::map(rfd,"8") %>% unlist
+drf8d<- purrr::map(rfd,"8.") %>% unlist
+drf16<- purrr::map(rfd,"16") %>% unlist
+drf32<- purrr::map(rfd,"32") %>% unlist
 
 #top_dot freqs
 trff <- map(felix,top_dot_freq) %>% unname()
@@ -157,6 +166,8 @@ met <- c(map(fanny,meter), map(felix,meter)) %>% unlist
 r_ent <- c(map(fanny,rhy_entropy),map(felix,rhy_entropy)) %>% 
   unname %>% unlist
 
+r_ent_d <- purrr::map(disputed,rhy_entropy) %>% unname %>% unlist
+
 #==============================================================
 #==============================================================
 #================ FEATURE DATAFRAME ===========================
@@ -177,7 +188,8 @@ ffeatures <- data.frame(fcomposer,
 disputed_features <- data.frame(cons_dis_d,cons_imp_d,
                                 cons_perf_d,dens_mean_d,dens_sd_d,
                                 fd_1,fd_2,fd_3,fd_4,fd_5,fd_6,
-                                fd_7,lend)
+                                fd_7,lend,drf2,drf2d,drf4,drf4d,drf8,drf8d,
+                                drf16,drf32)
 
 
 #==============================================================

@@ -88,3 +88,22 @@ ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
   geom_point() +
   geom_text(aes(label = state), vjust = 2)
 dev.off()
+
+
+
+#===================================================
+#Clustering on only felix: for age
+
+felix_features <- ffeatures[32:nrow(ffeatures),-1]
+felix_features_name <- c(rep("new",14),rep("old",15))
+
+pca_age <- prcomp(felix_features,scale = T)
+
+km2 <- kmeans(pca_age$x, 2, nstart = 20)
+d <- data.frame(PC1 = pca_age$x[, 1],
+                PC2 = pca_age$x[, 2],
+                cluster = as.factor(km2$cluster),
+                state = felix_features_name)
+ggplot(d, aes(x = PC1, y = PC2, col = cluster)) +
+  geom_point() +
+  geom_text(aes(label = state), vjust = 2)

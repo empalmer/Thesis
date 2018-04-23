@@ -34,23 +34,25 @@ Using museR's `piece_df()` function to create the following data frame.
 \label{subd}
 \end{figure}
 
-Data in R are commonly expressed as data frames. Expressing music as a data frame has challenges, as music cannot be easily expressed in rectangular form. Music as a data structure is very rugged. When expressing it in rectangular form, there needs to be placeholder or padding entries to account for the nonrectangularness. MuseR's `piece_df()` works by using regular expressions to extract note and rhythem information. It uses NA and . values to indicate empty spaces and duration respectively.
+Data in R are commonly expressed as data frames. Expressing music as a data frame has challenges, as music cannot be easily expressed in rectangular form. Music as a data structure is very rugged. When expressing it in rectangular form, there needs to be placeholder or padding entries to account for the nonrectangularness. MuseR's `piece_df()` works by using regular expressions to extract note and rhythm information. It uses NA and . values to indicate empty spaces and duration respectively.
 
-The output from `piece_df()` follows the same ideas as the structure of kern files. It has "." values similar to the Kern dots that represent the duration of the note for the timebase. This kind structure is good for certain types of features, where we are intersted only in the type of note happening, the time of the attack of the note, or without considering rhythem. Sometimes, we are intersted in how long the note lasts. The `durration_df()` function corrects this issue. It converts the `NA`s representing duration and replaces them with the note value that is currently happening. This allows for analysis that considers duration. The below figure represents the durrational version of the above data frame. 
+<!--
+The output from `piece_df()` follows the same ideas as the structure of kern files. It has "." values similar to the Kern dots that represent the duration of the note for the time base. This kind structure is good for certain types of features, where we are interested only in the type of note happening, the time of the attack of the note, or without considering rhythm. Sometimes, we are interested in how long the note lasts. The `durration_df()` function corrects this issue. It converts the `NA`s representing duration and replaces them with the note value that is currently happening. This allows for analysis that considers duration. The below figure represents the durational version of the above data frame. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/ex1r.png}
-\caption{Example of durrationaly conveted data frame equivalent to the above data frame (need to change)}
+\caption{Example of durationally converted data frame equivalent to the above data frame (need to change)}
 \label{subd}
 \end{figure}
 
+-->
 
 ## Features currently supported in museR
 
 #### Melodic intervals
 
-Melodic intervals, or the interval between two successive notes, are found using the `mel_ints()` function. It is currently only equipped to look at melodic intervals for the top note of each staff. In this context, it is most commonely used for analyzing melodic intervals of the voice. The function first extracts the top line of any instrument, and then outputs the proportion of each melodic interval happening over the whole piece. There are 12 possible intervals that are counted (ignoring augmented and diminished): unison,m2,M2,m3,M3,p4,tt,p5,m6,M6,m7,M7. `mel_ints()` outputs a vector of the proportion of each of the intervals. 
+Melodic intervals, or the interval between two successive notes, are found using the `mel_ints()` function. It is currently only equipped to look at melodic intervals for the top note of each staff. In this context, it is most commonly used for analyzing melodic intervals of the voice. The function first extracts the top line of any instrument, and then outputs the proportion of each melodic interval happening over the whole piece. There are 12 possible intervals that are counted (ignoring augmented and diminished): unison,m2,M2,m3,M3,p4,tt,p5,m6,M6,m7,M7. `mel_ints()` outputs a vector of the proportion of each of the intervals. 
 
 \begin{figure}[h]
 \centering
@@ -65,9 +67,9 @@ If we are interested in the types of melodic intervals, we can use the `connsona
 
 #### Density
 
-The `beat_density()` function analysis the average and standard devaition of density of each measure in the piece. It is called "beat" density as it only accounts for the instance a note starts. For example if a measure consisted of a single whole note it would be only counted once even though it is voiced the entire measure. 
+The `beat_density()` function analysis the average and standard deviation of density of each measure in the piece. It is called "beat" density as it only accounts for the instance a note starts. For example if a measure consisted of a single whole note it would be only counted once even though it is voiced the entire measure. 
 
-In the above example, the first measure would have a beat density of 4, and the second measure woudl have a beat density of 2. 
+In the above example, the first measure would have a beat density of 4, and the second measure would have a beat density of 2. 
 
 #### Major_minor
 

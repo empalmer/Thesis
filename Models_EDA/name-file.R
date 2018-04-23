@@ -75,6 +75,10 @@ old <- getwd()
 setwd("~/Desktop/Thesis/Data/Disputed_pieces")
 disputed <- list.files(path = "~/Desktop/Thesis/Data/Disputed_pieces") %>%
   map(piece_df, insts = "piece")
+disputed <- list(piece_df("fop8-2.krn","piece"),
+                 piece_df("fop8-3.krn","piece"),
+                 piece_df("f812.krn","piece"),
+                 piece_df("f9_12.xml.krn","piece"))
 setwd(old)
 
 

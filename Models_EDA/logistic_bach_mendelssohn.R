@@ -1,5 +1,6 @@
 library(glmnet)
 library(boot)
+library(plotmo)
 
 library(ROCR)
 source("features_bach_mendelssohn.R")
@@ -19,21 +20,26 @@ MSE_log
 #==============================================================
 # LASSO cross validated
 grid <- 10^seq(10,-2,length=100)
-log_lasso_mod <- glmnet(x,y,family = "binomial", alpha = 1, 
-                        lambda = grid)
+log_lasso_mod <- glmnet(x,y,family = "binomial", alpha = 1)
 # 5-fold CV LASSO logistic. 
 cv_log_lasso_mod <- cv.glmnet(x,y,family = "binomial",
                               nfolds = 5,type.measure = "class")
+pdf("loglambda_b.pdf")
 plot(cv_log_lasso_mod)
+dev.off()
+
 min_lambda <- cv_log_lasso_mod$lambda.min
+min_lambda
 
 min_mse <- min(cv_log_lasso_mod$cvm)
 min_mse
 
 
 plot(log_lasso_mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")
-plot_glmnet(log_lasso_mod, xvar = "lambda",xlim = c(-5,0))
 
+pdf("lasso_coef_b.pdf")
+plot_glmnet(log_lasso_mod, xvar = "lambda", ylim =c(-35,35), label = T)
+dev.off()
 
 
 

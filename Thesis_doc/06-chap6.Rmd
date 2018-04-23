@@ -1,35 +1,51 @@
-# Model Fit
+# Results
 
-## Model Fit - Bach/Mendelssohn
+## Models Results - Bach/Mendelssohn
 
-#### Logistic Regression
 
-A 5-fold cross-validated lasso logistic model was fit. The below graph shows the misclassification rate for different values of log(lambda). As the log(lambda) increases, the coefficients of each of the features start approaching zero. They do this at differnt times and rates. A 5-fold crossvalidation fit found that log(lambda) = -  A model fit using the lambda value with the minimum missclassifcation rate resulted in a miss-classification rate of 0.117. 
-We see that the density features stayed in the longest.
+Model        | misclass. rate - features | misclass. rate -  11 PCs 
+-------------|---------------------------|-------------------------------
+Logistic     | 0.078                     | 0.097
+LDA          | 0.092                     | 0.049
+KNN          | 0.097 (K=9)               | 0.098 (K = 9)
+Naive Bayes  | 0.103                     | 0.112
+Random forest| 0.058                     | 0.111
+
+Table: Averaged 5-fold CV misclassification rates of 100 runs on the feature space and the first 11 principal components for each model. 
+
+
+Table 6.1 shows the averaged 5-fold cross validated misclassification rates over 100 runs. For the KNN case, the features were scaled and centered first. 
+
+Figure 6.1 shows the misclassification rates corresponding to different values of $\log(\lambda)$ in the logistic lasso model. As the $\log(\lambda)$ increases, the coefficients of each of the features start approaching zero. They do this at different times and rates. Figure 6.2 shows coefficient values for each feature for varying $\log(\lambda)$ values. It appears that the features for density and frequency of 16th note rhythms stay non-zero the longest. A 5-fold cross validation fit found that a $\log(\lambda)$ value of -6.2 produced the lowest misclassification rate, represented by the left most dotted line. A model fit using that lambda value resulted in a misclassification rate of 0.078.
+
+<!--The left dotted line represents the minimum lambda, and the right line represents the lambda within one standard deviation. It is a more restricted model that can guard against over fitting, but is not used here. --> 
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale = .5]{images/lasso_bach.png}
+\includegraphics[scale = .5]{images/lasso_coef_b.pdf}
 \caption{Lasso penalties for each feature for changing lambda penalty values}
 \label{subd}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale = .5]{images/lasso_bach.png}
-\caption{Cross validated misclassification rates for different lambdas. The left dotted line represents the minimum lambda, and the right line represents the lambda within one standard deviation. It is a more restricted model that can guard against over fitting, but is not used here.}
+\includegraphics[scale = .5]{images/loglambda_b.pdf}
+\caption{Cross-validated misclassification rates for different lambdas}
 \label{subd}
 \end{figure}
 
-#### LDA
-For linear discriminant analysis, we have a 5-fold cross validated MSE of 0.13.Most commonly our models incorrectly predict Mendelssohn songs to be composed by Bach. 
+We also fit a lasso logistic model on the first 11 principal components. This resulted in an optimal $\log(\lambda)$ of -3.8, and a resulting misclassification rate of 0.097
 
-#### Naive Bayes
-A naive model was fit and resulted a miss-classification rate of 0.07
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/varImp_b.pdf}
+\caption{Variable importance for a random forest model Bach/Mendelssohn}
+\label{subd}
+\end{figure}
 
-#### KNN
+Figure X shows the variable importance rankings as a mean decrease in the Gini index. The density features are the most important in deciding splits of the trees, followed by frequency of sixteenth notes and frequency of second scale degree. 
 
-A K-Nearest Neighbors classifier was fit, with $K$ chosen to be 1 from 5-fold cross validation. This resulted in a miss-classification rate of .22
+
 
 <!-- =========================================================== -->
 <!-- =========================================================== -->
@@ -37,21 +53,53 @@ A K-Nearest Neighbors classifier was fit, with $K$ chosen to be 1 from 5-fold cr
 
 ## Model fit Felix/Fanny
 
-It there seems like there is not enough data to have a stable misclassification rate for different choices of fold. 
+Model        | misclass. rate - features | avg. misclass. rate -  11 PCs 
+-------------|---------------------------|-------------------------------
+Logistic     | 0.517                     | 0.45
+LDA          | 0.518                     | 0.505
+KNN          | 0.498                     | 0.467
+Naive Bayes  | 0.502                     | 0.521
+Random forest| 0.535                     | 0.571
 
-#### Logistic regression
-When a logistic classifier was fit, we got an average miss-classification rate of 0.35. We see that the density features and fifth scale degree stayed in the longest.
+Table: Averaged 5-fold CV misclassification rates of 100 runs on the feature space and the first 11 principal components for each model. 
 
-#### Naive Bayes
+Table X shows all the misclassification rates of each model. Unfortunately most of the misclassification rates are above 0.5, indicating that random guessing would do better at predicting the composer. 
 
-A naive Bayes model was fit and the 5-fold miss-classification rate averaged between .4 and .5.
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/lasso_coef_f.pdf}
+\caption{Lasso penalties for each feature for changing lambda penalty values for Fanny/Felix}
+\label{subd}
+\end{figure}
 
-#### LDA
-An LDA model was fit and predicts correctly about 50/50
+Figure X shows the coefficient estimates for varying log lambda penalties for a logistic lasso model fit on the feature space. The frequency of the first scale degree appears to remain non-zero for the longest time. 
 
-#### knn
-With K=8, the missclassification rate was about .43
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/loglambda_f.pdf}
+\caption{Cross-validated misclassification rates for different lambdas}
+\label{subd}
+\end{figure}
 
+Figure X shows the misclassification rates for varying values of log(lambda). Most rates are well above 0.5 (the error for a coin toss), although at log(lambda) of -2.8 we have the lowest misclassification error of 0.517.
+
+When fit on the first eleven principal components, we have a lower misclassification rate. Figure X shows the misclassification errors for varying log(lambda). At -3.21 we have the lowest misclassification rate. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/pca_loglambda_f.pdf}
+\caption{Cross-validated misclassification rates for different lambdas}
+\label{subd}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale = .5]{images/varImp_f.pdf}
+\caption{Variable importance for a random forest model Fanny/Felix}
+\label{subd}
+\end{figure}
+
+Figure X shows the variable importance used in random forests. We can see that frequency of the first and second scale degree as well as the length of the piece are useful features in fitting the model. However, the scale of the Mean decrease in Gini is a lot smaller than the one for Bach/Mendelssohn, so these features are likely not as helpful in distinguising the composers. 
 
 <!-- =========================================================== -->
 <!-- =========================================================== -->
@@ -59,10 +107,15 @@ With K=8, the missclassification rate was about .43
 
 ## Predictions for Disputed pieces: 
 
-Since we have such high missclassification rates, the following predictions are likely not accurate. 
+Since we have such high misclassification rates using each model, the following predictions are likely not accurate. Table X shows the predicted classification for each piece for each model. 
 
-- Logistic: Predicts Op 8 no 2 and 12 to be written by Felix. 
-- Naive Bayes: Predicted all four as written by Fanny. 
-- knn: Predicted Op 8 no 12 to be written by Felix.
-- LDA: Predicted Op9 no 12 to be written by Felix.
+Model            | Op.8 2 | Op.8 3 | Op.8 12 | Op.9 7 | Op.9 10 | Op.9 12
+-----------------|--------|--------|---------|--------|---------|--------
+logistic-lasso   | fanny  | fanny  | Felix   |        |         |fanny
+LDA              | fanny  | fanny  | fanny   |        |         |fanny 
+KNN              | felix  | fanny  | felix   |        |         |felix
+Naive Bayes      | fanny  | fanny  | fanny   |        |         |fanny
+Random Forest    | felix  | felix  | felix   |        |         |felix
+
+Table: Predicted composer for each disputed piece
   

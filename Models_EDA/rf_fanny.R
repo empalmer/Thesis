@@ -7,8 +7,9 @@ forest_mod
 plot(forest_mod)
 legend("top", colnames(forest_mod$err.rate),col=1:4,cex=0.8,fill=1:4)
 
+pdf("varImp_f.pdf")
 varImpPlot(forest_mod,type=2)
-
+dev.off()
 
 mcr <- 0
 for(j in 1:100){
@@ -27,3 +28,9 @@ for(j in 1:100){
 }
 MCR_rf <- mean(mcr)
 MCR_rf
+
+# predict 
+
+forest_mod <- randomForest(ffeatures[,-1], y = ffeatures[,1],
+                           mtry = 5,importance = T)
+predict(forest_mod, newdata = disputed_features)

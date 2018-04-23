@@ -62,19 +62,27 @@ dis <- predict(flog_mod,type= "response")
 # 5-fold CV LASSO logistic
 grid <- 10^seq(10,-2,length=100)
 flog_lasso_mod <- glmnet(xf,yf,family = "binomial", 
-                         alpha = 1,lambda = grid)
+                         alpha = 1)
 fcv_log_lasso_mod <- cv.glmnet(xf,yf,family = "binomial",
                               nfolds = 5,type.measure = "class")
 min_lambda <- fcv_log_lasso_mod$lambda.min
+min_lambda
+log(min_lambda)
+
 fcv_log_lasso_mod$cvm
 MSE_lasso <- min(fcv_log_lasso_mod$cvm)
 MSE_lasso
 
 # lambda plot
+pdf("lasso_coef_f.pdf")
 plot(fcv_log_lasso_mod)
+dev.off()
 # coeficient plots
 plot(flog_lasso_mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")
+
+pdf("loglambda_f.pdf")
 plot_glmnet(flog_lasso_mod, xvar = "lambda",xlim = c(-5,0))
+dev.off()
 
 #==============================================================
 # predicting pieces from lasso model...

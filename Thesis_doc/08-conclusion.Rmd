@@ -1,8 +1,15 @@
 # Conclusion {-}
 
+Fitting classifiers using low-level features composed mostly of frequencies of notes and rhythms was able to differentiate style between Bach and Fanny and Felix Mendelssohn. However classifiers using these low-level features were not successful in differentiating between Fanny and Felix. 
 
-## Future suggestions for museR
 
-Future suggestions to improve functionality of the R package museR include equipping it to deal with higher level features...
+## Future suggestions for musical stylometry research
 
-Also examining if some of the combinations were done in a musically correct way, or if they shoudl have remained as seperate features. For example, if the rhthmic entropy shouldhave been computed for each instrument, and how to 
+Most suggestions for future work lie in expanding the capabilities for museR. The first lies in increasing the ease of importing data. The scanning/OMR step is incredibly time consuming, which lead to a limited number of pieces being used in this analysis. While museR cannot help with this issue, museR could be expanded to be able to import music in the musicXML format in order to not need to rely on Humdrum's conversion program. 
+
+In addition, it would be interesting to perform this analysis on music of different forms, as we might expect unconscious signals to exist in the same way in symphonies as well as lieder. 
+
+Also it would be interesting to examine composers throughout their career. Maybe they had different aspects when they first started composing than when they were older. 
+
+Mostly, future versions of museR would be able to extract high level features. These are features that take into account the context of the feature in the music. These include more harmonic features, such as chord progressions, and more chord analysis. 
+
