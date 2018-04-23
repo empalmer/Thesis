@@ -1,7 +1,7 @@
 #  
 ## Introduction: 
 
-Treating text or music as data has challenges. Neither contains anything immediately analyzable. With the increasing availability of the internet and social media data, text classification has become an promising form of data analysis. While text classification problems are very frequent, similar methods that classify music have not been as commonly explored. To explore these problems, first analyzable features must identified that can be extracted for every text. These features can include word frequencies, length etc.  Analysis of text using machine learning can find patterns, authors, or categories of text. Similar methods can also be used to classify music, a field known as musical stylometry.
+Treating text or music as data has challenges. Neither data nor music contains anything immediately analyzable by a computer. With the increasing availability of the internet and social media data, text classification has become an promising form of data analysis. While text classification problems are very frequent, similar methods that classify music have not been as commonly explored. To explore these problems, first analyzable features must identified that can be extracted for every text. These features can include word frequencies, length etc.  Analysis of text using machine learning can find patterns, authors, or categories of text. Similar methods can also be used to classify music, a field known as musical stylometry.
 
 Feature extraction is an essential part in text or music classification. Unlike in a data set of numerical or categorical values, text and music must first go through a processing stage where features of interest can be extracted before any models can be fit. 
 
@@ -60,8 +60,11 @@ Shrinkage methods, instead of pickig which features to use, use all $p$ features
 
 The two methods mentioned above, shrinkage methods and subset selection both use the original variables. Dimension reduction methods transform the features space, and then fit models on the transformed variables. It is commonly used to combine enough of the information given in the features in a smaller dimensional space. This results in feature creation; using the recorded variables to create new features to fit the model on. Common dimension reduction techniques include Principal components analysis(PCA) and linear discriminant analysis (LDA). Goals of feature creations include that we can achieve a good reconstruction of the data and that we can be successful in making our predictors.
 
-<!--- ================================================================= -->
-<!--- ================================================================= -->
+Once we have a model, we often want to know how "good" it is. For classification, we often use the misclassifcation rate. To calculate this, we withold a sample of our data as a testing set. We then fit the model on the training set, and then use the fitted model to predict classes on the testing set. The misclassifcation rate is then computed as the number of pieces in the testing set that were incorrectly classified divided by the total number of pieces. Cross validation involves fitting a model on a training set, and then using the fitted model to predict the responses in the testing set. $k$-fold cross validation involves splitting the data set into $k$ different parts of equal size, and fitting a model on the the data set with one of the $k$ parts withheld. The model is then tested on the withheld data. This is useful for model selection and determining the accuracy of the model. In this paper, as is common, we use $k = 5$. This results in a predicted misclassification rate with lower variance.
+
+
+<!--- ============================================================== -->
+<!--- ============================================================== -->
 ## Previous research. 
 
 There have been numerous other applications of machine learning to music. These include many studies that are not specifically identifying a composer from sheet music. For example, a previous study used machine learning trained on a composer's music to have the computer learn the style and compose a piece in a similar style. [@papadopoulosai]

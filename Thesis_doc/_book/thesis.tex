@@ -131,24 +131,26 @@ I want to thank a few people.
 \Abstract{
 Classification for authorship of written classical music is a relatively
 infrequently explored field. In theory, composers leave behind
-unconsious (or perhaps consious) signals that indicate a piece of music
-as thier own. Ideally these signals or features can be extracted and
-used to build a model to predict the composer of a piece of music. For
-instance, the siblings Fanny Hensel and Felix Mendelssohn, although very
-similar in compositional style, likely have features that distingush
-their music. It is speculated that there are at least six pieces that
-Fanny wrote that were published by Felix. Low level features, including
-frequencies of chords and scale degree usage were extracted from 31
-lieder known to be written by Felix and 35 pieces known to be written by
-Fanny. These features were extracted using museR, an R package written
-by me*. Additionally, to check the validity of the model, 27 solo piano
-pieces from J.S. Bach's Well Tempered Clavier were used to compare
-against Felix and Fanny. A logistic lasso, k-nearest neighbors, random
-forests, naive Bayes, and linear discriminant analysis were preformed.
-Comparing between Bach and Menelssohn, --- model resulted in the lowest
-misclassification rate. Between Felix and Fanny --- model resulted in
-the lowest misclassification rate. Finally the six disputed pieces were
-run through the models. and \ldots{}
+unconscious (or perhaps conscious) signals that indicate a piece of
+music as their own. Ideally these signals or features can be extracted
+and used to build a model to predict the composer of a piece of music.
+For instance, the siblings Fanny Hensel and Felix Mendelssohn, although
+very similar in compositional style, likely have features that
+distinguish their music. It is speculated that there are at least six
+pieces that Fanny wrote that were published by Felix.
+
+Low level features, including frequencies of chords and scale degrees
+were extracted from 31 lieder known to be written by Felix and 35 pieces
+known to be written by Fanny. These features were extracted using museR,
+an R package written by me*. Additionally, to check the validity of the
+model, 27 solo piano pieces from J.S. Bach's Well Tempered Clavier were
+used to compare against Felix and Fanny. A logistic lasso, k-nearest
+neighbors, random forests, naive Bayes, and linear discriminant analysis
+were performed in order to classify the pieces. Comparing between Bach
+and Mendelssohn, --- model resulted in the lowest misclassification
+rate. Between Felix and Fanny --- model resulted in the lowest
+misclassification rate. Finally the six disputed pieces were run through
+the models. and \ldots{}
 }
 
 	\usepackage{tikz,amsmath,graphicx,}
@@ -196,24 +198,26 @@ run through the models. and \ldots{}
   \begin{abstract}
     Classification for authorship of written classical music is a relatively
     infrequently explored field. In theory, composers leave behind
-    unconsious (or perhaps consious) signals that indicate a piece of music
-    as thier own. Ideally these signals or features can be extracted and
-    used to build a model to predict the composer of a piece of music. For
-    instance, the siblings Fanny Hensel and Felix Mendelssohn, although very
-    similar in compositional style, likely have features that distingush
-    their music. It is speculated that there are at least six pieces that
-    Fanny wrote that were published by Felix. Low level features, including
-    frequencies of chords and scale degree usage were extracted from 31
-    lieder known to be written by Felix and 35 pieces known to be written by
-    Fanny. These features were extracted using museR, an R package written
-    by me*. Additionally, to check the validity of the model, 27 solo piano
-    pieces from J.S. Bach's Well Tempered Clavier were used to compare
-    against Felix and Fanny. A logistic lasso, k-nearest neighbors, random
-    forests, naive Bayes, and linear discriminant analysis were preformed.
-    Comparing between Bach and Menelssohn, --- model resulted in the lowest
-    misclassification rate. Between Felix and Fanny --- model resulted in
-    the lowest misclassification rate. Finally the six disputed pieces were
-    run through the models. and \ldots{}
+    unconscious (or perhaps conscious) signals that indicate a piece of
+    music as their own. Ideally these signals or features can be extracted
+    and used to build a model to predict the composer of a piece of music.
+    For instance, the siblings Fanny Hensel and Felix Mendelssohn, although
+    very similar in compositional style, likely have features that
+    distinguish their music. It is speculated that there are at least six
+    pieces that Fanny wrote that were published by Felix.
+    
+    Low level features, including frequencies of chords and scale degrees
+    were extracted from 31 lieder known to be written by Felix and 35 pieces
+    known to be written by Fanny. These features were extracted using museR,
+    an R package written by me*. Additionally, to check the validity of the
+    model, 27 solo piano pieces from J.S. Bach's Well Tempered Clavier were
+    used to compare against Felix and Fanny. A logistic lasso, k-nearest
+    neighbors, random forests, naive Bayes, and linear discriminant analysis
+    were performed in order to classify the pieces. Comparing between Bach
+    and Mendelssohn, --- model resulted in the lowest misclassification
+    rate. Between Felix and Fanny --- model resulted in the lowest
+    misclassification rate. Finally the six disputed pieces were run through
+    the models. and \ldots{}
   \end{abstract}
 
 \mainmatter % here the regular arabic numbering starts
@@ -223,16 +227,17 @@ run through the models. and \ldots{}
 
 \section{Introduction:}\label{introduction}
 
-Treating text or music as data has challenges. Neither contains anything
-immediately analyzable. With the increasing availability of the internet
-and social media data, text classification has become an promising form
-of data analysis. While text classification problems are very frequent,
-similar methods that classify music have not been as commonly explored.
-To explore these problems, first analyzable features must identified
-that can be extracted for every text. These features can include word
-frequencies, length etc. Analysis of text using machine learning can
-find patterns, authors, or categories of text. Similar methods can also
-be used to classify music, a field known as musical stylometry.
+Treating text or music as data has challenges. Neither data nor music
+contains anything immediately analyzable by a computer. With the
+increasing availability of the internet and social media data, text
+classification has become an promising form of data analysis. While text
+classification problems are very frequent, similar methods that classify
+music have not been as commonly explored. To explore these problems,
+first analyzable features must identified that can be extracted for
+every text. These features can include word frequencies, length etc.
+Analysis of text using machine learning can find patterns, authors, or
+categories of text. Similar methods can also be used to classify music,
+a field known as musical stylometry.
 
 Feature extraction is an essential part in text or music classification.
 Unlike in a data set of numerical or categorical values, text and music
@@ -448,6 +453,22 @@ model on. Common dimension reduction techniques include Principal
 components analysis(PCA) and linear discriminant analysis (LDA). Goals
 of feature creations include that we can achieve a good reconstruction
 of the data and that we can be successful in making our predictors.
+
+Once we have a model, we often want to know how ``good'' it is. For
+classification, we often use the misclassifcation rate. To calculate
+this, we withold a sample of our data as a testing set. We then fit the
+model on the training set, and then use the fitted model to predict
+classes on the testing set. The misclassifcation rate is then computed
+as the number of pieces in the testing set that were incorrectly
+classified divided by the total number of pieces. Cross validation
+involves fitting a model on a training set, and then using the fitted
+model to predict the responses in the testing set. \(k\)-fold cross
+validation involves splitting the data set into \(k\) different parts of
+equal size, and fitting a model on the the data set with one of the
+\(k\) parts withheld. The model is then tested on the withheld data.
+This is useful for model selection and determining the accuracy of the
+model. In this paper, as is common, we use \(k = 5\). This results in a
+predicted misclassification rate with lower variance.
 
 \section{Previous research.}\label{previous-research.}
 
@@ -1167,26 +1188,29 @@ submediant, 2/6.
 We determine a measure for the length of a piece by how many measures
 the piece has.
 
-\chapter{About the Models}\label{about-the-models}
+\chapter{About Classification Models}\label{about-classification-models}
 
 Classification problems attempt to divide observations (features) into
-groups (composer) based on similarities in the observations. The
-notation used in this chapter is inspired by \emph{The Elements of
-Statistical Learning} (Friedman, Hastie, \& Tibshirani, 2001) and
-\emph{An Introduction to Statistical Learning} (James, Witten, Hastie,
-\& Tibshirani, 2013). Our features space \(X\) is an \(n \times p\)
-matrix, where \(n\) is the size of our data, and \(p\) is the number of
-predictors. Each \(X_i\) is vector of values for a certain feature.
-\(x_{ij}\) denotes the \(i^{th}\) values of the \(j^{th}\) feature. This
-\(X\) contains the information of the extracted features that hopefully
-will be useful in determining the composer of the piece. If the features
-are different enough between the composer, ie, that the features endode
-some sense of unconscious (or conscious) use that differes between
-composer, we can then build and fit models that can use how the features
-differ between composers. These models can both explain the relationship
-and difference of the features between composers, and use the use the
-way the fitted model explains the differences to predict the composer of
-a piece if we know the same features for that piece.
+groups (composer) based on similarities in the observations. A
+classifier is some function \(f\) that maps a vector of input features
+\(x \in X\) to a composer \(y \in Y\) or possibly a probability of a
+composer \(P(Y = y) \in [0,1]\). The notation used in this chapter is
+inspired by \emph{The Elements of Statistical Learning} (Friedman,
+Hastie, \& Tibshirani, 2001) and \emph{An Introduction to Statistical
+Learning} (James, Witten, Hastie, \& Tibshirani, 2013). Our features
+space \(X\) is an \(n \times p\) matrix, where \(n\) is the size of our
+data, and \(p\) is the number of predictors. Each \(X_i\) is vector of
+values for a certain feature. \(x_{ij}\) denotes the \(i^{th}\) values
+of the \(j^{th}\) feature. This \(X\) contains the information of the
+extracted features that hopefully will be useful in determining the
+composer of the piece. If the features are different enough between the
+composer, ie, that the features endode some sense of unconscious (or
+conscious) use that differes between composer, we can then build and fit
+models that can use how the features differ between composers. These
+models can both explain the relationship and difference of the features
+between composers, and use the use the way the fitted model explains the
+differences to predict the composer of a piece if we know the same
+features for that piece.
 
 In addition to the features for each piece, each piece has a composer
 (response), known or unknown, that we denote by \(Y\). The \(i^{th}\)
@@ -1199,9 +1223,10 @@ classification of composer a model assigns or predicts.
 
 \section{Logistic Regression}\label{logistic-regression}
 
-Logistic regression directly modeling \(P(Y = k|X)\), or the probability
-a certain piece is written by a composer, given the features of that
-piece, by using the logistic function. The idea is to model the
+Knowing the class posteriors \(P(Y = k|X)\), or the probability that a
+piece has a certain composer, given the features of that piece, gives us
+an optimal classification. Logistic regression directly models
+\(P(Y = k|X)\) by using the logistic function. The idea is to model the
 posterior probabilities of each of the \(K\) classes as linear functions
 in \(x\) and requiring that the probabilities sum to 1. As is often the
 case, we use logistic regression to model a binary response: where there
@@ -1220,71 +1245,63 @@ probability \(\hat{p}(x_i)\) for the composer of each piece corresponds
 as closely as possible to the observed composer. The log-likelihood for
 \(N\) observations is:
 
-\[ \ell(\theta) = \sum_{i = 1}^N \log p_{g_i}(x_i;\theta)\] where
-\(p_k(x_i;\theta) = P(Y = k|X = x_i;\theta)\) We then choose \(\theta\)
-to maximize this function.
+\[ \ell(\beta) = \sum_{i = 1}^N \big\{y_i\log p(x_i;\beta) + (1-y_i)\log(1-p(x_i;\beta))\big\} = \sum_{i = 1}^N \big\{y_i\beta^Tx_i - \log(1 + e^{\beta^Tx_i})\big\}\]
+We then choose \(\beta\) to maximize \(\ell(\beta)\)
 
 \subsection{Lasso model selection}\label{lasso-model-selection}
 
-The Lasso penalty was proposed by Robert Tibshirani in 1996. Lasso
-regression works by giving a penalty to regression coefficients. It
-essentially performes variable selection, as for high enough penalties,
-coeficcients shrink to zero. It is often used in linear regression, but
-can be expended to logistic regression and other generalized linear
-models. For linear regression, the lasso works by choosing coefficients
+The Lasso penalty is a shrinkage method proposed by Robert Tibshirani in
+1996. Lasso regression works by giving a penalty to regression
+coefficients. It can be somewhat equivalent to performing variable
+selection, as for high enough penalties (or \(\lambda\)), coeficcients
+shrink to zero. It is often used in linear regression, but can be
+expended to logistic regression and other generalized linear models. For
+logistic regression, the lasso works by choosing coefficients
 \(\beta_\lambda^L\) that minimize
-\[ \sum_{i = 1}^n \bigg( y_i - \beta_0 - \sum_{j = 1}^p \beta_jx_{ij}\bigg)^2 + \lambda \sum_{j = 1}^p|\beta_j|\]
-We have that \(\lambda\) is a tuning parameter. Increasing \(\lambda\)
-will shrink the coefficients. This can be equivantely stated as:
-\[ \text{minimize}_\beta \bigg\{\sum_{i = 1}^n\bigg(y_i - \beta_0 - \sum_{j = 1}^p \beta_jx_{ij}\bigg) ^2 \text{ subject to } \sum_{j = 1}^p |\beta_j| \leq s\]
 
-To expand to generalized linear models, if our model uses some parameter
-\(\beta\) that was estimated by by some function \(\ell(\beta)\) (where
-\(\ell(\beta)\) is a log-likelyhood function for example), we maximize
-\(\ell(\beta)\) subject to \(\sum_{j=1}^p|\beta_j| < s\) (Tibshirani,
-1996)
+\[ \ell(\beta) + \lambda \sum_{j = 1}^p \beta_j \]
+
+where \(\ell(\beta)\) is the log-likelyhood function for logistic
+regression. This is equivalent to maximizing \(\ell(\beta)\) subject to
+\(\sum_{j=1}^p|\beta_j| < s\) (Tibshirani, 1996)
 
 \section{Linear Discriminant
 Analysis}\label{linear-discriminant-analysis}
 
-Linear regression on a categorical variable that has multiple variables
-has issues when there isn't a natural ordering with the categories. For
-large \(K\) and small \(p\), groups can be masked. When there is a
-binary response, we can calculate \(P(Y|X)\), but linear regression can
-give predictions that aren't valid probabilities, namely negative
-probabilities or probabilities greater than 1.
+Whereas logistic regression involves directly modeling
+\(P(Y = k | X =x)\), linear discriminant analysis (LDA), estimates these
+values less directly by using Bayes Theorem. When classes are well
+seperated or if \(n\) is small and the distribution of predictors is
+approximately normal, logistic regression estimates can be unstable,
+which is not the case for LDA. LDA is also popular when there are more
+than two response cases.
 
-Knowing the class posteriors \(P(Y = k|X)\), or the probability that a
-piece has a certain composer, given the values of its features, gives us
-an optimal classification. We notate \(f_k(x)\) is the class-conditional
-density of \(X\) in class \(G = k\) and \(\pi_k\) to the prior
-probability of class \(k\) with \(\sum_{k=1}^K \pi_k = 1\). Many models
-find \(P(Y = k | X)\) by modeling the distribution of the features \(X\)
-separately in each response class, and then use Bayes' theorem to
-calculate \(P(Y = k |X)\) which gives us the following:
+To preform LDA we must first model the distribution of each of the
+features that make up \(X\) in each of the response classes
+(\(P(X = x|Y)\)) We notate \(f_k(X) = P(X = x| Y = k)\) as the
+class-conditional density of \(X\) in class \(Y = k\). We denote the
+prior for class \(k\), \(\pi_k\), or the probability that a chosen
+observation is from the \(k^{th}\) class. We have that
+\(\sum_{k=1}^K \pi_k = 1\). Useing Bayes' theorem to calculate
+\(P(Y = k |X)\)gives us the following:
 
 \[ P(Y = k | X = x) = \frac{f_k(x)\pi_k}{\sum_{l = 1}^Kf_l(x)\pi_l}\]
 
-We thus must have a model to find \(f_k(x)\). Linear and quadratic
-discriminant analysis assume a multivariate Gaussian density, given by:
+We thus must have a model to find \(f_k(x)\). Different discriminant
+analysis techniques do this differnt ways. LDA assumes a multivariate
+Gaussian density, given by:
 \[f_k(x) = \frac{1}{(2\pi)^{p/2}|\mathbf{\Sigma}_k^{1/2}}e^{-\frac{1}{2}(x-\mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k)}\]
+, where \(\mu_k\) is the mean parameter for the \(k\)th class and
+\(\Sigma_k\) is the covariance matrix for the k\$th class.
 
-Linear discriminant analysis (LDA) assumes that the covariance matrix is
-equal for every \(k\):
-\(\mathbf{\Sigma}_k = \mathbf{\Sigma} \forall k\). Quadratic
-discriminant analysis does not have this assumption. In addition we
-assume \(\hat{\pi}_k = N_k/N\) where \(N_k\) is the number of class -
-\(k\) observations, \(\hat{\mu}_k = \sum_{g_i = k}x_i/N_k\), and
-\(\mathbf{\hat{\Sigma}} = \sum_{k = 1}^{K}\sum_{g_i = k}(x_i - \hat \mu_k)(x_i - \hat\mu_k)^T / (N- K)\)
+In addition, LDA assumes that the covariance matrix is equal for every
+\(k\): \(\mathbf{\Sigma}_k = \mathbf{\Sigma} \forall k\). Other
+discriminant models do not make this assumption. We also assume
+\(\hat{\pi}_k = N_k/N\) where \(N_k\) is the number of class - \(k\)
+observations,
 
-For LDA we can look at the log ratio comparing two classes \(k\) and
-\(l\) and can show:
-
-\[\log\frac{P(Y= k|x = x)}{P(Y = l|X = x)} = \log\frac{f_k(x)}{f_l(x)} + \log\frac{\pi_k}{\pi_l} = \log \frac{\pi_k}{\pi_l} - \frac{1}{2}(\mu_k + \mu_l)^T\mathbf{\Sigma}^{-1}(\mu_k- \mu_l) + x^T\mathbf{\Sigma}^{-1}(\mu_k - \mu_l) \]
-
-This is a linear equation, so the classes will be separated by
-hyperplanes. From the above, we can find that the predicted class for
-any \(x\) is :
+Using the formula for \(P(Y = k|X=x)\) as stated above, we can use LDA's
+assumption of \(f_k(X = x)\) which results in the discriminant function:
 
 \[ \delta_k(x) = x^T\mathbf{\Sigma}^{-1}\mu_k - \frac{1}{2}\mu_k^T\mathbf{\Sigma}^{-1}\mu_k + \log \pi_k \]
 
@@ -1292,38 +1309,54 @@ These functions are known as \(\textit{linear discriminant functions}\)
 We predict the class by finding the maximum value of the discriminant
 functions of all \(k\).
 
-For QDA we get the following discriminant functions:
-\[ \delta_k(x) = -\frac{1}{2}\log|\mathbf{\Sigma}_k| - \frac{1}{2}(x - \mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k) + \log \pi_k \]
-
-Linear discriminant analysis is helpful when the classes are well
-separated, when \(n\) is small and the distribution of the predictors
-\(X\) is approximately normal in each of the classes, and when there are
-more than two response classes.
-
 \section{Naive Bayes}\label{naive-bayes}
 
 The Naive Bayes classifier is often used for musical classification as
-it is good when the dimension \(p\) of the features space is large. It
-makes the (naive) assumption that all the features are independent for a
-given class \(i\), ie that \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]. In
-practice this is not the case, but the model still preforms surprisingly
-well in practice when this assumption does not hold.
+it is good when the dimension \(p\) of the features space is large. Like
+LDA, it also involves modeling \(P(Y = y | X =x)\) by using assumptions
+of the form of \(f_i(X)\) and using Bayes Theorem. Naive Bayes makes the
+(naive) assumption that all the features are independent for a given
+class \(i\), ie that \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]. These
+marginals are often estimated by using a Gaussian distribution, ie that
+\(f_{ik}(X_k) = \frac{1}{\sqrt{2\pi\sigma_k^2}}e^{\frac{(x - \mu_k)^2}{2\sigma_k^2}}\)
+In practice the independence assumption is not the case, but the model
+still preforms surprisingly well in practice when this assumption does
+not hold.
 
-\section{K- nearest - neighbor
-(expand)}\label{k--nearest---neighbor-expand}
+\section{K- nearest - neighbor}\label{k--nearest---neighbor}
 
-Another method for classification is k-nearest neighbor methods. It uses
-observations in the training set closest to \(x\) to form \(\hat{Y}\),
-the outputs. We often use Euclidean distance as a metric for closeness,
-although other methods exist. It is defined as
-\[ \hat{Y}(x) = \frac{1}{k}\sum_{x_i \in N_k(x)}y_i\]
-
-where \(N_k(x)\) is the \(k\) closest points, or neighbors, \(x_i\) in
-the training set. This is equivalent to taking the average of \(k\)
-observations with \(x_i\) closest to \(x\). This gives a predicted class
-of taking the mode of the \(k\) nearest neighbors.
+Another method for classification is \(k-\)nearest neighbor methods. It
+uses observations from a training set of the data. Then for an new
+observation in a testing set at point \(x_0 = x_1 \ldots x_p\), it finds
+the \(K\) closest points in the training set, and classifies \(x_0\) as
+the majority vote of the responses for the \(K\) neighbors. Euclidean
+distance is often used as the metric for closeness, although other
+methods exist. Euclidean distance is defined as \(d = |x_{(i)} - x_0\).
+After the \(K\) nearest neighbors are found, the predicted class for
+\(x_0\) is assigned to be the mode of the classes of the neighbors.
 
 \section{Random Forests}\label{random-forests}
+
+Tree-based methods are another form of classfier. Tree based methods
+involve segmenting the predictor space into smaller regions. To classify
+a point \(x_0\), we take the mode of the classes of training set
+observations in the smaller region where \(x_0\) lies, and assign the
+class of \(x_0\) as the mode. To create the tree, we recursively split
+the predictor space into two smaller regions at the point where the
+there is high node purity. The Gini index is often used to measure this,
+defined as \(G = \sum_{k = 1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})\). where
+\(\hat{p}_{mk}\) is the proportion of observations in the \(m\)th region
+of the \(k\)th class. If the Gini index is small, this indicates that a
+region contains mostly observations from a single class.
+
+Random forests offer an improvement over trees in general. They create a
+``forest'' of decision trees on bootstrapped training samples. In each
+of the trees in the forest, a random sample of \(m\) predictors are
+chosen to create the tree. For random forests, \(m = \sqrt{p}\)
+typically. Because strong predictors are often chosen for the first
+split of the tree, choosing only a random sample of the predictors to
+build the tree makes the trees in a Random forest significanly different
+from each other.This choice helps in decorrelating the trees.
 
 \section{Dimensionality Reduction: Pricipal component analysis
 (PCA)}\label{dimensionality-reduction-pricipal-component-analysis-pca}
@@ -1383,16 +1416,19 @@ We can observe the proportion of variance explained by each principal
 component. This is usually visualized in a skree plot. We can use this
 information to decide how many principal components to use.
 
-\section{5-fold Cross validation (move to
-introduction?)}\label{fold-cross-validation-move-to-introduction}
+\section{K-means}\label{k-means}
 
-Cross validation involves fitting a model on a training set, and then
-using the fitted model to predict the responses in the testing set.
-\(k\)-fold cross validation involves splitting the data set into \(k\)
-different parts of equal size, and fitting a model on the the data set
-with one of the \(k\) parts withheld. The model is then tested on the
-witheld data. This is useful for model selection and determining the
-accuracy of the model. In this paper, as is common, we use \(k = 5\)
+\(K\)-means is a form of unsupervised learning where we only use the
+features without the assoicated class of composer. When given a \(K\) or
+number of clusters, the algorithm assigns each piece to a cluster. This
+is used to see if there are any latent groupings in the feature space.
+If composers are differentiable with their features, we might expect
+that \(K\) means would differentiate teh clusters similar to the
+difference in composer. K-means clustering works by trying to minimize
+the within-cluster variation \(W(C_k)\) for each cluster \(C_k\). Often
+we devine the within-cluster variation by squared Euclidean distance, so
+\[W(C_k) = \frac{1}{|C_k|} \sum_{i,i' \in C_k}\sum_{j = 1}^p (x_{ij} - x_{i'j})^2 \]
+where \(|C_k|\) is the number of observations in the \(k\)th cluster.
 
 \chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}
 
