@@ -18,7 +18,7 @@ lda_mod <- lda(x = features[,-1], grouping = features[,1])
 x <- predict(lda_mod,newdata = features[,-1])
 lda.pred <- prediction(x$posterior[,2],features[,1])
 lda.perf <- performance(lda.pred,"tpr","fpr")
-plot(lda.perf)
+ROCR::plot(lda.perf)
 
 
 # Random Forests: 
@@ -28,7 +28,7 @@ forest_mod <- randomForest(composer~.,data = features,
 forest_mod.pr <- predict(forest_mod, newdata = features[,-1], type = "prob")
 rf.pred <- prediction(forest_mod.pr[,2],features[,1])
 rf.perf <- performance(rf.pred,"tpr","fpr")
-plot(rf.perf)
+ROCR::plot(rf.perf)
 
 # knn 
 

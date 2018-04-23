@@ -70,7 +70,7 @@
 
 
 % To pass between YAML and LaTeX the dollar signs are added by CII
-\title{A Musical Stylometry Study on the Music of Fanny Hensel and Felix
+\title{A Musical Stylometry Study on Works by Fanny Hensel and Felix
 Mendelssohn}
 \author{Emily Palmer}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
@@ -242,22 +242,25 @@ classification problems are very frequent, similar methods that classify
 music have not been as commonly explored.
 
 Feature extraction is an essential part in text or music classification.
-Unlike in a data set of numerical or categorical values, text and music
-must first go through a processing stage where features of interest can
-be extracted before any models can be fit.
+Unlike in other applications where the data initially countains set of
+numerical or categorical values, text and music must first go through a
+processing stage where features of interest can be extracted before any
+models can be fit.
 
-For music, the extracted features are used to build a model that can
-correctly classify a likely composer for that piece of music. Studies
-that examine the style of a type of music or composer are known as
-musical stylometry studies. For musically trained humans, this might be
-an easy task. Some are able to automatically distinguish a piece
-composed by Bach or Mozart either by listening to a recording, or
-looking at sheet music. This becomes more difficult when composers are
-contemporaries. Mozart and Salieri might be distinguishable to a more
-discerning listener or scholar, but only with some difficulty. Harder
-still is when the identity of the composer piece of music is disputed.
-Examples of such disputed authorship exist throughout music history,
-most notably in the Renaissance.
+Studies that examine the style of a type of music or composer using
+computations are known as musical stylometry studies. A subfield of
+musical stylometry is using the examined style to classify composer.
+These studies use extracted features to build a model that can correctly
+classify a likely composer for that piece of music. For musically
+trained humans, classifying composer on their own might be an easy task.
+Some are able to automatically distinguish a piece composed by Bach or
+Mozart either by listening to a recording, or looking at sheet music.
+This becomes more difficult when composers are contemporaries. Mozart
+and Salieri might be distinguishable to a more discerning listener or
+scholar, but only with some difficulty. Harder still is when the
+identity of the composer piece of music is disputed. Examples of such
+disputed authorship exist throughout music history, most notably in the
+Renaissance era and earlier.
 
 In both text and music classification, we must create features that can
 be calculated that would give a signal to indicate some conscious or
@@ -289,79 +292,78 @@ disputed paper.
 \section{Feature selection}\label{feature-selection}
 
 Text analysis, such as in the Federalist Papers, is accomplished by
-reading one word after another. Information in a piece of music,
-however, is read in a variety of ways. It can be read left to right note
-by note, but it can also be read vertically as the harmony, or the notes
-played together. Also in a piece with several instruments, both these
-processes happen at the same time for each instrument. There are also
-aspects that take place over large sections, such as phrasing, or
-cadential patterns. There are rules of counterpoint that are followed
-throughout the entire piece. Thus we need to find features that can be
-measured for each piece, or perhaps each measure or instrument, that can
-describe a certain piece of music. Then we must decide which features
-are those of rules and practices of classical music, and where the
-creativeness and individuality of a composer happens. As there are many
-different aspects of a piece, melodic changes, harmonies, etc., one can
-end up with many features to describe one piece. It is possible that the
-number of predictors \((p)\) can be greater than the sample size
-\((n)\), or that many features encode essentially the same thing. We
-thus need to figure a clever way to decrease our predictor space. This
-can happen in choosing what features we want to use to model, or by
-using a dimension reduction technique such as principal components
-analysis.
+reading one word after another. This often results in a vector where
+each entry is a word. Frequencies of word count for example, can easily
+be done by counting all instances of word occurance in the word vector.
+Information in a piece of music, however, is read in a variety of ways.
+It can be read left to right note by note, but it can also be read
+vertically as the harmony, or the notes played together. Also in a piece
+with several instruments, both these processes happen at the same time
+for each instrument. There are also aspects that take place over large
+sections, such as phrasing, or cadential patterns. There are rules of
+counterpoint that are followed throughout the entire piece. Thus we need
+to find features that can be measured for each piece, or perhaps each
+measure or instrument, that can describe a certain piece of music.
+Ideally, these features are not measuring certain rules and practices of
+classical music, but instead the creativeness and individuality of a
+composer. As there are many different aspects of a piece, melodic
+changes, harmonies, etc., one can end up with many features to describe
+one piece. It is possible that the number of predictors \((p)\) can be
+greater than the sample size \((n)\), or that many features encode
+essentially the same thing. We thus need to figure a clever way to
+decrease our predictor space. This can happen in choosing what features
+we want to use to model, or by using a dimension reduction technique
+such as principal components analysis.
 
 Most of the musical stylometry papers have focused on composers in the
 Renaissance (1400-1600), Baroque (1600-1750), and Classical (1730-1820)
 eras. The Mendelssohns were composing in the Romantic era (1780-1910).
 The focus of earlier papers may have been because composers in earlier
 eras followed rules of counterpoint more exactly, or perhaps had less
-``expressive'' allowances for their composing, thus making features
-easier. There are also more pieces with doubtful authorship in those
-eras. In addition Computer Assisted Research in the Humanities (CCARH)
-has a large corpus of encoded music from these times. As will be
-described later, the initial step of coding the music is the most time
-consuming, having music in a format immediately conducive to analysis is
-very helpful.
+``expressive'' allowances for their composing, thus making it easier to
+define and extract features. There are also more pieces with doubtful
+authorship in those eras. In addition Computer Assisted Research in the
+Humanities (CCARH) has a large corpus of encoded music from these times.
+As will be described later, the initial step of coding the music is the
+most time consuming, having music in a format immediately conducive to
+analysis is very helpful.
 
 \section{A Very Short Introduction to Music
 Theory}\label{a-very-short-introduction-to-music-theory}
 
-Western sheet music is presented on a five line staff. The sound of a
-note depends on its pitch, which is a specific vibration of sound waves
-at a certain frequency. The vertical distance between notes (also known
-as an interval) depends on how many half steps occur between two notes.
-There are 12 half steps in the western scale. Melodic intervals are
-defined as the number of half steps between two adjacent notes. Harmonic
-intervals are defined as the number of half steps between notes played
-at the same time. Chords occur when there are more than two notes being
-played simultaneously. The type of chord is also determined by the
-harmonic intervals it contains. Cadences are a type of chord
-progression, usually occurring at the end of a phrase and especially at
-the end of a piece. Musical notes are in the set
-\(note \in \{A,B,C,D,E,F,G\}\). The value of a note can be changed up or
-down a half step, by adding a sharp or flat. The key signature of the
-piece indicates how many sharps or flats are normal for the piece. A
-piece's key can be major or minor, although the piece can internally
-modulate between the two. The scale degree of a note depends on how many
-notes it is away from the tonic, or key of the piece. The time signature
-of a piece determines the number of beats that are in each measure.
-Intervals and chords can be either dissonant or consonant. Consonant
-intervals sound nice to our ears, whereas dissonant intervals add a
-sense of tension or unease, which is used to shape the feel of the
-music. In addition chords and intervals can be minor or major. Minor
-intervals feel ``sad'', whereas major intervals feel ``happy''. These
-are also known as sonorities, and divided into three types: perfect
-intervals (1, 4, 5, and 8), imperfect intervals (3 and 6), and dissonant
-intervals (2 and 7).
-
-For classical music there are some ``rules'' that most composers follow
-to some extent. These were followed more strictly in the Baroque era
-than the Romantic era. These rules are known as counterpoint. First
-species counterpoint is a type of counterpoint. One rule is that there
-are no parallel perfect consonances. Perfect consonances are octaves,
-fourths and fifths. Parallel indicates that they occur one after
-another. Another rule is that from one perfect consonance to another,
-the notes must proceed in contrary or oblique motion.
+Western sheet music is presented on a five line staff, where the
+postition on the staff defines its sound. The sound of a note depends on
+its pitch, which is a specific vibration of sound waves at a certain
+frequency. Notes are in the set \(note \in \{A,B,C,D,E,F,G\}\), and the
+value can be changed up or down a half step by adding a sharp or flat.
+The key signature of the piece indicates how many sharps or flats are
+normal for the piece. A piece's key can be major or minor, although the
+piece can internally modulate between the two. The scale degree of a
+note depends on how many notes it is away from the note that represents
+the key of the piece. The time signature of a piece determines the
+number of beats that are in each measure. The vertical distance between
+notes (also known as an interval) depends on how many half steps occur
+between two notes. There are 12 half steps in the western scale. Melodic
+intervals are defined as the number of half steps between two adjacent
+notes. Harmonic intervals are defined as the number of half steps
+between notes played at the same time. Chords occur when there are more
+than two notes being played simultaneously. The type of chord is
+determined by the harmonic intervals it contains. Cadences are a type of
+chord progression, usually occurring at the end of a phrase and
+especially at the end of a piece. Intervals and chords can be either
+dissonant or consonant. Consonant intervals sound nice to our ears,
+whereas dissonant intervals add a sense of tension or unease, which is
+used to shape the feel of the music. In addition chords and intervals
+can be minor or major. Minor intervals feel ``sad'', whereas major
+intervals feel ``happy''. These are also known as sonorities, and
+divided into three types: perfect intervals (1, 4, 5, and 8), imperfect
+intervals (3 and 6), and dissonant intervals (2 and 7). There are some
+rules, known as counterpoint, that most composers follow to some extent.
+These were followed more strictly in the Baroque era than the Romantic
+era. First species counterpoint is a type of counterpoint. One rule is
+that there are no parallel octaves, fourths or fifths. Another rule is
+that when changing from one perfect consonance to another, the notes
+must proceed in contrary or oblique motion.
 
 \section{Musical features}\label{musical-features}
 
@@ -391,27 +393,22 @@ have to train the feature to see if it was performing accurately. For
 this reason, this paper focuses only on low level features, or features
 that are context independent.
 
-Especially in research regarding text categorization, data sets have
-enormous numbers of variables. We use ``feature'' and ``variable''
-interchangeably, with the exception when features are created from
-variables, and the distinction will be made in that case (Guyon \&
-Elisseeff, 2003). There are several variable selection algorithms that
-select the ``important'' variables that could be included in models. If
-one included every variable that was extracted from a piece, the model
-would very likely be overfit. Thus some feature selection is important
-before fitting a model.
-
 \section{Background on Variable and Feature
 Selection}\label{background-on-variable-and-feature-selection}
 
 Before analysis is done or models are fit, numerous features are often
 extracted from the music without knowing a priori which ones will be
-helpful in identifying a composer's style. Fitting models with all of
-the features that are available can often lead to overfitting of the
-model. There are three main ways to deal with this problem: subset
-selection, shrinkage models, and dimensionality reduction. This section
-gives a broad overview of options for features selection. The methods
-used in this thesis will be described in further detail in chapter 4.
+helpful in identifying a composer's style. Especially in research
+regarding text categorization, data sets have enormous numbers of
+variables. We use ``feature'' and ``variable'' interchangeably, with the
+exception when features are created from variables, and the distinction
+will be made in that case (Guyon \& Elisseeff, 2003). Fitting models
+with all of the features that are available can often lead to
+overfitting of the model. There are three main ways to deal with this
+problem: subset selection, shrinkage models, and dimensionality
+reduction. This section gives a broad overview of options for features
+selection. The methods used in this thesis will be described in further
+detail in chapter 4.
 
 Subset selection methods choose which features to use in a model. There
 are many ways to do this and existing feature selection algorithms can
@@ -420,16 +417,14 @@ model is to look at all possible subsets of the variables and see which
 model performs best. All possible subsets of variables is \(2^p-1\),
 where \(p\) is the number of features. For large \(p\), this is often
 computationally impossible. Instead of fitting all possible subsets,
-strategies like best-first, branch and bound, simulated annealing, and
-genetic algorithms can help with the computational difficulties.
+stepwise selection strategies like forward selection and backward
+selection among others can be used.
 
 Subset selection methods often use some sort of variable ranking tool to
 determine which variables are useful to include in the best subset.
 Variable ranking uses a score function to assign a score to each
-possible variable. It is a computationally efficient method and is
-robust against overfitting as it introduces bias but may result in less
-variance. It is tempting to only include variables that have a high
-score. However, this possibly leads to redundancy. In addition,
+possible variable. It is tempting to only include variables that have a
+high score. However, this possibly leads to redundancy. In addition,
 variables that are not important by themselves can have a significant
 performance improvement when considered with other variables. Single
 variable classifiers rank the variable according to its individual
@@ -444,7 +439,7 @@ the coefficient estimates of the model used. Ideally, coefficients of
 features that are not as useful for the model will be shrunk towards
 zero, so they do not have a large effect on the model. Constraining
 features in this way often leads to a reduction in variance. The most
-common shrinkage methods are ridge regression and the lasso.
+common shrinkage methods are ridge and lasso.
 
 The two methods mentioned above, shrinkage methods and subset selection
 both use the original variables. Dimension reduction methods transform
@@ -1420,7 +1415,8 @@ where \(|C_k|\) is the number of observations in the \(k\)th cluster.
 abbreviations}\label{key-for-feature-abbreviations}
 \begin{longtable}[]{@{}ll@{}}
 \caption{Abbreviations for features and corresponding meanings. The
-features of Fanny and Felix begin with f.}\tabularnewline
+features of Fanny and Felix are the same but begin with
+f.}\tabularnewline
 \toprule
 \begin{minipage}[b]{0.11\columnwidth}\raggedright\strut
 name\strut
@@ -1440,24 +1436,25 @@ meaning\strut
 \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
 dens\_.\strut
 \end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright\strut
-Density of notes, mean and standard deviation\strut
+Density of notes: mean and standard deviation\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
 cons\_.\strut
 \end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright\strut
-Type of consonance, imp(imperfect), dis(dissonant), perf(perfect)\strut
+Type of melodic intervals: imp(imperfect), dis(dissonant),
+perf(perfect)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
 rf.\strut
 \end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright\strut
-Rhythm frequency, in 2(half), 2d(dotted half), 4 (quarter), 4d(dotted
+Rhythm frequency: 2(half), 2d(dotted half), 4 (quarter), 4d(dotted
 quarter), 8(eighth), 8d(dotted eighth), 16(sixteenth) ,32(thirty
 second)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
 sf\_.\strut
 \end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright\strut
-Scale degree frequency, in 1 to 8\strut
+Scale degree frequency: 1 to 8\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
 len\strut
@@ -1472,11 +1469,11 @@ Figure 5.1 shows density plots for each of the predictors used. We can
 see some difference of that feature being used by composer in the
 density features, and some of the rhythmic frequency features,
 especially use of eighth notes and sixteenth notes. The peaks for Bach
-are mostly narrower than those for Mendelssohn. This could be caused by
-We suspect the difference in density is somewhat caused by the type of
-piece of Bach and Mendelssohn. We might expect that solo pieces, like
-those in the Bach data set would have lower densities then for lieder,
-like in the Mendelssohn data set.
+are mostly narrower than those for Mendelssohn. We suspect the
+difference in density is somewhat caused by the type of piece of Bach
+and Mendelssohn. We might expect that solo pieces, like those in the
+Bach data set would have lower densities then for lieder, like in the
+Mendelssohn data set, which also include voice.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/distribution_b.pdf}
@@ -1903,6 +1900,8 @@ Mostly, future versions of museR would be able to extract high level
 features. These are features that take into account the context of the
 feature in the music. These include more harmonic features, such as
 chord progressions, and more chord analysis.
+
+Also it would be interesting to implement a windowing technique.
 
 \appendix
 
