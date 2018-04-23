@@ -8,7 +8,7 @@ advisor: 'Andrew Bray'
 
 department: 'Mathematics'
 degree: 'Bachelor of Arts'
-title: 'Thesis'
+title: 'A Musical Stylometry Study on Works by Fanny Hensel and Felix Mendelssohn'
 knit: "bookdown::render_book"
 site: bookdown::bookdown_site
 output: 

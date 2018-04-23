@@ -13,3 +13,5 @@ Also it would be interesting to examine composers throughout their career. Maybe
 
 Mostly, future versions of museR would be able to extract high level features. These are features that take into account the context of the feature in the music. These include more harmonic features, such as chord progressions, and more chord analysis. 
 
+Also it would be interesting to implement a windowing technique. 
+

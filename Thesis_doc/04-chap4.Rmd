@@ -4,21 +4,20 @@
 
 name    | meaning 
 --------|-----------------------------------------------------------------
-dens_.  | Density of notes, mean and standard deviation
-cons_.  | Type of consonance, imp(imperfect), dis(dissonant), perf(perfect)
-rf.     | Rhythm frequency, in 2(half), 2d(dotted half), 4 (quarter), 4d(dotted quarter), 8(eighth), 8d(dotted eighth), 16(sixteenth) ,32(thirty second)
-sf_.    | Scale degree frequency, in 1 to 8
+dens_.  | Density of notes: mean and standard deviation
+cons_.  | Type of melodic intervals: imp(imperfect), dis(dissonant), perf(perfect)
+rf.     | Rhythm frequency:  2(half), 2d(dotted half), 4 (quarter), 4d(dotted quarter), 8(eighth), 8d(dotted eighth), 16(sixteenth) ,32(thirty second)
+sf_.    | Scale degree frequency: 1 to 8
 len     | Length of the piece
 
-Table: Abbreviations for features and corresponding meanings. The features of Fanny and Felix begin with f. 
+Table: Abbreviations for features and corresponding meanings. The features of Fanny and Felix are the same but begin with f. 
 
 <!-- =============================== -->
 <!-- =============================== -->
 <!-- =============================== -->
 ## Bach and Mendelssohns
 
-Figure 5.1 shows density plots for each of the predictors used. We can see some difference of that feature being used by composer in the density features, and some of the rhythmic frequency features, especially use of eighth notes and sixteenth notes. The peaks for Bach are mostly narrower than those for Mendelssohn. This could be caused by We suspect the difference in density is somewhat caused by the type of piece of Bach and Mendelssohn. We might expect that solo pieces, like those in the Bach data set would have lower densities then for lieder, like in the Mendelssohn data set.
-
+Figure 5.1 shows density plots for each of the predictors used. We can see some difference of that feature being used by composer in the density features, and some of the rhythmic frequency features, especially use of eighth notes and sixteenth notes. The peaks for Bach are mostly narrower than those for Mendelssohn. We suspect the difference in density is somewhat caused by the type of piece of Bach and Mendelssohn. We might expect that solo pieces, like those in the Bach data set would have lower densities then for lieder, like in the Mendelssohn data set, which also include voice.
 
 
 \begin{figure}[H]
