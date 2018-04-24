@@ -2,7 +2,11 @@
 
 `r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'` 
 
+
+<!--
 Included will be the vignette for museR
 
 
-Also a piratical how to guide for converting music into R
+Also a pratical how to guide for converting music into R
+
+-->

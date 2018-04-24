@@ -1809,7 +1809,7 @@ frequency of the first scale degree appears to remain non-zero for the
 longest time. At \(\log(\lambda)\) of -2.67 we get the best lambda fit.
 At this \(\log(\lambda)\) value we have most of the coefficients shunk
 to zero besides frequency of thirty second notes and dotted eighth
-notes, and frequency of the first scale degree.
+notes, and frequency of the tonic (first scale degree).
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/var_imp_rflog_b.pdf}
@@ -1817,18 +1817,20 @@ notes, and frequency of the first scale degree.
 \label{subd}
 \end{figure}
 Figure 6.4 shows the variable importance used in random forests and the
-logistic regression coefficients at the best \(\lambda\) value. At the
-best lambda value, only nine of the coefficients of logistic regression
-are non-zero. The variables that the random forest model found useful
-did not correspond very well to the variables remaining non-zero in the
-logistic lasso model.
+logistic regression coefficients at the best \(\lambda\) value (-2.67).
+At the best lambda value, only nine of the coefficients of logistic
+regression are non-zero. The features that the random forest model found
+useful did not correspond very well to the features remaining non-zero
+in the logistic lasso model.
 
 \section{Predictions for Disputed
 pieces:}\label{predictions-for-disputed-pieces}
 
 Since we have such high misclassification rates using each model, the
-following predictions are likely not accurate. Table 6.3 shows the
-predicted classification for each piece for each model.
+following predictions are likely not accurate. Even so, we do see that
+each piece has a higher proportion of predictions for Fanny than Felix.
+Table 6.3 shows the predicted classification for each piece for each
+model.
 \begin{longtable}[]{@{}lllllll@{}}
 \caption{Predicted composer for each disputed piece}\tabularnewline
 \toprule
@@ -1853,34 +1855,33 @@ felix\tabularnewline
 \end{longtable}
 \chapter{Discussion}\label{discussion}
 
-\section{Discussion}\label{discussion-1}
-
 On very basic low-level features, consisting mostly of frequencies of
 notes, intervals and chords, most models comparing Bach to the
 Mendelssohn do relatively well. This is likely due to the decent
 separation of the features encoding density. We likely see so much
-separation because the Bach data is for solo piano and the Mendelssohn
-data has an additional instrument, thus making the piece automatically
+separation because the Bach data are for solo piano and the Mendelssohn
+data have an additional instrument, thus making the piece automatically
 more dense.
 
 On the other hand, models fit to compare Felix and Fanny did not do as
 well. They are only very slightly better than random guessing. This
 could be because there is no true difference between Fanny and Felix in
-the features we extracted, ie. the features extracted are not good
+the features we extracted, i.e., the features extracted are not good
 enough to pick up any existing signal. On the other hand, it is
 certainly believable that Fanny and Felix could have very similar
 unconscious signals in their writing. They were trained together, and
 did critique each others work extensively. The other possibility is that
-there are more works by Fanny snuck into Felix's published work, leading
-to overlap in the extracted features. We do know these features can
-accurately predict composer because as above for Bach and Mendelssohn,
-but perhaps composers so similar in style cannot be differentiated using
-these features. The included features only encode very basic aspects of
-music, and are more based on frequencies than how music actually seems
-to differ in style to a listener.
+there are more pieces by Fanny snuck into Felix's published work,
+leading to overlap in the extracted features. These features did
+accurately predict composer for the previous comparison
+(Bach/Mendelssohn), but perhaps composers so similar in style cannot be
+differentiated using these features. The included features only encode
+very basic aspects of music, and are more based on frequencies than how
+music actually seems to differ in style to a listener, such as features
+for uses of melodic phrasing.
 
-Even though our classifier for Felix/Fanny did not perform very well, it
-does seem like there is a good amount of musical interpretation
+Even though our classifiers for Felix/Fanny did not perform very well,
+it does seem like there is a good amount of musical interpretation
 contained in the features used. The first three principal components of
 the features seem to correspond to harmonic meaning, rhythmic meaning,
 and dotted vs not dotted notes.
@@ -1901,7 +1902,8 @@ not able to pick an existing signal, or that Fanny and Felix have no
 discernible difference in style, although the first is more likely. Most
 of the previous studies regarding composer identification were able to
 distinguish composer. The work by Brinkman when comparing Josquin to
-contemporaries did have substantial error in , although not as bad .
+contemporaries did have substantial error in assigning composers
+although not as bad as our classifiers performed, except for de Orto.
 Josquin and his contemporaries however, did not grow up together or
 receive identical music training, like Fanny and Felix did. Also
 analyzing music in the Romantic era has not been done before, and
@@ -1915,7 +1917,8 @@ Most suggestions for future work lie in expanding the capabilities for
 museR. One issue to be improved upon is increasing the ease of importing
 data. The scanning/OMR step is incredibly time consuming, which lead to
 a limited number of pieces being used in this analysis. Running this
-same analysis with more data would also be good. While museR cannot
+same analysis with more data could also lead to better results and lower
+errors, or at least errors with smaller variance. While museR cannot
 directly help with speeding up the scanning process, museR could be
 expanded to be able to import music in the musicXML format in order to
 not need to rely on Humdrum's conversion program. Future versions of
@@ -1931,24 +1934,20 @@ meaning in determining style as they are on a smaller scale instead of
 averaged across the entire piece.
 
 In addition, it would be interesting to perform this same analysis on
-music of different different types of pieces. We might expect
-unconscious signals to exist in the same way in symphonies as well as
-lieder, or perhaps not. Considering features that are similar between
-symphonic work and solo piano works is a challenging problem in of
-itself. Also including another composer in this study, perhaps a
-contemporary of Felix and Fanny, or at least a composer in the Romantic
-era would also be helpful in checking the validity of the features. Also
-it would be interesting to examine composers throughout their career.
-Composers, Dvorak for example, changed drastically their career. Maybe
-they had different aspects when they first started composing than when
+music of different types of pieces. We might expect unconscious signals
+to exist in the same way in symphonies as well as lieder, or perhaps
+not. Considering features that are similar between symphonic work and
+solo piano works is a challenging problem in of itself. Also including
+another composer in this study, perhaps a contemporary of Felix and
+Fanny, or at least a composer in the Romantic era would also be helpful
+in checking the validity of the features. Also it would be interesting
+to examine composers throughout their career. Composers, Dvorak for
+example, changed drastically their career. Maybe composers have
+different aspects of style when they first started composing than when
 they were older. Ideally museR could be used to pick up on these
 differences.
 
 \appendix
-
-Included will be the vignette for museR
-
-Also a piratical how to guide for converting music into R
 
 \backmatter
 

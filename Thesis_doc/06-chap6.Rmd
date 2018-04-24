@@ -85,7 +85,7 @@ Table 6.2 shows all the misclassification rates of each model. Unfortunately mos
 \label{subd}
 \end{figure}
 
-Figure 6.3 shows the coefficient estimates for varying $\log(\lambda)$ penalties for a logistic lasso model fit on the feature space. The frequency of the first scale degree appears to remain non-zero for the longest time. At $\log(\lambda)$ of -2.67 we get the best lambda fit. At this $\log(\lambda)$ value we have most of the coefficients shunk to zero besides frequency of thirty second notes and dotted eighth notes, and frequency of the first scale degree. 
+Figure 6.3 shows the coefficient estimates for varying $\log(\lambda)$ penalties for a logistic lasso model fit on the feature space. The frequency of the first scale degree appears to remain non-zero for the longest time. At $\log(\lambda)$ of -2.67 we get the best lambda fit. At this $\log(\lambda)$ value we have most of the coefficients shunk to zero besides frequency of thirty second notes and dotted eighth notes, and frequency of the tonic (first scale degree). 
 
 <!--
 \begin{figure}[H]
@@ -116,7 +116,7 @@ When fit on the first eleven principal components, we have a lower misclassifica
 \label{subd}
 \end{figure}
 
-Figure 6.4 shows the variable importance used in random forests and the logistic regression coefficients at the best $\lambda$ value. At the best lambda value, only nine of the coefficients of logistic regression are non-zero. The variables that the random forest model found useful did not correspond very well to the variables remaining non-zero in the logistic lasso model. 
+Figure 6.4 shows the variable importance used in random forests and the logistic regression coefficients at the best $\lambda$ value (-2.67). At the best lambda value, only nine of the coefficients of logistic regression are non-zero. The features that the random forest model found useful did not correspond very well to the features remaining non-zero in the logistic lasso model. 
 
 <!-- =========================================================== -->
 <!-- =========================================================== -->
@@ -124,7 +124,7 @@ Figure 6.4 shows the variable importance used in random forests and the logistic
 
 ## Predictions for Disputed pieces: 
 
-Since we have such high misclassification rates using each model, the following predictions are likely not accurate. Table 6.3 shows the predicted classification for each piece for each model. 
+Since we have such high misclassification rates using each model, the following predictions are likely not accurate. Even so, we do see that each piece has a higher proportion of predictions for Fanny than Felix. Table 6.3 shows the predicted classification for each piece for each model. 
 
 Model            | Op.8 2 | Op.8 3 | Op.8 12 | Op.9 7 | Op.9 10 | Op.9 12
 -----------------|--------|--------|---------|--------|---------|--------
