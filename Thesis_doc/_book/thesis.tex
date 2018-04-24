@@ -118,7 +118,7 @@ Mendelssohn}
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \Acknowledgements{
-I want to thank a few people.
+
 }
 
 \Dedication{
@@ -188,9 +188,8 @@ cannot trust the predictions for these disputed pieces.
 
 \frontmatter % this stuff will be roman-numbered
 \pagestyle{empty} % this removes page numbers from the frontmatter
-  \begin{acknowledgements}
-    I want to thank a few people.
-  \end{acknowledgements}
+
+
 
   \hypersetup{linkcolor=black}
   \setcounter{tocdepth}{2}
@@ -1196,7 +1195,7 @@ composer, ie, that the features encode some sense of unconscious (or
 conscious) use that differs between composer, we can then build and fit
 models that can use how the features differ between composers. These
 models can both explain the relationship and difference of the features
-between composers, and use the use the way the fitted model explains the
+between composers, and use the way the fitted model explains the
 differences to predict the composer of a piece if we know the same
 features for that piece.
 
@@ -1689,22 +1688,22 @@ do not correspond naturally to composer identification.
 \chapter{Results}\label{results}
 
 The following section presents the results of fitting five different
-classifiers on the original feature space as well as the first 11
-principal components to account for 85\% of the variance. This was done
-as there are many features that measure aspects of the same thing, ie
-there are seven different features measuring aspects of scale degree use
-where each scale degree can individually have interesting musical
-interpretations.
+models for classficiation on the original feature space as well as the
+first 11 principal components to account for 85\% of the variance. This
+was done as there are many features that measure aspects of the same
+thing, i.e.~there are seven different features measuring aspects of
+scale degree use where each scale degree can individually have
+interesting musical interpretations.
 
 The five classifiers were chosen as they were used previously in the
 literature for similar problems (KNN, Naive Bayes and Random forests),
-or are popular models for classfication (Logistic, LDA). For the
+or are popular models for classification (Logistic, LDA). For the
 logistic classifier we used lasso as a shrinkage method.
 
 Each model (10 total) was tested for predictive accuracy by finding the
-\(5-\)fold crosvalidated misclassfication rate. The crossvalidated
-misclassification showed a lot of variance depending on the random fold
-assigned, so the process was repeated 100 times, and the rate was
+\(5-\)fold cross-validated misclassification rate. The cross-validated
+misclassification rate showed a lot of variance depending on the random
+fold assigned, so the process was repeated 100 times, and the rate was
 averaged.
 
 \section{Models Results -
@@ -1729,7 +1728,7 @@ Naive Bayes & 0.103 & 0.112\tabularnewline
 Random forest & 0.058 & 0.111\tabularnewline
 \bottomrule
 \end{longtable}
-Table 6.1 shows the averaged 5-fold cross validated misclassification
+Table 6.1 shows the averaged 5-fold cross-validated misclassification
 rates over 100 runs. For the KNN case, the features were scaled and
 centered first. Most models have misclassification rates round 10\%. The
 best model was found to be linear discriminant analysis run on the
@@ -1739,21 +1738,20 @@ Figure 6.1 shows coefficient values for each feature for varying
 \(\log(\lambda)\) values. \(\lambda\) corresponds the restriction
 penalty. Higher values of \(\log(\lambda)\) correspond to a higher
 penalty, resulting in coefficient estimates that shrink to zero. The
-crossvalidated lasso logistic fit chose \(\log(\lambda) = -6.2\) to have
-the lowest misclassifiation rate. At that value, most features besides
-sf3, sf5, and rf8 are nonzero. We have that f2 and dens mean have low
-coefficient estimates at this point, but are nonzero, Overall, for all
-\(\lambda\) penalties, it appears that the features for density and
-frequency of 16th note rhythms stay non-zero the longest.
+cross-validated lasso logistic fit chose \(\log(\lambda) = -6.2\) to
+have the lowest misclassification rate. At that value, most features
+besides the third and fifth scale degrees and frequency of eighth note
+are nonzero. We have that scale degree two and mean density features
+have low coefficient estimates at this point, but are nonzero, Overall,
+for all \(\lambda\) penalties, it appears that the features for density
+and frequency of 16th note rhythms stay non-zero the longest, implying
+these features are more useful features for distinguishing the composer.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .6]{images/lasso_coef_b.pdf}
 \caption{Bach/Mendelssohn lasso logistic regression coefficients for changing $\lambda$ penalty values}
 \label{subd}
 \end{figure}
-We also fit a lasso logistic model on the first 11 principal components.
-This resulted in an optimal \(\log(\lambda)\) of -3.8, and a resulting
-misclassification rate of 0.097
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/var_imp_rflog_f.pdf}
@@ -1764,13 +1762,13 @@ Figure 6.2 shows the variable importance rankings as a mean decrease in
 the Gini index for the random forest model. It also shows the absolute
 value of the logistic regression coefficients at the best value for
 \(\lambda\). Note that we look at the relative height of the bars here
-to determine importance.We can see that while the random forest does not
-view frequencies of dotted quarter notes to be a very useful predictor,
-the logistic model views it as very important. The density features are
-the most important in deciding splits of the trees, although these
-values do not have high coefficients in the logistic. Both models agree
-that the last seven variables are not important. They were shrunk to
-zero in the logistic lasso model.
+to determine importance. We can see that while the random forest does
+not view frequencies of dotted quarter notes to be a very useful
+predictor, the logistic model views it as very important. The density
+features are the most important in deciding splits of the trees,
+although these values do not have high coefficients in the logistic.
+Both models agree that the last seven variables are not important. They
+were shrunk to zero in the logistic lasso model.
 
 \section{Model fit Felix/Fanny}\label{model-fit-felixfanny}
 \begin{longtable}[]{@{}lll@{}}
@@ -1798,8 +1796,7 @@ Table 6.2 shows all the misclassification rates of each model.
 Unfortunately most of the misclassification rates are above 0.5,
 indicating that random guessing would perform better at predicting the
 composer. A logistic lasso classification model fit on the principal
-components performed best, with a misclassification rate of 0.45. The
-\(\log(\lambda)\) penalty associated with this rate was -3.21.
+components performed best, with a misclassification rate of 0.45.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .6]{images/loglambda_f.pdf}

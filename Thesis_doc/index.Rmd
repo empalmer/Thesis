@@ -25,7 +25,7 @@ abstract: |
 # like below, use a command like that for the abstract above.  Note that a tab is 
 # needed on the line after the |.
 acknowledgements: |
-  I want to thank a few people.
+  
 #dedication: |
 #  You can have a dedication here if you wish. 
 #preface: |
