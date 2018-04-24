@@ -5,6 +5,11 @@ library(pROC)
 library(plotROC)
 
 # Logistic lasso works yes yay.
+# by hand
+predicts <- predict(log_lasso_mod,newx = x,
+                    type = 'response',s = min_lambda)
+
+
 x <- model.matrix(composer ~.,features)[,-1]
 y <- features[,1] %>% unname() %>% as.character()
 log_fit <- glmnet(x,y,family = "binomial", alpha = 1)

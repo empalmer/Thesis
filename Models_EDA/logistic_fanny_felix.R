@@ -78,10 +78,10 @@ pdf("lasso_coef_f.pdf")
 plot(fcv_log_lasso_mod)
 dev.off()
 # coeficient plots
-plot(flog_lasso_mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")
+plot(flog_lasso_mod, xvar = "lambda", xlim = c(-10, 0),ylim = c(0,5), main = "Lasso")
 
 pdf("loglambda_f.pdf")
-plot_glmnet(flog_lasso_mod, xvar = "lambda",xlim = c(-5,0))
+plot_glmnet(flog_lasso_mod, xvar = "lambda",xlim = c(-5,0),ylim = c(-20,20), label = T)
 dev.off()
 
 #==============================================================

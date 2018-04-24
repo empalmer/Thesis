@@ -1,5 +1,7 @@
 # Exploratory Data Analysis
 
+Before fitting any classifiers, we first want to perform some exploratory data analysis to examine visually any patterns or seperations between variables and composer. This is done by looking at individual density plots of each variable for each composer, looking at correlation structures in the features, and using PCA as an unsupervised method to gain insight into the feature space. We examine two cases, features for Bach/not Bach, which corresponds to Bach vs Fanny Hensel and Felix Mendelssohn. We denote this as Bach/Menelssohn. We also examine the features for Fanny/Felix.
+
 ## Key for feature abbreviations 
 
 name    | meaning 
@@ -17,51 +19,24 @@ Table: Abbreviations for features and corresponding meanings. The features of Fa
 <!-- =============================== -->
 ## Bach and Mendelssohns
 
-Figure 5.1 shows density plots for each of the predictors used. We can see some difference of that feature being used by composer in the density features, and some of the rhythmic frequency features, especially use of eighth notes and sixteenth notes. The peaks for Bach are mostly narrower than those for Mendelssohn. We suspect the difference in density is somewhat caused by the type of piece of Bach and Mendelssohn. We might expect that solo pieces, like those in the Bach data set would have lower densities then for lieder, like in the Mendelssohn data set, which also include voice.
+Figure 5.1 shows density plots for each of the predictors used. We can see some difference of that feature being used by composer in the density features, and some of the rhythmic frequency features, especially use of eighth notes and sixteenth notes. The peaks for Bach are mostly narrower than those for Mendelssohn. One can suspect the difference in density is partially caused by the type of piece of Bach and Mendelssohn. We might expect that solo pieces, such as those in the Bach data set would have lower densities then for lieder, as in the Mendelssohn data set, which also include voice.
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/distribution_b.pdf}
-\caption{Density plot of each feature of Bach/Mendelssohn}
+\includegraphics[scale = .6]{images/distribution_b.pdf}
+\caption{Density plot for each feature of Bach/Mendelssohn}
 \label{subd}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/cor_circles_b.pdf}
+\includegraphics[scale = .6]{images/cor_circles_b.pdf}
 \caption{Correlations between features of Bach/Mendelssohn}
 \label{subd}
 \end{figure}
 
-Figures 5.2 shows a visualization of the correlation matrix. The larger the circle represents a larger absolute value of correlation between the two predictors. We can see higher correlations between perfect consonances and dissonant consonances. This is to be expected. We also see high negative correlations between frequency of sixteenth notes and density, and frequency of eight notes. In addition we see high positive correlations between frequency of second, third, sixth, and seventh scale degree. There is likely some musical explanation to this. 
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale = .5]{images/biplot_b.pdf}
-\caption{Biplot of the loading vectors of the first two principal components}
-\label{subd}
-\end{figure}
-
-The biplot in Figure 5.3 shows the loading vectors plotted on the first two principal components.  The loading vectors of features seem to arrange into approximately three groups. The features: perfect consonances of melodic intervals of the voice, frequency of the first scale degree, frequency of the fourth scale degree are all grouped together. Similarly, frequencies for the 7th, 6th, 2nd, and 3rd are grouped together. In addition we have perfect consonances and imperfect consonances on two sides of the second principal component. This leads me to believe that the second principal component encodes some sense of use of consonant notes.  The first principal seems to encode some sense of rhythm. Faster rhythmic notes, like sixteenth notes and thirty second notes have opposite loadings than slower rhythmic notes. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale = .5]{images/bi_elipse12.pdf}
-\caption{Biplot of the first two principal components plotted with data points colored by composer. }
-\label{subd}
-\end{figure}
-
-Figure 5.4 shows the same loadings of the principal components, but with the addition of points representing each piece graphed by their first two principal components. Each piece is colored by composer. The ellipses represent a 95% concentration area, or where 95% of the data lie. We can see that the ellipses only overlap slightly, indicating that pieces by Bach and Mendelssohn usually have different values in the first and second principal component. Figure 5.5 shows the pieces plotted on the second and third principal component and there is much less separation. There also does not seem to be any obvious musical interpretation of the loadings.
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale = .5]{images/bi_elipse23.pdf}
-\caption{Biplot of the second and third principal components plotted with data points colored by composer}
-\label{subd}
-\end{figure}
-
+Figures 5.2 is a visualization of the correlation matrix. The larger the circle represents a larger absolute value of correlation between the two predictors. We can see higher correlations between perfect consonances and dissonant consonances. This is to be expected, as a higher frequency of perfect consonances nescesarrily means a lower frequency of dissonant consonances. We also see high negative correlations between frequency of sixteenth notes and density, and frequency of eight notes. In addition we see high positive correlations between frequency of second, third, sixth, and seventh scale degree. There is likely some musical explanation to this. 
 
 
 \begin{figure}[H]
@@ -71,9 +46,36 @@ Figure 5.4 shows the same loadings of the principal components, but with the add
 \label{subd}
 \end{figure}
 
-Figure 5.6 shows the skree plot of the PCs of Bach and Mendelssohn. For each principal component used (shown on the x-axis), we have the corresponding percentage of variance explained (y-axis). Often when using PCA for dimensionality, we often look for an elbow in the skree plot. This is done to choose the smallest number of principal components needed to explain a sizable amount of the variation in the feature space.  There is a possible elbow at the second principal component. This indicates that we might be able to perform analysis using only the first two principal components. However, especially considering that our data are not very separable, we likely would likely want to use more information in our model. As a similar result occurred for Brinkman, in our analysis we will use the principal components that account for 85% of the variance. In the Bach/Mendelssohn case this corresponds to using 11 principal components. 
+Figure 5.3 shows the skree plot of the principal components of Bach and Mendelssohn. For each principal component used (shown on the x-axis), we have the corresponding percentage of variance explained (y-axis). Often when using PCA for dimensionality, we often look for an elbow in the skree plot. This is done to choose the smallest number of principal components needed to explain a sizable amount of the variation in the feature space.  There is a possible elbow at the second principal component. This indicates that we might be able to perform analysis using only the first two principal components. However, especially considering that our data are not very separable, we likely would likely want to use more information in our model. As a similar result occurred for Brinkman, in our analysis we will use the principal components that account for 85% of the variance. In the Bach/Mendelssohn case this corresponds to using 11 principal components. 
 
-We can also use K-means clustering to see if there are any apparent groups in the data. When we run K-means on the first 11 principal components of Bach and Mendelssohn with K = 2 (since there are two composers), we get the results we see in Figure 5.7. The coloring of the points indicate which cluster the K-means algorithm identified each piece as. The label of each piece indicates the actual composer. We can see that for the most part, for pieces with high or low scores on the first principal component, the clustering preserves the composer. For pieces with middle scores of the first PC, there is a good number of pieces with a cluster assignment not consistent with composer. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale = .5]{images/biplot_b.pdf}
+\caption{Biplot of the loading vectors of the first two principal components}
+\label{subd}
+\end{figure}
+
+The biplot in Figure 5.4 shows the loading vectors plotted on the first two principal components. The loading vectors of features seem to arrange into approximately three groups. The features: perfect consonances of melodic intervals of the voice, frequency of the first scale degree, frequency of the fourth scale degree are all grouped together. Similarly, frequencies for the 7th, 6th, 2nd, and 3rd are grouped together. In addition we have perfect consonances and imperfect consonances on two sides of the second principal component.
+It appears that the first principal component seems to encode tempo/rhythm. Faster rhythmic notes, like sixteenth notes and thirty second notes have opposite loadings than slower rhythmic notes.  The second principal component appears to encodes harmonic structure, especially differences in consonances.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = .5]{images/bi_elipse12.pdf}
+\caption{Biplot of the first two principal components plotted with data points colored by composer. }
+\label{subd}
+\end{figure}
+
+Figure 5.5 shows the same loadings of the principal components, but with the addition of points representing each piece graphed by their first two principal components. Each piece is colored by composer. The ellipses represent a 95% concentration area, or where 95% of the data lie. We can see that the ellipses only overlap slightly, indicating that pieces by Bach and Mendelssohn usually have different values in the first and second principal component. Figure 5.6 shows the pieces plotted on the second and third principal component and there is much less separation. The third principal component also appears to encode rythmic information. We have that dotted rhythmic frequencies have opposite loadings on the third principal component to their corresponding non dotted rhythm. For example, frequencies of eight notes have an opposite loading on the third principal component to the frequency of dotted eigth notes. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = .5]{images/bi_elipse23.pdf}
+\caption{Biplot of the second and third principal components plotted with data points colored by composer}
+\label{subd}
+\end{figure}
+
+
+We can also use K-means clustering to see if there are any apparent groups in the data. When we run K-means on the first 11 principal components of Bach and Mendelssohn with K = 2 (since we are comparing two classes ), we get the results we see in Figure 5.7. The coloring of the points indicate which cluster the K-means algorithm identified each piece as. The label of each piece indicates the actual composer. We can see that for the most part, for pieces with high or low scores on the first principal component, the clustering preserves the composer. For pieces with middle scores of the first PC, there is a good number of pieces with a cluster assignment not consistent with composer. 
 
 \begin{figure}[H]
 \centering
@@ -82,7 +84,8 @@ We can also use K-means clustering to see if there are any apparent groups in th
 \label{subd}
 \end{figure}
 
-We can also examine when $K=3$, as the Mendelssohn set is made up of Fanny and Felix, so there are actually three composers. (fix labeling)
+We can also examine when $K=3$, indicating that the $K-$means algorithm should look for three clusters. This is reasonable as the Mendelssohn set is made up of Fanny and Felix, so there are actually three composers. The clusters seem to be mostly assigned by the value of the first principal component. For the most part, pieces by Bach are assigned to the third cluster, although there are a couple in the other two clusters.
+
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/kmeans_3_b.pdf}
@@ -97,7 +100,7 @@ We can also examine when $K=3$, as the Mendelssohn set is made up of Fanny and F
 
 ## Felix and Fanny
 
-As we can see from density distributions in Figure 5.9, most of the features used have very little separation between the two composers. This is not very encouraging for later fitting of models.
+As we can see from density distributions in Figure 5.9, most of the features used have very little separation between the two composers. Most of the density distributions for features from pieces of Fanny and Felix overlap completely and have nearly identical peaks. There is a small difference in peak for the frequency of use of the first scale degree, with fanny using it more often. The lack of difference in features between the two composers is not very encouraging for later fitting of models.
 
 \begin{figure}[H]
 \centering
@@ -106,12 +109,22 @@ As we can see from density distributions in Figure 5.9, most of the features use
 \label{subd}
 \end{figure}
 
-The correlations of the Fanny/Felix features are shown in Figure 5.10. The features appear to not be as correlated as the Bach/Mendelssohn features with the exception of frequencies of types of melodic consonances, and frequencies of scale degrees 2, 3, 6, and 7. 
+The correlations of the Fanny/Felix features are shown in Figure 5.10. The rythmic features do not seem to have as much correlation as the Bach/Mendelssohn features. We still see higher correlations for frequencies of types of melodic consonances, and frequencies of scale degrees 2, 3, 6, and 7. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/cor_circles_f.pdf}
 \caption{Correlations between features of Fanny/Felix}
+\label{subd}
+\end{figure}
+
+
+Figure 5.11 shows the skree plot for Fanny/Felix. It can be argued that there is an elbow at principal component thirteen, but it is not that clear. Using 11 principal components again accounts for 85% of the variance, so we will use 11 PCs in fitting our classifiers as well.  
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale = .5]{images/skree_f.pdf}
+\caption{PCA Felix/Fanny skree plot}
 \label{subd}
 \end{figure}
 
@@ -124,7 +137,7 @@ The correlations of the Fanny/Felix features are shown in Figure 5.10. The featu
 \label{subd}
 \end{figure}
 
-Figure 5.11 shows the loadings of the principal components of the features of Fanny and Felix. Again we see that the loadings for scale degrees 1 and 5 and perfect consonant intervals are in opposite direction on the second principal component to scale degrees 2, 7 and dissonant intervals. Also we see again that frequencies for faster rhythmic values have opposite loadings to those of slower notes.  
+Figure 5.12 shows the loadings of the principal components of the features of Fanny and Felix. In contrast to the biplot for Bach/Mendelssohn, it seems like the first principal component encodes harmonic aspects of music, and second principal component encodes rhythm. The loadings for scale degrees 1, 5 and perfect consonant intervals are in opposite direction on the second principal component to scale degrees 2, 7 and dissonant intervals. Also we see that frequencies for faster rhythmic values have opposite loadings to those of slower notes on the second principal component.
 
 \begin{figure}[H]
 \centering
@@ -133,17 +146,7 @@ Figure 5.11 shows the loadings of the principal components of the features of Fa
 \label{subd}
 \end{figure}
 
-When the pieces are plotted on the biplot as shown in Figure 5.12, we see that there is not that much separation between the Fanny pieces and the Felix pieces. This might lead to issues in creating a model to classify. 
-
-
-Figure 5.13 shows the skree plot for Fanny/Felix. It can be argued that there is an elbow at principal component 13, but it is not that clear. Using 11 PCs accounts again for 85% of the variance, so we will use 11 PCs in models as well. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale = .5]{images/skree_f.pdf}
-\caption{PCA Felix/Fanny skree plot}
-\label{subd}
-\end{figure}
+When the pieces colored by composer are plotted on the biplot as shown in Figure 5.13, we do not see as much seperation between the Fanny and Felix pieces as how we did for Bach/Mendellsohn. The 95% elipses almost completely overlap. This lack of seperation for the two groups might lead to issues in creating a model to classify. 
 
 
 \begin{figure}[H]
@@ -153,7 +156,7 @@ Figure 5.13 shows the skree plot for Fanny/Felix. It can be argued that there is
 \label{subd}
 \end{figure}
 
-Figure 5.14 shows the results of K-means with $K = 2$. We see that in the two clusters, there are many pieces labeled of both composer. 
+We again run $K-$means to identify clusters in the data. Ideally pieces would be clustered if they shared the same composer, even though the $K-$means algorithm does not have access to the composer information. Figure 5.14 shows the results of K-means with $K = 2$. We see that in the two clusters, there are many pieces labeled of both composer. This indicates that when clusters that exist in the data, they do not correspond naturally to composer identification.
 
 
 

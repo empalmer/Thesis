@@ -4,33 +4,9 @@
 
 On very basic low-level features, consisting mostly of frequencies of notes, intervals and chords, most models comparing Bach to the Mendelssohn do relatively well. This is likely due to the decent separation of the features encoding density. We likely see so much separation because the Bach data is for solo piano and the Mendelssohn data has an additional instrument, thus making the piece automatically more dense. 
 
+On the other hand, models fit to compare Felix and Fanny did not do as well. They are only very slightly better than random guessing. This could be because there is no true difference between Fanny and Felix in the features we extracted, ie. the features extracted are not good enough to pick up any existing signal. On the other hand, it is certainly believable that Fanny and Felix could have very similar unconscious signals in their writing. They were trained together, and did critique each others work extensively. The other possibility is that there are more works by Fanny snuck into Felix's published work, leading to overlap in the extracted features.  We do know these features can accurately predict composer because as above for Bach and Mendelssohn, but perhaps composers so similar in style cannot be differentiated using these features. The included features only encode very basic aspects of music, and are more based on frequencies than how music actually seems to differ in style to a listener. 
 
-Model        | misclass. rate - features | misclass. rate -  11 PCs 
--------------|---------------------------|-------------------------------
-Logistic     | 0.078                     | 0.097
-LDA          | 0.092                     | 0.049
-KNN          | 0.097 (K=9)               | 0.098 (K = 9)
-Naive Bayes  | 0.103                     | 0.112
-Random forest| 0.058                     | 0.111
-
-Table: Misclassification Rates for different models comparing Bach and Mendelssohns
-
-
-On the other hand, models fit to compare Felix and Fanny did not do as well. They are only very slightly better than random guessing. This could be because there is no true difference between Fanny and Felix in the features we extracted, ie. the features extracted are not good enough to pick up any existing signal. On the other hand, it is certainly believable that Fanny and Felix could have very similar unconscious signals in their writing. They were trained together, and did critique each others work extensively. The other possibility is that there are more works by Fanny snuck into Felix's published work, leading to overlap in the extracted features.  We do know these features can accurately predict composer because as above for Bach and Mendelssohn, but perhaps composers so similar in style cannot be differentiated using these features. The included features only encode very basic aspects of music, and are more based on frequencies than how music acutally seems to differn in style to a listener. 
-
-
-Model        | misclass. rate - features | avg. misclass. rate -  11 PCs 
--------------|---------------------------|-------------------------------
-Logistic     | 0.517                     | 0.45
-LDA          | 0.518                     | 0.505
-KNN          | 0.498                     | 0.467
-Naive Bayes  | 0.502                     | 0.521
-Random forest| 0.535                     | 0.571
-
-Table: Summary of misclassification rates for different models comparing Felix and Fanny
-
-
-
+Even though our classifier for Felix/Fanny did not perform very well, it does seem like there is a good amount of musical interpretation contained in the features used. The first three principal components of the features seem to correspond to harmonic meaning, rhythmic meaning, and dotted vs not dotted notes. 
 
 
 

@@ -13,6 +13,29 @@ pdf("varImp_b.pdf")
 varImpPlot(forest_mod,type=2)
 dev.off()
 
+predicts <- predict(log_lasso_mod,newx = x,
+                    type = 'coefficients',s = min_lambda)
+scaled_coeffs <- predicts[-1,1]
+
+rf_imp <- forest_mod$importance[,4]
+
+imps <- data.frame(feature = names(scaled_coeffs),
+                   log = abs(scaled_coeffs),
+                   rf = abs(rf_imp))
+
+imps$feature <- factor(names(scaled_coeffs),
+                       levels = c("dens_mean","dens_sd","sf_2","rf16",
+                                  "rf32","sf_7","rf4","sf_6","rf8","cons_dis",
+                                  "sf_1", "sf_3", "rf4d", "sf_4", 
+                                  "cons_perf","cons_imp","sf_5","rf2",
+                                  "rf2d","rf8d","len"))
+pdf("var_imp_rflog_b.pdf")
+ggplot(melt(imps), aes(x = feature, y = value, fill = variable )) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme(axis.text.x = element_text(angle = 90))
+dev.off()
+
+
 library(rpart)
 fit=rpart(factor(Y)~., df)
 plot(fit)

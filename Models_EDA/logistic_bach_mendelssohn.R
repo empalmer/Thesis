@@ -28,6 +28,13 @@ pdf("loglambda_b.pdf")
 plot(cv_log_lasso_mod)
 dev.off()
 
+
+# extract coefficients: for variable importance
+predicts <- predict(log_lasso_mod,newx = x,
+                    type = 'coefficients',s = min_lambda)
+scaled_coeffs <- scale(predicts[,1], center = T, scale = T)[,1]
+#
+
 min_lambda <- cv_log_lasso_mod$lambda.min
 min_lambda
 

@@ -93,9 +93,13 @@ The possible triad chords are all defined by the intervals between each note. Fo
 A similar process is done for seventh chords. 
 -->
 
+#### Frequency of rhythm use
+
+We determine the frequency of use of the most common types of rhythm: half notes, dotted half notes, quarter notes, dotted quarter notes, eighth notes, dotted eight notes, sixteenth notes, and thirtysecond notes.  
+
 #### Length
 
-We determine a measure for the length of a piece by how many measures the piece has.
+We define a measure for the length of a piece by how many measures the piece has.
 
 <!--
 #### Voice distance

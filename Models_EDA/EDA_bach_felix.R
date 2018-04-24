@@ -71,7 +71,11 @@ library(reshape)
 setwd("~/Desktop/Thesis/Thesis_doc/images")
 pdf("distribution_b.pdf")
 ggplot(melt(features), aes(x = value, color = composer)) + geom_density()+
-  facet_wrap(~variable, scales = "free")
+  facet_wrap(~variable, scales = "free") +
+  theme(axis.ticks = element_blank(), axis.text.y = element_blank(),
+        axis.text.x = element_blank(),
+        strip.text = element_text(face="bold", size=10),
+        strip.background = element_rect(fill = "white", size = 1))
 dev.off()
 
 #==============================================================

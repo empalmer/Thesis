@@ -149,8 +149,8 @@ Clavier were used. A logistic lasso, k-nearest neighbors, random
 forests, naive Bayes, and linear discriminant analysis were performed on
 the feature space in order to classify the pieces. In addition, those
 same models were fit on the principal components. Comparing between Bach
-and Mendelssohn, the LDA model fit on the principalmodel resulted in the
-lowest misclassification rate (0.049). Between Felix and Fanny a
+and Mendelssohn, the LDA model fit on the principal components resulted
+in the lowest misclassification rate (0.049). Between Felix and Fanny a
 logistic lasso model on the principal components resulted in the lowest
 misclassification rate. Finally the six disputed pieces were run through
 the models. As misclassification rates were so high on the models, we
@@ -219,8 +219,8 @@ cannot trust the predictions for these disputed pieces.
     forests, naive Bayes, and linear discriminant analysis were performed on
     the feature space in order to classify the pieces. In addition, those
     same models were fit on the principal components. Comparing between Bach
-    and Mendelssohn, the LDA model fit on the principalmodel resulted in the
-    lowest misclassification rate (0.049). Between Felix and Fanny a
+    and Mendelssohn, the LDA model fit on the principal components resulted
+    in the lowest misclassification rate (0.049). Between Felix and Fanny a
     logistic lasso model on the principal components resulted in the lowest
     misclassification rate. Finally the six disputed pieces were run through
     the models. As misclassification rates were so high on the models, we
@@ -242,7 +242,7 @@ classification problems are very frequent, similar methods that classify
 music have not been as commonly explored.
 
 Feature extraction is an essential part in text or music classification.
-Unlike in other applications where the data initially countains set of
+Unlike in other applications where the data initially contains set of
 numerical or categorical values, text and music must first go through a
 processing stage where features of interest can be extracted before any
 models can be fit.
@@ -294,7 +294,7 @@ disputed paper.
 Text analysis, such as in the Federalist Papers, is accomplished by
 reading one word after another. This often results in a vector where
 each entry is a word. Frequencies of word count for example, can easily
-be done by counting all instances of word occurance in the word vector.
+be done by counting all instances of word occurrence in the word vector.
 Information in a piece of music, however, is read in a variety of ways.
 It can be read left to right note by note, but it can also be read
 vertically as the harmony, or the notes played together. Also in a piece
@@ -332,7 +332,7 @@ analysis is very helpful.
 Theory}\label{a-very-short-introduction-to-music-theory}
 
 Western sheet music is presented on a five line staff, where the
-postition on the staff defines its sound. The sound of a note depends on
+position on the staff defines its sound. The sound of a note depends on
 its pitch, which is a specific vibration of sound waves at a certain
 frequency. Notes are in the set \(note \in \{A,B,C,D,E,F,G\}\), and the
 value can be changed up or down a half step by adding a sharp or flat.
@@ -417,7 +417,7 @@ model is to look at all possible subsets of the variables and see which
 model performs best. All possible subsets of variables is \(2^p-1\),
 where \(p\) is the number of features. For large \(p\), this is often
 computationally impossible. Instead of fitting all possible subsets,
-stepwise selection strategies like forward selection and backward
+step wise selection strategies like forward selection and backward
 selection among others can be used.
 
 Subset selection methods often use some sort of variable ranking tool to
@@ -442,31 +442,34 @@ features in this way often leads to a reduction in variance. The most
 common shrinkage methods are ridge and lasso.
 
 The two methods mentioned above, shrinkage methods and subset selection
-both use the original variables. Dimension reduction methods transform
-the features space, and then fit models on the transformed variables. It
-is commonly used to combine enough of the information given in the
-features in a smaller dimensional space. This results in feature
-creation; using the recorded variables to create new features to fit the
-model on. Common dimension reduction techniques include Principal
-components analysis(PCA) and linear discriminant analysis (LDA). Goals
-of feature creations include that we can achieve a good reconstruction
-of the data and that we can be successful in making our predictors.
+both use the original variables to fit models. Dimension reduction
+methods transform the features space, and then fit models on the
+transformed variables. It is commonly used to attempt to encode enough
+of the information given in the original features in a smaller
+dimensional space. This results in feature creation; using the recorded
+variables to create new features to fit the model on. Common dimension
+reduction techniques include Principal components analysis(PCA) and
+linear discriminant analysis (LDA). Goals of feature creations include
+that we can achieve a good reconstruction of the data and that we can be
+successful in making our predictors.
 
 Once we have a model, we often want to know how ``good'' it is. For
-classification, we often use the misclassifcation rate. To calculate
-this, we withhold a sample of our data as a testing set. We then fit the
-model on the training set, and then use the fitted model to predict
-classes on the testing set. The misclassifcation rate is then computed
-as the number of pieces in the testing set that were incorrectly
-classified divided by the total number of pieces. Cross validation
-involves fitting a model on a training set, and then using the fitted
-model to predict the responses in the testing set. \(k\)-fold cross
-validation involves splitting the data set into \(k\) different parts of
-equal size, and fitting a model on the the data set with one of the
-\(k\) parts withheld. The model is then tested on the withheld data.
-This is useful for model selection and determining the accuracy of the
-model. In this paper, as is common, we use \(k = 5\). This results in a
-predicted misclassification rate with lower variance.
+classification models, we often use the misclassifcation rate. To
+calculate this, we withhold a sample of our data as a testing set. We
+then fit the model on the training set, and then use the fitted model to
+predict classes on the testing set. The misclassifcation rate is then
+computed as the number of pieces in the testing set that were
+incorrectly classified divided by the total number of pieces. Cross
+validation involves fitting a model on a training set, and then using
+the fitted model to predict the responses in the testing set. In
+particular, \(k\)-fold cross validation involves splitting the data set
+into \(k\) different parts of equal size, and fitting a model on the the
+data set with one of the \(k\) parts withheld. The model is then tested
+on the withheld data. This is useful for model selection and determining
+the accuracy of the model. In this paper, as is common, we use
+\(k = 5\). This results in a predicted misclassification rate with lower
+variance that other crossvalidation methods such as leave-one-out-error
+and validation sets.
 
 \section{Previous research.}\label{previous-research.}
 
@@ -489,35 +492,34 @@ same process can also be used to look at the development of a composers
 musical style over time.
 
 This paper draws its inspiration from four different studies that have
-looked at the question of classifying composers by extracting features
-from sheet music. Initial studies in the 1970's started looking at ways
-to represent music in a way that could analyzed by computers. Recently,
-several previous papers have focused on Josquin des Prez. This is likely
-due to the fact that there is a large training and testing data set
-available in easily analyzable format provided by the Josquin Research
-Project (``The josquin research project,'' n.d.). In addition there are
-a number of pieces of disputed authorship that have been attributed to
-him.
+looked at classifying composers by extracting features from sheet music.
+Initial studies in the 1970's started looking at ways to represent music
+in a way that could analyzed by computers. Recently, several previous
+papers have focused on Josquin des Prez. This is likely due to the fact
+that there is a large training and testing data set available in easily
+analyzable format provided by the Josquin Research Project (``The
+josquin research project,'' n.d.). In addition there are a number of
+pieces of disputed authorship that have been attributed to him.
 
 Work by Brinkman et al. (Brinkman, Shanahan, \& Sapp, n.d.) uses machine
 learning to evaluate attribution of compositions by Josquin des Prez.
-They first compared music of Josquin and JS Bach's four part chorales.
+They first compared music of Josquin to JS Bach's four part chorales.
 Many listeners could easily distinguish these two composers as they were
 separated by two centuries. They also compared Josquin to composers
 closer in time and style: Ockeghem and Du Fay, who are only one or two
 generations separated. These composers could likely be differentiated by
 experienced listeners of Renaissance music. Finally they compared
-Josquin's to his contemporaries: de Orto and La Rue to find differences
-in style.
+Josquin's to his contemporaries: de Orto and La Rue.
 
-Work by Backer et. al.(2005) looked at differences in style between J.S.
-Bach, Telemann, Handel,Haydn and Mozart and then examined a disputed
-piece: BWV 534 which is believed to be composed by J.S. Bach, J.L.
-Krebs, or W.F. Bach (J.S. Bach's son). (Backer \& Kranenburg, 2005)
+Work by Backer et. al. looked at differences in style between J.S. Bach,
+Telemann, Handel, Haydn and Mozart and then examined a disputed piece:
+BWV 534 which is believed to be composed by J.S. Bach, J.L. Krebs, or
+W.F. Bach (J.S. Bach's son). (Backer \& Kranenburg, 2005)
 
-The following two studies to not try to identify composers of unknown
-works, but instead try to fit classifiers that can correctly predict
-composers based on differences in style.
+The following two studies do not try to identify composers of unknown
+works, but instead try to extract features that can seperate differences
+in style, and also fit classifiers that can correctly assign composers
+based on their style.
 
 Crerar (Crerar, 1985) used incipits from Vivaldi, Correlli, and
 Valentini, who could have been a student of Correlli. They used low
@@ -535,50 +537,53 @@ type.
 \section{Previous choices of features in
 applications}\label{previous-choices-of-features-in-applications}
 
-Deciding on and extracting features of music is the first step of
-analysis. Depending on the characteristics of the composer and time
-period different features would be useful. Often features are extracted
-en masse and then work is done later to determine which features are
-important or useful in identifying style.
+Deciding on and extracting features is the first step of analysis of
+music. Depending on the characteristics of the composer and time period,
+different features are be useful. Often features are extracted en masse
+and then work is done later to determine which features are important or
+useful in identifying style.
 
 In addition to what kinds of features, there is also the question of the
-scale of those features. They can be features for a given instrument,
-the entire piece, or each measure. Also windowing techniques can be used
-where a ``window'' is created over a given number of bars or notes, and
-moves through the whole piece. For each window, a feature is recorded.
-These can be overlapping windows by creating an ``offset'' of a number
-of beats or notes. This produces more data, as instead of one feature
-for each piece, there is a feature for each window, and there can be
-tens of windows in each piece.
+scale of where the features should exist at. There can be features for a
+given instrument, the entire piece, or each measure. Also windowing
+techniques can be used where a window is created over a given number of
+bars or notes, where the window moves through the whole piece. A
+features is extracted and recorded for each window. Windows can be made
+to overlap by using an offset of a number of beats or notes. Windowing
+thus produces more data, as instead of one feature for each piece, there
+is a feature for each window, and there can be tens of windows in each
+piece.
 
-Common types of features used before in music analysis are: Frequencies
-or fractions of notes, chords, etc. are a common low-level feature.
-These include the fraction of the score that consisted of dissonant
-sororities, as well as the fraction of bars that begin with a dissonant
-sonority. Other features include the type of intervals or consonances
-present in a piece: perfect consonance, imperfect consonances, and
-dissonance. In polyphonic pieces, the four types of motion, (parallel,
-similar, oblique, and contrary) can also be used as features. Crerar
-(Crerar, 1985) used pitch frequencies, after standardizing all pieces by
+Common types of features used before in music analysis include low level
+features of frequencies of notes, chords, etc. Also features that look
+at the fraction of the score that consisted of dissonant sororities, as
+well as the fraction of bars that begin with a dissonant sonority. Other
+features include the type of intervals or consonances present in a
+piece: perfect consonance, imperfect consonances, and dissonance. In
+polyphonic pieces, the four types of motion, (parallel, similar,
+oblique, and contrary) can also be used as features. Crerar (Crerar,
+1985) used pitch frequencies, after standardizing all pieces by
 transposing to the key of C, the first melodic interval of the piece,
-and note transition counts.
+and note transition counts. Mearns used types of motion and consonances
+as features (Mearns et al., 2010).
 
-Features measuring ``stability'' are also popular. Stability is computed
-by dividing the standard deviation of the lengths of the fragment by the
-mean length of the fragments. It is normalized in this way to be
+Features measuring stability are also popular. Stability can be measured
+for rhythmic changes or harmonic changes. Stability is computed by
+dividing the standard deviation of the lengths of the rhythm or note by
+the mean length of the notes. It is normalized in this way to be
 comparable over differing time signatures. These types of features were
 used by Backer et. al.(Backer \& Kranenburg, 2005). They also used
 overlapping windowing over each entire composition to produce more data.
 They chose a window of 30 bars to create a high enough number of
 fragments per piece and a low enough variance of the feature values
-between fragments. They chose to extract 20 features including features
-of fractions and measuring stability, and entropy. They computed the
-entropy of the probability of occurrence chords. They measured this two
-different ways, defining chords to be the same no matter what scale
-degree they are on, and distinguishing chords differently depending on
-scale degree. Next the entropy was calculated given the probability of
-each pitch in the score. Entropy was calculated by
-\(-\sum_{i = 1}^{N}p_i\log{p_i}\) where \(p_i\) is the probability of
+between fragments. They chose to extract twenty features that include
+frequencies of intervals, and measures of stability, and entropy. They
+computed the entropy of the probability of occurrence chords. They
+measured this two different ways, defining chords to be the same no
+matter what scale degree they are on, and distinguishing chords
+differently depending on scale degree. Next the entropy was calculated
+given the probability of each pitch in the score. Entropy was calculated
+by \(-\sum_{i = 1}^{N}p_i\log{p_i}\) where \(p_i\) is the probability of
 occurrence, and \(N\) is the total number. Next they the calculated
 average number of active voices at one time which represents the voice
 density of the piece. Then for every interval, the duration of that
@@ -615,8 +620,8 @@ positions, in this case on each beat of the bar, are used for
 contrapuntal evaluation. This is a relatively simplistic method of
 choosing structurally important notes. In Bach, for example, the
 majority of voice progressions take place at a closer level. The
-features for counterpoint method include the nature of the approach to a
-perfect consonance, whether a dissonance is properly prepared
+features measuring counterpoint rules include the nature of the approach
+to a perfect consonance, whether a dissonance is properly prepared
 (i.e.~preceded by a consonant interval containing the same note which
 then becomes dissonant), whether a dissonance is correctly resolved
 downwards by step, details of parallel intervals, and the overall
@@ -624,19 +629,19 @@ distribution of contrapuntal movements (oblique / contrary / similar /
 parallel / other). A feature for total vertical interval count is also
 used.
 
-\section{Previous modeling in
-applications}\label{previous-modeling-in-applications}
+\section{Previous modeling and results in
+applications}\label{previous-modeling-and-results-in-applications}
 
 Most of the previous research has needed to do some kind of feature
 selection. Usually features are extracted before any analysis is done,
 and we don't know before hand which features are distinguishing.
 
-A modification of a forward selection (Floating Forward Selection
+A modification of a forward selection (Floating Forward Selection)
 (Pudil, Novovičová, \& Kittler, 1994) was used in Backer's (2005) study
 to extract features in order to identify distinguishing style between
 Bach, Handel, Telemann, Mozart, and Haydn, and then subsequently
 classify the authorship of BWV 535. Each composer was compared via
-creating comparisons of all possible class arrangements, ie
+creating bi variate comparisons of all possible class arrangements, ie
 (Bach)(Handel), (Bach)(Handel,Telemann), etc. The algorithm extracted
 features for each class arrangement that distinguished the groups the
 best. A \(k\)-nearest neighbors classifier was fit using the features
@@ -695,19 +700,17 @@ composer.
 
 Felix Mendelssohn, often considered a prodigy akin to Mozart, was a
 prolific composer. Before he was fourteen years old, he had already
-written over 100 compositions.
-
-His lesser known sister Fanny Hensel née Mendelssohn was also a composer
-of incredible skill. The two were very close, for many years training
-and studying together. In their early education living in Berlin, Felix
-and Fanny received the same musical education, first piano lessons by
-Madam Bigot, a famous pianist esteemed by Haydn and Beethoven. Beginning
-in 1818, Carl Friedrich Zelter, a somewhat removed student of Bach and
-the most influential Berlin musician of the time, began to teach them
-both composition. In addition to music, the children were tutored by
-some of the finest scholars in Berlin in subjects such as languages,
-history, and drawing. Goethe himself claimed that Fanny was ``as gifted
-as Felix'' (Tillard, 1996).
+written over 100 compositions. His lesser known sister Fanny Hensel née
+Mendelssohn was also a composer of incredible skill. The two were very
+close, for many years training and studying together. In their early
+education living in Berlin, Felix and Fanny received the same musical
+education, first piano lessons by Madam Bigot, a famous pianist esteemed
+by Haydn and Beethoven. Beginning in 1818, Carl Friedrich Zelter, a
+somewhat removed student of Bach and the most influential Berlin
+musician of the time, began to teach them both composition. In addition
+to music, the children were tutored by some of the finest scholars in
+Berlin in subjects such as languages, history, and drawing. Goethe
+himself claimed that Fanny was ``as gifted as Felix'' (Tillard, 1996).
 
 As Fanny grew up, her father started implying that she should focus her
 energy on the domestic sphere of her life. While the fact that she never
@@ -746,17 +749,16 @@ private, only performed in small circles of her friends and family at
 intimate parties. Similarly, although she was quite a prolific composer,
 under recommendation of her father Abraham Mendelssohn, and to a lesser
 extent Felix, Fanny did not publish her work until later in her life. In
-1846 after her father's death and though her brother disapproved, she
-published her first collection of Lieder. Many of Fanny's unpublished
-notebooks are in private collections and are inaccessible for study.
+1846 after her father's death and though her brother initially
+disapproved, she published her first collection of Lieder. Many of
+Fanny's unpublished notebooks are in private collections and are
+inaccessible for study.
 
 However, it is widely speculated that some of Fanny's work was published
 under her brother's name, especially three pieces each in his Op 8 and 9
-lieder.
-
-Famously, when Felix met the Queen of England, she sang Felix's lied
-``Italien'', and Felix had to admit that in fact, it was his sister that
-had written it. In a letter to Felix, Fanny admits:
+lieder. Famously, when Felix met the Queen of England, she sang Felix's
+lied ``Italien'', and Felix had to admit that in fact, it was his sister
+that had written it. In a letter to Felix, Fanny admits:
 \begin{quote}
 ``I have just recently received a letter from Vienna, which contained
 basically nothing but the question of whether ``On Wings of Song'' was
@@ -768,11 +770,14 @@ As she never made such a list, we are left to wonder if there are any
 other pieces of hers that have been published under her brothers name
 and reputation. It is suspected that most of Fanny's friends and family
 would have known at the time that she had composed the pieces published
-by Felix. An article written in the Harmonicon in 1830, an influential
-music journal in London, mentioned that all the lied in Felix's
-collection were not written about him:
+by Felix, as they would have heard her play those pieces at home and for
+private audiences. An article written in the Harmonicon in 1830, an
+influential music journal in London, mentioned that not all the lieder
+in Felix's collection were written by him. The article also praises the
+work of Fanny, albeit in an odd way likely due to the time of
+publication.
 \begin{quote}
-" I possess twelve published songs under Mr.~Mendelssohn's name, which
+``I possess twelve published songs under Mr.~Mendelssohn's name, which
 he wrote when a boy of fifteen. One of these appears in the musical
 annual, ``Apollo's Gift,'' and deserves all the praise you have in your
 review bestowed on it. But the whole of the twelve are not by him: three
@@ -789,9 +794,10 @@ brother; but possesses sufficient power and nerve for the accurate
 performance of Beethoven's music. She is no superficial musician; she
 has studied the science deeply, and writes with the freedom of a master.
 Her songs are distinguished by tenderness, warmth, and originality: some
-which I heard were exquisite.``(Ayrton, 1830)
+which I heard were exquisite.''(Ayrton, 1830)
 \end{quote}
-This project will use lieder of Fanny and Felix Mendelssohn. Most of the
+This project will use lieder of Fanny and Felix Mendelssohn in attempts
+to train a classifier to analyze the six disputed pieces. Most of the
 available work by Fanny are lieder, of which Felix also composed a great
 deal. We will see if there is a determinable difference in style of
 these siblings who grew up very close and received mostly the same
@@ -830,7 +836,7 @@ songs, written as for solo piano (or harpsichord).
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/test.png}
-\caption{Flowchart of the conversion process from physical copy to dataframe}
+\caption{Flowchart of the conversion process from physical score copy to dataframe in R}
 \label{subd}
 \end{figure}
 \section{Optical music recognition}\label{optical-music-recognition}
@@ -840,7 +846,7 @@ copies. Sheet music as a form of data requires a lengthy process of
 conversion before being able to be used in any analysis. Simply scanning
 the scores into, say, a PDF, gives no musical semantics and can only be
 viewed on screen or printed on paper. Thus, the two main steps in
-reading in data from sheet music are: first using optical music
+reading in data from sheet music are, first, using optical music
 recognition software to transform physical scores into digital formats,
 and second, to read the digital format in to R where subsequent analysis
 can be done.
@@ -864,9 +870,7 @@ the staff lines. The staff lines are critical, as they define the basis
 for the vertical definition distance of pitch, and the horizontal
 distance definition of rhythm. The staff gives a normalization that is
 helpful, essentially defining the size of what notes and rhythm look
-like. Staff removal methods include projections, histograms, run
-lengths, candidates assemblage, contour tracking, and graph path search.
-(Doermann, Tombre, \& others, 2014)
+like. (Doermann, Tombre, \& others, 2014)
 
 The next step is music symbol extraction and classification. These
 methods include template matching, where the object in question is
@@ -904,7 +908,7 @@ scanned by any garden variety scanner.
 MusicXML is commonly used as a format for digital music, as it is
 conducive to representing sheet music and music notation, and it can be
 transferable to many different music software. Muse Score was chosen to
-be the music software for viewing digital scores, as it is a free
+be the music software for viewing digital scores as it is a free
 software that can read MusicXML.
 
 After being scanned by PhotoScore and read into Muse Score, each piece
@@ -913,27 +917,25 @@ line by line for each bar to ``spell check'' the digital version.
 PhotoScore did a good job recognizing notes, but often had issues
 recognizing rhythms, and had issues keeping the structure of the piece.
 Often in the scanning process clefs or bar lines were not found, causing
-PhotoScore to output every staff on one line. Using PhotoScore, there
-were on average approximately 6 minor issues per piece, although there
-were on occasion major structural issues. Audiveris often added extra
-beats to measures. It also always identified a bass clef as a baritone
-clef.
+PhotoScore to output every staff on one line. In contrast, Audiveris
+often added extra beats to measures, and assigned notes to the wrong
+staff. It also always identified a bass clef as a baritone clef.
 
 Unfortunately, the scanning process is very lengthy and time consuming,
 as the scanning often gives a large number of mistakes. Often the score
 must be then scanned again. In addition the proof-reading process is
-lengthy. One must check each note and theme for errors against the
-original score, and change the afflicted notes using Muse Score. The
-corrected score must then be output as a musicXML file. In addition,
-there were some pieces that PhotoScore or Audiveris had a hard time
-reading. These pieces were then entered into MuseScore by hand and then
-proofread.
+lengthy. One must check each note and rhythm for errors against the
+original score, and change the incorrect notes using MuseScore. The
+corrected score must then be re-outputed as a musicXML file. In
+addition, there were some pieces that PhotoScore or Audiveris had a hard
+time reading. These pieces were then entered into MuseScore by hand and
+then proofread.
 
 MusicXML on its own is not conducive to converting into a data frame as
 representing the single half note middle C looks like this:
 \begin{figure}[h]
 \centering
-\includegraphics[scale=.30]{images/mxlc.png}
+\includegraphics[scale=.4]{images/mxlc.png}
 \caption{A half middle C in musicXML encoding}
 \label{subd}
 \end{figure}
@@ -942,11 +944,11 @@ Kern Score music format is much more easily readable. It has clearly
 expressed time signature, bar, beat and musical voicing information
 (Mearns et al., 2010). Because of this, it is also more conducive to
 being read into an R data frame. The below picture shows how a basic
-piece of music corresponds to a .krn file.
+piece of music corresponds to a Kern file.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.50]{images/krnmusic.png}
-\caption{How sheet music corresponds to kern files}
+\caption{How sheet music corresponds to kern files [\cite{huron1994humdrum}]}
 \label{subd}
 \end{figure}
 Kern files are organized with columns each representing one staff of
@@ -1162,10 +1164,17 @@ example above, if we assume the key is F major, the tonic has a tonic
 scale degree proportion of 2/6, the mediant 1/6, dominant, 1/6,
 submediant, 2/6.
 
+\subsubsection{Frequency of rhythm use}\label{frequency-of-rhythm-use}
+
+We determine the frequency of use of the most common types of rhythm:
+half notes, dotted half notes, quarter notes, dotted quarter notes,
+eighth notes, dotted eight notes, sixteenth notes, and thirtysecond
+notes.
+
 \subsubsection{Length}\label{length}
 
-We determine a measure for the length of a piece by how many measures
-the piece has.
+We define a measure for the length of a piece by how many measures the
+piece has.
 
 \chapter{About Classification Models}\label{about-classification-models}
 
@@ -1411,6 +1420,16 @@ where \(|C_k|\) is the number of observations in the \(k\)th cluster.
 
 \chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}
 
+Before fitting any classifiers, we first want to perform some
+exploratory data analysis to examine visually any patterns or
+seperations between variables and composer. This is done by looking at
+individual density plots of each variable for each composer, looking at
+correlation structures in the features, and using PCA as an unsupervised
+method to gain insight into the feature space. We examine two cases,
+features for Bach/not Bach, which corresponds to Bach vs Fanny Hensel
+and Felix Mendelssohn. We denote this as Bach/Menelssohn. We also
+examine the features for Fanny/Felix.
+
 \section{Key for feature
 abbreviations}\label{key-for-feature-abbreviations}
 \begin{longtable}[]{@{}ll@{}}
@@ -1469,97 +1488,103 @@ Figure 5.1 shows density plots for each of the predictors used. We can
 see some difference of that feature being used by composer in the
 density features, and some of the rhythmic frequency features,
 especially use of eighth notes and sixteenth notes. The peaks for Bach
-are mostly narrower than those for Mendelssohn. We suspect the
-difference in density is somewhat caused by the type of piece of Bach
-and Mendelssohn. We might expect that solo pieces, like those in the
-Bach data set would have lower densities then for lieder, like in the
+are mostly narrower than those for Mendelssohn. One can suspect the
+difference in density is partially caused by the type of piece of Bach
+and Mendelssohn. We might expect that solo pieces, such as those in the
+Bach data set would have lower densities then for lieder, as in the
 Mendelssohn data set, which also include voice.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/distribution_b.pdf}
-\caption{Density plot of each feature of Bach/Mendelssohn}
+\includegraphics[scale = .6]{images/distribution_b.pdf}
+\caption{Density plot for each feature of Bach/Mendelssohn}
 \label{subd}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/cor_circles_b.pdf}
+\includegraphics[scale = .6]{images/cor_circles_b.pdf}
 \caption{Correlations between features of Bach/Mendelssohn}
 \label{subd}
 \end{figure}
-Figures 5.2 shows a visualization of the correlation matrix. The larger
-the circle represents a larger absolute value of correlation between the
-two predictors. We can see higher correlations between perfect
-consonances and dissonant consonances. This is to be expected. We also
-see high negative correlations between frequency of sixteenth notes and
-density, and frequency of eight notes. In addition we see high positive
-correlations between frequency of second, third, sixth, and seventh
-scale degree. There is likely some musical explanation to this.
-\begin{figure}[H]
-\centering
-\includegraphics[scale = .5]{images/biplot_b.pdf}
-\caption{Biplot of the loading vectors of the first two principal components}
-\label{subd}
-\end{figure}
-The biplot in Figure 5.3 shows the loading vectors plotted on the first
-two principal components. The loading vectors of features seem to
-arrange into approximately three groups. The features: perfect
-consonances of melodic intervals of the voice, frequency of the first
-scale degree, frequency of the fourth scale degree are all grouped
-together. Similarly, frequencies for the 7th, 6th, 2nd, and 3rd are
-grouped together. In addition we have perfect consonances and imperfect
-consonances on two sides of the second principal component. This leads
-me to believe that the second principal component encodes some sense of
-use of consonant notes. The first principal seems to encode some sense
-of rhythm. Faster rhythmic notes, like sixteenth notes and thirty second
-notes have opposite loadings than slower rhythmic notes.
-\begin{figure}[H]
-\centering
-\includegraphics[scale = .5]{images/bi_elipse12.pdf}
-\caption{Biplot of the first two principal components plotted with data points colored by composer. }
-\label{subd}
-\end{figure}
-Figure 5.4 shows the same loadings of the principal components, but with
-the addition of points representing each piece graphed by their first
-two principal components. Each piece is colored by composer. The
-ellipses represent a 95\% concentration area, or where 95\% of the data
-lie. We can see that the ellipses only overlap slightly, indicating that
-pieces by Bach and Mendelssohn usually have different values in the
-first and second principal component. Figure 5.5 shows the pieces
-plotted on the second and third principal component and there is much
-less separation. There also does not seem to be any obvious musical
-interpretation of the loadings.
-\begin{figure}[H]
-\centering
-\includegraphics[scale = .5]{images/bi_elipse23.pdf}
-\caption{Biplot of the second and third principal components plotted with data points colored by composer}
-\label{subd}
-\end{figure}
+Figures 5.2 is a visualization of the correlation matrix. The larger the
+circle represents a larger absolute value of correlation between the two
+predictors. We can see higher correlations between perfect consonances
+and dissonant consonances. This is to be expected, as a higher frequency
+of perfect consonances nescesarrily means a lower frequency of dissonant
+consonances. We also see high negative correlations between frequency of
+sixteenth notes and density, and frequency of eight notes. In addition
+we see high positive correlations between frequency of second, third,
+sixth, and seventh scale degree. There is likely some musical
+explanation to this.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/skree_b.pdf}
 \caption{Skree plot of the PCA's}
 \label{subd}
 \end{figure}
-Figure 5.6 shows the skree plot of the PCs of Bach and Mendelssohn. For
-each principal component used (shown on the x-axis), we have the
-corresponding percentage of variance explained (y-axis). Often when
-using PCA for dimensionality, we often look for an elbow in the skree
-plot. This is done to choose the smallest number of principal components
-needed to explain a sizable amount of the variation in the feature
-space. There is a possible elbow at the second principal component. This
-indicates that we might be able to perform analysis using only the first
-two principal components. However, especially considering that our data
-are not very separable, we likely would likely want to use more
-information in our model. As a similar result occurred for Brinkman, in
-our analysis we will use the principal components that account for 85\%
-of the variance. In the Bach/Mendelssohn case this corresponds to using
-11 principal components.
-
+Figure 5.3 shows the skree plot of the principal components of Bach and
+Mendelssohn. For each principal component used (shown on the x-axis), we
+have the corresponding percentage of variance explained (y-axis). Often
+when using PCA for dimensionality, we often look for an elbow in the
+skree plot. This is done to choose the smallest number of principal
+components needed to explain a sizable amount of the variation in the
+feature space. There is a possible elbow at the second principal
+component. This indicates that we might be able to perform analysis
+using only the first two principal components. However, especially
+considering that our data are not very separable, we likely would likely
+want to use more information in our model. As a similar result occurred
+for Brinkman, in our analysis we will use the principal components that
+account for 85\% of the variance. In the Bach/Mendelssohn case this
+corresponds to using 11 principal components.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = .5]{images/biplot_b.pdf}
+\caption{Biplot of the loading vectors of the first two principal components}
+\label{subd}
+\end{figure}
+The biplot in Figure 5.4 shows the loading vectors plotted on the first
+two principal components. The loading vectors of features seem to
+arrange into approximately three groups. The features: perfect
+consonances of melodic intervals of the voice, frequency of the first
+scale degree, frequency of the fourth scale degree are all grouped
+together. Similarly, frequencies for the 7th, 6th, 2nd, and 3rd are
+grouped together. In addition we have perfect consonances and imperfect
+consonances on two sides of the second principal component. It appears
+that the first principal component seems to encode tempo/rhythm. Faster
+rhythmic notes, like sixteenth notes and thirty second notes have
+opposite loadings than slower rhythmic notes. The second principal
+component appears to encodes harmonic structure, especially differences
+in consonances.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = .5]{images/bi_elipse12.pdf}
+\caption{Biplot of the first two principal components plotted with data points colored by composer. }
+\label{subd}
+\end{figure}
+Figure 5.5 shows the same loadings of the principal components, but with
+the addition of points representing each piece graphed by their first
+two principal components. Each piece is colored by composer. The
+ellipses represent a 95\% concentration area, or where 95\% of the data
+lie. We can see that the ellipses only overlap slightly, indicating that
+pieces by Bach and Mendelssohn usually have different values in the
+first and second principal component. Figure 5.6 shows the pieces
+plotted on the second and third principal component and there is much
+less separation. The third principal component also appears to encode
+rythmic information. We have that dotted rhythmic frequencies have
+opposite loadings on the third principal component to their
+corresponding non dotted rhythm. For example, frequencies of eight notes
+have an opposite loading on the third principal component to the
+frequency of dotted eigth notes.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = .5]{images/bi_elipse23.pdf}
+\caption{Biplot of the second and third principal components plotted with data points colored by composer}
+\label{subd}
+\end{figure}
 We can also use K-means clustering to see if there are any apparent
 groups in the data. When we run K-means on the first 11 principal
-components of Bach and Mendelssohn with K = 2 (since there are two
-composers), we get the results we see in Figure 5.7. The coloring of the
-points indicate which cluster the K-means algorithm identified each
+components of Bach and Mendelssohn with K = 2 (since we are comparing
+two classes ), we get the results we see in Figure 5.7. The coloring of
+the points indicate which cluster the K-means algorithm identified each
 piece as. The label of each piece indicates the actual composer. We can
 see that for the most part, for pieces with high or low scores on the
 first principal component, the clustering preserves the composer. For
@@ -1571,8 +1596,13 @@ pieces with a cluster assignment not consistent with composer.
 \caption{KNN when k = 2}
 \label{subd}
 \end{figure}
-We can also examine when \(K=3\), as the Mendelssohn set is made up of
-Fanny and Felix, so there are actually three composers. (fix labeling)
+We can also examine when \(K=3\), indicating that the \(K-\)means
+algorithm should look for three clusters. This is reasonable as the
+Mendelssohn set is made up of Fanny and Felix, so there are actually
+three composers. The clusters seem to be mostly assigned by the value of
+the first principal component. For the most part, pieces by Bach are
+assigned to the third cluster, although there are a couple in the other
+two clusters.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/kmeans_3_b.pdf}
@@ -1583,7 +1613,12 @@ Fanny and Felix, so there are actually three composers. (fix labeling)
 
 As we can see from density distributions in Figure 5.9, most of the
 features used have very little separation between the two composers.
-This is not very encouraging for later fitting of models.
+Most of the density distributions for features from pieces of Fanny and
+Felix overlap completely and have nearly identical peaks. There is a
+small difference in peak for the frequency of use of the first scale
+degree, with fanny using it more often. The lack of difference in
+features between the two composers is not very encouraging for later
+fitting of models.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/distribution_f.pdf}
@@ -1591,13 +1626,24 @@ This is not very encouraging for later fitting of models.
 \label{subd}
 \end{figure}
 The correlations of the Fanny/Felix features are shown in Figure 5.10.
-The features appear to not be as correlated as the Bach/Mendelssohn
-features with the exception of frequencies of types of melodic
-consonances, and frequencies of scale degrees 2, 3, 6, and 7.
+The rythmic features do not seem to have as much correlation as the
+Bach/Mendelssohn features. We still see higher correlations for
+frequencies of types of melodic consonances, and frequencies of scale
+degrees 2, 3, 6, and 7.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/cor_circles_f.pdf}
 \caption{Correlations between features of Fanny/Felix}
+\label{subd}
+\end{figure}
+Figure 5.11 shows the skree plot for Fanny/Felix. It can be argued that
+there is an elbow at principal component thirteen, but it is not that
+clear. Using 11 principal components again accounts for 85\% of the
+variance, so we will use 11 PCs in fitting our classifiers as well.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = .5]{images/skree_f.pdf}
+\caption{PCA Felix/Fanny skree plot}
 \label{subd}
 \end{figure}
 \begin{figure}[h]
@@ -1606,50 +1652,66 @@ consonances, and frequencies of scale degrees 2, 3, 6, and 7.
 \caption{PCA Loadings of the features for Fanny/Felix}
 \label{subd}
 \end{figure}
-Figure 5.11 shows the loadings of the principal components of the
-features of Fanny and Felix. Again we see that the loadings for scale
-degrees 1 and 5 and perfect consonant intervals are in opposite
-direction on the second principal component to scale degrees 2, 7 and
-dissonant intervals. Also we see again that frequencies for faster
-rhythmic values have opposite loadings to those of slower notes.
+Figure 5.12 shows the loadings of the principal components of the
+features of Fanny and Felix. In contrast to the biplot for
+Bach/Mendelssohn, it seems like the first principal component encodes
+harmonic aspects of music, and second principal component encodes
+rhythm. The loadings for scale degrees 1, 5 and perfect consonant
+intervals are in opposite direction on the second principal component to
+scale degrees 2, 7 and dissonant intervals. Also we see that frequencies
+for faster rhythmic values have opposite loadings to those of slower
+notes on the second principal component.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/bi_elipse_12_f.pdf}
 \caption{Loadings and pieces for Fanny/Felix}
 \label{subd}
 \end{figure}
-When the pieces are plotted on the biplot as shown in Figure 5.12, we
-see that there is not that much separation between the Fanny pieces and
-the Felix pieces. This might lead to issues in creating a model to
-classify.
-
-Figure 5.13 shows the skree plot for Fanny/Felix. It can be argued that
-there is an elbow at principal component 13, but it is not that clear.
-Using 11 PCs accounts again for 85\% of the variance, so we will use 11
-PCs in models as well.
-\begin{figure}[H]
-\centering
-\includegraphics[scale = .5]{images/skree_f.pdf}
-\caption{PCA Felix/Fanny skree plot}
-\label{subd}
-\end{figure}
+When the pieces colored by composer are plotted on the biplot as shown
+in Figure 5.13, we do not see as much seperation between the Fanny and
+Felix pieces as how we did for Bach/Mendellsohn. The 95\% elipses almost
+completely overlap. This lack of seperation for the two groups might
+lead to issues in creating a model to classify.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .5]{images/kmeans_2_f.pdf}
 \caption{K-means with k = 2}
 \label{subd}
 \end{figure}
-Figure 5.14 shows the results of K-means with \(K = 2\). We see that in
-the two clusters, there are many pieces labeled of both composer.
+We again run \(K-\)means to identify clusters in the data. Ideally
+pieces would be clustered if they shared the same composer, even though
+the \(K-\)means algorithm does not have access to the composer
+information. Figure 5.14 shows the results of K-means with \(K = 2\). We
+see that in the two clusters, there are many pieces labeled of both
+composer. This indicates that when clusters that exist in the data, they
+do not correspond naturally to composer identification.
 
 \chapter{Results}\label{results}
+
+The following section presents the results of fitting five different
+classifiers on the original feature space as well as the first 11
+principal components to account for 85\% of the variance. This was done
+as there are many features that measure aspects of the same thing, ie
+there are seven different features measuring aspects of scale degree use
+where each scale degree can individually have interesting musical
+interpretations.
+
+The five classifiers were chosen as they were used previously in the
+literature for similar problems (KNN, Naive Bayes and Random forests),
+or are popular models for classfication (Logistic, LDA). For the
+logistic classifier we used lasso as a shrinkage method.
+
+Each model (10 total) was tested for predictive accuracy by finding the
+\(5-\)fold crosvalidated misclassfication rate. The crossvalidated
+misclassification showed a lot of variance depending on the random fold
+assigned, so the process was repeated 100 times, and the rate was
+averaged.
 
 \section{Models Results -
 Bach/Mendelssohn}\label{models-results---bachmendelssohn}
 \begin{longtable}[]{@{}lll@{}}
-\caption{Averaged 5-fold CV misclassification rates of 100 runs on the
-feature space and the first 11 principal components for each
-model.}\tabularnewline
+\caption{Averaged 5-fold CV misclassification rates for each model from
+100 runs on the feature space and the first 11 PCs.}\tabularnewline
 \toprule
 Model & misclass. rate - features & misclass. rate - 11
 PCs\tabularnewline
@@ -1662,51 +1724,53 @@ PCs\tabularnewline
 \endhead
 Logistic & 0.078 & 0.097\tabularnewline
 LDA & 0.092 & 0.049\tabularnewline
-KNN & 0.097 (K=9) & 0.098 (K = 9)\tabularnewline
+KNN (K = 9) & 0.097 & 0.098\tabularnewline
 Naive Bayes & 0.103 & 0.112\tabularnewline
 Random forest & 0.058 & 0.111\tabularnewline
 \bottomrule
 \end{longtable}
 Table 6.1 shows the averaged 5-fold cross validated misclassification
 rates over 100 runs. For the KNN case, the features were scaled and
-centered first.
+centered first. Most models have misclassification rates round 10\%. The
+best model was found to be linear discriminant analysis run on the
+principal components.
 
-Figure 6.1 shows the misclassification rates corresponding to different
-values of \(\log(\lambda)\) in the logistic lasso model. As the
-\(\log(\lambda)\) increases, the coefficients of each of the features
-start approaching zero. They do this at different times and rates.
-Figure 6.2 shows coefficient values for each feature for varying
-\(\log(\lambda)\) values. It appears that the features for density and
-frequency of 16th note rhythms stay non-zero the longest. A 5-fold cross
-validation fit found that a \(\log(\lambda)\) value of -6.2 produced the
-lowest misclassification rate, represented by the left most dotted line.
-A model fit using that lambda value resulted in a misclassification rate
-of 0.078.
-\begin{figure}[h]
+Figure 6.1 shows coefficient values for each feature for varying
+\(\log(\lambda)\) values. \(\lambda\) corresponds the restriction
+penalty. Higher values of \(\log(\lambda)\) correspond to a higher
+penalty, resulting in coefficient estimates that shrink to zero. The
+crossvalidated lasso logistic fit chose \(\log(\lambda) = -6.2\) to have
+the lowest misclassifiation rate. At that value, most features besides
+sf3, sf5, and rf8 are nonzero. We have that f2 and dens mean have low
+coefficient estimates at this point, but are nonzero, Overall, for all
+\(\lambda\) penalties, it appears that the features for density and
+frequency of 16th note rhythms stay non-zero the longest.
+\begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/lasso_coef_b.pdf}
-\caption{Lasso penalties for each feature for changing lambda penalty values}
-\label{subd}
-\end{figure}
-\begin{figure}[h]
-\centering
-\includegraphics[scale = .5]{images/loglambda_b.pdf}
-\caption{Cross-validated misclassification rates for different lambdas}
+\includegraphics[scale = .6]{images/lasso_coef_b.pdf}
+\caption{Bach/Mendelssohn lasso logistic regression coefficients for changing $\lambda$ penalty values}
 \label{subd}
 \end{figure}
 We also fit a lasso logistic model on the first 11 principal components.
 This resulted in an optimal \(\log(\lambda)\) of -3.8, and a resulting
 misclassification rate of 0.097
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/varImp_b.pdf}
-\caption{Variable importance for a random forest model Bach/Mendelssohn}
+\includegraphics[scale = .5]{images/var_imp_rflog_f.pdf}
+\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Bach/Mendelssohn}
 \label{subd}
 \end{figure}
-Figure X shows the variable importance rankings as a mean decrease in
-the Gini index. The density features are the most important in deciding
-splits of the trees, followed by frequency of sixteenth notes and
-frequency of second scale degree.
+Figure 6.2 shows the variable importance rankings as a mean decrease in
+the Gini index for the random forest model. It also shows the absolute
+value of the logistic regression coefficients at the best value for
+\(\lambda\). Note that we look at the relative height of the bars here
+to determine importance.We can see that while the random forest does not
+view frequencies of dotted quarter notes to be a very useful predictor,
+the logistic model views it as very important. The density features are
+the most important in deciding splits of the trees, although these
+values do not have high coefficients in the logistic. Both models agree
+that the last seven variables are not important. They were shrunk to
+zero in the logistic lasso model.
 
 \section{Model fit Felix/Fanny}\label{model-fit-felixfanny}
 \begin{longtable}[]{@{}lll@{}}
@@ -1723,65 +1787,50 @@ Model & misclass. rate - features & avg. misclass. rate - 11
 PCs\tabularnewline
 \midrule
 \endhead
-Logistic & 0.517 & 0.45\tabularnewline
+Logistic & 0.467 & 0.45\tabularnewline
 LDA & 0.518 & 0.505\tabularnewline
 KNN & 0.498 & 0.467\tabularnewline
 Naive Bayes & 0.502 & 0.521\tabularnewline
 Random forest & 0.535 & 0.571\tabularnewline
 \bottomrule
 \end{longtable}
-Table X shows all the misclassification rates of each model.
+Table 6.2 shows all the misclassification rates of each model.
 Unfortunately most of the misclassification rates are above 0.5,
-indicating that random guessing would do better at predicting the
-composer.
-\begin{figure}[h]
+indicating that random guessing would perform better at predicting the
+composer. A logistic lasso classification model fit on the principal
+components performed best, with a misclassification rate of 0.45. The
+\(\log(\lambda)\) penalty associated with this rate was -3.21.
+\begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/lasso_coef_f.pdf}
-\caption{Lasso penalties for each feature for changing lambda penalty values for Fanny/Felix}
+\includegraphics[scale = .6]{images/loglambda_f.pdf}
+\caption{Fanny/Felix lasso logistic regression coefficients for changing $\lambda$ penalty values}
 \label{subd}
 \end{figure}
-Figure X shows the coefficient estimates for varying log lambda
+Figure 6.3 shows the coefficient estimates for varying \(\log(\lambda)\)
 penalties for a logistic lasso model fit on the feature space. The
 frequency of the first scale degree appears to remain non-zero for the
-longest time.
-\begin{figure}[h]
+longest time. At \(\log(\lambda)\) of -2.67 we get the best lambda fit.
+At this \(\log(\lambda)\) value we have most of the coefficients shunk
+to zero besides frequency of thirty second notes and dotted eighth
+notes, and frequency of the first scale degree.
+\begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/loglambda_f.pdf}
-\caption{Cross-validated misclassification rates for different lambdas}
+\includegraphics[scale = .5]{images/var_imp_rflog_b.pdf}
+\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Fanny/Felix}
 \label{subd}
 \end{figure}
-Figure X shows the misclassification rates for varying values of
-log(lambda). Most rates are well above 0.5 (the error for a coin toss),
-although at log(lambda) of -2.8 we have the lowest misclassification
-error of 0.517.
-
-When fit on the first eleven principal components, we have a lower
-misclassification rate. Figure X shows the misclassification errors for
-varying log(lambda). At -3.21 we have the lowest misclassification rate.
-\begin{figure}[h]
-\centering
-\includegraphics[scale = .5]{images/pca_loglambda_f.pdf}
-\caption{Cross-validated misclassification rates for different lambdas}
-\label{subd}
-\end{figure}
-\begin{figure}[h]
-\centering
-\includegraphics[scale = .5]{images/varImp_f.pdf}
-\caption{Variable importance for a random forest model Fanny/Felix}
-\label{subd}
-\end{figure}
-Figure X shows the variable importance used in random forests. We can
-see that frequency of the first and second scale degree as well as the
-length of the piece are useful features in fitting the model. However,
-the scale of the Mean decrease in Gini is a lot smaller than the one for
-Bach/Mendelssohn, so these features are likely not as helpful in
-distinguising the composers.
+Figure 6.4 shows the variable importance used in random forests and the
+logistic regression coefficients at the best \(\lambda\) value. At the
+best lambda value, only nine of the coefficients of logistic regression
+are non-zero. The variables that the random forest model found useful
+did not correspond very well to the variables remaining non-zero in the
+logistic lasso model.
 
 \section{Predictions for Disputed
 pieces:}\label{predictions-for-disputed-pieces}
 
 Since we have such high misclassification rates using each model, the
-following predictions are likely not accurate. Table X shows the
+following predictions are likely not accurate. Table 6.3 shows the
 predicted classification for each piece for each model.
 \begin{longtable}[]{@{}lllllll@{}}
 \caption{Predicted composer for each disputed piece}\tabularnewline
@@ -1795,11 +1844,14 @@ Model & Op.8 2 & Op.8 3 & Op.8 12 & Op.9 7 & Op.9 10 & Op.9
 12\tabularnewline
 \midrule
 \endhead
-logistic-lasso & fanny & fanny & Felix & & & fanny\tabularnewline
-LDA & fanny & fanny & fanny & & & fanny\tabularnewline
-KNN & felix & fanny & felix & & & felix\tabularnewline
-Naive Bayes & fanny & fanny & fanny & & & fanny\tabularnewline
-Random Forest & felix & felix & felix & & & felix\tabularnewline
+logistic-lasso & fanny & fanny & felix & fanny & felix &
+fanny\tabularnewline
+LDA & fanny & fanny & fanny & felix & felix & fanny\tabularnewline
+KNN & felix & fanny & felix & felix & fanny & felix\tabularnewline
+Naive Bayes & fanny & fanny & fanny & fanny & fanny &
+fanny\tabularnewline
+Random Forest & felix & felix & felix & fanny & fanny &
+felix\tabularnewline
 \bottomrule
 \end{longtable}
 \chapter{Discussion}\label{discussion}
@@ -1813,26 +1865,7 @@ separation of the features encoding density. We likely see so much
 separation because the Bach data is for solo piano and the Mendelssohn
 data has an additional instrument, thus making the piece automatically
 more dense.
-\begin{longtable}[]{@{}lll@{}}
-\caption{Misclassification Rates for different models comparing Bach and
-Mendelssohns}\tabularnewline
-\toprule
-Model & misclass. rate - features & misclass. rate - 11
-PCs\tabularnewline
-\midrule
-\endfirsthead
-\toprule
-Model & misclass. rate - features & misclass. rate - 11
-PCs\tabularnewline
-\midrule
-\endhead
-Logistic & 0.078 & 0.097\tabularnewline
-LDA & 0.092 & 0.049\tabularnewline
-KNN & 0.097 (K=9) & 0.098 (K = 9)\tabularnewline
-Naive Bayes & 0.103 & 0.112\tabularnewline
-Random forest & 0.058 & 0.111\tabularnewline
-\bottomrule
-\end{longtable}
+
 On the other hand, models fit to compare Felix and Fanny did not do as
 well. They are only very slightly better than random guessing. This
 could be because there is no true difference between Fanny and Felix in
@@ -1846,28 +1879,15 @@ to overlap in the extracted features. We do know these features can
 accurately predict composer because as above for Bach and Mendelssohn,
 but perhaps composers so similar in style cannot be differentiated using
 these features. The included features only encode very basic aspects of
-music, and are more based on frequencies than how music acutally seems
-to differn in style to a listener.
-\begin{longtable}[]{@{}lll@{}}
-\caption{Summary of misclassification rates for different models
-comparing Felix and Fanny}\tabularnewline
-\toprule
-Model & misclass. rate - features & avg. misclass. rate - 11
-PCs\tabularnewline
-\midrule
-\endfirsthead
-\toprule
-Model & misclass. rate - features & avg. misclass. rate - 11
-PCs\tabularnewline
-\midrule
-\endhead
-Logistic & 0.517 & 0.45\tabularnewline
-LDA & 0.518 & 0.505\tabularnewline
-KNN & 0.498 & 0.467\tabularnewline
-Naive Bayes & 0.502 & 0.521\tabularnewline
-Random forest & 0.535 & 0.571\tabularnewline
-\bottomrule
-\end{longtable}
+music, and are more based on frequencies than how music actually seems
+to differ in style to a listener.
+
+Even though our classifier for Felix/Fanny did not perform very well, it
+does seem like there is a good amount of musical interpretation
+contained in the features used. The first three principal components of
+the features seem to correspond to harmonic meaning, rhythmic meaning,
+and dotted vs not dotted notes.
+
 \chapter*{Conclusion}\label{conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
 
@@ -1875,33 +1895,57 @@ Fitting classifiers using low-level features composed mostly of
 frequencies of notes and rhythms was able to differentiate style between
 Bach and Fanny and Felix Mendelssohn. However classifiers using these
 low-level features were not successful in differentiating between Fanny
-and Felix.
+and Felix. Of the ten models fit on pieces by Fanny and Felix, only 4/10
+did better than random guessing. The \(k-\)nearest neighbor classifier
+and lasso logistic performed the best. Thus the low-level features used
+in this study were not able to measure style differences between Fanny
+and Felix. This is likely either to the fact that these features were
+not able to pick an existing signal, or that Fanny and Felix have no
+discernible difference in style, although the first is more likely. Most
+of the previous studies regarding composer identification were able to
+distinguish composer. The work by Brinkman when comparing Josquin to
+contemporaries did have substantial error in , although not as bad .
+Josquin and his contemporaries however, did not grow up together or
+receive identical music training, like Fanny and Felix did. Also
+analyzing music in the Romantic era has not been done before, and
+perhaps different kinds of features need to be created to train a
+successful classifier.
 
-\section{Future suggestions for musical stylometry
-research}\label{future-suggestions-for-musical-stylometry-research}
+\section{Future suggestions for research and expansion of
+museR}\label{future-suggestions-for-research-and-expansion-of-muser}
 
 Most suggestions for future work lie in expanding the capabilities for
-museR. The first lies in increasing the ease of importing data. The
-scanning/OMR step is incredibly time consuming, which lead to a limited
-number of pieces being used in this analysis. While museR cannot help
-with this issue, museR could be expanded to be able to import music in
-the musicXML format in order to not need to rely on Humdrum's conversion
-program.
+museR. One issue to be improved upon is increasing the ease of importing
+data. The scanning/OMR step is incredibly time consuming, which lead to
+a limited number of pieces being used in this analysis. Running this
+same analysis with more data would also be good. While museR cannot
+directly help with speeding up the scanning process, museR could be
+expanded to be able to import music in the musicXML format in order to
+not need to rely on Humdrum's conversion program. Future versions of
+museR will ideally be able to extract high level features. These are
+features that take into account the context of the music from where the
+feature is extracted. These features could include more harmonic
+features, such as chord progressions, and more chord analysis. These
+high level features are what humans generally pick up on when
+distinguishing style. In addition, in the future, museR should be able
+to implement windowing techniques for extracting features. These
+features could still be low-level features, but they might have more
+meaning in determining style as they are on a smaller scale instead of
+averaged across the entire piece.
 
-In addition, it would be interesting to perform this analysis on music
-of different forms, as we might expect unconscious signals to exist in
-the same way in symphonies as well as lieder.
-
-Also it would be interesting to examine composers throughout their
-career. Maybe they had different aspects when they first started
-composing than when they were older.
-
-Mostly, future versions of museR would be able to extract high level
-features. These are features that take into account the context of the
-feature in the music. These include more harmonic features, such as
-chord progressions, and more chord analysis.
-
-Also it would be interesting to implement a windowing technique.
+In addition, it would be interesting to perform this same analysis on
+music of different different types of pieces. We might expect
+unconscious signals to exist in the same way in symphonies as well as
+lieder, or perhaps not. Considering features that are similar between
+symphonic work and solo piano works is a challenging problem in of
+itself. Also including another composer in this study, perhaps a
+contemporary of Felix and Fanny, or at least a composer in the Romantic
+era would also be helpful in checking the validity of the features. Also
+it would be interesting to examine composers throughout their career.
+Composers, Dvorak for example, changed drastically their career. Maybe
+they had different aspects when they first started composing than when
+they were older. Ideally museR could be used to pick up on these
+differences.
 
 \appendix
 
