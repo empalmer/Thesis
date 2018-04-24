@@ -1880,6 +1880,17 @@ very basic aspects of music, and are more based on frequencies than how
 music actually seems to differ in style to a listener, such as features
 for uses of melodic phrasing.
 
+Running the classfication models on the fist eleven principal components
+resulted in a slight improvement for two of the models in the
+Bach/Mendelssohn comparison, and a slight improvement for three of the
+models in the Fanny/Felix comparison. For LDA, at least, we know LDA is
+a model that is sensitive to collinearity, and running on the principal
+components helps with this. For the models where no improvement was made
+using the principal components, it is possible that those models did
+better with more information included. Perhaps we should have chosen
+more principal components to account for more explanation of varaince to
+be used in models.
+
 Even though our classifiers for Felix/Fanny did not perform very well,
 it does seem like there is a good amount of musical interpretation
 contained in the features used. The first three principal components of
