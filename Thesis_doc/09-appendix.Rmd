@@ -1,12 +1,11 @@
-`r if(knitr:::is_latex_output()) '\\appendix'`
+# Appendix {-}
 
-`r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'` 
+## How to download museR {-}
 
+The following commands download `museR` from GitHub. 
 
-<!--
-Included will be the vignette for museR
+```{r, eval = F}
+library(devtools)
+install_github("empalmer/Thesis/museR")
+```
 
-
-Also a pratical how to guide for converting music into R
-
--->

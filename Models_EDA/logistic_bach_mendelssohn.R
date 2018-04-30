@@ -46,6 +46,7 @@ plot(log_lasso_mod, xvar = "lambda", xlim = c(-5, 0), main = "Lasso")
 
 pdf("lasso_coef_b.pdf")
 plot_glmnet(log_lasso_mod, xvar = "lambda", ylim =c(-35,35), label = T)
+abline(v = -6.2)
 dev.off()
 
 

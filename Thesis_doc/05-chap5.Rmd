@@ -1,31 +1,38 @@
 # About Classification Models
 
-Classification problems attempt to divide observations (features) into groups (composer) based on similarities in the observations. A classifier is some function $f$ that maps a vector of input features $x \in X$ to a composer $y \in Y$ or possibly a probability of a composer $P(Y = y) \in [0,1]$. The notation used in this chapter is inspired by *The Elements of Statistical Learning* [@esl] and *An Introduction to Statistical Learning* [@isl]. Our features space $X$ is an $n \times p$ matrix, where $n$ is the size of our data, and $p$ is the number of predictors.  Each $X_i$ is vector of values for a certain feature.  $x_{ij}$ denotes the $i^{th}$ values of the $j^{th}$ feature. This $X$ contains the information of the extracted features that hopefully will be useful in determining the composer of the piece. If the features are different enough between the composer, ie, that the features encode some sense of unconscious (or conscious) use that differs between composer,  we can then build and fit models that can use how the features differ between composers. These models can both explain the relationship and difference of the features between composers, and use the way the fitted model explains the differences to predict the composer of a piece if we know the same features for that piece. 
+Classification problems attempt to divide observations (features) into groups (composer) based on similarities in the observations. A classifier is some function $f$ that maps a vector of input features $x \in X$ to a composer $y \in Y$ or possibly a probability of a composer $P(Y = y) \in [0,1]$. The notation used in this chapter is inspired by *The Elements of Statistical Learning* [@esl] and *An Introduction to Statistical Learning* [@isl]. 
+
+Our features space $X$ is an $n \times p$ matrix, where $n$ is the size of our data, and $p$ is the number of predictors.  Each $X_i$ is vector of values for a certain feature.  $x_{ij}$ denotes the $i^{th}$ values of the $j^{th}$ feature. This $X$ contains the information of the extracted features that hopefully will be useful in determining the composer of the piece. If the features are different enough between the composers, i.e., that the features encode some difference of unconscious (or conscious) style, we can then build and fit models that leverage this difference. These models can both explain the relationship and difference of the features between composers, and use the way the fitted model explains the differences to predict the composer of a piece if we know the same features for that piece. 
 
 In addition to the features for each piece, each piece has a composer (response), known or unknown, that we denote by $Y$. The $i^{th}$ piece has composer $Y_i$ where $i \in 1, \ldots, n$ In our case we have $Y \in \{\text{Fanny},\text{Felix}, \text{Bach}\}$, or more generally, $y \in \{\text{list of composers}\}$. Since the options for composer are in a discrete set, we can divide the input features space into different groups, or regions, that are labeled according to the classification of composer a model assigns or predicts.
 
-## Logistic Regression
+## Supervised Methods
 
-Knowing the class posteriors $P(Y = k|X)$, or the probability that a piece has a certain composer, given the features of that piece, gives us an optimal classification. Logistic regression directly models $P(Y = k|X)$ by using the logistic function. The idea is to model the posterior probabilities of each of the $K$ classes as linear functions in $x$ and requiring that the probabilities sum to 1. As is often the case, we use logistic regression to model a binary response: where there are two options for composer. Thus in the case of a binary response we can use an indicator function with coding 0/1. We then name $p(X) = P(Y=1|X)$ The model has the form: 
+Supervised methods involve learning about data with knowledge of the response or composer. Classification models rely on supervised techniques to predict composers. These models are built using the observations with their associated response.
+
+
+### Logistic Regression
+
+Knowing the conditional probability $P(Y = k|X)$, or the probability that a piece has a certain composer, given the features of that piece, results in an optimal classification. Logistic regression directly models $P(Y = k|X)$ by using the logistic function. The idea is to model the posterior probabilities of each of the $K$ classes as linear functions in $x$ and requiring that the probabilities sum to 1. As is often the case, we use logistic regression to model a binary response: where there are two options for composer. Thus in the case of a binary response we can use an indicator function with coding 0/1. We then name $p(X) = P(Y=1|X)$ The model has the form: 
 $$ \log \bigg( \frac{p(X)}{1-p(X)} \bigg) = \beta_0 + \beta_1 X_1 + \cdots + \beta_pX_p$$
 
 where which can be written as: 
 
 $$ p(X) = \frac{e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p}}{1 +e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p} }$$
 
-We estimate the regression coefficients by using maximum likelihood. This results in coefficient estimates such that for the predicted probability $\hat{p}(x_i)$ for the composer of each piece corresponds as closely as possible to the observed composer.
+We estimate the regression coefficients, $\beta_i$, by using maximum likelihood. This results in coefficient estimates such that for the predicted probability $\hat{p}(x_i)$ for the composer of each piece corresponds as closely as possible to the observed composer.
 The log-likelihood for $N$ observations is: 
 
 $$ \ell(\beta) = \sum_{i = 1}^N \big\{y_i\log p(x_i;\beta) + (1-y_i)\log(1-p(x_i;\beta))\big\} = \sum_{i = 1}^N \big\{y_i\beta^Tx_i - \log(1 + e^{\beta^Tx_i})\big\}$$
-We then choose $\beta$ to maximize $\ell(\beta)$
+We then choose $\beta$ to maximize $\ell(\beta)$. 
 
-### Lasso model selection
+#### Lasso model selection
 
-The Lasso penalty is a shrinkage method proposed by Robert Tibshirani in 1996. Lasso regression works by giving a penalty to regression coefficients. It can be somewhat equivalent to performing variable selection, as for high enough penalties (or $\lambda$), coefficients shrink to zero. It is often used in linear regression, but can be expended to logistic regression and other generalized linear models. For logistic regression, the lasso works by choosing coefficients $\beta_\lambda^L$ that minimize 
+The Lasso penalty is a shrinkage method proposed by Robert Tibshirani in 1996. Lasso regression works by giving a penalty to the magnitude of regression coefficients. The intercept is not included in the penalty. It can be somewhat equivalent to performing variable selection, as for high enough penalties (or $\lambda$), coefficients shrink to zero. It is often used in linear regression, but can be expended to logistic regression and other generalized linear models. For logistic regression, the lasso works by choosing coefficients $\beta_\lambda^L$ that minimize 
 
-$$ \ell(\beta) + \lambda \sum_{j = 1}^p \beta_j $$
+$$ \ell(\beta) + \lambda \sum_{j = 1}^p |\beta_j| $$
 
-where $\ell(\beta)$ is the log-likelihood function for logistic regression. This is equivalent to maximizing $\ell(\beta)$ subject to $\sum_{j=1}^p|\beta_j| < s$ [@lasso]
+where $\ell(\beta)$ is the log-likelihood function for logistic regression.  This is equivalent to maximizing $\ell(\beta)$ subject to $\sum_{j=1}^p|\beta_j| < s$ [@lasso].
 
 
 <!---
@@ -37,19 +44,19 @@ where $\ell(\beta)$ is the log-likelihood function for logistic regression. This
 
 
  
-## Linear Discriminant Analysis
+### Linear Discriminant Analysis
 
 <!--Linear regression on a categorical variable that has multiple variables has issues when there isn't a natural ordering with the categories. For large $K$ and small $p$, groups can be masked.  When there is a binary response, we can calculate $P(Y|X)$, but linear regression can give predictions that aren't valid probabilities, namely negative probabilities or probabilities greater than 1. -->
 
 Whereas logistic regression involves directly modeling $P(Y = k | X =x)$, linear discriminant analysis (LDA), estimates these values less directly by using Bayes Theorem. When classes are well separated or if $n$ is small and the distribution of predictors is approximately normal, logistic regression estimates can be unstable, which is not the case for LDA. LDA is also popular when there are more than two response cases.
 
-To preform LDA we must first model the distribution of each of the features that make up $X$ in each of the response classes ($P(X = x|Y)$) We notate $f_k(X) = P(X = x| Y = k)$ as the class-conditional density of $X$ in class $Y = k$. We denote the prior for class $k$, $\pi_k$, or the probability that a chosen observation is from the $k^{th}$ class. We have that $\sum_{k=1}^K \pi_k = 1$. Using Bayes' theorem to calculate $P(Y = k |X)$gives us the following: 
+To perform LDA we must first model the distribution of each of the features that make up $X$ in each of the response classes, $P(X = x|Y)$. We denote $f_k(X) = P(X = x| Y = k)$ as the class-conditional density of $X$ in class $Y = k$. We denote the prior for class $k$, $\pi_k$, or the probability that a chosen observation is from the $k^{th}$ class. We have that $\sum_{k=1}^K \pi_k = 1$. Using Bayes' theorem to calculate $P(Y = k |X)$ gives us the following: 
 
 $$ P(Y = k | X = x) = \frac{f_k(x)\pi_k}{\sum_{l = 1}^Kf_l(x)\pi_l}$$
 
-We thus must have a model to find $f_k(x)$. Different discriminant analysis techniques do this different ways. LDA assumes a multivariate Gaussian density, given by: $$f_k(x) = \frac{1}{(2\pi)^{p/2}|\mathbf{\Sigma}_k^{1/2}}e^{-\frac{1}{2}(x-\mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k)}$$ , where $\mu_k$ is the mean parameter for the $k$th class and $\Sigma_k$ is the covariance matrix for the k$th class.
+We thus must have a model to find $f_k(x)$. Different discriminant analysis techniques do this different ways. LDA assumes a multivariate Gaussian density, given by: $$f_k(x) = \frac{1}{(2\pi)^{p/2}|\mathbf{\Sigma}_k|^{1/2}}e^{-\frac{1}{2}(x-\mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k)},$$  where $\mu_k$ is the mean parameter for the $k$th class and $\Sigma_k$ is the covariance matrix for the $k$th class.
 
-In addition, LDA assumes that the covariance matrix is equal for every $k$: $\mathbf{\Sigma}_k = \mathbf{\Sigma} \forall k$.  Other discriminant models do not make this assumption. We also assume $\hat{\pi}_k = N_k/N$ where $N_k$ is the number of class - $k$ observations,
+In addition, LDA assumes that the covariance matrix is equal for every $k$: $\mathbf{\Sigma}_k = \mathbf{\Sigma}$ $\forall$ $k$.  Other discriminant models do not make this assumption. We also assume $\hat{\pi}_k = N_k/N$ where $N_k$ is the number of class - $k$ observations,
 
 <!--$\hat{\mu}_k = \sum_{g_i = k}x_i/N_k$, and $\mathbf{\hat{\Sigma}} = \sum_{k = 1}^{K}\sum_{g_i = k}(x_i - \hat \mu_k)(x_i - \hat\mu_k)^T / (N- K)$ 
 
@@ -64,7 +71,7 @@ Using the formula for $P(Y = k|X=x)$ as stated above, we can use LDA's assumptio
 
 $$ \delta_k(x) = x^T\mathbf{\Sigma}^{-1}\mu_k - \frac{1}{2}\mu_k^T\mathbf{\Sigma}^{-1}\mu_k + \log \pi_k $$
 
-These functions are known as $\textit{linear discriminant functions}$
+These functions are known as $\textit{linear discriminant functions}$.
 We predict the class by finding the maximum value of the discriminant functions of all $k$. 
 
 <!--
@@ -74,45 +81,47 @@ $$ \delta_k(x) = -\frac{1}{2}\log|\mathbf{\Sigma}_k| - \frac{1}{2}(x - \mu_k)^T\
 Linear discriminant analysis is helpful when the classes are well separated, when $n$ is small and the distribution of the predictors $X$ is approximately normal in each of the classes, and when there are more than two response classes. 
 -->
 
-## Naive Bayes
-The Naive Bayes classifier is often used for musical classification as it is good when the dimension $p$ of the features space is large. Like LDA, it also involves modeling $P(Y = y | X =x)$ by using assumptions of the form of $f_i(X)$ and using Bayes Theorem. Naive Bayes makes the (naive) assumption that all the features are independent for a given class $i$, ie that $$f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)$$. These marginals are often estimated by using a Gaussian distribution, ie that $f_{ik}(X_k) = \frac{1}{\sqrt{2\pi\sigma_k^2}}e^{\frac{(x - \mu_k)^2}{2\sigma_k^2}}$ In practice the independence assumption is not the case, but the model still preforms surprisingly well in practice when this assumption does not hold. 
+### Naive Bayes
+The Naive Bayes classifier is often used for musical classification as it is good when the dimension $p$ of the features space is large. Like LDA, it also involves modeling $P(Y = y | X =x)$ by using assumptions of the form of $f_i(X)$ and using Bayes Theorem. Naive Bayes makes the (naive) assumption that all the features are independent for a given class $i$, $$f_i(X) = \prod_{k = 1}^p f_{ik}(X_k).$$ These marginals are often estimated by using a Gaussian distribution, ie that $f_{ik}(X_k) = \frac{1}{\sqrt{2\pi\sigma_k^2}}e^{\frac{(x - \mu_k)^2}{2\sigma_k^2}}$. In practice, the independence assumption is not the case, but the model still performs surprisingly well. 
 
 
-## K- nearest - neighbor
+### $k$-nearest neighbor
 
-Another method for classification is $k-$nearest neighbor methods. It uses observations from a training set of the data. Then for an new observation in a testing set at point $x_0 = x_1 \ldots x_p$, it finds the $K$ closest points in the training set, and classifies $x_0$ as the majority vote of the responses for the $K$ neighbors. Euclidean distance is often used as the metric for closeness, although other methods exist. Euclidean distance is defined as $d = |x_{(i)} - x_0$. After the $K$ nearest neighbors are found, the predicted class for $x_0$ is assigned to be the mode of the classes of the neighbors.  
+Another method for classification is $k$-nearest neighbor methods. It uses observations from a training set of the data. Then for a new observation in a testing set at point $x_0 = x_1 \ldots x_p$, it finds the $k$ closest points in the training set, and classifies $x_0$ as the majority vote of the responses for the $K$ neighbors. Euclidean distance is often used as the metric for closeness, although other methods exist. Euclidean distance is defined as $d = |x_{(i)} - x_0|$. After the $K$ nearest neighbors are found, the predicted class for $x_0$ is assigned to be the mode of the classes of the neighbors.  
 
-## Random Forests
+### Random Forests
 
-Tree-based methods are another form of classifier. Tree based methods involve segmenting the predictor space into smaller regions. To classify a point $x_0$, we take the mode of the classes of training set observations in the smaller region where $x_0$ lies, and assign the class of $x_0$ as the mode. To create the tree, we recursively split the predictor space into two smaller regions at the point where the there is high node purity. The Gini index is often used to measure this, defined as $G = \sum_{k = 1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})$. where $\hat{p}_{mk}$ is the proportion of observations in the $m$th region of the $k$th class. If the Gini index is small, this indicates that a region contains mostly observations from a single class. 
+Tree-based methods are another form of classifier. Tree based methods involve segmenting the predictor space into smaller regions that are similar in their response. To classify a point $x_0$, we take the mode of the classes of training set observations in the smaller region where $x_0$ lies, and assign the class of $x_0$ as the mode. To create the tree, we recursively split the predictor space into two smaller regions, where the split point is known as a node. Nodes with high node purity are choices where the two resulting regions have mostly the same class in the region. We chose a good split based on the split with highest node purity. The Gini index is often used to measure node purity, defined as $G = \sum_{k = 1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})$, where $\hat{p}_{mk}$ is the proportion of observations in the $m$th region of the $k$th class. If the Gini index is small, this indicates that a region contains mostly observations from a single class. 
 
-Random forests offer an improvement over trees in general. They create a "forest" of decision trees on bootstrapped training samples. In each of the trees in the forest, a random sample of $m$ predictors are chosen to create the tree. For random forests, $m = \sqrt{p}$ typically.  Because strong predictors are often chosen for the first split of the tree, choosing only a random sample of the predictors to build the tree makes the trees in a Random forest significantly different from each other.This choice helps in decorrelating the trees.
+Random forests offer an improvement over trees in general. They create a "forest" of decision trees on bootstrapped training samples. In each of the trees in the forest, a random sample of $m$ predictors are chosen to create the tree. For random forests, $m = \sqrt{p}$ typically.  Because strong predictors are often chosen for the first split of the tree, choosing only a random sample of the predictors to build the tree makes the trees in a random forest significantly different from each other. This choice helps in decorrelating the trees. To predict the class of a piece, we then take the majority vote of the class predicted for each tree in the random forest. 
 
-## Dimensionality Reduction: Pricipal component analysis (PCA)
+## Unsupervised methods
+
+Unsupervised methods are methods where the response is not used. The methods involve learning structures in the data without any labeled response or composer. Some unsupervised methods, such as PCA, can be used for later models that rely on supervised methods. 
+
+### Principal component analysis (PCA)
 
 Principal component analysis (PCA) transforms the features space into a lower dimensional representation. It chooses the transformed features to have maximal variance and be mutually uncorrelated. 
 
-Principal component analysis can be useful when the predictors are correlated. We suspect many of our features are correlated, due to certain patterns in music, as well as the way we created our features. These relationships are caused by similarity in the features, and from music theory rules. (For example, if there is a high frequency of first scale degrees, we might expect a high frequency of chords that include the first scale degree. Another example, if we had a high frequency of seventh scale degrees, we would expect them to resolve to the first scale degree.)
+Principal component analysis can be useful when the predictors are correlated. We suspect many of our features are correlated, due to certain patterns in music, as well as the way we created our features. These relationships are caused by similarity in the features, and from music theory rules. For example, if there is a high frequency of first scale degrees, we might expect a high frequency of chords that include the first scale degree. Another example, if we had a high frequency of seventh scale degrees, we would expect them to resolve to the first scale degree.
 
-Principal component analysis is also helpful when there are many predictors, and we want to deal with a smaller dimension of predictor space. 
+Principal component analysis is also helpful when there are many predictors, and we want to deal with a smaller dimension of predictor space. To do this, we choose to use fewer principal components than features, and as principal components are chosen in a way to maximize the variability in the data, so including fewer principal components than features still ideally gives a good representation of the initial data. Used in supervised methods, the transformed features from PCA can be used to fit models instead of the original features. 
 
-As an unsupervised method, PCA can inform about latent meta variables. 
+As an unsupervised method, PCA can inform about latent meta variables. Meta variables are features included in the data that aren't specifically measured by individual features. PCA explores these by giving similar weights to features that are correlated with each other. Thus original features that have similar PCA scores have similar interpretability.
 
-Used in supervised methods, the transformed features from PCA can be used to fit models instead of the original features space. 
-
-Principal components transforms the feature space. If our original features are $X_1,X_2,\ldots,X_p$, we transform the features to $Z_1,Z_2,\ldots,Z_M$, where $M < p$. Each $Z_i$ is a linear combination of the original predictors, ie, $Z_m = \sum_{j = 1}^p \phi_{jm}X_j$, for constants $\phi_{1m},\phi_{2m},\ldots,\phi_{pm}$ for $m = 1,\ldots,M$. Given an $n\times p$ data set $\mathbf{X}$ where $x_{ij}$ is the $i^{th}$ instance of the $j^{th}$ feature, we solve for the $m^{th}$ principal component loading vector  $\phi_m = \phi_{1m},\phi_{2m},\ldots,\phi_{pm}$ that solves the optimization
-problem:  $$\max_{\phi_{1m},\ldots,\phi_{pm}} \bigg\{\frac{1}{n}\sum_{i=1}^n\bigg(\sum_{j=1}^p \phi_{jm}x_{ij}\bigg)^2\bigg\}$$,
-where the $\phi$s are subject to $\sum_{j = 1}^p\phi_{jm}^2 = 1$. Our principal components are then calculated as $z_{im} = \sum_{j = 1}^p\phi{jm}x_{ij}$
+Principal components transforms the feature space. If our original features are $X_1,X_2,\ldots,X_p$, we transform the features to $Z_1,Z_2,\ldots,Z_M$, where $M \leq p$. Each $Z_i$ is a linear combination of the original predictors, ie, $Z_m = \sum_{j = 1}^p \phi_{jm}X_j$, for constants $\phi_{1m},\phi_{2m},\ldots,\phi_{pm}$ for $m = 1,\ldots,M$. Given an $n\times p$ data set $\mathbf{X}$ where $x_{ij}$ is the $i^{th}$ instance of the $j^{th}$ feature, we solve for the $m^{th}$ principal component loading vector  $\phi_m = \phi_{1m},\phi_{2m},\ldots,\phi_{pm}$ that solves the optimization
+problem:  $$\max_{\phi_{1m},\ldots,\phi_{pm}} \bigg\{\frac{1}{n}\sum_{i=1}^n\bigg(\sum_{j=1}^p \phi_{jm}x_{ij}\bigg)^2\bigg\},$$
+where the $\phi$s are subject to $\sum_{j = 1}^p\phi_{jm}^2 = 1$. Our principal components are then calculated as $z_{im} = \sum_{j = 1}^p\phi_{jm}x_{ij}$.
 
 The loadings of the first principal component, $\phi_1$ thus determine the direction in the feature space with the most variance, $Z_1$, or the scores of the first principal component is then a new feature in our transformed feature space. We continue calculating $Z_i$, where each following $Z_i$ has the maximal variance in a direction uncorrelated to the previous principal components. 
 
-Before PCA is performed, we center all features to have mean zero, as the scale of some features are not the same, which will lead to issues in the loadings, as the features with higher scales would automatically have the higher variance. 
+Before PCA is performed, we center and scale all features to have mean zero and standard deviation one, as initially the scale of some features are not the same. This would lead to issues in the loadings, as the features with higher scales would automatically have the higher variance. 
 
-We can observe the proportion of variance explained by each principal component. This is usually visualized in a skree plot. We can use this information to decide how many principal components to use. 
+We can observe the proportion of variance explained by each principal component. This is usually visualized in a skree plot. The number of the principal component is plotted on the x-axis, and the percentage of variance which that principal component accounts for is on the y-axis. We can use this information to decide how many principal components to use. We often choose the cut-off principal component at an "elbow", or where the decrease in variance explained by an additional principal component starts to decrease. 
 
-## K-means
+### K-means
 
-$K$-means is a form of unsupervised learning where we only use the features without the associated class of composer. When given a $K$ or number of clusters, the algorithm assigns each piece to a cluster. This is used to see if there are any latent groupings in the feature space. If composers are differentiable with their features, we might expect that $K$ means would differentiate the clusters similar to the difference in composer. K-means clustering works by trying to minimize the within-cluster variation $W(C_k)$ for each cluster $C_k$. Often we define the within-cluster variation by squared Euclidean distance, so $$W(C_k) = \frac{1}{|C_k|} \sum_{i,i' \in C_k}\sum_{j = 1}^p (x_{ij} - x_{i'j})^2 $$
+$K$-means is a form of unsupervised learning where we only use the features without the associated class of composer. When given a $K$ or number of clusters, the algorithm assigns each piece to a cluster. This is used to see if there are any latent groupings in the feature space. If composers are differentiable by their features, we might expect that $K$ means would differentiate the clusters similar to the difference in composer. K-means clustering minimizing the within-cluster variation $W(C_k)$ for each cluster $C_k$. Often we define the within-cluster variation by squared Euclidean distance, so $$W(C_k) = \frac{1}{|C_k|} \sum_{i,i' \in C_k}\sum_{j = 1}^p (x_{ij} - x_{i'j})^2 $$
 where $|C_k|$ is the number of observations in the $k$th cluster. 
 
 <!-- Algorithm for k-means? -->

@@ -82,6 +82,7 @@ plot(flog_lasso_mod, xvar = "lambda", xlim = c(-10, 0),ylim = c(0,5), main = "La
 
 pdf("loglambda_f.pdf")
 plot_glmnet(flog_lasso_mod, xvar = "lambda",xlim = c(-5,0),ylim = c(-20,20), label = T)
+abline(v = -2.67)
 dev.off()
 
 #==============================================================

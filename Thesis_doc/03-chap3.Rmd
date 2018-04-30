@@ -1,24 +1,24 @@
 # MuseR and features
 
-To the best of my knowledge, there is currently no package of R that has been built to analyze sheet music. There are existing packages (such as tuneR) that examine audio formats of music. The intention of this thesis was to create a package, museR, that imports sheet music in the proper form (musicXML or Kern) and does all of the analysis using R. 
+To the best of my knowledge, there is currently no package in R that has been built to analyze sheet music. There are existing packages (such as tuneR) that examine audio formats of music. The intention of this thesis was to create a package, museR, that imports sheet music in the proper form (musicXML or Kern) and does all of the analysis using R. 
 
 ## Importing data into R
 
-MuseR is equipped to import data in the Kern format. The functions for converting these files are `kern2df()` and `piece_df()` These are most usefully in the form of individual splines. This allows for naming the columns according to instrument. Below we have a short piece appearing as it would look from MuseScore. 
+MuseR is equipped to import data in the Kern format. The functions for converting these files are `kern2df()` and `piece_df()`. These are most usefully in the form of individual splines. This allows for naming the columns according to instrument. Figure 3.1 shows short example piece appearing as it would look from MuseScore. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/ex1m.png}
-\caption{Example musescore format excerpt}
+\caption{Example MuseScore format excerpt}
 \label{subd}
 \end{figure}
 
-This piece would have the following Kern format representation:
+This piece would have the Kern format representation as shown in Figure 3.2.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/ex1k.png}
-\caption{Example kern format excerpt of the above musescore}
+\caption{Example kern format excerpt of the above MuseScore}
 \label{subd}
 \end{figure}
 
@@ -34,7 +34,9 @@ Using museR's `piece_df()` function to create the following data frame.
 \label{subd}
 \end{figure}
 
-Data in R are commonly expressed as data frames. Expressing music as a data frame has challenges, as music cannot be easily expressed in rectangular form. Music as a data structure is very rugged. When expressing it in rectangular form, there needs to be placeholder or padding entries to account for the nonrectangularness. MuseR's `piece_df()` works by using regular expressions to extract note and rhythm information. It uses NA and . values to indicate empty spaces and duration respectively.
+
+
+Data in R are commonly expressed as data frames. Music as a data structure is very rugged. Expressing music as a data frame has challenges, as music cannot be easily expressed in rectangular form. When expressing it in rectangular form,  placeholder or padding entries must be added to account for the nonrectangularness. MuseR's `piece_df()` works by using regular expressions to extract note and rhythm information. It uses NA and . values to indicate empty spaces and duration respectively.
 
 <!--
 The output from `piece_df()` follows the same ideas as the structure of kern files. It has "." values similar to the Kern dots that represent the duration of the note for the time base. This kind structure is good for certain types of features, where we are interested only in the type of note happening, the time of the attack of the note, or without considering rhythm. Sometimes, we are interested in how long the note lasts. The `durration_df()` function corrects this issue. It converts the `NA`s representing duration and replaces them with the note value that is currently happening. This allows for analysis that considers duration. The below figure represents the durational version of the above data frame. 
@@ -52,7 +54,7 @@ The output from `piece_df()` follows the same ideas as the structure of kern fil
 
 #### Melodic intervals
 
-Melodic intervals, or the interval between two successive notes, are found using the `mel_ints()` function. It is currently only equipped to look at melodic intervals for the top note of each staff. In this context, it is most commonly used for analyzing melodic intervals of the voice. The function first extracts the top line of any instrument, and then outputs the proportion of each melodic interval happening over the whole piece. There are 12 possible intervals that are counted (ignoring augmented and diminished): unison,m2,M2,m3,M3,p4,tt,p5,m6,M6,m7,M7. `mel_ints()` outputs a vector of the proportion of each of the intervals. 
+Melodic intervals, or the interval between two successive notes, are found using the `mel_ints()` function. It is currently only equipped to look at melodic intervals for the top note of each staff. In this context, it is most commonly used for analyzing melodic intervals of the voice. The function first extracts the top line of any instrument, and then outputs the proportion of each melodic interval happening over the whole piece. There are 12 possible intervals that are counted (ignoring augmented and diminished): unison, m2, M2, m3, M3, p4, tt, p5, m6, M6, m7, M7. `mel_ints()` outputs a vector of the proportion of each of the intervals. 
 
 \begin{figure}[h]
 \centering
@@ -63,11 +65,11 @@ Melodic intervals, or the interval between two successive notes, are found using
 
 For example if this function was run on the above piece, the melodic top line intervals would be: $\{(f,c),(c,d),(d,f)\} = \{p4,M2,m3\}$, which would output the proportion vector $(0,1/3,1/3,0,0,1/3,0,0,0,0,0,0)$.
 
-If we are interested in the types of melodic intervals, we can use the `connsonance()` to examine the proportion of consonant (perfect, imperfect, dissonant) intervals over the piece. This function works by calling `mel_ints()` and then adding up the perfect, imperfect, and dissonant intervals proportions. 
+If we are interested in the types of melodic intervals, we can use `consonance()` to examine the proportion of consonant (perfect, imperfect, dissonant) intervals over the piece. This function works by calling `mel_ints()` and then adding up the perfect, imperfect, and dissonant intervals proportions. 
 
 #### Density
 
-The `beat_density()` function analysis the average and standard deviation of density of each measure in the piece. It is called "beat" density as it only accounts for the instance a note starts. For example if a measure consisted of a single whole note it would be only counted once even though it is voiced the entire measure. 
+The `beat_density()` function analyzes the average and standard deviation of density of each measure in the piece. The function is named "beat" density as it only accounts for the instance a note starts. For example if a measure consisted of a single whole note it would be only counted once even though it is voiced the entire measure. 
 
 In the above example, the first measure would have a beat density of 4, and the second measure would have a beat density of 2. 
 
@@ -76,9 +78,9 @@ In the above example, the first measure would have a beat density of 4, and the 
 For most musical analysis, the key of the piece is important in determining chords, etc. The key is based on the key signature, which is always given in a Kern file. Kern files from CCARH have the key of the piece given, but scanned files do not. 
 For kern files from CCARH, `Major_minor()` extracts the key given by the Kern file. for scanned files, `Major_minor()` identifies the two options for key given the key signature. For example, if there was a key signature with one sharp, the options would be G Major or E minor. The tonic for each option is identified, and then the count of instances of both choices for tonic is made. The key is determined by which of the options for tonic has the higher count.
 
-#### Prop scale degree
+#### Scale degree frequencies
 
-Once the key of a piece is determined, the proportion of each scale degree is calculated. The scale degrees consist of : Tonic, Supertonic, Mediant, Submediant, Dominant, Submediant, and Leading tone. In the example above, if we assume the key is F major, the tonic has a tonic scale degree proportion of 2/6, the mediant 1/6, dominant, 1/6, submediant, 2/6.
+Once the key of a piece is determined, the proportion of each scale degree is calculated. The scale degrees consist of: Tonic, Supertonic, Mediant, Submediant, Dominant, Submediant, and Leading tone. In the example above, if we assume the key is F major, the tonic has a tonic scale degree proportion of 2/6, the mediant 1/6, dominant, 1/6, submediant, 2/6.
 
 
 <!--
@@ -95,11 +97,11 @@ A similar process is done for seventh chords.
 
 #### Frequency of rhythm use
 
-We determine the frequency of use of the most common types of rhythm: half notes, dotted half notes, quarter notes, dotted quarter notes, eighth notes, dotted eight notes, sixteenth notes, and thirtysecond notes.  
+We determine the frequency using `rhythm_freq()` to find the most common types of rhythm: half notes, dotted half notes, quarter notes, dotted quarter notes, eighth notes, dotted eight notes, sixteenth notes, and thirty second notes.  
 
 #### Length
 
-We define a measure for the length of a piece by how many measures the piece has.
+We use `length_measures()` as a feature for the length of a piece. It is calculated by finding how many measures the piece has. 
 
 <!--
 #### Voice distance

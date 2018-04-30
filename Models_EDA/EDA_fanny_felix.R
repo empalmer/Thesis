@@ -24,7 +24,8 @@ ggplot(melt(ffeatures), aes(x = value, color = fcomposer)) + geom_density()+
   theme(axis.ticks = element_blank(), axis.text.y = element_blank(),
         axis.text.x = element_blank(),
         strip.text = element_text(face="bold", size=10),
-        strip.background = element_rect(fill = "white", size = 1))
+        strip.background = element_rect(fill = "white", size = 1),
+        legend.position = "none")
 dev.off()
 #==============================================================
 # Correlation matrix + visualization

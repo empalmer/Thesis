@@ -1,10 +1,10 @@
-# Results
+# Classification Results
 
 The following section presents the results of fitting five different models for classficiation on the original feature space as well as the first 11 principal components to account for 85% of the variance. This was done as there are many features that measure aspects of the same thing, i.e. there are seven different features measuring aspects of scale degree use where each scale degree can individually have interesting musical interpretations.
 
 The five classifiers were chosen as they were used previously in the literature for similar problems (KNN, Naive Bayes and Random forests), or are popular models for classification (Logistic, LDA). For the logistic classifier we used lasso as a shrinkage method.
 
-Each model (10 total) was tested for predictive accuracy by finding the $5-$fold cross-validated misclassification rate. The cross-validated misclassification rate showed a lot of variance depending on the random fold assigned, so the process was repeated 100 times, and the rate was averaged. 
+Each model (10 total) was tested for predictive accuracy by finding the $5-$fold cross-validated misclassification rate. The cross-validated misclassification rate showed high of variance depending on the random fold assigned, so the process was repeated 100 times, and the rate was averaged. 
 
 ## Models Results - Bach/Mendelssohn
 
@@ -23,7 +23,7 @@ Table: Averaged 5-fold CV misclassification rates for each model from 100 runs o
 Table 6.1 shows the averaged 5-fold cross-validated misclassification rates over 100 runs. For the KNN case, the features were scaled and centered first. Most models have misclassification rates round 10%. The best model was found to be linear discriminant analysis run on the principal components. 
 
 
- Figure 6.1 shows coefficient values for each feature for varying $\log(\lambda)$ values. $\lambda$ corresponds the restriction penalty. Higher values of $\log(\lambda)$ correspond to a higher penalty, resulting in coefficient estimates that shrink to zero. The cross-validated lasso logistic fit chose $\log(\lambda) = -6.2$ to have the lowest misclassification rate. At that value, most features besides the third and fifth scale degrees and frequency of eighth note are nonzero. We have that scale degree two and mean density features have low coefficient estimates at this point, but are nonzero, Overall, for all $\lambda$ penalties, it appears that the features for density and frequency of 16th note rhythms stay non-zero the longest, implying these features are more useful features for distinguishing the composer.
+ Figure 6.1 shows coefficient values for each feature for varying $\log(\lambda)$ values. $\lambda$ corresponds to the restriction penalty. Higher values of $\log(\lambda)$ correspond to a higher penalty, resulting in coefficient estimates that shrink to zero. The cross-validated lasso logistic fit chose $\log(\lambda) = -6.2$ to have the lowest misclassification rate. At that value, most features besides the third and fifth scale degrees and frequency of eighth note are non-zero. We have that scale degree two and mean density features have low coefficient estimates at this point, but are non-zero. Overall, for all $\lambda$ penalties, it appears that the features for density and frequency of 16th note rhythms stay non-zero the longest, implying these features are more useful features for distinguishing the composer.
 
 <!--
 Figure 6.1 shows the misclassification rates corresponding to different values of $\log(\lambda)$ in the logistic lasso model. As the $\log(\lambda)$ increases, the coefficients of each of the features start approaching zero. They do this at different times and rates.
@@ -33,7 +33,7 @@ The left dotted line represents the minimum lambda, and the right line represent
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .6]{images/lasso_coef_b.pdf}
-\caption{Bach/Mendelssohn lasso logistic regression coefficients for changing $\lambda$ penalty values}
+\caption{Bach/Mendelssohn lasso logistic regression coefficients for changing $\lambda$ penalty values. The vertical line represents the value of best $\lambda$.}
 \label{subd}
 \end{figure}
 
@@ -51,8 +51,8 @@ We also fit a lasso logistic model on the first 11 principal components. This re
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/var_imp_rflog_f.pdf}
-\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Bach/Mendelssohn}
+\includegraphics[scale = .5]{images/var_imp_rflog_b.pdf}
+\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Bach/Mendelssohn.}
 \label{subd}
 \end{figure}
 
@@ -76,16 +76,16 @@ Random forest| 0.535                     | 0.571
 
 Table: Averaged 5-fold CV misclassification rates of 100 runs on the feature space and the first 11 principal components for each model. 
 
-Table 6.2 shows all the misclassification rates of each model. Unfortunately most of the misclassification rates are above 0.5, indicating that random guessing would perform better at predicting the composer. A logistic lasso classification model fit on the principal components performed best, with a misclassification rate of 0.45. <!-- The $\log(\lambda)$ penalty associated with this rate was -3.21. -->
+Table 6.2 shows all the misclassification rates of each model. Most of the misclassification rates are above 0.5, indicating that random guessing would perform better at predicting the composer. A logistic lasso classification model fit on the principal components performed best, with a misclassification rate of 0.45. <!-- The $\log(\lambda)$ penalty associated with this rate was -3.21. -->
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .6]{images/loglambda_f.pdf}
-\caption{Fanny/Felix lasso logistic regression coefficients for changing $\lambda$ penalty values}
+\caption{Fanny/Felix lasso logistic regression coefficients for changing $\lambda$ penalty values. The vertical line represents the value of best $\lambda$.}
 \label{subd}
 \end{figure}
 
-Figure 6.3 shows the coefficient estimates for varying $\log(\lambda)$ penalties for a logistic lasso model fit on the feature space. The frequency of the first scale degree appears to remain non-zero for the longest time. At $\log(\lambda)$ of -2.67 we get the best lambda fit. At this $\log(\lambda)$ value we have most of the coefficients shunk to zero besides frequency of thirty second notes and dotted eighth notes, and frequency of the tonic (first scale degree). 
+Figure 6.3 shows the coefficient estimates for varying $\log(\lambda)$ penalties for a logistic lasso model fit on the feature space. The frequency of the first scale degree appears to remain non-zero for the longest time. At $\log(\lambda)$ of -2.67 we get the best $\lambda$ fit. At this $\log(\lambda)$ value we have most of the coefficients shunk to zero besides frequency of thirty second notes and dotted eighth notes, and frequency of the tonic (first scale degree). 
 
 <!--
 \begin{figure}[H]
@@ -111,20 +111,20 @@ When fit on the first eleven principal components, we have a lower misclassifica
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/var_imp_rflog_b.pdf}
-\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Fanny/Felix}
+\includegraphics[scale = .5]{images/var_imp_rflog_f.pdf}
+\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Fanny/Felix.}
 \label{subd}
 \end{figure}
 
-Figure 6.4 shows the variable importance used in random forests and the logistic regression coefficients at the best $\lambda$ value (-2.67). At the best lambda value, only nine of the coefficients of logistic regression are non-zero. The features that the random forest model found useful did not correspond very well to the features remaining non-zero in the logistic lasso model. 
+Figure 6.4 shows the variable importance used in random forests and the logistic regression coefficients at the best $\lambda$ value (-2.67). At the best $\lambda$ value, only nine of the coefficients of logistic regression are non-zero. The features that the random forest model found useful did not correspond very well to the features remaining non-zero in the logistic lasso model. 
 
 <!-- =========================================================== -->
 <!-- =========================================================== -->
 <!-- =========================================================== -->
 
-## Predictions for Disputed pieces: 
+## Predictions for disputed pieces 
 
-Since we have such high misclassification rates using each model, the following predictions are likely not accurate. Even so, we do see that each piece has a higher proportion of predictions for Fanny than Felix. Table 6.3 shows the predicted classification for each piece for each model. 
+Since we have such high misclassification rates using each model, the following predictions are likely not accurate. Even so, we do see that most of the pieces have a higher proportion of predictions for Fanny than Felix. Table 6.3 shows the predicted classification for each piece for each model. 
 
 Model            | Op.8 2 | Op.8 3 | Op.8 12 | Op.9 7 | Op.9 10 | Op.9 12
 -----------------|--------|--------|---------|--------|---------|--------
@@ -135,4 +135,19 @@ Naive Bayes      | fanny  | fanny  | fanny   | fanny  | fanny   |fanny
 Random Forest    | felix  | felix  | felix   | fanny  | fanny   |felix
 
 Table: Predicted composer for each disputed piece
+
+## Discussion
+
+On very basic low-level features, consisting mostly of frequencies of notes, intervals and chords, most models comparing Bach to the Mendelssohns do relatively well. This is likely due to the decent separation of the features encoding density. We likely see so much separation because the Bach data are for solo piano and the Mendelssohn data have an additional instrument, thus making the piece automatically more dense. 
+
+On the other hand, models fit to compare Felix and Fanny did not do as well. They are only very slightly better than random guessing. This could be because there is no true difference between Fanny and Felix in the features we extracted, i.e., the features extracted are not good enough to pick up any existing signal. On the other hand, it is certainly believable that Fanny and Felix could have very similar unconscious signals in their writing. They were trained together, and did critique each others work extensively. The other possibility is that there are more pieces by Fanny snuck into Felix's published work, leading to overlap in the extracted features.  These features did accurately predict composer for the previous comparison (Bach/Mendelssohn), but perhaps composers so similar in style cannot be differentiated using these features. The included features only encode very basic aspects of music, and are more based on frequencies than how music actually seems to differ in style to a listener, such as features for uses of melodic phrasing. 
+
+Running the classfication models on the first eleven principal components resulted in a slight improvement for two of the models in the Bach/Mendelssohn comparison, and a slight improvement for three of the models in the Fanny/Felix comparison. For LDA, at least, we know LDA is a model that is sensitive to collinearity, and running on the principal components helps with this. For the models where no improvement was made using the principal components, it is possible that those models did better with more information included. Perhaps we should have chosen more principal components to account for more explanation of variance to be used in models. 
+
+Even though our classifiers for Felix/Fanny did not perform very well, it does seem like there is a good amount of musical interpretation contained in the features used. The first three principal components of the features seem to correspond to harmonic meaning, rhythmic meaning, and dotted vs not dotted notes. 
+
+
+
+
+
   

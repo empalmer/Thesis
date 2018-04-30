@@ -6,16 +6,16 @@ The majority of the pieces used in this paper were lieder of Felix Mendelssohn a
 
 <!-- 116 pieces: lieder of Op 8 (12 pieces), op 9 (12 pieces), op 19(6 pieces), op 34 (6 pieces), op 47 (6 pieces), op 57 (6 pieces), op 71 (6 pieces), and 6 pieces of lieder without opus numbers, also 56 lieder without a collection. -->
 
-Of Fanny's music, a total of 35 pieces were used: 15 lieder were used from her lieder without name collection, 10 from her Wo kommst du Her collection, and 10 from an unnamed collection.
+Of Fanny's music, a total of 35 pieces were used: 15 lieder were used from her lieder without name collection, 10 from her *Wo kommst du Her* collection, and 10 from an unnamed collection.
 
 The six pieces published by Felix that are thought to be written by Fanny are Op8 no 2, 3 and 12, and Op 9, no 7, 10 and 12.   
 
-Data from JS Bach were also used. These data were available in Kern Score format from the Center for Computer Assisted Research in the Humanities. (CCARH). The pieces used were from the Well Tempered Clavier (WTC). These were written as training pieces and each collection contains 24 pieces with one in every possible key. Pieces from the Well Tempered Clavier were chosen as the data were more easily accessible (no scanning was required) and they were a similar format as the Mendelssohn songs, written as for solo piano (or harpsichord).
+Data from JS Bach were also used to provide a comparison corpus that is expected to be very distinct from the work of the Mendelssohns. These data were available in Kern Score format from the Center for Computer Assisted Research in the Humanities. (CCARH). The pieces used were from the Well Tempered Clavier (WTC). These were written as training pieces and each collection contains 24 pieces with one in every possible key. Pieces from the Well Tempered Clavier were chosen as the data were more easily accessible (no scanning was required) and they were a similar format as the Mendelssohn songs, written as for solo piano (or harpsichord).
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/test.png}
-\caption{Flowchart of the conversion process from physical score copy to dataframe in R}
+\caption{Flowchart of the conversion process from physical score copy to dataframe in R.}
 \label{subd}
 \end{figure}
 
@@ -23,35 +23,35 @@ Data from JS Bach were also used. These data were available in Kern Score format
 
 ## Optical music recognition
 
-The vast majority of classical music is found solely in PDF or physical copies. Sheet music as a form of data requires a lengthy process of conversion before being able to be used in any analysis. Simply scanning the scores into, say, a PDF, gives no musical semantics and can only be viewed on screen or printed on paper. Thus, the two main steps in reading in data from sheet music are, first, using optical music recognition software to transform physical scores into digital formats, and second, to read the digital format in to R where subsequent analysis can be done. 
+The vast majority of classical music scores are found solely in PDF or physical copies. Sheet music as a form of data requires a lengthy process of conversion before being able to be used in any analysis. Simply scanning the scores into, say, a PDF, gives no musical semantics and can only be viewed on screen or printed on paper. Thus, the two main steps in reading in data from sheet music are, first, using optical music recognition software to transform physical scores into digital formats, and second, to read the digital format in to R where subsequent analysis can be done. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.50]{images/scorephoto.JPG}
-\caption{Score in physical form before conversion process has started}
+\caption{Score in physical form before conversion process has started.}
 \label{subd}
 \end{figure}
 
 The scores used in this paper were obtained from physical copies available in the Reed music library. These scores were then scanned using software designed for optical music recognition (OMR). 
 
-Optical music recognition requires learning from graphical and textual information. The main things the software must pick up are the locations of bar lines, notes, rests, slurs, dynamic markings, tempo markings, lyrics etc. Basic optical music recognition has been around since 1966. 
+Optical music recognition requires learning from graphical and textual information. The software must mainly pick up the locations of bar lines, notes, rests, slurs, dynamic markings, tempo markings, lyrics etc. Basic optical music recognition has been around since 1966. 
 
-Most commonly, the first step in optical music recognition is to remove the staff lines. The staff lines are critical, as they define the basis for the vertical definition distance of pitch, and the horizontal distance definition of rhythm. The staff gives a normalization that is helpful, essentially defining the size of what notes and rhythm look like. [@OMR]
+Most commonly, the first step in optical music recognition is to remove the staff lines. The staff lines are critical, as they define the basis for the vertical definition distance of pitch, and the horizontal distance definition of rhythm. The staff gives a normalization that is helpful, essentially defining the size of what notes and rhythm look like [@OMR].
 
 <!---Staff removal methods include projections, histograms, run lengths, candidates assemblage, contour tracking, and graph path search. [@OMR] -->
 
-The next step is music symbol extraction and classification. These methods include template matching, where the object in question is compared to existing known musical symbols, simple operators, such as analysis of bounding boxes and projections, joining graphical primitives, such as combining extracted objects such as notes, note heads, and note beams to connect them in a musically correct way to form chords etc. Other methods use statistical models for analyzing musical primitives (the objects the OMR is trying to classify) such as Neural Networks, Support Vector Machines, k-Nearest Neighbor, and Hidden Markov Models.
+The next step is music symbol extraction and classification. These methods include template matching, where the object in question is compared to existing known musical symbols, simple operators, such as analysis of bounding boxes and projections, and joining graphical primitives, such as combining extracted objects such as notes, note heads, and note beams to connect them in a musically correct way to form chords. Other methods use statistical models for analyzing musical primitives (the objects the OMR is trying to classify) such as Neural Networks, Support Vector Machines, k-Nearest Neighbor, and Hidden Markov Models.
 
 The next step OMR performs is syntactical analysis and validation. This step essentially uses defined grammars describing the organization of music notation in terms of music symbols. This makes the classification problem simpler, as there are existing rules and relationships between musical symbols. 
 
-The two OMR softwares used in this paper were PhotoScore and Audiveris. Each has its own benefits and issues. Photo Score works by scanning the physical score on a flatbed scanner at a high resolution. It then uses OMR techniques to output a musicXML file that can be read in by most music composing software, such as Sibelius, Finale or Muse Score. 
+The two OMR softwares used in this paper were PhotoScore and Audiveris. Each has its own benefits and issues. PhotoScore works by scanning the physical score on a flatbed scanner at a high resolution. It then uses OMR techniques to output a musicXML file that can be read in by most music composing software, such as Sibelius, Finale or Muse Score. 
 
-Audiveris in contrast works by inputting a high resolution PDF and then uses OMR techniques to output a music XML file. Often, high enough resolution PDFs do not exist, so the physical scores must also be scanned by any garden variety scanner. 
+Audiveris, in contrast, works by inputting a high resolution PDF and then uses OMR techniques to output a music XML file. Often, high enough resolution PDFs do not exist, so the physical scores must also be scanned by any garden variety scanner. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.30]{images/museScore.png}
-\caption{A score in MuseScore format after being read by an OMR like PhotoScore or Audiveris}
+\caption{A score in MuseScore format after being read by an OMR like PhotoScore or Audiveris.}
 \label{subd}
 \end{figure}
 
@@ -59,9 +59,9 @@ MusicXML is commonly used as a format for digital music, as it is conducive to r
 
 After being scanned by PhotoScore and read into Muse Score, each piece was proof-read and corrected. This involves looking through every piece line by line for each bar to "spell check" the digital version. PhotoScore did a good job recognizing notes, but often had issues recognizing rhythms, and had issues keeping the structure of the piece. Often in the scanning process clefs or bar lines were not found, causing PhotoScore to output every staff on one line. In contrast, Audiveris often added extra beats to measures, and assigned notes to the wrong staff. It also always identified a bass clef as a baritone clef. 
 
-Unfortunately, the scanning process is very lengthy and time consuming, as the scanning often gives a large number of mistakes. Often the score must be then scanned again. In addition the proof-reading process is lengthy. One must check each note and rhythm for errors against the original score, and change the incorrect notes using MuseScore. The corrected score must then be re-outputed as a musicXML file. In addition, there were some pieces that PhotoScore or Audiveris had a hard time reading. These pieces were then entered into MuseScore by hand and then proofread. 
+Unfortunately, the scanning process is very lengthy and time consuming, as the scanning often gives a large number of mistakes. Often the score must be then scanned again. In addition, the proof-reading process is lengthy. One must check each note and rhythm for errors against the original score, and change the incorrect notes using MuseScore. The corrected score must then be re-outputted as a musicXML file. In addition, there were some pieces that PhotoScore or Audiveris had a hard time reading. These pieces were then entered into MuseScore by hand and then proofread. 
 
-MusicXML on its own is not conducive to converting into a data frame as representing the single half note middle C looks like this: 
+MusicXML on its own is not conducive to converting into a data frame as representing the single half note middle C is represented in Figure 2.4.  
 
 \begin{figure}[h]
 \centering
@@ -71,24 +71,24 @@ MusicXML on its own is not conducive to converting into a data frame as represen
 \end{figure} 
 
 We then need to convert into a format more easily readable into R. The Kern Score music format is much more easily readable. It has clearly expressed time signature, bar, beat and musical voicing information [@mearns2010]. Because of this, it is also more conducive to being read into an R data frame. 
- The below picture shows how a basic piece of music corresponds to a Kern file. 
+ Figure 2.5 [@huron1994humdrum] shows how a basic piece of music corresponds to a Kern file. 
 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.50]{images/krnmusic.png}
-\caption{How sheet music corresponds to kern files [\cite{huron1994humdrum}]}
+\caption{How sheet music corresponds to kern files.}
 \label{subd}
 \end{figure} 
 
-Kern files are organized with columns each representing one staff of music. Each line of a Kern file represents one note of one value of a time base. The time base for a Kern file is based on the smallest (shortest) rhythm value of a note found in a piece. For example, if a piece was in 4/4 and there were sixteenth notes present there would be 16*4 rows for each measure. The "attack" of each note is the only note printed, the following time while the note is held is represented with dots in the remaining rows until a new note is sounded for that staff. The pitch of each note is represented by the letters a through g. The case (lower or upper) as well as the repetition (c or ccc) represents which octave the pitch occurs. Any accidental is represented with a #, -, or n symbol. Each instrument/staff in a piece is represented using one (or more) columns called splines. For example, most lieder consist of voice and piano. There are thus three splines, one for voice, one for the treble clef staff of the piano, and one for the bass clef of the piano. In addition, there are splines that contain the text for the voice for the corresponding notes. This was not of interest to the musical classification problem, so these splines were removed. Chords are represented by multiple notes on the same line. For example, if there was a half note C major triad followed by a quarter note D flat, it would be represented as 
+Kern files are organized with columns each representing one staff of music. Each line of a Kern file represents one note of one value of a time base. The time base for a Kern file is based on the smallest (shortest) rhythm value of a note found in a piece. For example, if a piece was in 4/4 and there were sixteenth notes present there would be 16*4 rows for each measure. The "attack" of each note is the only note printed, the following time while the note is held is represented with dots in the remaining rows until a new note is sounded for that staff. The pitch of each note is represented by the letters a through g. The case (lower or upper) as well as the repetition (c or ccc) represents which octave the pitch occurs. Any accidental is represented with a $\sharp$, -, or n symbol. Each instrument/staff in a piece is represented using one (or more) columns called splines. For example, most lieder consist of voice and piano. There are thus three splines, one for voice, one for the treble clef staff of the piano, and one for the bass clef of the piano. In addition, there are splines that contain the text for the voice for the corresponding notes. This was not of interest to the musical classification problem, so these splines were removed. Chords are represented by multiple notes on the same line. For example, if there was a half note C major triad followed by a quarter note D flat, it would be represented as 
 
 ```{}
 2c 2e 2g
 4d- . . 
 ```
 
-In addition, there is a lot of information about the appearance of the piece, stem direction etc for notes, but this was decided as not important for determining style, so it was removed.
+In addition, there is a lot of information about the appearance of the piece, stem direction etc. for notes, but these factors were decided as not important for determining style, so it was removed.
 
 We convert to kern format by using Humdrum's function `xml2hum` that converts a musicXML file into a kern file. Humdrum is a computational music software used to analyze music. It is a command line tool that has many functions for music analysis. The Kern file type can be read much more easily into R. Compared to above, the code for a single middle c whole note would be :
 
@@ -105,15 +105,15 @@ The import_xml_files.sh file goes through the process of converting scores from 
 
 The CCARH has a large data base containing work mostly Baroque and Renaissance composers already in the Kern format, which is where the Bach data came from.  
 
-The files that were scanned (ie all pieces by Felix and Fanny) need to be separated into separate file for each staff, ie a seperate file for each instrument. In addition, since we are focused on musical style, the text of the pieces is removed in this stage. In the case of analyzing lieder, each piece always has two or three files. These files consist of voice, piano right hand, and piano left hand. This is necessary to avoid the bugs in `xml2hum` that have issues when staffs don't necessarily match up as a result of the conversion process. This is often caused by an inconsistency in time base.
+The files that were scanned (i.e. all pieces by Felix and Fanny) need to be separated into separate files for each staff, ie a separate file for each instrument. In addition, since we are focused on musical style, the text of the pieces is removed in this stage. In the case of analyzing lieder, each piece always has two or three files. These files consist of voice, piano right hand, and piano left hand. This is necessary to avoid the bugs in `xml2hum` that have issues when staffs don't necessarily match up as a result of the conversion process. This is often caused by an inconsistency in time base.
 
-## .krn to R
+## Kern to R
 
-Once we have .krn files to represent each piece we use regular expressions to extract key information. For scanned music (Felix and Fanny music), there are as many files are there are staffs, usually three. MuseR's `krn2df()` and `piece_df()` functions read in .krn files and output a data frame in R for each piece. First the data in .krn format are read in line by line using R's `readLines()` function. This takes every line of the .krn file and converts it into a vector. Each entry contains the rhythm value and note value for all notes in that line. If there are multiple notes played at the same time, they are all in one line. The notes are separated by splitting up the string by spaces. This converts a single string representing one Kern line to multiple strings each representing one note (or dot placeholder) for one Kern line. Then each entry is separated out into the theme and note value for each note. Each line contains the following columns: the measure the note occurs in, the rhythm value for the note (for example 4), note name, octave inclusive (for example cc), note name (octave exclusive)[ C sharp]. In addition, for the whole piece the key signature and meter are recorded as columns. If there are 3 splines and each spline has at most one note at a time, there would thus be $3 + 3*3=12$. If there are 3 splines and one of the splines has at most 3 values, that is equivalent to having 5 total splines there are then $ 3 + 3*5 = 18$ columns. 
+Once we have Kern files to represent each piece we use regular expressions to extract key information. For scanned music (Felix and Fanny music), there are as many files are there are staffs, usually three. MuseR's `krn2df()` and `piece_df()` functions read in Kern files and output a data frame in R for each piece. First the data in Kern format are read in line by line using R's `readLines()` function. This takes every line of the Kern file and converts it into a vector. Each entry contains the rhythm value and note value for all notes in that line. If there are multiple notes played at the same time, they are all in one line. The notes are separated by splitting up the string by spaces. This converts a single string representing one Kern line to multiple strings each representing one note (or dot placeholder) for one Kern line. Then each entry is separated out into the theme and note value for each note. Each line contains the following columns: the measure the note occurs in, the rhythm value for the note (for example 4), note name, octave inclusive (for example cc), note name (octave exclusive)[ C sharp]. In addition, for the whole piece the key signature and meter are recorded as columns. If there are 3 splines and each spline has at most one note at a time, there would thus be $3 + 3\times3=12$. If there are 3 splines and one of the splines has at most 3 values, that is equivalent to having 5 total splines there are then $3+3\times5 = 18$ columns. 
 
-A lot of data included in the .krn files are not necessary. For example, we assume that whether or not a note has a stem up or stem down offers no help in classifying composer style, so this information is removed when converting to an R data frame. 
+A lot of data included in the Kern files are not necessary. For example, we assume that whether or not a note has a stem up or stem down offers no help in classifying composer style, so this information is removed when converting to an R data frame. 
 
-Inspired by the .krn file type, each row of the R data frame contains one time base value. For a given piece, the time base represents the shortest note duration value. For example, if the shortest note a piece contained was a sixteenth note, the time base would be 16. Each measure then would contain 16 rows. This results in many rows of NA for certain instruments, when a note is still being voiced, but it is not the instance of the note being attacked. 
+Inspired by the Kern file type, each row of the R data frame contains one time base value. For a given piece, the time base represents the shortest note duration value. For example, if the shortest note a piece contained was a sixteenth note, the time base would be 16. Each measure then would contain 16 rows. This results in many rows of NA for certain instruments, when a note is still being voiced, but it is not the instance of the note being attacked. 
 
 
 

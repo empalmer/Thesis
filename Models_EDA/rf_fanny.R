@@ -26,15 +26,15 @@ imps <- data.frame(feature = names(scaled_coeffs),
                    rf = abs(rf_imp))
 
 imps$feature <- factor(names(scaled_coeffs),
-                       levels = c("fsf_1","flen","fsf_2","rf8","fcons_dis",
-                                  "fsf_5","fcons_perf","fsf_4","fcons_imp",
-                                  "rf4d","rf2","fdens_sd","rf8d","fdens_mean",
-                                  "fsf_7","fsf_6","rf4","rf2d","rf16","fsf_3","rf32"))
+                       levels = rev(c("fsf_1","flen","fsf_2","rf8","fcons_dis",
+                                  "fsf_5","fdens_sd","rf2","fsf_6","fcons_perf","fcons_imp",
+                                  "fsf_4","fdens_mean","fsf_7","rf4d","rf2d","fsf_3",
+                                  "rf4","rf16","rf8d","rf32")))
 
 pdf("var_imp_rflog_f.pdf")
 ggplot(melt(imps), aes(x = feature, y = value, fill = variable )) +
   geom_bar(stat = "identity", position = "dodge") +
-  theme(axis.text.x = element_text(angle = 90)) + ylim(0,4)
+  theme(axis.text.x = element_text(angle = 90)) + ylim(0,4) + coord_flip()
 dev.off()
 
 

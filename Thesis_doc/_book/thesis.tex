@@ -681,24 +681,24 @@ separation between Bach and Josquin when visualized on their first two
 principal components. Between Josquin and each of his contemporaries,
 the principal components did not have as much of an obvious separation.
 The transformed features from principal components analysis were used to
-train a classifier. First a \(k-\)nearest neighbor classifier was used
+train a classifier. First, a \(k-\)nearest neighbor classifier was used
 with \(k = 6\). The training set consisted of 80\% of the data, with
-20\% withed as a testing set. The model correctly predicted pieces de
-Orto 38.9\% of the time, Josquin 60.6\%, La Rue, 80.6\% Next they
-trained a support vector machine classifier, which preformed similarly
-to the \(k-\)nearest neighbor classifier.
+20\% withheld as a testing set. The model correctly predicted pieces by
+de Orto 38.9\% of the time, Josquin 60.6\%, and La Rue, 80.6\% Next,
+they trained a support vector machine classifier, which preformed
+similarly to the \(k-\)nearest neighbor classifier.
 
 Mearns fit a classifier using a WEKA algorithm, as well as Naive Bayes
-and a Decision Tree was created that correctly predicted composer 2/3 of
-the time. (Mearns et al., 2010)
+and a Decision Tree was created that correctly predicted the composer
+2/3 of the time (Mearns et al., 2010).
 
-Crerar (Crerar, 1985) took a different approach, and instead of trying
-to fit a model that would classify composers, preformed a chi-squared
-test to see if the groups were in fact different. This would imply that
-the composers had different styles that could be distinguished using the
-features in the paper. The probability of the chi-squared values
-occurring were all less that 0.05, and thus the composers do indeed have
-different styles.
+Crerar took a different approach, and instead of trying to fit a model
+that would classify composers, performed a chi-squared test to see if
+the features of the composers were in fact different. This would imply
+that the composers had different styles that could be distinguished
+using the features in the paper. The probability of the chi-squared
+values occurring were all less than 0.05, and thus the composers do
+indeed have different styles (Crerar, 1985).
 
 \section{Fanny and Felix Mendelssohn}\label{fanny-and-felix-mendelssohn}
 
@@ -714,30 +714,31 @@ written over 100 compositions. His lesser known sister Fanny Hensel née
 Mendelssohn was also a composer of incredible skill. The two were very
 close, for many years training and studying together. In their early
 education living in Berlin, Felix and Fanny received the same musical
-education, first piano lessons by Madam Bigot, a famous pianist esteemed
-by Haydn and Beethoven. Beginning in 1818, Carl Friedrich Zelter, a
-somewhat removed student of Bach and the most influential Berlin
-musician of the time, began to teach them both composition. In addition
-to music, the children were tutored by some of the finest scholars in
-Berlin in subjects such as languages, history, and drawing. Goethe
-himself claimed that Fanny was ``as gifted as Felix'' (Tillard, 1996).
+education. In their younger years, they were both instructed in piano by
+Madam Bigot, a famous pianist esteemed by Haydn and Beethoven. Beginning
+in 1818, Carl Friedrich Zelter, a somewhat removed student of Bach and
+the most influential Berlin musician of the time, began to teach them
+both composition. In addition to music, the children were tutored by
+some of the finest scholars in Berlin in subjects such as languages,
+history, and drawing. Goethe himself claimed that Fanny was ``as gifted
+as Felix'' (Tillard, 1996).
 
 As Fanny grew up, her father started implying that she should focus her
 energy on the domestic sphere of her life. While the fact that she never
 became a world famous composer and performer is often attributed to the
-gender politics of her time, it is also likely due to her high class.
-(Reich, 1991) Especially considering the anti-Semitic feelings of the
-time, and since the family had recently converted from Judaism to
-Christianity, the family did not want any other unusual characteristic
-such as a professional female composer to set them further apart from
-``polite'' society.
+gender politics of her time, it is also likely due to her high class
+(Reich, 1991). Since the family had recently converted from Judaism to
+Christianity, and considering the anti-Semitic feelings of the time, the
+family did not want any other unusual characteristic such as a
+professional female composer to set them further apart from ``polite''
+society.
 
-Most of Fanny's available work are lieder, short pieces of voice
+Most of Fanny's available work are \emph{lieder}, short pieces of voice
 accompanied by piano. They were accepted at the time as the more
 feminine, domestic compositions, acceptable for women to compose. Her
 brother moved on to more elaborate compositions such as operas,
 orchestral concertos and symphonies. Her father pressured Fanny to
-remain composing Lieder. (Todd, 2003)
+remain composing lieder (Todd, 2003).
 \begin{quote}
 ``Music will perhaps become his profession, while for you it can and
 must only be an ornament, never the root of your being and doing. We may
@@ -760,7 +761,7 @@ intimate parties. Similarly, although she was quite a prolific composer,
 under recommendation of her father Abraham Mendelssohn, and to a lesser
 extent Felix, Fanny did not publish her work until later in her life. In
 1846 after her father's death and though her brother initially
-disapproved, she published her first collection of Lieder. Many of
+disapproved, she published her first collection of lieder. Many of
 Fanny's unpublished notebooks are in private collections and are
 inaccessible for study.
 
@@ -781,7 +782,7 @@ other pieces of hers that have been published under her brothers name
 and reputation. It is suspected that most of Fanny's friends and family
 would have known at the time that she had composed the pieces published
 by Felix, as they would have heard her play those pieces at home and for
-private audiences. An article written in the Harmonicon in 1830, an
+private audiences. An article written in 1830 in the Harmonicon, an
 influential music journal in London, mentioned that not all the lieder
 in Felix's collection were written by him. The article also praises the
 work of Fanny, albeit in an odd way likely due to the time of
@@ -799,17 +800,17 @@ their musical crudities, and, because these are printed, holding up
 their heads as if they were finished musicians. Miss Mendelssohn is a
 first-rate piano-forte player, of which you may form some idea when I
 mention that she can express the varied beauties of Beethoven's
-extraordinary trio in Bb, beginning She has not the wild energy of her
-brother; but possesses sufficient power and nerve for the accurate
-performance of Beethoven's music. She is no superficial musician; she
-has studied the science deeply, and writes with the freedom of a master.
-Her songs are distinguished by tenderness, warmth, and originality: some
-which I heard were exquisite.''(Ayrton, 1830)
+extraordinary trio in Bb. She has not the wild energy of her brother;
+but possesses sufficient power and nerve for the accurate performance of
+Beethoven's music. She is no superficial musician; she has studied the
+science deeply, and writes with the freedom of a master. Her songs are
+distinguished by tenderness, warmth, and originality: some which I heard
+were exquisite.''(Ayrton, 1830)
 \end{quote}
 This project will use lieder of Fanny and Felix Mendelssohn in attempts
 to train a classifier to analyze the six disputed pieces. Most of the
-available work by Fanny are lieder, of which Felix also composed a great
-deal. We will see if there is a determinable difference in style of
+available work by Fanny are lieder. Felix also composed a good number of
+lieder. We will see if there is a determinable difference in style of
 these siblings who grew up very close and received mostly the same
 musical education. All other previous composership studies cannot be
 adjusted for training and upbringing, so it might be challenging to
@@ -829,41 +830,43 @@ total of 31 pieces: lieder of Op 8 (9 pieces), op 9 (9 pieces), Op 19.a
 (3 pieces), op 34 (1 piece), and 9 pieces published posthumously.
 
 Of Fanny's music, a total of 35 pieces were used: 15 lieder were used
-from her lieder without name collection, 10 from her Wo kommst du Her
-collection, and 10 from an unnamed collection.
+from her lieder without name collection, 10 from her \emph{Wo kommst du
+Her} collection, and 10 from an unnamed collection.
 
 The six pieces published by Felix that are thought to be written by
 Fanny are Op8 no 2, 3 and 12, and Op 9, no 7, 10 and 12.
 
-Data from JS Bach were also used. These data were available in Kern
-Score format from the Center for Computer Assisted Research in the
-Humanities. (CCARH). The pieces used were from the Well Tempered Clavier
-(WTC). These were written as training pieces and each collection
-contains 24 pieces with one in every possible key. Pieces from the Well
-Tempered Clavier were chosen as the data were more easily accessible (no
-scanning was required) and they were a similar format as the Mendelssohn
-songs, written as for solo piano (or harpsichord).
+Data from JS Bach were also used to provide a comparison corpus that is
+expected to be very distinct from the work of the Mendelssohns. These
+data were available in Kern Score format from the Center for Computer
+Assisted Research in the Humanities. (CCARH). The pieces used were from
+the Well Tempered Clavier (WTC). These were written as training pieces
+and each collection contains 24 pieces with one in every possible key.
+Pieces from the Well Tempered Clavier were chosen as the data were more
+easily accessible (no scanning was required) and they were a similar
+format as the Mendelssohn songs, written as for solo piano (or
+harpsichord).
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/test.png}
-\caption{Flowchart of the conversion process from physical score copy to dataframe in R}
+\caption{Flowchart of the conversion process from physical score copy to dataframe in R.}
 \label{subd}
 \end{figure}
 \section{Optical music recognition}\label{optical-music-recognition}
 
-The vast majority of classical music is found solely in PDF or physical
-copies. Sheet music as a form of data requires a lengthy process of
-conversion before being able to be used in any analysis. Simply scanning
-the scores into, say, a PDF, gives no musical semantics and can only be
-viewed on screen or printed on paper. Thus, the two main steps in
-reading in data from sheet music are, first, using optical music
-recognition software to transform physical scores into digital formats,
-and second, to read the digital format in to R where subsequent analysis
-can be done.
+The vast majority of classical music scores are found solely in PDF or
+physical copies. Sheet music as a form of data requires a lengthy
+process of conversion before being able to be used in any analysis.
+Simply scanning the scores into, say, a PDF, gives no musical semantics
+and can only be viewed on screen or printed on paper. Thus, the two main
+steps in reading in data from sheet music are, first, using optical
+music recognition software to transform physical scores into digital
+formats, and second, to read the digital format in to R where subsequent
+analysis can be done.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.50]{images/scorephoto.JPG}
-\caption{Score in physical form before conversion process has started}
+\caption{Score in physical form before conversion process has started.}
 \label{subd}
 \end{figure}
 The scores used in this paper were obtained from physical copies
@@ -871,24 +874,24 @@ available in the Reed music library. These scores were then scanned
 using software designed for optical music recognition (OMR).
 
 Optical music recognition requires learning from graphical and textual
-information. The main things the software must pick up are the locations
-of bar lines, notes, rests, slurs, dynamic markings, tempo markings,
-lyrics etc. Basic optical music recognition has been around since 1966.
+information. The software must mainly pick up the locations of bar
+lines, notes, rests, slurs, dynamic markings, tempo markings, lyrics
+etc. Basic optical music recognition has been around since 1966.
 
 Most commonly, the first step in optical music recognition is to remove
 the staff lines. The staff lines are critical, as they define the basis
 for the vertical definition distance of pitch, and the horizontal
 distance definition of rhythm. The staff gives a normalization that is
 helpful, essentially defining the size of what notes and rhythm look
-like. (Doermann, Tombre, \& others, 2014)
+like (Doermann, Tombre, \& others, 2014).
 
 The next step is music symbol extraction and classification. These
 methods include template matching, where the object in question is
 compared to existing known musical symbols, simple operators, such as
-analysis of bounding boxes and projections, joining graphical
+analysis of bounding boxes and projections, and joining graphical
 primitives, such as combining extracted objects such as notes, note
 heads, and note beams to connect them in a musically correct way to form
-chords etc. Other methods use statistical models for analyzing musical
+chords. Other methods use statistical models for analyzing musical
 primitives (the objects the OMR is trying to classify) such as Neural
 Networks, Support Vector Machines, k-Nearest Neighbor, and Hidden Markov
 Models.
@@ -900,19 +903,19 @@ problem simpler, as there are existing rules and relationships between
 musical symbols.
 
 The two OMR softwares used in this paper were PhotoScore and Audiveris.
-Each has its own benefits and issues. Photo Score works by scanning the
+Each has its own benefits and issues. PhotoScore works by scanning the
 physical score on a flatbed scanner at a high resolution. It then uses
 OMR techniques to output a musicXML file that can be read in by most
 music composing software, such as Sibelius, Finale or Muse Score.
 
-Audiveris in contrast works by inputting a high resolution PDF and then
-uses OMR techniques to output a music XML file. Often, high enough
+Audiveris, in contrast, works by inputting a high resolution PDF and
+then uses OMR techniques to output a music XML file. Often, high enough
 resolution PDFs do not exist, so the physical scores must also be
 scanned by any garden variety scanner.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.30]{images/museScore.png}
-\caption{A score in MuseScore format after being read by an OMR like PhotoScore or Audiveris}
+\caption{A score in MuseScore format after being read by an OMR like PhotoScore or Audiveris.}
 \label{subd}
 \end{figure}
 MusicXML is commonly used as a format for digital music, as it is
@@ -933,16 +936,16 @@ staff. It also always identified a bass clef as a baritone clef.
 
 Unfortunately, the scanning process is very lengthy and time consuming,
 as the scanning often gives a large number of mistakes. Often the score
-must be then scanned again. In addition the proof-reading process is
+must be then scanned again. In addition, the proof-reading process is
 lengthy. One must check each note and rhythm for errors against the
 original score, and change the incorrect notes using MuseScore. The
-corrected score must then be re-outputed as a musicXML file. In
+corrected score must then be re-outputted as a musicXML file. In
 addition, there were some pieces that PhotoScore or Audiveris had a hard
 time reading. These pieces were then entered into MuseScore by hand and
 then proofread.
 
 MusicXML on its own is not conducive to converting into a data frame as
-representing the single half note middle C looks like this:
+representing the single half note middle C is represented in Figure 2.4.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.4]{images/mxlc.png}
@@ -953,12 +956,12 @@ We then need to convert into a format more easily readable into R. The
 Kern Score music format is much more easily readable. It has clearly
 expressed time signature, bar, beat and musical voicing information
 (Mearns et al., 2010). Because of this, it is also more conducive to
-being read into an R data frame. The below picture shows how a basic
-piece of music corresponds to a Kern file.
+being read into an R data frame. Figure 2.5 (Huron, 1994) shows how a
+basic piece of music corresponds to a Kern file.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=.50]{images/krnmusic.png}
-\caption{How sheet music corresponds to kern files [\cite{huron1994humdrum}]}
+\caption{How sheet music corresponds to kern files.}
 \label{subd}
 \end{figure}
 Kern files are organized with columns each representing one staff of
@@ -971,24 +974,24 @@ printed, the following time while the note is held is represented with
 dots in the remaining rows until a new note is sounded for that staff.
 The pitch of each note is represented by the letters a through g. The
 case (lower or upper) as well as the repetition (c or ccc) represents
-which octave the pitch occurs. Any accidental is represented with a \#,
--, or n symbol. Each instrument/staff in a piece is represented using
-one (or more) columns called splines. For example, most lieder consist
-of voice and piano. There are thus three splines, one for voice, one for
-the treble clef staff of the piano, and one for the bass clef of the
-piano. In addition, there are splines that contain the text for the
-voice for the corresponding notes. This was not of interest to the
-musical classification problem, so these splines were removed. Chords
-are represented by multiple notes on the same line. For example, if
-there was a half note C major triad followed by a quarter note D flat,
-it would be represented as
+which octave the pitch occurs. Any accidental is represented with a
+\(\sharp\), -, or n symbol. Each instrument/staff in a piece is
+represented using one (or more) columns called splines. For example,
+most lieder consist of voice and piano. There are thus three splines,
+one for voice, one for the treble clef staff of the piano, and one for
+the bass clef of the piano. In addition, there are splines that contain
+the text for the voice for the corresponding notes. This was not of
+interest to the musical classification problem, so these splines were
+removed. Chords are represented by multiple notes on the same line. For
+example, if there was a half note C major triad followed by a quarter
+note D flat, it would be represented as
 \begin{verbatim}
 2c 2e 2g
 4d- . . 
 \end{verbatim}
 In addition, there is a lot of information about the appearance of the
-piece, stem direction etc for notes, but this was decided as not
-important for determining style, so it was removed.
+piece, stem direction etc. for notes, but these factors were decided as
+not important for determining style, so it was removed.
 
 We convert to kern format by using Humdrum's function \texttt{xml2hum}
 that converts a musicXML file into a kern file. Humdrum is a
@@ -1016,8 +1019,8 @@ The CCARH has a large data base containing work mostly Baroque and
 Renaissance composers already in the Kern format, which is where the
 Bach data came from.
 
-The files that were scanned (ie all pieces by Felix and Fanny) need to
-be separated into separate file for each staff, ie a seperate file for
+The files that were scanned (i.e.~all pieces by Felix and Fanny) need to
+be separated into separate files for each staff, ie a separate file for
 each instrument. In addition, since we are focused on musical style, the
 text of the pieces is removed in this stage. In the case of analyzing
 lieder, each piece always has two or three files. These files consist of
@@ -1026,15 +1029,15 @@ the bugs in \texttt{xml2hum} that have issues when staffs don't
 necessarily match up as a result of the conversion process. This is
 often caused by an inconsistency in time base.
 
-\section{.krn to R}\label{krn-to-r}
+\section{Kern to R}\label{kern-to-r}
 
-Once we have .krn files to represent each piece we use regular
+Once we have Kern files to represent each piece we use regular
 expressions to extract key information. For scanned music (Felix and
 Fanny music), there are as many files are there are staffs, usually
 three. MuseR's \texttt{krn2df()} and \texttt{piece\_df()} functions read
-in .krn files and output a data frame in R for each piece. First the
-data in .krn format are read in line by line using R's
-\texttt{readLines()} function. This takes every line of the .krn file
+in Kern files and output a data frame in R for each piece. First the
+data in Kern format are read in line by line using R's
+\texttt{readLines()} function. This takes every line of the Kern file
 and converts it into a vector. Each entry contains the rhythm value and
 note value for all notes in that line. If there are multiple notes
 played at the same time, they are all in one line. The notes are
@@ -1047,16 +1050,16 @@ rhythm value for the note (for example 4), note name, octave inclusive
 (for example cc), note name (octave exclusive){[} C sharp{]}. In
 addition, for the whole piece the key signature and meter are recorded
 as columns. If there are 3 splines and each spline has at most one note
-at a time, there would thus be \(3 + 3*3=12\). If there are 3 splines
-and one of the splines has at most 3 values, that is equivalent to
-having 5 total splines there are then \$ 3 + 3*5 = 18\$ columns.
+at a time, there would thus be \(3 + 3\times3=12\). If there are 3
+splines and one of the splines has at most 3 values, that is equivalent
+to having 5 total splines there are then \(3+3\times5 = 18\) columns.
 
-A lot of data included in the .krn files are not necessary. For example,
+A lot of data included in the Kern files are not necessary. For example,
 we assume that whether or not a note has a stem up or stem down offers
 no help in classifying composer style, so this information is removed
 when converting to an R data frame.
 
-Inspired by the .krn file type, each row of the R data frame contains
+Inspired by the Kern file type, each row of the R data frame contains
 one time base value. For a given piece, the time base represents the
 shortest note duration value. For example, if the shortest note a piece
 contained was a sixteenth note, the time base would be 16. Each measure
@@ -1066,7 +1069,7 @@ instance of the note being attacked.
 
 \chapter{MuseR and features}\label{muser-and-features}
 
-To the best of my knowledge, there is currently no package of R that has
+To the best of my knowledge, there is currently no package in R that has
 been built to analyze sheet music. There are existing packages (such as
 tuneR) that examine audio formats of music. The intention of this thesis
 was to create a package, museR, that imports sheet music in the proper
@@ -1075,21 +1078,22 @@ form (musicXML or Kern) and does all of the analysis using R.
 \section{Importing data into R}\label{importing-data-into-r}
 
 MuseR is equipped to import data in the Kern format. The functions for
-converting these files are \texttt{kern2df()} and \texttt{piece\_df()}
+converting these files are \texttt{kern2df()} and \texttt{piece\_df()}.
 These are most usefully in the form of individual splines. This allows
-for naming the columns according to instrument. Below we have a short
-piece appearing as it would look from MuseScore.
+for naming the columns according to instrument. Figure 3.1 shows short
+example piece appearing as it would look from MuseScore.
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/ex1m.png}
-\caption{Example musescore format excerpt}
+\caption{Example MuseScore format excerpt}
 \label{subd}
 \end{figure}
-This piece would have the following Kern format representation:
+This piece would have the Kern format representation as shown in Figure
+3.2.
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/ex1k.png}
-\caption{Example kern format excerpt of the above musescore}
+\caption{Example kern format excerpt of the above MuseScore}
 \label{subd}
 \end{figure}
 Using museR's \texttt{piece\_df()} function to create the following data
@@ -1100,11 +1104,11 @@ frame.
 \caption{Example R data frame converted from the above MuseScore}
 \label{subd}
 \end{figure}
-Data in R are commonly expressed as data frames. Expressing music as a
-data frame has challenges, as music cannot be easily expressed in
-rectangular form. Music as a data structure is very rugged. When
-expressing it in rectangular form, there needs to be placeholder or
-padding entries to account for the nonrectangularness. MuseR's
+Data in R are commonly expressed as data frames. Music as a data
+structure is very rugged. Expressing music as a data frame has
+challenges, as music cannot be easily expressed in rectangular form.
+When expressing it in rectangular form, placeholder or padding entries
+must be added to account for the nonrectangularness. MuseR's
 \texttt{piece\_df()} works by using regular expressions to extract note
 and rhythm information. It uses NA and . values to indicate empty spaces
 and duration respectively.
@@ -1121,9 +1125,9 @@ this context, it is most commonly used for analyzing melodic intervals
 of the voice. The function first extracts the top line of any
 instrument, and then outputs the proportion of each melodic interval
 happening over the whole piece. There are 12 possible intervals that are
-counted (ignoring augmented and diminished):
-unison,m2,M2,m3,M3,p4,tt,p5,m6,M6,m7,M7. \texttt{mel\_ints()} outputs a
-vector of the proportion of each of the intervals.
+counted (ignoring augmented and diminished): unison, m2, M2, m3, M3, p4,
+tt, p5, m6, M6, m7, M7. \texttt{mel\_ints()} outputs a vector of the
+proportion of each of the intervals.
 \begin{figure}[h]
 \centering
 \includegraphics[scale = .5]{images/ex2.png}
@@ -1134,19 +1138,19 @@ For example if this function was run on the above piece, the melodic top
 line intervals would be: \(\{(f,c),(c,d),(d,f)\} = \{p4,M2,m3\}\), which
 would output the proportion vector \((0,1/3,1/3,0,0,1/3,0,0,0,0,0,0)\).
 
-If we are interested in the types of melodic intervals, we can use the
-\texttt{connsonance()} to examine the proportion of consonant (perfect,
+If we are interested in the types of melodic intervals, we can use
+\texttt{consonance()} to examine the proportion of consonant (perfect,
 imperfect, dissonant) intervals over the piece. This function works by
 calling \texttt{mel\_ints()} and then adding up the perfect, imperfect,
 and dissonant intervals proportions.
 
 \subsubsection{Density}\label{density}
 
-The \texttt{beat\_density()} function analysis the average and standard
-deviation of density of each measure in the piece. It is called ``beat''
-density as it only accounts for the instance a note starts. For example
-if a measure consisted of a single whole note it would be only counted
-once even though it is voiced the entire measure.
+The \texttt{beat\_density()} function analyzes the average and standard
+deviation of density of each measure in the piece. The function is named
+``beat'' density as it only accounts for the instance a note starts. For
+example if a measure consisted of a single whole note it would be only
+counted once even though it is voiced the entire measure.
 
 In the above example, the first measure would have a beat density of 4,
 and the second measure would have a beat density of 2.
@@ -1165,10 +1169,10 @@ each option is identified, and then the count of instances of both
 choices for tonic is made. The key is determined by which of the options
 for tonic has the higher count.
 
-\subsubsection{Prop scale degree}\label{prop-scale-degree}
+\subsubsection{Scale degree frequencies}\label{scale-degree-frequencies}
 
 Once the key of a piece is determined, the proportion of each scale
-degree is calculated. The scale degrees consist of : Tonic, Supertonic,
+degree is calculated. The scale degrees consist of: Tonic, Supertonic,
 Mediant, Submediant, Dominant, Submediant, and Leading tone. In the
 example above, if we assume the key is F major, the tonic has a tonic
 scale degree proportion of 2/6, the mediant 1/6, dominant, 1/6,
@@ -1176,15 +1180,15 @@ submediant, 2/6.
 
 \subsubsection{Frequency of rhythm use}\label{frequency-of-rhythm-use}
 
-We determine the frequency of use of the most common types of rhythm:
-half notes, dotted half notes, quarter notes, dotted quarter notes,
-eighth notes, dotted eight notes, sixteenth notes, and thirtysecond
-notes.
+We determine the frequency using \texttt{rhythm\_freq()} to find the
+most common types of rhythm: half notes, dotted half notes, quarter
+notes, dotted quarter notes, eighth notes, dotted eight notes, sixteenth
+notes, and thirty second notes.
 
 \subsubsection{Length}\label{length}
 
-We define a measure for the length of a piece by how many measures the
-piece has.
+We use \texttt{length\_measures()} as a feature for the length of a
+piece. It is calculated by finding how many measures the piece has.
 
 \chapter{About Classification Models}\label{about-classification-models}
 
@@ -1195,20 +1199,20 @@ classifier is some function \(f\) that maps a vector of input features
 composer \(P(Y = y) \in [0,1]\). The notation used in this chapter is
 inspired by \emph{The Elements of Statistical Learning} (Friedman,
 Hastie, \& Tibshirani, 2001) and \emph{An Introduction to Statistical
-Learning} (James, Witten, Hastie, \& Tibshirani, 2013). Our features
-space \(X\) is an \(n \times p\) matrix, where \(n\) is the size of our
-data, and \(p\) is the number of predictors. Each \(X_i\) is vector of
-values for a certain feature. \(x_{ij}\) denotes the \(i^{th}\) values
-of the \(j^{th}\) feature. This \(X\) contains the information of the
-extracted features that hopefully will be useful in determining the
-composer of the piece. If the features are different enough between the
-composer, ie, that the features encode some sense of unconscious (or
-conscious) use that differs between composer, we can then build and fit
-models that can use how the features differ between composers. These
-models can both explain the relationship and difference of the features
-between composers, and use the way the fitted model explains the
-differences to predict the composer of a piece if we know the same
-features for that piece.
+Learning} (James, Witten, Hastie, \& Tibshirani, 2013).
+
+Our features space \(X\) is an \(n \times p\) matrix, where \(n\) is the
+size of our data, and \(p\) is the number of predictors. Each \(X_i\) is
+vector of values for a certain feature. \(x_{ij}\) denotes the
+\(i^{th}\) values of the \(j^{th}\) feature. This \(X\) contains the
+information of the extracted features that hopefully will be useful in
+determining the composer of the piece. If the features are different
+enough between the composers, i.e., that the features encode some
+difference of unconscious (or conscious) style, we can then build and
+fit models that leverage this difference. These models can both explain
+the relationship and difference of the features between composers, and
+use the way the fitted model explains the differences to predict the
+composer of a piece if we know the same features for that piece.
 
 In addition to the features for each piece, each piece has a composer
 (response), known or unknown, that we denote by \(Y\). The \(i^{th}\)
@@ -1219,17 +1223,24 @@ composer are in a discrete set, we can divide the input features space
 into different groups, or regions, that are labeled according to the
 classification of composer a model assigns or predicts.
 
-\section{Logistic Regression}\label{logistic-regression}
+\section{Supervised Methods}\label{supervised-methods}
 
-Knowing the class posteriors \(P(Y = k|X)\), or the probability that a
-piece has a certain composer, given the features of that piece, gives us
-an optimal classification. Logistic regression directly models
-\(P(Y = k|X)\) by using the logistic function. The idea is to model the
-posterior probabilities of each of the \(K\) classes as linear functions
-in \(x\) and requiring that the probabilities sum to 1. As is often the
-case, we use logistic regression to model a binary response: where there
-are two options for composer. Thus in the case of a binary response we
-can use an indicator function with coding 0/1. We then name
+Supervised methods involve learning about data with knowledge of the
+response or composer. Classification models rely on supervised
+techniques to predict composers. These models are built using the
+observations with their associated response.
+
+\subsection{Logistic Regression}\label{logistic-regression}
+
+Knowing the conditional probability \(P(Y = k|X)\), or the probability
+that a piece has a certain composer, given the features of that piece,
+results in an optimal classification. Logistic regression directly
+models \(P(Y = k|X)\) by using the logistic function. The idea is to
+model the posterior probabilities of each of the \(K\) classes as linear
+functions in \(x\) and requiring that the probabilities sum to 1. As is
+often the case, we use logistic regression to model a binary response:
+where there are two options for composer. Thus in the case of a binary
+response we can use an indicator function with coding 0/1. We then name
 \(p(X) = P(Y=1|X)\) The model has the form:
 \[ \log \bigg( \frac{p(X)}{1-p(X)} \bigg) = \beta_0 + \beta_1 X_1 + \cdots + \beta_pX_p\]
 
@@ -1237,33 +1248,34 @@ where which can be written as:
 
 \[ p(X) = \frac{e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p}}{1 +e^{\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p} }\]
 
-We estimate the regression coefficients by using maximum likelihood.
-This results in coefficient estimates such that for the predicted
-probability \(\hat{p}(x_i)\) for the composer of each piece corresponds
-as closely as possible to the observed composer. The log-likelihood for
-\(N\) observations is:
+We estimate the regression coefficients, \(\beta_i\), by using maximum
+likelihood. This results in coefficient estimates such that for the
+predicted probability \(\hat{p}(x_i)\) for the composer of each piece
+corresponds as closely as possible to the observed composer. The
+log-likelihood for \(N\) observations is:
 
 \[ \ell(\beta) = \sum_{i = 1}^N \big\{y_i\log p(x_i;\beta) + (1-y_i)\log(1-p(x_i;\beta))\big\} = \sum_{i = 1}^N \big\{y_i\beta^Tx_i - \log(1 + e^{\beta^Tx_i})\big\}\]
-We then choose \(\beta\) to maximize \(\ell(\beta)\)
+We then choose \(\beta\) to maximize \(\ell(\beta)\).
 
-\subsection{Lasso model selection}\label{lasso-model-selection}
+\subsubsection{Lasso model selection}\label{lasso-model-selection}
 
 The Lasso penalty is a shrinkage method proposed by Robert Tibshirani in
-1996. Lasso regression works by giving a penalty to regression
-coefficients. It can be somewhat equivalent to performing variable
-selection, as for high enough penalties (or \(\lambda\)), coefficients
-shrink to zero. It is often used in linear regression, but can be
-expended to logistic regression and other generalized linear models. For
-logistic regression, the lasso works by choosing coefficients
-\(\beta_\lambda^L\) that minimize
+1996. Lasso regression works by giving a penalty to the magnitude of
+regression coefficients. The intercept is not included in the penalty.
+It can be somewhat equivalent to performing variable selection, as for
+high enough penalties (or \(\lambda\)), coefficients shrink to zero. It
+is often used in linear regression, but can be expended to logistic
+regression and other generalized linear models. For logistic regression,
+the lasso works by choosing coefficients \(\beta_\lambda^L\) that
+minimize
 
-\[ \ell(\beta) + \lambda \sum_{j = 1}^p \beta_j \]
+\[ \ell(\beta) + \lambda \sum_{j = 1}^p |\beta_j| \]
 
 where \(\ell(\beta)\) is the log-likelihood function for logistic
 regression. This is equivalent to maximizing \(\ell(\beta)\) subject to
-\(\sum_{j=1}^p|\beta_j| < s\) (Tibshirani, 1996)
+\(\sum_{j=1}^p|\beta_j| < s\) (Tibshirani, 1996).
 
-\section{Linear Discriminant
+\subsection{Linear Discriminant
 Analysis}\label{linear-discriminant-analysis}
 
 Whereas logistic regression involves directly modeling
@@ -1274,26 +1286,26 @@ approximately normal, logistic regression estimates can be unstable,
 which is not the case for LDA. LDA is also popular when there are more
 than two response cases.
 
-To preform LDA we must first model the distribution of each of the
-features that make up \(X\) in each of the response classes
-(\(P(X = x|Y)\)) We notate \(f_k(X) = P(X = x| Y = k)\) as the
+To perform LDA we must first model the distribution of each of the
+features that make up \(X\) in each of the response classes,
+\(P(X = x|Y)\). We denote \(f_k(X) = P(X = x| Y = k)\) as the
 class-conditional density of \(X\) in class \(Y = k\). We denote the
 prior for class \(k\), \(\pi_k\), or the probability that a chosen
 observation is from the \(k^{th}\) class. We have that
 \(\sum_{k=1}^K \pi_k = 1\). Using Bayes' theorem to calculate
-\(P(Y = k |X)\)gives us the following:
+\(P(Y = k |X)\) gives us the following:
 
 \[ P(Y = k | X = x) = \frac{f_k(x)\pi_k}{\sum_{l = 1}^Kf_l(x)\pi_l}\]
 
 We thus must have a model to find \(f_k(x)\). Different discriminant
 analysis techniques do this different ways. LDA assumes a multivariate
 Gaussian density, given by:
-\[f_k(x) = \frac{1}{(2\pi)^{p/2}|\mathbf{\Sigma}_k^{1/2}}e^{-\frac{1}{2}(x-\mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k)}\]
-, where \(\mu_k\) is the mean parameter for the \(k\)th class and
-\(\Sigma_k\) is the covariance matrix for the k\$th class.
+\[f_k(x) = \frac{1}{(2\pi)^{p/2}|\mathbf{\Sigma}_k|^{1/2}}e^{-\frac{1}{2}(x-\mu_k)^T\mathbf{\Sigma}_k^{-1}(x - \mu_k)},\]
+where \(\mu_k\) is the mean parameter for the \(k\)th class and
+\(\Sigma_k\) is the covariance matrix for the \(k\)th class.
 
 In addition, LDA assumes that the covariance matrix is equal for every
-\(k\): \(\mathbf{\Sigma}_k = \mathbf{\Sigma} \forall k\). Other
+\(k\): \(\mathbf{\Sigma}_k = \mathbf{\Sigma}\) \(\forall\) \(k\). Other
 discriminant models do not make this assumption. We also assume
 \(\hat{\pi}_k = N_k/N\) where \(N_k\) is the number of class - \(k\)
 observations,
@@ -1303,46 +1315,49 @@ assumption of \(f_k(X = x)\) which results in the discriminant function:
 
 \[ \delta_k(x) = x^T\mathbf{\Sigma}^{-1}\mu_k - \frac{1}{2}\mu_k^T\mathbf{\Sigma}^{-1}\mu_k + \log \pi_k \]
 
-These functions are known as \(\textit{linear discriminant functions}\)
+These functions are known as \(\textit{linear discriminant functions}\).
 We predict the class by finding the maximum value of the discriminant
 functions of all \(k\).
 
-\section{Naive Bayes}\label{naive-bayes}
+\subsection{Naive Bayes}\label{naive-bayes}
 
 The Naive Bayes classifier is often used for musical classification as
 it is good when the dimension \(p\) of the features space is large. Like
 LDA, it also involves modeling \(P(Y = y | X =x)\) by using assumptions
 of the form of \(f_i(X)\) and using Bayes Theorem. Naive Bayes makes the
 (naive) assumption that all the features are independent for a given
-class \(i\), ie that \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k)\]. These
-marginals are often estimated by using a Gaussian distribution, ie that
-\(f_{ik}(X_k) = \frac{1}{\sqrt{2\pi\sigma_k^2}}e^{\frac{(x - \mu_k)^2}{2\sigma_k^2}}\)
-In practice the independence assumption is not the case, but the model
-still preforms surprisingly well in practice when this assumption does
-not hold.
+class \(i\), \[f_i(X) = \prod_{k = 1}^p f_{ik}(X_k).\] These marginals
+are often estimated by using a Gaussian distribution, ie that
+\(f_{ik}(X_k) = \frac{1}{\sqrt{2\pi\sigma_k^2}}e^{\frac{(x - \mu_k)^2}{2\sigma_k^2}}\).
+In practice, the independence assumption is not the case, but the model
+still performs surprisingly well.
 
-\section{K- nearest - neighbor}\label{k--nearest---neighbor}
+\subsection{\texorpdfstring{\(k\)-nearest
+neighbor}{k-nearest neighbor}}\label{k-nearest-neighbor}
 
-Another method for classification is \(k-\)nearest neighbor methods. It
-uses observations from a training set of the data. Then for an new
+Another method for classification is \(k\)-nearest neighbor methods. It
+uses observations from a training set of the data. Then for a new
 observation in a testing set at point \(x_0 = x_1 \ldots x_p\), it finds
-the \(K\) closest points in the training set, and classifies \(x_0\) as
+the \(k\) closest points in the training set, and classifies \(x_0\) as
 the majority vote of the responses for the \(K\) neighbors. Euclidean
 distance is often used as the metric for closeness, although other
-methods exist. Euclidean distance is defined as \(d = |x_{(i)} - x_0\).
+methods exist. Euclidean distance is defined as \(d = |x_{(i)} - x_0|\).
 After the \(K\) nearest neighbors are found, the predicted class for
 \(x_0\) is assigned to be the mode of the classes of the neighbors.
 
-\section{Random Forests}\label{random-forests}
+\subsection{Random Forests}\label{random-forests}
 
 Tree-based methods are another form of classifier. Tree based methods
-involve segmenting the predictor space into smaller regions. To classify
-a point \(x_0\), we take the mode of the classes of training set
-observations in the smaller region where \(x_0\) lies, and assign the
-class of \(x_0\) as the mode. To create the tree, we recursively split
-the predictor space into two smaller regions at the point where the
-there is high node purity. The Gini index is often used to measure this,
-defined as \(G = \sum_{k = 1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})\). where
+involve segmenting the predictor space into smaller regions that are
+similar in their response. To classify a point \(x_0\), we take the mode
+of the classes of training set observations in the smaller region where
+\(x_0\) lies, and assign the class of \(x_0\) as the mode. To create the
+tree, we recursively split the predictor space into two smaller regions,
+where the split point is known as a node. Nodes with high node purity
+are choices where the two resulting regions have mostly the same class
+in the region. We chose a good split based on the split with highest
+node purity. The Gini index is often used to measure node purity,
+defined as \(G = \sum_{k = 1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})\), where
 \(\hat{p}_{mk}\) is the proportion of observations in the \(m\)th region
 of the \(k\)th class. If the Gini index is small, this indicates that a
 region contains mostly observations from a single class.
@@ -1353,11 +1368,20 @@ of the trees in the forest, a random sample of \(m\) predictors are
 chosen to create the tree. For random forests, \(m = \sqrt{p}\)
 typically. Because strong predictors are often chosen for the first
 split of the tree, choosing only a random sample of the predictors to
-build the tree makes the trees in a Random forest significantly
-different from each other.This choice helps in decorrelating the trees.
+build the tree makes the trees in a random forest significantly
+different from each other. This choice helps in decorrelating the trees.
+To predict the class of a piece, we then take the majority vote of the
+class predicted for each tree in the random forest.
 
-\section{Dimensionality Reduction: Pricipal component analysis
-(PCA)}\label{dimensionality-reduction-pricipal-component-analysis-pca}
+\section{Unsupervised methods}\label{unsupervised-methods}
+
+Unsupervised methods are methods where the response is not used. The
+methods involve learning structures in the data without any labeled
+response or composer. Some unsupervised methods, such as PCA, can be
+used for later models that rely on supervised methods.
+
+\subsection{Principal component analysis
+(PCA)}\label{principal-component-analysis-pca}
 
 Principal component analysis (PCA) transforms the features space into a
 lower dimensional representation. It chooses the transformed features to
@@ -1367,24 +1391,31 @@ Principal component analysis can be useful when the predictors are
 correlated. We suspect many of our features are correlated, due to
 certain patterns in music, as well as the way we created our features.
 These relationships are caused by similarity in the features, and from
-music theory rules. (For example, if there is a high frequency of first
+music theory rules. For example, if there is a high frequency of first
 scale degrees, we might expect a high frequency of chords that include
 the first scale degree. Another example, if we had a high frequency of
 seventh scale degrees, we would expect them to resolve to the first
-scale degree.)
+scale degree.
 
 Principal component analysis is also helpful when there are many
 predictors, and we want to deal with a smaller dimension of predictor
-space.
+space. To do this, we choose to use fewer principal components than
+features, and as principal components are chosen in a way to maximize
+the variability in the data, so including fewer principal components
+than features still ideally gives a good representation of the initial
+data. Used in supervised methods, the transformed features from PCA can
+be used to fit models instead of the original features.
 
 As an unsupervised method, PCA can inform about latent meta variables.
-
-Used in supervised methods, the transformed features from PCA can be
-used to fit models instead of the original features space.
+Meta variables are features included in the data that aren't
+specifically measured by individual features. PCA explores these by
+giving similar weights to features that are correlated with each other.
+Thus original features that have similar PCA scores have similar
+interpretability.
 
 Principal components transforms the feature space. If our original
 features are \(X_1,X_2,\ldots,X_p\), we transform the features to
-\(Z_1,Z_2,\ldots,Z_M\), where \(M < p\). Each \(Z_i\) is a linear
+\(Z_1,Z_2,\ldots,Z_M\), where \(M \leq p\). Each \(Z_i\) is a linear
 combination of the original predictors, ie,
 \(Z_m = \sum_{j = 1}^p \phi_{jm}X_j\), for constants
 \(\phi_{1m},\phi_{2m},\ldots,\phi_{pm}\) for \(m = 1,\ldots,M\). Given
@@ -1393,10 +1424,10 @@ an \(n\times p\) data set \(\mathbf{X}\) where \(x_{ij}\) is the
 \(m^{th}\) principal component loading vector
 \(\phi_m = \phi_{1m},\phi_{2m},\ldots,\phi_{pm}\) that solves the
 optimization problem:
-\[\max_{\phi_{1m},\ldots,\phi_{pm}} \bigg\{\frac{1}{n}\sum_{i=1}^n\bigg(\sum_{j=1}^p \phi_{jm}x_{ij}\bigg)^2\bigg\}\],
+\[\max_{\phi_{1m},\ldots,\phi_{pm}} \bigg\{\frac{1}{n}\sum_{i=1}^n\bigg(\sum_{j=1}^p \phi_{jm}x_{ij}\bigg)^2\bigg\},\]
 where the \(\phi\)s are subject to \(\sum_{j = 1}^p\phi_{jm}^2 = 1\).
 Our principal components are then calculated as
-\(z_{im} = \sum_{j = 1}^p\phi{jm}x_{ij}\)
+\(z_{im} = \sum_{j = 1}^p\phi_{jm}x_{ij}\).
 
 The loadings of the first principal component, \(\phi_1\) thus determine
 the direction in the feature space with the most variance, \(Z_1\), or
@@ -1405,39 +1436,45 @@ transformed feature space. We continue calculating \(Z_i\), where each
 following \(Z_i\) has the maximal variance in a direction uncorrelated
 to the previous principal components.
 
-Before PCA is performed, we center all features to have mean zero, as
-the scale of some features are not the same, which will lead to issues
-in the loadings, as the features with higher scales would automatically
-have the higher variance.
+Before PCA is performed, we center and scale all features to have mean
+zero and standard deviation one, as initially the scale of some features
+are not the same. This would lead to issues in the loadings, as the
+features with higher scales would automatically have the higher
+variance.
 
 We can observe the proportion of variance explained by each principal
-component. This is usually visualized in a skree plot. We can use this
-information to decide how many principal components to use.
+component. This is usually visualized in a skree plot. The number of the
+principal component is plotted on the x-axis, and the percentage of
+variance which that principal component accounts for is on the y-axis.
+We can use this information to decide how many principal components to
+use. We often choose the cut-off principal component at an ``elbow'', or
+where the decrease in variance explained by an additional principal
+component starts to decrease.
 
-\section{K-means}\label{k-means}
+\subsection{K-means}\label{k-means}
 
 \(K\)-means is a form of unsupervised learning where we only use the
 features without the associated class of composer. When given a \(K\) or
 number of clusters, the algorithm assigns each piece to a cluster. This
 is used to see if there are any latent groupings in the feature space.
-If composers are differentiable with their features, we might expect
-that \(K\) means would differentiate the clusters similar to the
-difference in composer. K-means clustering works by trying to minimize
-the within-cluster variation \(W(C_k)\) for each cluster \(C_k\). Often
-we define the within-cluster variation by squared Euclidean distance, so
+If composers are differentiable by their features, we might expect that
+\(K\) means would differentiate the clusters similar to the difference
+in composer. K-means clustering minimizing the within-cluster variation
+\(W(C_k)\) for each cluster \(C_k\). Often we define the within-cluster
+variation by squared Euclidean distance, so
 \[W(C_k) = \frac{1}{|C_k|} \sum_{i,i' \in C_k}\sum_{j = 1}^p (x_{ij} - x_{i'j})^2 \]
 where \(|C_k|\) is the number of observations in the \(k\)th cluster.
 
 \chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}
 
-Before fitting any classifiers, we first want to perform some
-exploratory data analysis to examine visually any patterns or
-seperations between variables and composer. This is done by looking at
-individual density plots of each variable for each composer, looking at
-correlation structures in the features, and using PCA as an unsupervised
-method to gain insight into the feature space. We examine two cases,
-features for Bach/not Bach, which corresponds to Bach vs Fanny Hensel
-and Felix Mendelssohn. We denote this as Bach/Menelssohn. We also
+Before fitting any classifiers, we first want to perform exploratory
+data analysis to examine visually any patterns or separations between
+variables and composer. This is done by looking at individual density
+plots of each variable for each composer, looking at correlation
+structures in the features, and using PCA as an unsupervised method to
+gain insight into the feature space. We examine two cases, features for
+Bach/not Bach, where not Bach is the pieces of Fanny Hensel and Felix
+Mendelssohn combined. We denote this as Bach/Mendelssohn. We also
 examine the features for Fanny/Felix.
 
 \section{Key for feature
@@ -1505,37 +1542,38 @@ Bach data set would have lower densities then for lieder, as in the
 Mendelssohn data set, which also include voice.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .6]{images/distribution_b.pdf}
-\caption{Density plot for each feature of Bach/Mendelssohn}
+\includegraphics[scale = .7]{images/distribution_b.pdf}
+\caption{Density plot for each feature of Bach/Mendelssohn. Red represents Bach and blue represents the Mendelssohns.}
 \label{subd}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .6]{images/cor_circles_b.pdf}
-\caption{Correlations between features of Bach/Mendelssohn}
+\includegraphics[scale = .7]{images/cor_circles_b.pdf}
+\caption{Correlations between features of Bach/Mendelssohn.}
 \label{subd}
 \end{figure}
-Figures 5.2 is a visualization of the correlation matrix. The larger the
-circle represents a larger absolute value of correlation between the two
+Figures 5.2 is a visualization of the correlation matrix. The size of
+the circle represents the absolute value of correlation between the two
 predictors. We can see higher correlations between perfect consonances
 and dissonant consonances. This is to be expected, as a higher frequency
-of perfect consonances nescesarrily means a lower frequency of dissonant
+of perfect consonances necessarily means a lower frequency of dissonant
 consonances. We also see high negative correlations between frequency of
 sixteenth notes and density, and frequency of eight notes. In addition
 we see high positive correlations between frequency of second, third,
-sixth, and seventh scale degree. There is likely some musical
-explanation to this.
+sixth, and seventh scale degree. It is likely that these negative
+correlations are due to structures in music theory or sensible melodic
+compositional technique.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/skree_b.pdf}
-\caption{Skree plot of the PCA's}
+\includegraphics[scale = .7]{images/skree_b.pdf}
+\caption{Skree plot of the PCA's.}
 \label{subd}
 \end{figure}
 Figure 5.3 shows the skree plot of the principal components of Bach and
 Mendelssohn. For each principal component used (shown on the x-axis), we
 have the corresponding percentage of variance explained (y-axis). Often
-when using PCA for dimensionality, we often look for an elbow in the
-skree plot. This is done to choose the smallest number of principal
+when using PCA for dimension reduction, we often look for an elbow in
+the skree plot. This is done to choose the smallest number of principal
 components needed to explain a sizable amount of the variation in the
 feature space. There is a possible elbow at the second principal
 component. This indicates that we might be able to perform analysis
@@ -1547,8 +1585,8 @@ account for 85\% of the variance. In the Bach/Mendelssohn case this
 corresponds to using 11 principal components.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/biplot_b.pdf}
-\caption{Biplot of the loading vectors of the first two principal components}
+\includegraphics[scale = .7]{images/biplot_b.pdf}
+\caption{Biplot of the loading vectors of the first two principal components.}
 \label{subd}
 \end{figure}
 The biplot in Figure 5.4 shows the loading vectors plotted on the first
@@ -1566,7 +1604,7 @@ component appears to encodes harmonic structure, especially differences
 in consonances.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/bi_elipse12.pdf}
+\includegraphics[scale = .7]{images/bi_elipse12.pdf}
 \caption{Biplot of the first two principal components plotted with data points colored by composer. }
 \label{subd}
 \end{figure}
@@ -1579,31 +1617,31 @@ pieces by Bach and Mendelssohn usually have different values in the
 first and second principal component. Figure 5.6 shows the pieces
 plotted on the second and third principal component and there is much
 less separation. The third principal component also appears to encode
-rythmic information. We have that dotted rhythmic frequencies have
+rhythmic information. We have that dotted rhythmic frequencies have
 opposite loadings on the third principal component to their
 corresponding non dotted rhythm. For example, frequencies of eight notes
 have an opposite loading on the third principal component to the
-frequency of dotted eigth notes.
+frequency of dotted eighth notes.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/bi_elipse23.pdf}
-\caption{Biplot of the second and third principal components plotted with data points colored by composer}
+\includegraphics[scale = .7]{images/bi_elipse23.pdf}
+\caption{Biplot of the second and third principal components plotted with data points colored by composer.}
 \label{subd}
 \end{figure}
 We can also use K-means clustering to see if there are any apparent
 groups in the data. When we run K-means on the first 11 principal
 components of Bach and Mendelssohn with K = 2 (since we are comparing
 two classes ), we get the results we see in Figure 5.7. The coloring of
-the points indicate which cluster the K-means algorithm identified each
-piece as. The label of each piece indicates the actual composer. We can
-see that for the most part, for pieces with high or low scores on the
-first principal component, the clustering preserves the composer. For
-pieces with middle scores of the first PC, there is a good number of
-pieces with a cluster assignment not consistent with composer.
+the points indicate which cluster the K-means algorithm assigned to each
+piece. The label of each piece indicates the actual composer. We can see
+that for the most part, for pieces with high or low scores on the first
+principal component, the clustering preserves the composer. For pieces
+with middle scores of the first PC, there is a good number of pieces
+with a cluster assignment not consistent with composer.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/kmeans_2_b.pdf}
-\caption{KNN when k = 2}
+\includegraphics[scale = .7]{images/kmeans_2_b.pdf}
+\caption{KNN when k = 2.}
 \label{subd}
 \end{figure}
 We can also examine when \(K=3\), indicating that the \(K-\)means
@@ -1615,8 +1653,8 @@ assigned to the third cluster, although there are a couple in the other
 two clusters.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/kmeans_3_b.pdf}
-\caption{KNN when k = 3}
+\includegraphics[scale = .7]{images/kmeans_3_b.pdf}
+\caption{KNN when $k = 3$.}
 \label{subd}
 \end{figure}
 \section{Felix and Fanny}\label{felix-and-fanny}
@@ -1631,19 +1669,19 @@ features between the two composers is not very encouraging for later
 fitting of models.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/distribution_f.pdf}
-\caption{Density plot of each feature of Fanny/Felix}
+\includegraphics[scale = .7]{images/distribution_f.pdf}
+\caption{Density plot of each feature of Fanny/Felix. Blue represents Fanny and red represents Felix.}
 \label{subd}
 \end{figure}
 The correlations of the Fanny/Felix features are shown in Figure 5.10.
-The rythmic features do not seem to have as much correlation as the
+The rhythmic features do not seem to have as much correlation as the
 Bach/Mendelssohn features. We still see higher correlations for
 frequencies of types of melodic consonances, and frequencies of scale
 degrees 2, 3, 6, and 7.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/cor_circles_f.pdf}
-\caption{Correlations between features of Fanny/Felix}
+\includegraphics[scale = .7]{images/cor_circles_f.pdf}
+\caption{Correlations between features of Fanny/Felix.}
 \label{subd}
 \end{figure}
 Figure 5.11 shows the skree plot for Fanny/Felix. It can be argued that
@@ -1652,14 +1690,14 @@ clear. Using 11 principal components again accounts for 85\% of the
 variance, so we will use 11 PCs in fitting our classifiers as well.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/skree_f.pdf}
-\caption{PCA Felix/Fanny skree plot}
+\includegraphics[scale = .7]{images/skree_f.pdf}
+\caption{PCA Felix/Fanny skree plot.}
 \label{subd}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/biplot_f.pdf}
-\caption{PCA Loadings of the features for Fanny/Felix}
+\includegraphics[scale = .7]{images/biplot_f.pdf}
+\caption{PCA Loadings of the features for Fanny/Felix.}
 \label{subd}
 \end{figure}
 Figure 5.12 shows the loadings of the principal components of the
@@ -1673,22 +1711,22 @@ for faster rhythmic values have opposite loadings to those of slower
 notes on the second principal component.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/bi_elipse_12_f.pdf}
-\caption{Loadings and pieces for Fanny/Felix}
+\includegraphics[scale = .7]{images/bi_elipse_12_f.pdf}
+\caption{Loadings and pieces for Fanny/Felix.}
 \label{subd}
 \end{figure}
 When the pieces colored by composer are plotted on the biplot as shown
-in Figure 5.13, we do not see as much seperation between the Fanny and
-Felix pieces as how we did for Bach/Mendellsohn. The 95\% elipses almost
-completely overlap. This lack of seperation for the two groups might
-lead to issues in creating a model to classify.
+in Figure 5.13, we do not see as much separation between the Fanny and
+Felix pieces as how we did for Bach/Mendelssohn. The 95\% ellipses
+almost completely overlap. This lack of separation for the two groups
+might lead to issues in creating a model to classify.
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/kmeans_2_f.pdf}
-\caption{K-means with k = 2}
+\includegraphics[scale = .7]{images/kmeans_2_f.pdf}
+\caption{K-means with k = 2.}
 \label{subd}
 \end{figure}
-We again run \(K-\)means to identify clusters in the data. Ideally
+We again run \(K-\)means to identify clusters in the data. Ideally,
 pieces would be clustered if they shared the same composer, even though
 the \(K-\)means algorithm does not have access to the composer
 information. Figure 5.14 shows the results of K-means with \(K = 2\). We
@@ -1696,7 +1734,7 @@ see that in the two clusters, there are many pieces labeled of both
 composer. This indicates that when clusters that exist in the data, they
 do not correspond naturally to composer identification.
 
-\chapter{Results}\label{results}
+\chapter{Classification Results}\label{classification-results}
 
 The following section presents the results of fitting five different
 models for classficiation on the original feature space as well as the
@@ -1713,7 +1751,7 @@ logistic classifier we used lasso as a shrinkage method.
 
 Each model (10 total) was tested for predictive accuracy by finding the
 \(5-\)fold cross-validated misclassification rate. The cross-validated
-misclassification rate showed a lot of variance depending on the random
+misclassification rate showed high of variance depending on the random
 fold assigned, so the process was repeated 100 times, and the rate was
 averaged.
 
@@ -1746,27 +1784,27 @@ best model was found to be linear discriminant analysis run on the
 principal components.
 
 Figure 6.1 shows coefficient values for each feature for varying
-\(\log(\lambda)\) values. \(\lambda\) corresponds the restriction
+\(\log(\lambda)\) values. \(\lambda\) corresponds to the restriction
 penalty. Higher values of \(\log(\lambda)\) correspond to a higher
 penalty, resulting in coefficient estimates that shrink to zero. The
 cross-validated lasso logistic fit chose \(\log(\lambda) = -6.2\) to
 have the lowest misclassification rate. At that value, most features
 besides the third and fifth scale degrees and frequency of eighth note
-are nonzero. We have that scale degree two and mean density features
-have low coefficient estimates at this point, but are nonzero, Overall,
+are non-zero. We have that scale degree two and mean density features
+have low coefficient estimates at this point, but are non-zero. Overall,
 for all \(\lambda\) penalties, it appears that the features for density
 and frequency of 16th note rhythms stay non-zero the longest, implying
 these features are more useful features for distinguishing the composer.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .6]{images/lasso_coef_b.pdf}
-\caption{Bach/Mendelssohn lasso logistic regression coefficients for changing $\lambda$ penalty values}
+\caption{Bach/Mendelssohn lasso logistic regression coefficients for changing $\lambda$ penalty values. The vertical line represents the value of best $\lambda$.}
 \label{subd}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/var_imp_rflog_f.pdf}
-\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Bach/Mendelssohn}
+\includegraphics[scale = .5]{images/var_imp_rflog_b.pdf}
+\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Bach/Mendelssohn.}
 \label{subd}
 \end{figure}
 Figure 6.2 shows the variable importance rankings as a mean decrease in
@@ -1803,45 +1841,45 @@ Naive Bayes & 0.502 & 0.521\tabularnewline
 Random forest & 0.535 & 0.571\tabularnewline
 \bottomrule
 \end{longtable}
-Table 6.2 shows all the misclassification rates of each model.
-Unfortunately most of the misclassification rates are above 0.5,
-indicating that random guessing would perform better at predicting the
-composer. A logistic lasso classification model fit on the principal
-components performed best, with a misclassification rate of 0.45.
+Table 6.2 shows all the misclassification rates of each model. Most of
+the misclassification rates are above 0.5, indicating that random
+guessing would perform better at predicting the composer. A logistic
+lasso classification model fit on the principal components performed
+best, with a misclassification rate of 0.45.
 \begin{figure}[H]
 \centering
 \includegraphics[scale = .6]{images/loglambda_f.pdf}
-\caption{Fanny/Felix lasso logistic regression coefficients for changing $\lambda$ penalty values}
+\caption{Fanny/Felix lasso logistic regression coefficients for changing $\lambda$ penalty values. The vertical line represents the value of best $\lambda$.}
 \label{subd}
 \end{figure}
 Figure 6.3 shows the coefficient estimates for varying \(\log(\lambda)\)
 penalties for a logistic lasso model fit on the feature space. The
 frequency of the first scale degree appears to remain non-zero for the
-longest time. At \(\log(\lambda)\) of -2.67 we get the best lambda fit.
-At this \(\log(\lambda)\) value we have most of the coefficients shunk
-to zero besides frequency of thirty second notes and dotted eighth
+longest time. At \(\log(\lambda)\) of -2.67 we get the best \(\lambda\)
+fit. At this \(\log(\lambda)\) value we have most of the coefficients
+shunk to zero besides frequency of thirty second notes and dotted eighth
 notes, and frequency of the tonic (first scale degree).
 \begin{figure}[H]
 \centering
-\includegraphics[scale = .5]{images/var_imp_rflog_b.pdf}
-\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Fanny/Felix}
+\includegraphics[scale = .5]{images/var_imp_rflog_f.pdf}
+\caption{Random forest variable importance and logistic regression coefficients and best $\lambda$ Fanny/Felix.}
 \label{subd}
 \end{figure}
 Figure 6.4 shows the variable importance used in random forests and the
 logistic regression coefficients at the best \(\lambda\) value (-2.67).
-At the best lambda value, only nine of the coefficients of logistic
+At the best \(\lambda\) value, only nine of the coefficients of logistic
 regression are non-zero. The features that the random forest model found
 useful did not correspond very well to the features remaining non-zero
 in the logistic lasso model.
 
-\section{Predictions for Disputed
-pieces:}\label{predictions-for-disputed-pieces}
+\section{Predictions for disputed
+pieces}\label{predictions-for-disputed-pieces}
 
 Since we have such high misclassification rates using each model, the
 following predictions are likely not accurate. Even so, we do see that
-each piece has a higher proportion of predictions for Fanny than Felix.
-Table 6.3 shows the predicted classification for each piece for each
-model.
+most of the pieces have a higher proportion of predictions for Fanny
+than Felix. Table 6.3 shows the predicted classification for each piece
+for each model.
 \begin{longtable}[]{@{}lllllll@{}}
 \caption{Predicted composer for each disputed piece}\tabularnewline
 \toprule
@@ -1864,11 +1902,11 @@ Random Forest & felix & felix & felix & fanny & fanny &
 felix\tabularnewline
 \bottomrule
 \end{longtable}
-\chapter{Discussion}\label{discussion}
+\section{Discussion}\label{discussion}
 
 On very basic low-level features, consisting mostly of frequencies of
 notes, intervals and chords, most models comparing Bach to the
-Mendelssohn do relatively well. This is likely due to the decent
+Mendelssohns do relatively well. This is likely due to the decent
 separation of the features encoding density. We likely see so much
 separation because the Bach data are for solo piano and the Mendelssohn
 data have an additional instrument, thus making the piece automatically
@@ -1891,15 +1929,15 @@ very basic aspects of music, and are more based on frequencies than how
 music actually seems to differ in style to a listener, such as features
 for uses of melodic phrasing.
 
-Running the classfication models on the fist eleven principal components
-resulted in a slight improvement for two of the models in the
+Running the classfication models on the first eleven principal
+components resulted in a slight improvement for two of the models in the
 Bach/Mendelssohn comparison, and a slight improvement for three of the
 models in the Fanny/Felix comparison. For LDA, at least, we know LDA is
 a model that is sensitive to collinearity, and running on the principal
 components helps with this. For the models where no improvement was made
 using the principal components, it is possible that those models did
 better with more information included. Perhaps we should have chosen
-more principal components to account for more explanation of varaince to
+more principal components to account for more explanation of variance to
 be used in models.
 
 Even though our classifiers for Felix/Fanny did not perform very well,
@@ -1959,18 +1997,29 @@ In addition, it would be interesting to perform this same analysis on
 music of different types of pieces. We might expect unconscious signals
 to exist in the same way in symphonies as well as lieder, or perhaps
 not. Considering features that are similar between symphonic work and
-solo piano works is a challenging problem in of itself. Also including
+solo piano works is a challenging problem in of itself. Also, including
 another composer in this study, perhaps a contemporary of Felix and
 Fanny, or at least a composer in the Romantic era would also be helpful
-in checking the validity of the features. Also it would be interesting
+in checking the validity of the features. Also, it would be interesting
 to examine composers throughout their career. Composers, Dvorak for
 example, changed drastically their career. Maybe composers have
 different aspects of style when they first started composing than when
-they were older. Ideally museR could be used to pick up on these
+they were older. Ideally, museR could be used to pick up on these
 differences.
 
-\appendix
+\chapter*{Appendix}\label{appendix}
+\addcontentsline{toc}{chapter}{Appendix}
 
+\section*{How to download museR}\label{how-to-download-muser}
+\addcontentsline{toc}{section}{How to download museR}
+
+The following commands download \texttt{museR} from GitHub.
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"empalmer/Thesis/museR"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 \backmatter
 
 \chapter*{References}\label{references}
@@ -2029,6 +2078,10 @@ feature selection. \emph{Journal of Machine Learning Research},
 \hypertarget{ref-hoer}{}
 Hoerl, A. E. (1959). Optimum solution of many variables equations.
 \emph{Chemical Engineering Progress}, \emph{55}(11), 69--78.
+
+\hypertarget{ref-huron1994humdrum}{}
+Huron, D. (1994). The humdrum toolkit reference manual, ccarh. Stanford
+University.
 
 \hypertarget{ref-isl}{}
 James, G., Witten, D., Hastie, T., \& Tibshirani, R. (2013). \emph{An
