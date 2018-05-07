@@ -67,8 +67,8 @@ rfm <- map(mendelssohn,dot_freq) %>% unname()
 rf <- c(rfb,rfm) %>% unlist %>% unname()
 
 #- rhtm freqs
-rfb <- map(bach,rhythem_freq)
-rfm <- map(mendelssohn,rhythem_freq)
+rfb <- map(bach,rhythm_freq)
+rfm <- map(mendelssohn,rhythm_freq)
 
 rf <- c(rfb,rfm)
 

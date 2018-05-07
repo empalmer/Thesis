@@ -22,7 +22,7 @@ This piece would have the Kern format representation as shown in Figure 3.2.
 \label{subd}
 \end{figure}
 
-Using museR's `piece_df()` function to create the following data frame.
+We use museR's `piece_df()` function to create the data frame shown in Figure 3.3.
 
 
 

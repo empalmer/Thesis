@@ -14,8 +14,11 @@ pairs2
 library(corrplot)
 setwd("~/Desktop/Thesis/Thesis_doc/images")
 pdf("cor_circles_b.pdf")
-corrplot(cor(features[,-1]), order = "hclust")
+corrplot(cor(features[,-1]),order = "original", diag = F, type = "lower")
 dev.off()
+
+
+corrplot(cor(features[,-1]), order = "hclust")
 #==============================================================
 # Correlation matrix
 cor(features)

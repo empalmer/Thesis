@@ -118,9 +118,9 @@ fd_7 <- map(sf_fd,7)%>% unlist
 #==============================================================
 #==============================================================
 #r freqs
-rfh <- purrr::map(fanny,rhythem_freq)
-rfm <- purrr::map(felix,rhythem_freq)
-rfd <- purrr::map(disputed,rhythem_freq)
+rfh <- purrr::map(fanny,rhythm_freq)
+rfm <- purrr::map(felix,rhythm_freq)
+rfd <- purrr::map(disputed,rhythm_freq)
   
 rf <- c(rfh,rfm)
 
@@ -179,7 +179,7 @@ ffeatures <- data.frame(fcomposer,
                         fdens_mean,fdens_sd,
                         fsf_1,fsf_2,fsf_3,fsf_4,fsf_5,fsf_6,
                         fsf_7,flen,rf2,rf2d,rf4,rf4d,rf8,rf8d,
-                        rf16,rf32,r_ent)
+                        rf16,rf32)
 #==============================================================
 #==============================================================
 #==============================================================

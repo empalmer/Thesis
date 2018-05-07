@@ -34,8 +34,11 @@ cor(ffeatures)
 library(corrplot)
 setwd("~/Desktop/Thesis/Thesis_doc/images")
 pdf("cor_circles_f.pdf")
-corrplot(cor(ffeatures[,-1]), order = "hclust")
+corrplot(cor(ffeatures[,-1]),order = "original", diag = F, type = "lower")
 dev.off()
+
+
+corrplot(cor(ffeatures[,-1]), order = "hclust")
 
 #==============================================================
 # PCA and skree plots 

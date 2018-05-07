@@ -19,7 +19,7 @@ Table: Abbreviations for features and corresponding meanings. The features of Fa
 <!-- =============================== -->
 ## Bach and Mendelssohns
 
-Figure 5.1 shows density plots for each of the predictors used. We can see some difference of that feature being used by composer in the density features, and some of the rhythmic frequency features, especially use of eighth notes and sixteenth notes. The peaks for Bach are mostly narrower than those for Mendelssohn. One can suspect the difference in density is partially caused by the type of piece of Bach and Mendelssohn. We might expect that solo pieces, such as those in the Bach data set would have lower densities then for lieder, as in the Mendelssohn data set, which also include voice.
+Figure 5.1 shows density plots for each of the predictors used. We can see some difference of that feature being used by composer in the density features, and some of the rhythmic frequency features, especially use of eighth notes and sixteenth notes. The peaks for Bach are mostly narrower than those for the Mendelssohns. One can suspect the difference in density is partially caused by the type of piece of Bach and Mendelssohn. We might expect that solo pieces, such as those in the Bach data set would have lower densities then for lieder, as in the Mendelssohn data set, which also include voice.
 
 
 \begin{figure}[H]
@@ -46,7 +46,7 @@ Figures 5.2 is a visualization of the correlation matrix. The size of the circle
 \label{subd}
 \end{figure}
 
-Figure 5.3 shows the skree plot of the principal components of Bach and Mendelssohn. For each principal component used (shown on the x-axis), we have the corresponding percentage of variance explained (y-axis). Often when using PCA for dimension reduction, we often look for an elbow in the skree plot. This is done to choose the smallest number of principal components needed to explain a sizable amount of the variation in the feature space.  There is a possible elbow at the second principal component. This indicates that we might be able to perform analysis using only the first two principal components. However, especially considering that our data are not very separable, we likely would likely want to use more information in our model. As a similar result occurred for Brinkman, in our analysis we will use the principal components that account for 85% of the variance. In the Bach/Mendelssohn case this corresponds to using 11 principal components. 
+Figure 5.3 shows the skree plot of the principal components of Bach and Mendelssohn. For each principal component used (shown on the x-axis), we have the corresponding percentage of variance explained (y-axis). When using PCA for dimension reduction, we often look for an elbow in the skree plot. This is done to choose the smallest number of principal components needed to explain a sizable amount of the variation in the feature space.  There is a possible elbow at the second principal component. This indicates that we might be able to perform analysis using only the first two principal components. However, especially considering that our data are not very separable, we likely would likely want to use more information in our model. As a similar result occurred for Brinkman, in our analysis we will use the principal components that account for 85% of the variance. In the Bach/Mendelssohn case this corresponds to using 11 principal components. 
 
 \begin{figure}[H]
 \centering
@@ -84,7 +84,7 @@ We can also use K-means clustering to see if there are any apparent groups in th
 \label{subd}
 \end{figure}
 
-We can also examine when $K=3$, indicating that the $K-$means algorithm should look for three clusters. This is reasonable as the Mendelssohn set is made up of Fanny and Felix, so there are actually three composers. The clusters seem to be mostly assigned by the value of the first principal component. For the most part, pieces by Bach are assigned to the third cluster, although there are a couple in the other two clusters.
+We can also examine when $K=3$, indicating that the K-means algorithm should look for three clusters. This is reasonable as the Mendelssohn set is made up of Fanny and Felix, so there are actually three composers. The clusters seem to be mostly assigned by the value of the first principal component. For the most part, pieces by Bach are assigned to the third cluster, although there are a couple in the other two clusters.
 
 \begin{figure}[H]
 \centering
@@ -93,14 +93,13 @@ We can also examine when $K=3$, indicating that the $K-$means algorithm should l
 \label{subd}
 \end{figure}
 
-
 <!-- ====================================================== -->
 <!-- ====================================================== -->
 <!-- ====================================================== -->
 
 ## Felix and Fanny
 
-As we can see from density distributions in Figure 5.9, most of the features used have very little separation between the two composers. Most of the density distributions for features from pieces of Fanny and Felix overlap completely and have nearly identical peaks. There is a small difference in peak for the frequency of use of the first scale degree, with fanny using it more often. The lack of difference in features between the two composers is not very encouraging for later fitting of models.
+As we can see from density distributions in Figure 5.9, most of the features used have very little separation between the two composers. Most of the density distributions for features from pieces of Fanny and Felix overlap completely and have nearly identical peaks. There is a small difference in peak for the frequency of use of the first scale degree, with Fanny using it more often. The lack of difference in features between the two composers is not very encouraging for later fitting of models.
 
 \begin{figure}[H]
 \centering
@@ -146,7 +145,7 @@ Figure 5.12 shows the loadings of the principal components of the features of Fa
 \label{subd}
 \end{figure}
 
-When the pieces colored by composer are plotted on the biplot as shown in Figure 5.13, we do not see as much separation between the Fanny and Felix pieces as how we did for Bach/Mendelssohn. The 95% ellipses almost completely overlap. This lack of separation for the two groups might lead to issues in creating a model to classify. 
+When the pieces colored by composer are plotted on the biplot as shown in Figure 5.13, we do not see as much separation between the Fanny and Felix pieces as we did for Bach/Mendelssohn. The 95% ellipses almost completely overlap. This lack of separation for the two groups might lead to issues in creating a model to classify. 
 
 
 \begin{figure}[H]
@@ -156,7 +155,7 @@ When the pieces colored by composer are plotted on the biplot as shown in Figure
 \label{subd}
 \end{figure}
 
-We again run $K-$means to identify clusters in the data. Ideally, pieces would be clustered if they shared the same composer, even though the $K-$means algorithm does not have access to the composer information. Figure 5.14 shows the results of K-means with $K = 2$. We see that in the two clusters, there are many pieces labeled of both composer. This indicates that when clusters that exist in the data, they do not correspond naturally to composer identification.
+We again run K-means to identify clusters in the data. Ideally, pieces would be clustered if they shared the same composer, even though the K-means algorithm does not have access to the composer information. Figure 5.14 shows the results of K-means with K = 2. We see that in the two clusters, there are many pieces labeled of both composer. This indicates that when clusters that exist in the data, they do not correspond naturally to composer identification.
 
 
 
