@@ -17,7 +17,7 @@ KNN  (K = 9) | 0.097                     | 0.098
 Naive Bayes  | 0.103                     | 0.112
 Random forest| 0.058                     | 0.111
 
-Table: Averaged 5-fold CV misclassification rates for each model from 100 runs on the feature space and the first 11 PCs. 
+Table: Averaged 5-fold CV misclassification rates for each model from 100 runs on the feature space and on the first 11 PCs. 
 
 
 Table 6.1 shows the averaged 5-fold cross-validated misclassification rates over 100 runs. For the KNN case, the features were scaled and centered first. Most models have misclassification rates round 10%. The best model was found to be linear discriminant analysis run on the principal components. 
@@ -74,7 +74,7 @@ KNN          | 0.498                     | 0.467
 Naive Bayes  | 0.502                     | 0.521
 Random forest| 0.535                     | 0.571
 
-Table: Averaged 5-fold CV misclassification rates of 100 runs on the feature space and the first 11 principal components for each model. 
+Table: Averaged 5-fold CV misclassification rates of 100 runs on the feature space and on the first 11 principal components for each model. 
 
 Table 6.2 shows all the misclassification rates of each model. Most of the misclassification rates are above 0.5, indicating that random guessing would perform better at predicting the composer. A logistic lasso classification model fit on the principal components performed best, with a misclassification rate of 0.45. <!-- The $\log(\lambda)$ penalty associated with this rate was -3.21. -->
 

@@ -155,7 +155,7 @@ When the pieces colored by composer are plotted on the biplot as shown in Figure
 \label{subd}
 \end{figure}
 
-We again run K-means to identify clusters in the data. Ideally, pieces would be clustered if they shared the same composer, even though the K-means algorithm does not have access to the composer information. Figure 5.14 shows the results of K-means with K = 2. We see that in the two clusters, there are many pieces labeled of both composer. This indicates that when clusters that exist in the data, they do not correspond naturally to composer identification.
+We again run K-means to identify clusters in the data. Ideally, pieces would be clustered if they shared the same composer, even though the K-means algorithm does not have access to the composer information. Figure 5.14 shows the results of K-means with K = 2. Both clusters contain pieces written by Fanny and Felix. This indicates that when clusters exist in the data, they do not correspond naturally to composer identification.
 
 
 

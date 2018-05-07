@@ -149,15 +149,16 @@ an R package written for the purpose of this thesis. Additionally, to
 check the validity of features used, 27 solo piano pieces from J.S.
 Bach's Well Tempered Clavier were also included in the analysis.
 Logistic lasso, \(k-\)nearest neighbors, random forests, naive Bayes,
-and linear discriminant analysis were performed on the feature space in
-order to classify the pieces. In addition, those same models were fit on
-the principal components. The LDA model fit on the principal components
-comparing Bach and Mendelssohn resulted in the lowest misclassification
-rate (0.049). The logistic lasso model on the principal components
-between Felix and Fanny resulted in the lowest misclassification rate
-(0.45). Finaly, each model was used to predict the authorship of the the
-six disputed pieces. As misclassification rates were so high on the
-models, we cannot trust the predictions for these disputed pieces.
+and linear discriminant analysis (LDA) were performed on the feature
+space in order to classify the pieces. In addition, those same models
+were fit on the principal components. The LDA model fit on the principal
+components comparing Bach and Mendelssohn resulted in the lowest
+misclassification rate (0.049). The logistic lasso model on the
+principal components between Felix and Fanny resulted in the lowest
+misclassification rate (0.45). Finaly, each model was used to predict
+the authorship of the the six disputed pieces. As misclassification
+rates were so high on the models, we cannot trust the predictions for
+these disputed pieces.
 }
 
 	\usepackage{tikz,amsmath,graphicx,}
@@ -221,15 +222,16 @@ models, we cannot trust the predictions for these disputed pieces.
     check the validity of features used, 27 solo piano pieces from J.S.
     Bach's Well Tempered Clavier were also included in the analysis.
     Logistic lasso, \(k-\)nearest neighbors, random forests, naive Bayes,
-    and linear discriminant analysis were performed on the feature space in
-    order to classify the pieces. In addition, those same models were fit on
-    the principal components. The LDA model fit on the principal components
-    comparing Bach and Mendelssohn resulted in the lowest misclassification
-    rate (0.049). The logistic lasso model on the principal components
-    between Felix and Fanny resulted in the lowest misclassification rate
-    (0.45). Finaly, each model was used to predict the authorship of the the
-    six disputed pieces. As misclassification rates were so high on the
-    models, we cannot trust the predictions for these disputed pieces.
+    and linear discriminant analysis (LDA) were performed on the feature
+    space in order to classify the pieces. In addition, those same models
+    were fit on the principal components. The LDA model fit on the principal
+    components comparing Bach and Mendelssohn resulted in the lowest
+    misclassification rate (0.049). The logistic lasso model on the
+    principal components between Felix and Fanny resulted in the lowest
+    misclassification rate (0.45). Finaly, each model was used to predict
+    the authorship of the the six disputed pieces. As misclassification
+    rates were so high on the models, we cannot trust the predictions for
+    these disputed pieces.
   \end{abstract}
 
 \mainmatter % here the regular arabic numbering starts
@@ -300,7 +302,7 @@ disputed paper.
 
 Text analysis, such as in the Federalist Papers, is accomplished by
 reading one word after another. This often results in a vector where
-each entry is a word. Frequencies of word count for example, can easily
+each entry is a word. Frequencies of word count, for example, can easily
 be done by counting all instances of word occurrence in the word vector.
 Information in a piece of music, however, is read in a variety of ways.
 It can be read left to right note by note, but it can also be read
@@ -1726,10 +1728,10 @@ lead to issues in creating a model to classify.
 We again run K-means to identify clusters in the data. Ideally, pieces
 would be clustered if they shared the same composer, even though the
 K-means algorithm does not have access to the composer information.
-Figure 5.14 shows the results of K-means with K = 2. We see that in the
-two clusters, there are many pieces labeled of both composer. This
-indicates that when clusters that exist in the data, they do not
-correspond naturally to composer identification.
+Figure 5.14 shows the results of K-means with K = 2. Both clusters
+contain pieces written by Fanny and Felix. This indicates that when
+clusters exist in the data, they do not correspond naturally to composer
+identification.
 
 \chapter{Classification Results}\label{classification-results}
 
@@ -1756,7 +1758,7 @@ averaged.
 Bach/Mendelssohn}\label{models-results---bachmendelssohn}
 \begin{longtable}[]{@{}lll@{}}
 \caption{Averaged 5-fold CV misclassification rates for each model from
-100 runs on the feature space and the first 11 PCs.}\tabularnewline
+100 runs on the feature space and on the first 11 PCs.}\tabularnewline
 \toprule
 Model & misclass. rate - features & misclass. rate - 11
 PCs\tabularnewline
@@ -1819,7 +1821,7 @@ were shrunk to zero in the logistic lasso model.
 \section{Model fit Felix/Fanny}\label{model-fit-felixfanny}
 \begin{longtable}[]{@{}lll@{}}
 \caption{Averaged 5-fold CV misclassification rates of 100 runs on the
-feature space and the first 11 principal components for each
+feature space and on the first 11 principal components for each
 model.}\tabularnewline
 \toprule
 Model & misclass. rate - features & avg. misclass. rate - 11
@@ -2021,7 +2023,7 @@ The following commands download \texttt{museR} from GitHub.
 analysis}\label{how-to-access-code-used-in-analysis}
 \addcontentsline{toc}{section}{How to access code used in analysis}
 
-R code used in this analysis can be found at
+The R code used in this analysis can be found at
 \url{https://github.com/empalmer/Thesis/Models_EDA}
 
 \backmatter
