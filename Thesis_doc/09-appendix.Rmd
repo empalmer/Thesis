@@ -11,4 +11,6 @@ install_github("empalmer/Thesis/museR")
 
 ## How to access code used in analysis {-}
 
-like this
+R code used in this analysis can be found at <https://github.com/empalmer/Thesis/Models_EDA>
+
+
