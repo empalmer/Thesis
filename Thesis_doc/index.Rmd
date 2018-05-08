@@ -24,7 +24,18 @@ abstract: |
 # If you'd rather include the preliminary content in files instead of inline
 # like below, use a command like that for the abstract above.  Note that a tab is 
 # needed on the line after the |.
-#acknowledgements: |
+acknowledgements: |
+  Thank you to Andrew for advising me through this crazy year and convincing me to do statistics. Thank you to Angélica for your support and inspiring me to be a math major. Thank you to the entire math department for being generally amazing. 
+  
+  Thank you to John for keeping my thesis musically grounded and the idea for the focus of this thesis. 
+  
+  Thank you to Monica for being my piano teacher all these years. You have helped me grow so much as a musician.
+  
+  Thank you to my parents for always believing in me and helping me though the hard times. Your support means everything.
+  
+  Thank you to Kaelyn and Jenny for being extraordinary friends and supporting me though this past year. Thank you to Makana and Andie and our crazy math study parties sophomore year and beyond. You all are why I made it through.  
+  
+  Thank you to my cat for being a very good cat.  
   
 #dedication: |
 #  You can have a dedication here if you wish. 
