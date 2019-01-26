@@ -1,3 +1,1 @@
-A folder for example data
-
-This contains the following pieces
+I would reccomend http://kern.ccarh.org/ for finding example data.
