@@ -3,7 +3,7 @@
 .RData
 .Ruserdata
 Data/
-Orals_pres.html
-Orals_pres.Rmd
 attribution_josquin.R
 *.DS_Store
+ExampleData/*.krn
+ExampleData/file_descriptions.md
